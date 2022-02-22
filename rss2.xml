@@ -9,7 +9,7 @@
     <atom:link href="http://example.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>欲买桂花同饮酒，终不似，少年游。</description>
-    <pubDate>Mon, 21 Feb 2022 05:12:28 GMT</pubDate>
+    <pubDate>Tue, 22 Feb 2022 13:02:22 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -22,7 +22,7 @@
       
       
       
-      <content:encoded><![CDATA[<p>​        搭建博客最重要的就是<strong>耐心</strong>和<strong>坚持</strong>。搭建时候遇见许多问题(权限、版本等等)，经过耐心的搜索解决方案逐一解决还是非常开心的！<span id="more"></span></p><h2 id="利用hexo-github-搭建个人博客"><a href="#利用hexo-github-搭建个人博客" class="headerlink" title="利用hexo + github 搭建个人博客"></a>利用hexo + github 搭建个人博客</h2><h3 id="注册-Github-和安装-Git"><a href="#注册-Github-和安装-Git" class="headerlink" title="注册 Github 和安装 Git"></a>注册 Github 和安装 Git</h3><p>​        首先，我们需要注册一个<a href="https://github.com/">GitHub</a>账号，有时候会因为网络问题而刷新不出页面就需要多刷新几次。(也可以利用Gitee)。然后进入Git官方(<a href="https://git-scm.com/">Git (git-scm.com)</a>)，下载Git。</p><h3 id="绑定-Github"><a href="#绑定-Github" class="headerlink" title="绑定 Github"></a>绑定 Github</h3><p>​        绑定GitHub方便我们上传文件。虽然在GitHub上我们可以直接上传文件，但是由于网络的原因并不好用，所以我们利用SSH来完成GitHub的绑定并提交文件，这样很方便快捷。</p><h4 id="绑定-github"><a href="#绑定-github" class="headerlink" title="绑定 github"></a>绑定 github</h4><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3>]]></content:encoded>
+      <content:encoded><![CDATA[<p>​        搭建博客最重要的就是<strong>耐心</strong>和<strong>坚持</strong>。搭建时候遇见许多问题(权限、版本等等)，经过耐心的搜索解决方案逐一解决还是非常开心的！<span id="more"></span></p><h2 id="利用-hexo-github-搭建个人博客"><a href="#利用-hexo-github-搭建个人博客" class="headerlink" title="利用 hexo + github 搭建个人博客"></a>利用 hexo + github 搭建个人博客</h2><h3 id="注册-Github-和安装-Git"><a href="#注册-Github-和安装-Git" class="headerlink" title="注册 Github 和安装 Git"></a>注册 Github 和安装 Git</h3><p>​        首先，我们需要注册一个<a href="https://github.com/">GitHub</a>账号，有时候会因为网络问题而刷新不出页面就需要多刷新几次。(也可以利用Gitee)。然后进入Git官方(<a href="https://git-scm.com/">Git (git-scm.com)</a>)，下载Git。</p><h3 id="绑定-Github"><a href="#绑定-Github" class="headerlink" title="绑定 Github"></a>绑定 Github</h3><p>​        绑定GitHub方便我们上传文件。虽然在GitHub上我们可以直接上传文件，但是由于网络的原因并不好用，所以我们利用SSH来完成GitHub的绑定并提交文件，这样很方便快捷。</p><p>检查是否安装SSH，我们在新建的文件夹中右键打开Git Bash:</p><p><img src="https://pic4.zhimg.com/v2-daee176b8f87fbc5c6ff5feca6bd0887_r.jpg" alt="preview"></p><p>输入 ssh 命令，查看本机是否安装ssh。</p><p>已安装 ssh 输入ssh-keygen -t rsa 命令，指定 RSA 算法生成密钥，然后敲四次回车键，之后会生成两个文件，分别为密钥 id_rsa 和公钥id_rsa.pub。接下来我们把公钥 id_rsa.pub 的内容添加到 Github。输入</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/.ssh</span><br><span class="line">$ ls</span><br><span class="line">$ cat id_rsa.pub</span><br></pre></td></tr></table></figure><p>然后我们进入 Github 主页，点击右上角，然后点击 settings。</p><p>点击 SSH and GPG keys，再点击 New SSH key</p><p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图：</p><p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#x6f;&#109;">&#103;&#x69;&#116;&#64;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#99;&#x6f;&#109;</a> 进行检验：</p>]]></content:encoded>
       
       
       <category domain="http://example.com/categories/hexo/">hexo</category>
