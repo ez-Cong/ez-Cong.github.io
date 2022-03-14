@@ -5,7 +5,7 @@
     <url>/2022/03/09/SpringBoot/</url>
     <content><![CDATA[<p>SpringBoot是整合Spring技术栈的一站式框架</p>
 <p>SpringBoot是简化Spring技术栈的快速开发脚手架<span id="more"></span></p>
-<h3 id="1-SpringBoot特点"><a href="#1-SpringBoot特点" class="headerlink" title="1 SpringBoot特点"></a>1 SpringBoot特点</h3><h4 id="1-1-依赖管理"><a href="#1-1-依赖管理" class="headerlink" title="1.1 依赖管理"></a>1.1 依赖管理</h4><p>父项目依赖管理</p>
+<h3 id="SpringBoot特点"><a href="#SpringBoot特点" class="headerlink" title="SpringBoot特点"></a>SpringBoot特点</h3><h4 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h4><p>父项目依赖管理</p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">依赖管理    </span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">父项目</span><br><span class="line"> <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>start 场景启动器</p>
@@ -20,7 +20,7 @@
 
 
 
-<h3 id="2-容器功能"><a href="#2-容器功能" class="headerlink" title="2 容器功能"></a>2 容器功能</h3><h4 id="2-1-组件"><a href="#2-1-组件" class="headerlink" title="2.1 组件"></a>2.1 组件</h4><p><strong>@Configuration</strong></p>
+<h3 id="容器功能"><a href="#容器功能" class="headerlink" title="容器功能"></a>容器功能</h3><h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><p><strong>@Configuration</strong></p>
 <ul>
 <li>Full模式于Lite模式<ul>
 <li>配置类组件之间无依赖关系用Lite模式加速容器启动过程，减少判断</li>
@@ -42,18 +42,18 @@
 
 <p><strong>@Conditional</strong></p>
 <p>条件装配 @Conditional：满足Conditional指定的条件，进行组件注入</p>
-<h4 id="2-2-原生配置文件引入"><a href="#2-2-原生配置文件引入" class="headerlink" title="2.2 原生配置文件引入"></a>2.2 原生配置文件引入</h4><p><strong>@ImportResource</strong></p>
+<h4 id="原生配置文件引入"><a href="#原生配置文件引入" class="headerlink" title="原生配置文件引入"></a>原生配置文件引入</h4><p><strong>@ImportResource</strong></p>
 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">======================beans.xml=========================</span><br><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;haha&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.atguigu.boot.bean.User&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;zhangsan&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span> <span class="attr">value</span>=<span class="string">&quot;18&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;hehe&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.atguigu.boot.bean.Pet&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;tomcat&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ImportResource(&quot;classpath:beans.xml&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyConfig</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">======================测试=================</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">haha</span> <span class="operator">=</span> run.containsBean(<span class="string">&quot;haha&quot;</span>);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">hehe</span> <span class="operator">=</span> run.containsBean(<span class="string">&quot;hehe&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;haha：&quot;</span>+haha);<span class="comment">//true</span></span><br><span class="line">        System.out.println(<span class="string">&quot;hehe：&quot;</span>+hehe);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h4 id="2-3-配置绑定"><a href="#2-3-配置绑定" class="headerlink" title="2.3 配置绑定"></a>2.3 配置绑定</h4><p>读取properties文件中内容，封装到JavaBean中</p>
+<h4 id="配置绑定"><a href="#配置绑定" class="headerlink" title="配置绑定"></a>配置绑定</h4><p>读取properties文件中内容，封装到JavaBean中</p>
 <p><strong>@ConfigurationProperties</strong></p>
 <p><strong>@EnableConfigurationProperties + @ConfigurationProperties</strong></p>
 <p><strong>@Component + @ConfigurationProperties</strong></p>
-<h3 id="3-自动配置原理"><a href="#3-自动配置原理" class="headerlink" title="3 自动配置原理"></a>3 自动配置原理</h3><p><strong>SpringBootConfiguration</strong></p>
+<h3 id="自动配置原理"><a href="#自动配置原理" class="headerlink" title="自动配置原理"></a>自动配置原理</h3><p><strong>SpringBootConfiguration</strong></p>
 <p>@Configuration。代表当前是一个配置类</p>
 <p><strong>@ComponentScan</strong></p>
 <p>指定扫描</p>
@@ -63,6 +63,7 @@
 
 
 <p><strong>@AutoConfigurationPackage</strong></p>
+<p>自动配置包，指定默认的包规则。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Import(AutoConfigurationPackages.Registrar.class)</span>  <span class="comment">//给容器中导入一个组件</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> AutoConfigurationPackage &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//利用Registrar给容器中导入一系列组件</span></span><br><span class="line"><span class="comment">//将指定的一个包下的所有组件导入进来？MainApplication 所在包下。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
@@ -72,6 +73,37 @@
 
 
 
+
+
+
+
+<p><strong>蠢事：</strong>忘记填写@RestController</p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><h4 id="properties"><a href="#properties" class="headerlink" title="properties"></a>properties</h4><p>“YAML Ain’t Markup Language”</p>
+<h4 id="yaml"><a href="#yaml" class="headerlink" title="yaml"></a>yaml</h4><p>适合用来做以数据为中心的配置文件</p>
+<p><strong>自定义的类和配置文件绑定一般没有提示</strong></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">exclude</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="静态资源访问"><a href="#静态资源访问" class="headerlink" title="静态资源访问"></a>静态资源访问</h3><h4 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h4><p>静态资源放在类路径下：called <code>/static</code> (or <code>/public</code> or <code>/resources</code> or <code>/META-INF/resources</code></p>
+<p>访问：当前项目根路径&#x2F; + 静态资源名</p>
+<p><strong>原理：</strong>静态映射&#x2F;**</p>
+<p>请求进来，先去找Controller看能不能处理。不能处理的所有请求又都交给静态资源处理器。静态资源也找不到则响应404页面。</p>
+<p>改变默认的静态资源路径</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">mvc:</span></span><br><span class="line">    <span class="attr">static-path-pattern:</span> <span class="string">/res/**</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">static-locations:</span> [<span class="string">classpath:/haha/</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="欢迎页"><a href="#欢迎页" class="headerlink" title="欢迎页"></a>欢迎页</h4><p>静态资源路径下配置 index.html</p>
+<ul>
+<li>可以配置静态资源路径</li>
+<li>需要注意的是，如果配置了静态资源的访问前缀，会导致 index.html 不能被默认访问</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="comment">#  mvc:</span></span><br><span class="line"><span class="comment">#    static-path-pattern: /res/**   导致welcome page功能失效</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">static-locations:</span> [<span class="string">classpath:/haha/</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义-Favicon"><a href="#自定义-Favicon" class="headerlink" title="自定义 Favicon"></a>自定义 Favicon</h4><p>favicon.io 放在静态资源目录</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="comment">#  mvc:</span></span><br><span class="line"><span class="comment">#    static-path-pattern: /res/**   这个会导致 Favicon 功能失效</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="静态资源配置原理"><a href="#静态资源配置原理" class="headerlink" title="静态资源配置原理"></a>静态资源配置原理</h4><ul>
+<li>SpringBoot启动默认加载  xxxAutoConfiguration 类（自动配置类）</li>
+<li>SpringMVC功能的自动配置类 WebMvcAutoConfiguration，生效</li>
+</ul>
 ]]></content>
       <categories>
         <category>Java</category>
@@ -98,7 +130,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#105;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#109;">&#103;&#105;&#x74;&#64;&#x67;&#105;&#x74;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#109;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#99;&#111;&#x6d;">&#x67;&#x69;&#x74;&#64;&#103;&#x69;&#116;&#104;&#x75;&#x62;&#46;&#99;&#111;&#x6d;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -112,7 +144,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#103;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#x75;&#x62;&#46;&#x63;&#111;&#109;">&#103;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#104;&#x75;&#x62;&#46;&#x63;&#111;&#109;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#x67;&#x69;&#116;&#x40;&#x67;&#105;&#116;&#x68;&#x75;&#x62;&#46;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#116;&#x40;&#x67;&#105;&#116;&#x68;&#x75;&#x62;&#46;&#x63;&#x6f;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -205,6 +237,165 @@
       </categories>
       <tags>
         <tag>hexo搭建博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python</title>
+    <url>/2022/03/14/python/</url>
+    <content><![CDATA[<h3 id="Python简介"><a href="#Python简介" class="headerlink" title="Python简介"></a>Python简介</h3><p>python 这一伟大语言诞生于1989年圣诞节期间，创始人是荷兰的Guido van Rossum。(python有两个主要的大版本: python2 和 python3。本文基于 python3 开发)</p>
+<p>由于课程要求，利用 <strong>Anaconda</strong> 包管理器安装和管理 python 软件，选用了 <strong>jupyter notebook</strong> 编辑器。</p>
+<p>python官网：<a href="https://www.python.org/">Welcome to Python.org</a></p>
+<p>数据科学计算平台 Anaconda：Anaconda是一个集成的Python数据科学环境，Anaconda除了有Python外，还安装了180多个用于数据分析的第三方库，而且可 以使用conda命令安装第三方库和创建多个环境。相对于只安装 Python而言，避免了安装第三方库的麻烦。Anaconda的优点是已经内置了Jupyter notebook交互式计算环境、 Spyder集成开发环境，以及NumPy、pandas、Matplotlib、SciPy等各 类主要数据分析模块。Anaconda还是一个开源的包、环境管理器，可以在同一个机器上安装不同版本的软件包及其依赖，并能够在不同的环境之间切换。使用 Anaconda可以方便地进行包的管理（包的安装、卸载、更新），对于需要的各种Python的第三方包，可以直接在Anaconda中进行下载。Anaconda官网： <a href="https://www.anaconda.com/">Anaconda | The World’s Most Popular Data Science Platform</a></p>
+<p><strong>常用类库：</strong></p>
+<p><strong>Numpy：</strong>NumPy软件包是Python生态系统中数据分析、机器学习和科 学计算的主力军。它极大地简化了向量和矩阵的操作处理。除了能对数值数据进行切片（slice）和切块（dice）外， 使用NumPy还能为处理和调试上述库中的高级实例带来极大 便利。一般被很多大型金融公司使用，以及核心的科学计算组织 如Lawrence Livermore、NASA用其处理一些本来使用C++、 Fortran或Matlab等所做的任务。</p>
+<p><strong>SciPy：</strong> SciPy（<a href="http://scipy.org)是基于numpy开发的高级模块,/">http://scipy.org）是基于NumPy开发的高级模块，</a> 依赖于NumPy，提供了许多数学算法和函数的实现，可便 捷快速地解决科学计算中的一些标准问题，例如数值积分 和微分方程求解、最优化、甚至包括信号处理等。作为标准科学计算程序库， SciPy它是Python科学计算程序 的核心包，包含了科学计算中常见问题的各个功能模块， 不同子模块适用于不同的应用。</p>
+<p><strong>Pandas：</strong>Pandas提供了大量快速便捷处理数据的函数和方法。它是 使Python成为强大而高效的数据分析环境的重要因素之一。 Pandas中主要的数据结构有Series、DataFrame和Panel。其 中Series是一维数组，与NumPy中的一维array以及Python基 本的数据结构List类似；DataFrame是二维的表格型数据结 构，可以将DataFrame理解为Series的容器； Panel是三维的 数组，可看作为DataFrame的容器。</p>
+<p><strong>Matplotlib：</strong>Matplotlib是Python 的绘图库，是用于生成出版质量 级别图形的桌面绘图包，让用户很轻松地将数据图形 化，同时还提供多样化的输出格式。</p>
+<p><strong>Seaborn：</strong>Seaborn在Matplotlib基础上提供了一个绘制统计图形 的高级接口，为数据的可视化分析工作提供了极大的 方便，使得绘图更加容易。 用Matplotlib最大的困难是其默认的各种参数，而 Seaborn则完全避免了这一问题。一般来说，Seaborn 能满足数据分析90%的绘图需求。</p>
+<p><strong>Scikit-learn：</strong>Scikit-learn是专门面向机器学习的Python开源框架， 它实现了各种成熟的算法，容易安装和使用。 Scikit-learn的基本功能有分类、回归、聚类、数据 降维、模型选择和数据预处理六大部分。</p>
+<p>python库的一些常用命令:</p>
+<p><strong>import 模块名 [as 别名]</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#导入random随机函数模块中的所有对象并设置别名</span></span><br><span class="line"><span class="keyword">import</span> random <span class="keyword">as</span> rd</span><br><span class="line"><span class="comment">#通过别名访问模块中的对象</span></span><br><span class="line"><span class="comment">#返回[1,10]之间的一个随机整数</span></span><br><span class="line">rd.randint(<span class="number">1</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>from 模块名 import 对象名 [as 别名]</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#导入random模块中的randint,使用别名rt</span></span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint <span class="keyword">as</span> rt</span><br><span class="line"><span class="comment">#通过别名使用randint函数</span></span><br><span class="line">rt(<span class="number">1</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="语法常识"><a href="#语法常识" class="headerlink" title="语法常识"></a>语法常识</h3><p><strong>命名规则：</strong>驼峰规则</p>
+<p><strong>代码缩进：</strong>Tab和空格来进行缩进，注意不要混用。( Python中的缩进代表程序块的作用域，如果采用了错误的代码缩进，会导致程序抛出异常) </p>
+<p><strong>代码注释：</strong>Python的单行注释语句用#开始，从#开始一直到末尾的部分是注释部分。如果要进行多行的注释可以使用三个单引号（’’’） 或者双引号（”””）将注释内容包围。单引号和双引号在使用上没有本质的差别。</p>
+<p><strong>中文编码：</strong>Python中使用<strong>函数ord(x)<strong>查看x字符的编码，编码占2 个字节，因此一般再使用</strong>hex函数</strong>把编码转为十六进制显示。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(<span class="string">&quot;A&quot;</span>)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(<span class="string">&quot;我&quot;</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键字：</strong>关键字是Python语言本身使用的标识符，被Python语言保留，每个关键字都有其特殊的意义 ，因而不能用作标识符，否则容易产生编译错误。如False、True 、None 、and、or、not、as ………….</p>
+<p>检查是否是Python中的关键字（保留字符），用 <strong>keyword.iskeyword (word)</strong> </p>
+<p><strong>_ ：</strong>单独的下划线（_）用于表示上一次运算的结果。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In[]:<span class="number">2</span>*<span class="number">3</span></span><br><span class="line">Out[]:<span class="number">6</span></span><br><span class="line">In[]:_*<span class="number">10</span></span><br><span class="line">Out[]:<span class="number">60</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>内置函数：</strong></p>
+<p>类型转换函数：chr(97) ord(‘a’) str(3.15) int(3.3) </p>
+<p>数学运算函数：abs(x) max(3,2,5,1) pow(x,y)</p>
+<p><strong>变量赋值：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=<span class="number">0</span>;y=<span class="number">0</span>;z=<span class="number">0</span> <span class="comment">#多个语句间用分号分隔</span></span><br><span class="line">a, b = <span class="number">1</span>, <span class="number">2</span> <span class="comment">#采用多变量同时赋值</span></span><br><span class="line">c=d=<span class="number">3</span>		<span class="comment">#采用链式赋值</span></span><br><span class="line"><span class="built_in">print</span>(x,y,z,a,b,c,d)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>type()函数：</strong>一般形式：type(变量名)，其作用是查询变量的数字类型。</p>
+<p><strong>id()函数：</strong>是获取变 量的内存地址。</p>
+<p><strong>isinstance()函数：</strong>判断一个数值是否是某种数字类型。 </p>
+<p><strong>Python中有六个标准的数据类型：</strong></p>
+<ul>
+<li>number（数字）</li>
+<li>string（字符串） </li>
+<li>list（列表）</li>
+</ul>
+<p>列表是Python里面的容器之一，由方括号和方括号括起来的数据构成。里面的数据可以是整数、浮点数、字符串， 也可以是另一个列表或者其它的数据结构。列表里面的每 一项叫作列表的一个元素，每个元素之间使用英文逗号隔开，</p>
+<p>例如</p>
+<p>list_1 &#x3D; [1, 2, 3, 4, 5]                     #列表里面有5个元素，全部是数字 </p>
+<p>list_2 &#x3D; [‘abc’, ‘x’, ‘’, ‘kkk’]             #列表里面有4个元素，全部是字符串</p>
+<p>list_3 &#x3D; []                                         #空列表 </p>
+<p>list_4 &#x3D; [123, ‘xyz’, 3.14, [1, 2, ‘yy’]] #由多种元素组合起来的列表</p>
+<ul>
+<li>tuple（元组）</li>
+</ul>
+<p>元组是Python里面的容器之一，由小括号和小括号括起来 的数据构成。它的外型和列表非常像，只不过列表使用的 是方括号，元组使用的是小括号。“元组”中的“元”和 “二元一次方程”中的“元”是同一个意思，“组”就是组合的意思。</p>
+<p>tuple_1 &#x3D; (1, 2, 3, 4, 5)         #元组里面有5个元素，全部为数字 </p>
+<p>tuple_2 &#x3D; (‘abc’, ‘x’, ‘’, ‘kkk’) #元组里面有4个元素，全部是字符串 </p>
+<p>tuple_3 &#x3D; ()                             #空元组 </p>
+<p>tuple_4 &#x3D; (123, ‘xyz’, [1, ‘t’, ‘z’], (‘o’, ‘pp’)) #由多种元素组合起来的元组</p>
+<ul>
+<li>dictionary（字典）</li>
+<li>set（集合）</li>
+</ul>
+<p>不可变数据类型有：Number、String、Tuple； 可变数据类型有：List、Dictionary、Set。</p>
+<p><strong>元组和列表的区别：</strong></p>
+<p>列表: L&#x3D;[1,2,5,7]  </p>
+<p>元组: T&#x3D;(1,2,5,7)</p>
+<p>列表生成以后还可以往里面继续添加数据，也可以从里面删除数据；但是元组一旦生成就不能修改。如果它里面只 有整数、浮点数、字符串、另一个元组，就既不能添加数据，也不能删除数据，还不能修改里面数据的值。但是如 果元组里面包含了一个列表，那么这个元组里面的列表依旧可以变化。</p>
+<p>TT&#x3D;([a,b,c],12,“Hello”) </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">example_list=[<span class="string">&#x27;我&#x27;</span>,<span class="string">&#x27;是&#x27;</span>,<span class="string">&#x27;列&#x27;</span>,<span class="string">&#x27;表&#x27;</span>]</span><br><span class="line">example_tuple=[<span class="string">&#x27;我&#x27;</span>,<span class="string">&#x27;是&#x27;</span>,<span class="string">&#x27;元&#x27;</span>,<span class="string">&#x27;组&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>((example_list[<span class="number">1</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_tuple[<span class="number">2</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_list[-<span class="number">2</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_tuple[-<span class="number">3</span>]))</span><br></pre></td></tr></table></figure>
+
+<p><strong>字典：</strong></p>
+<p>字典就是使用大括号括起来的键（Key）值（Value） 对（Key-Value对）。每个键值对之间使用英文逗号分隔， 每个Key与Value之间使用英文冒号分隔。</p>
+<p>Key可以使用中文、英文或者数字，但是不能重复。Value 可以是任意字符串、数字、列表、元组或者另一个字典， Value可以重复。</p>
+<p>可以通过Key来从字典中读取对应的Value，有3种主要的格式：  </p>
+<p>变量名[key]  </p>
+<p>变量名.get(key)  </p>
+<p>变量名.get(key, ‘在找不到key的情况下使用这个值’) </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dict1=&#123;<span class="number">1</span>:<span class="string">&quot;good&quot;</span>,<span class="number">2</span>:<span class="string">&quot;bad&quot;</span>,<span class="number">3</span>:<span class="string">&quot;not good&quot;</span>&#125;</span><br><span class="line">value1=dict1.get(<span class="number">1</span>,<span class="string">&quot;1&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(value1)</span><br><span class="line"></span><br><span class="line">good</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>集合：</strong></p>
+<p>集合是使用大括号括起来的各种数据，可以看作没有 Value的字典。<strong>集合里面的元素不能重复。</strong>集合也是无序的。集合最大的应用之一就是去重。例如，<strong>把一个带有重复元素的列表先转换为集合，再转换回列表，那么重复元素就只会保留一个</strong>。把列表转换为集合需要使用set()函数， 把集合转换为列表使用list()函数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">duplicated_list = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;a&#x27;</span>]</span><br><span class="line">unique_list = <span class="built_in">list</span>(<span class="built_in">set</span>(duplicated_list))</span><br><span class="line"><span class="built_in">print</span>(unique_list)</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;s&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="运算符与表达式"><a href="#运算符与表达式" class="headerlink" title="运算符与表达式"></a>运算符与表达式</h3><p>算术运算符（ +、–、*、&#x2F;、**、&#x2F;&#x2F;、％ ）</p>
+<p>关系运算符（ &gt;、&lt;、&gt;&#x3D;、&lt;&#x3D;、&#x3D; &#x3D;、!&#x3D; ）。  </p>
+<p>逻辑运算符（and、or、not ）。  </p>
+<p>位运算符（ &lt;&lt;、&gt;&gt;、~、|、^、&amp; ）。  </p>
+<p>赋值运算符（ &#x3D;、复合赋值运算符 ）。 </p>
+<p>成员运算符（ in、not in ）。  </p>
+<p>同一运算符（ is、is not ）。  </p>
+<p>下标运算符（ [ ] ）。  </p>
+<p>其他（ 如函数调用运算符（））。 </p>
+<p><strong>隐式类型转换：</strong></p>
+<p>当有一个操作数的类型是复数时，其它数据都自动转换成复数类型。  </p>
+<p>当有一个操作数的类型是小数时，其它数据都自动转换成小数类型。  </p>
+<p>不支持数字和字符之间的隐式转换。  </p>
+<p>数值的除法（&#x2F;）总是返回一个浮点数，要获取整数使用 &#x2F;&#x2F;操作符。  </p>
+<p>混合计算时，Python会把整型转换成为浮点数。 </p>
+<p>** 乘方运算</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In[]:<span class="number">4</span>*<span class="number">3</span>**<span class="number">2</span></span><br><span class="line">Out[]:<span class="number">36</span></span><br><span class="line"></span><br><span class="line">In[]:<span class="string">&quot;a&quot;</span>*<span class="number">10</span></span><br><span class="line">Out[]:<span class="string">&#x27;aaaaaaaaaa&#x27;</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">True</span> <span class="keyword">and</span> <span class="number">0</span></span><br><span class="line">Out[]:<span class="number">0</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">False</span> <span class="keyword">and</span> <span class="number">12</span></span><br><span class="line">Out[]:<span class="literal">False</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">True</span> <span class="keyword">or</span> <span class="number">0</span></span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In[]:<span class="literal">False</span> <span class="keyword">or</span> <span class="number">12</span></span><br><span class="line">Out[]:<span class="number">12</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">In[]:x=y=<span class="number">2.5</span></span><br><span class="line">	z=<span class="number">2.5</span></span><br><span class="line">	x <span class="keyword">is</span> <span class="keyword">not</span> z</span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;a&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;abcd&#x27;</span></span><br><span class="line">Out[]: <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;ac&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;abcd&#x27;</span></span><br><span class="line">Out[]:<span class="literal">False</span> </span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;a&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">&#x27;b,c,d&#x27;</span></span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="number">3</span> <span class="keyword">not</span> <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">Out[]:<span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>链式关系表达式:</strong></p>
+<p>相当于多个表达式之间逻 辑与的关系。</p>
+<p> 1 &lt; 2 &lt; 3 #等价于1 &lt; 2 and 2 &lt; 3  </p>
+<p>2 &gt;&#x3D; 1 &gt; 10 #等价于2 &gt;&#x3D; 1 and 1 &gt; 10 </p>
+<p><strong>Python中的函数分为内置函数和模块函数。</strong> </p>
+<p><strong>内置函数:</strong></p>
+<ul>
+<li>内置函数（BIF，built-in functions）是Python内置对 象类型之一，不需要导入任何模块即可使用一类函数。 </li>
+<li>执行dir(<strong>builtins</strong>)可以列出所有的内置函数;</li>
+<li>使用help(函数名)可以查看某个函数的用法;  abs(x):返回数字x的绝对值或复数x的模;  bin(x)、oct(x)、hex(x):把整数x转换为二进制、八进 制、十六进制的表示形式。  bytes(x)：把指定对象x转换为字节串表示形式。 </li>
+<li>float(x)：把整数或字符串x转换为浮点数；</li>
+<li>int(x[, d])：返回实数（float）、分数（Fraction）或 高精度实数（Decimal）x的整数部分，或把d进制的字符 串x转换为十进制并返回，d默认为十进制；</li>
+<li>chr(x)：返回Unicode编码为x的字符；</li>
+<li>ord(x)：返回1个字符x的Unicode编码；</li>
+<li>isinstance(obj, type)：测试对象obj是否属于指定类型 type；</li>
+<li>type(obj)：返回对象obj的类型；</li>
+<li>max(x)、 min(x)：返回可迭代对象x中的最大值、最小值；</li>
+<li>len(obj)：返回对象obj包含的元素个数；</li>
+<li>reversed(seq):返回seq中所有元素逆序后的迭代器对象;</li>
+<li>sorted(iterable, key&#x3D;None, reverse&#x3D;False):返回排序后的列表，其中iterable表示要排序的序列或迭代对象， key用来指定排序规则或依据，reverse用来指定升序或降序，默认为升序。该函数不改变iterable内任何元素的顺序；</li>
+<li>sum(x, start&#x3D;0)：返回序列x中所有元素之和；</li>
+<li>exit()：退出当前解释器环境；</li>
+</ul>
+<p><strong>模块函数:</strong></p>
+<ul>
+<li><p>math模块 </p>
+<p>math.pi 圆周率pi </p>
+<p>math.e 自然常数e </p>
+<p>math.tau 数学常数τ </p>
+<p>math.inf 正无穷大 </p>
+<p>math.nan 非浮点数标记，NaN(Not a  Number)</p>
+</li>
+<li><p>random模块</p>
+<p>random.random() 返回[0.0,1.0]区间内的一个随机小数 random.random() 返回 0.9523521796999529</p>
+<p>random.uniform(a,b) 返回[a,b]区间内的一个随机小数 random.uniform(1,3) 返回 2.3403540401554146</p>
+<p>random.randint(a,b) 返回[a,b]区间内的一个随机整数 random.randint(1,3) 返回2</p>
+<p>random.randrange([ start],end,[step]) 返回[start,end)区间内的一个整数， start和step默认都是1 random.randrange(1,10)返回 5</p>
+<p>random.choice() 随机返回给定序列中的一个元素 random.choice([‘a’,’b’,’c’]) 返回’c‘</p>
+<p>random.shuffle(x,[ra ndom]) 将可变序列的所有元素随机排列 random.shuffle([1,2,3,4]) 返回[1, 4, 3, 2]</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>python(课程)</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
       </tags>
   </entry>
 </search>
