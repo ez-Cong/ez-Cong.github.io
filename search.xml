@@ -113,6 +113,82 @@
       </tags>
   </entry>
   <entry>
+    <title>numpy&amp;pandas</title>
+    <url>/2022/03/19/numpy-pandas/</url>
+    <content><![CDATA[<p>由于打算后期学习机器学习以及 NLP 等课程，这里先学习一下有关的两个库 numpy 和 pandas。</p>
+<span id="more"></span>
+
+<h3 id="Numpy"><a href="#Numpy" class="headerlink" title="Numpy"></a>Numpy</h3><p>官方文档介绍 numpy 为：numPy 是Python中科学计算的基础包。它是一个Python库，提供多维数组对象，各种派生对象（如掩码数组和矩阵），以及用于数组快速操作的各种API，有包括数学、逻辑、形状操作、排序、选择、输入输出、离散傅立叶变换、基本线性代数，基本统计运算和随机模拟等等。</p>
+<p>这里，我们做个练习。我们需要先下载 numpy 包，输入 pip install numpy 命令。</p>
+<p>导入 numpy包 输入一个二维矩阵：</p>
+<p><img src="/../resources/image-20220319225611515.png" alt="image-20220319225611515"></p>
+<p>生成一个3行4列矩阵：</p>
+<p><img src="/../resources/image-20220319230232125.png" alt="image-20220319230232125"></p>
+<p>生成一个3行4列全部为1的矩阵：</p>
+<p><img src="/../resources/image-20220319232342472.png" alt="image-20220319232342472"></p>
+<p>每隔三个数输出10-20：</p>
+<p><img src="/../resources/image-20220319230959161.png" alt="image-20220319230959161"></p>
+<p>生成 0-11, reshape为矩阵行列：</p>
+<p><img src="/../resources/image-20220319232411028.png" alt="image-20220319232411028"></p>
+<p>1-10分成5段数列：<br><img src="/../resources/image-20220319231555369.png"></p>
+<p><strong>需要注意：</strong> <strong>linspace</strong>包含终值，<strong>range</strong> 和 <strong>arange</strong>不包含终值。</p>
+<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p>矩阵a 减 矩阵b。同理也可以进行相加、相乘、相除。</p>
+<p>注意的是平方运算： ** 表示平方。</p>
+<p>也可以进行sin,cos,tan。</p>
+<p><img src="/../resources/image-20220319232540910.png" alt="image-20220319232540910"></p>
+<p>矩阵乘法运算：</p>
+<p>矩阵运算：c_dot &#x3D; <strong>np.dot(a,b)</strong> </p>
+<p>另一种形式：c_dot_2 &#x3D; <strong>a.dot(b)</strong></p>
+<p><img src="/../resources/image-20220319233117350.png" alt="image-20220319233117350"></p>
+<p>随机生成0-1之间数字，求和，找到最小值最大值：</p>
+<p><img src="/../resources/image-20220319233420494.png" alt="image-20220319233420494"></p>
+<p>axis&#x3D;1每一行中求和，寻找最大值最小值。axis&#x3D;0每一列中求和，寻找最大值最小值。</p>
+<p><img src="/../resources/image-20220319233704066.png" alt="image-20220319233704066"></p>
+<p>求矩阵中最大值，最小值索引：<br><img src="/../resources/image-20220320121338504.png" alt="image-20220320121338504"></p>
+<p>求平均值：</p>
+<p>注意：<strong>axis&#x3D;0列，axis&#x3D;1行</strong></p>
+<p><img src="/../resources/image-20220320121404262.png" alt="image-20220320121404262"></p>
+<p>中位数：</p>
+<p><img src="/../resources/image-20220320121454781.png" alt="image-20220320121454781"></p>
+<p>逐步累加：</p>
+<p><img src="/../resources/image-20220320121520699.png" alt="image-20220320121520699"></p>
+<p>后一项与前一项作差：</p>
+<p><img src="/../resources/image-20220320121542889.png" alt="image-20220320121542889"></p>
+<p>非0行索引：</p>
+<p><img src="/../resources/image-20220320121703735.png" alt="image-20220320121703735"></p>
+<p>矩阵转置：</p>
+<p><img src="/../resources/image-20220320121646268.png" alt="image-20220320121635225"></p>
+<p>flat: flat返回的是一个迭代器，可以用for访问数组每一个元素。</p>
+<p><img src="/../resources/image-20220320122821612.png" alt="image-20220320122821612"></p>
+<p>合并:</p>
+<p>vertical stack上下合并</p>
+<p>horizontal stack左右合并</p>
+<p><img src="/../resources/image-20220320125048314.png" alt="image-20220320125048314"></p>
+<p>向量的转置：<br><img src="/../resources/image-20220320125320194.png" alt="image-20220320125320194"></p>
+<p>分割：</p>
+<p><img src="/../resources/image-20220320130647220.png" alt="image-20220320130647220"></p>
+<p>deep copy：</p>
+<h4 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h4><p><strong>Pandas</strong> 是 python 的核心数据分析支持库，提供了快速、灵活、明确的数据结构，旨在简单、直观地处理关系型、标记型数据。Pandas 的目标是成为 Python 数据分析实践与实战的必备高级工具，其长远目标是成为<strong>最强大、最灵活、可以支持任何语言的开源数据分析工具</strong>。经过多年不懈的努力，Pandas 离这个目标已经越来越近了。</p>
+<p>Pandas 的主要数据结构是 <strong>Series（一维数据）</strong>与 <strong>DataFrame （二维数据）</strong>，这两种数据结构足以处理金融、统计、社会科学、工程等领域里的大多数典型用例。对于 R 用户，DataFrame 提供了比 R 语言 data.frame 更丰富的功能。Pandas 基于 NumPy 开发，可以与其它第三方科学计算支持库完美集成。</p>
+<p>Pandas还具有很多优点：官方文档中都有介绍。<a href="https://www.pypandas.cn/docs/getting_started/overview.html#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">Pandas 概览 | Pandas 中文 (pypandas.cn)</a></p>
+<p>用值列表生成 Series 时，Pandas 默认自动生成整数索引：</p>
+<p><img src="/../resources/image-20220320153129409.png" alt="image-20220320153129409"></p>
+<p>用含日期时间索引与标签的 Numpy 数组生成 DataFrame：</p>
+<p><img src="/../resources/image-20220320153715145.png" alt="image-20220320153715145"></p>
+<p>用 Series字典对象生成DataFrame:</p>
+<p><img src="/../resources/image-20220320154218356.png" alt="image-20220320154218356"></p>
+<p>查看 DataFrame 头部和尾部数据：</p>
+<p><img src="/../resources/image-20220320154424221.png" alt="image-20220320154424221"></p>
+<p>显示索引与列名：<br><img src="/../resources/image-20220320154553779.png" alt="image-20220320154553779"></p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>numpy&amp;pandas</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo + github 搭建个人博客</title>
     <url>/2022/02/20/hello-world/</url>
     <content><![CDATA[<p>搭建博客最重要的就是<strong>耐心</strong>和<strong>坚持</strong>。搭建时候遇见许多问题(权限、版本等等)，经过耐心的搜索解决方案逐一解决还是非常开心的！<span id="more"></span></p>
@@ -130,7 +206,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#x67;&#x69;&#116;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#x69;&#116;&#64;&#x67;&#105;&#116;&#104;&#117;&#x62;&#x2e;&#99;&#111;&#109;">&#x67;&#x69;&#116;&#64;&#x67;&#105;&#116;&#104;&#117;&#x62;&#x2e;&#99;&#111;&#109;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -144,7 +220,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#98;&#46;&#99;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#98;&#46;&#99;&#x6f;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;">&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -237,82 +313,6 @@
       </categories>
       <tags>
         <tag>hexo搭建博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>numpy&amp;pandas</title>
-    <url>/2022/03/19/numpy-pandas/</url>
-    <content><![CDATA[<p>由于打算后期学习机器学习以及 NLP 等课程，这里先学习一下有关的两个库 numpy 和 pandas。</p>
-<span id="more"></span>
-
-<h3 id="Numpy"><a href="#Numpy" class="headerlink" title="Numpy"></a>Numpy</h3><p>官方文档介绍 numpy 为：numPy 是Python中科学计算的基础包。它是一个Python库，提供多维数组对象，各种派生对象（如掩码数组和矩阵），以及用于数组快速操作的各种API，有包括数学、逻辑、形状操作、排序、选择、输入输出、离散傅立叶变换、基本线性代数，基本统计运算和随机模拟等等。</p>
-<p>这里，我们做个练习。我们需要先下载 numpy 包，输入 pip install numpy 命令。</p>
-<p>导入 numpy包 输入一个二维矩阵：</p>
-<p><img src="/../resources/image-20220319225611515.png" alt="image-20220319225611515"></p>
-<p>生成一个3行4列矩阵：</p>
-<p><img src="/../resources/image-20220319230232125.png" alt="image-20220319230232125"></p>
-<p>生成一个3行4列全部为1的矩阵：</p>
-<p><img src="/../resources/image-20220319232342472.png" alt="image-20220319232342472"></p>
-<p>每隔三个数输出10-20：</p>
-<p><img src="/../resources/image-20220319230959161.png" alt="image-20220319230959161"></p>
-<p>生成 0-11, reshape为矩阵行列：</p>
-<p><img src="/../resources/image-20220319232411028.png" alt="image-20220319232411028"></p>
-<p>1-10分成5段数列：<br><img src="/../resources/image-20220319231555369.png"></p>
-<p><strong>需要注意：</strong> <strong>linspace</strong>包含终值，<strong>range</strong> 和 <strong>arange</strong>不包含终值。</p>
-<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p>矩阵a 减 矩阵b。同理也可以进行相加、相乘、相除。</p>
-<p>注意的是平方运算： ** 表示平方。</p>
-<p>也可以进行sin,cos,tan。</p>
-<p><img src="/../resources/image-20220319232540910.png" alt="image-20220319232540910"></p>
-<p>矩阵乘法运算：</p>
-<p>矩阵运算：c_dot &#x3D; <strong>np.dot(a,b)</strong> </p>
-<p>另一种形式：c_dot_2 &#x3D; <strong>a.dot(b)</strong></p>
-<p><img src="/../resources/image-20220319233117350.png" alt="image-20220319233117350"></p>
-<p>随机生成0-1之间数字，求和，找到最小值最大值：</p>
-<p><img src="/../resources/image-20220319233420494.png" alt="image-20220319233420494"></p>
-<p>axis&#x3D;1每一行中求和，寻找最大值最小值。axis&#x3D;0每一列中求和，寻找最大值最小值。</p>
-<p><img src="/../resources/image-20220319233704066.png" alt="image-20220319233704066"></p>
-<p>求矩阵中最大值，最小值索引：<br><img src="/../resources/image-20220320121338504.png" alt="image-20220320121338504"></p>
-<p>求平均值：</p>
-<p>注意：<strong>axis&#x3D;0列，axis&#x3D;1行</strong></p>
-<p><img src="/../resources/image-20220320121404262.png" alt="image-20220320121404262"></p>
-<p>中位数：</p>
-<p><img src="/../resources/image-20220320121454781.png" alt="image-20220320121454781"></p>
-<p>逐步累加：</p>
-<p><img src="/../resources/image-20220320121520699.png" alt="image-20220320121520699"></p>
-<p>后一项与前一项作差：</p>
-<p><img src="/../resources/image-20220320121542889.png" alt="image-20220320121542889"></p>
-<p>非0行索引：</p>
-<p><img src="/../resources/image-20220320121703735.png" alt="image-20220320121703735"></p>
-<p>矩阵转置：</p>
-<p><img src="/../resources/image-20220320121646268.png" alt="image-20220320121635225"></p>
-<p>flat: flat返回的是一个迭代器，可以用for访问数组每一个元素。</p>
-<p><img src="/../resources/image-20220320122821612.png" alt="image-20220320122821612"></p>
-<p>合并:</p>
-<p>vertical stack上下合并</p>
-<p>horizontal stack左右合并</p>
-<p><img src="/../resources/image-20220320125048314.png" alt="image-20220320125048314"></p>
-<p>向量的转置：<br><img src="/../resources/image-20220320125320194.png" alt="image-20220320125320194"></p>
-<p>分割：</p>
-<p><img src="/../resources/image-20220320130647220.png" alt="image-20220320130647220"></p>
-<p>deep copy：</p>
-<h4 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h4><p><strong>Pandas</strong> 是 python 的核心数据分析支持库，提供了快速、灵活、明确的数据结构，旨在简单、直观地处理关系型、标记型数据。Pandas 的目标是成为 Python 数据分析实践与实战的必备高级工具，其长远目标是成为<strong>最强大、最灵活、可以支持任何语言的开源数据分析工具</strong>。经过多年不懈的努力，Pandas 离这个目标已经越来越近了。</p>
-<p>Pandas 的主要数据结构是 <strong>Series（一维数据）</strong>与 <strong>DataFrame （二维数据）</strong>，这两种数据结构足以处理金融、统计、社会科学、工程等领域里的大多数典型用例。对于 R 用户，DataFrame 提供了比 R 语言 data.frame 更丰富的功能。Pandas 基于 NumPy 开发，可以与其它第三方科学计算支持库完美集成。</p>
-<p>Pandas还具有很多优点：官方文档中都有介绍。<a href="https://www.pypandas.cn/docs/getting_started/overview.html#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">Pandas 概览 | Pandas 中文 (pypandas.cn)</a></p>
-<p>用值列表生成 Series 时，Pandas 默认自动生成整数索引：</p>
-<p><img src="/../resources/image-20220320153129409.png" alt="image-20220320153129409"></p>
-<p>用含日期时间索引与标签的 Numpy 数组生成 DataFrame：</p>
-<p><img src="/../resources/image-20220320153715145.png" alt="image-20220320153715145"></p>
-<p>用 Series字典对象生成DataFrame:</p>
-<p><img src="/../resources/image-20220320154218356.png" alt="image-20220320154218356"></p>
-<p>查看 DataFrame 头部和尾部数据：</p>
-<p><img src="/../resources/image-20220320154424221.png" alt="image-20220320154424221"></p>
-<p>显示索引与列名：<br><img src="/../resources/image-20220320154553779.png" alt="image-20220320154553779"></p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>numpy&amp;pandas</tag>
       </tags>
   </entry>
   <entry>
