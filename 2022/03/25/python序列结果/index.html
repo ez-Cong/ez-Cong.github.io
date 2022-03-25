@@ -20,47 +20,29 @@
     var CONFIG = {"hostname":"congyx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","positon":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="由于打算后期学习机器学习以及 NLP 等课程，这里先学习一下有关的两个库 numpy 和 pandas。">
+  <meta name="description" content="序列序列（sequence）是一种用来存放多个值的数据类型，序列中对象类型可以相同也可以不同。 序列中的每个元素可以通过索引来进行访问 （集合类型除外）。 序列按照其中的元素是否可变分为可变序列和不可变序列，按照元素是否有序分为有序序列和无序序列。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="numpy&amp;pandas">
-<meta property="og:url" content="https://congyx.com/2022/03/19/numpy-pandas/index.html">
+<meta property="og:title" content="python序列结构">
+<meta property="og:url" content="https://congyx.com/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%9C/index.html">
 <meta property="og:site_name" content="程序人生">
-<meta property="og:description" content="由于打算后期学习机器学习以及 NLP 等课程，这里先学习一下有关的两个库 numpy 和 pandas。">
+<meta property="og:description" content="序列序列（sequence）是一种用来存放多个值的数据类型，序列中对象类型可以相同也可以不同。 序列中的每个元素可以通过索引来进行访问 （集合类型除外）。 序列按照其中的元素是否可变分为可变序列和不可变序列，按照元素是否有序分为有序序列和无序序列。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://congyx.com/resources/image-20220319225611515.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220319230232125.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220319232342472.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220319230959161.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220319232411028.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220319231555369.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220319232540910.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220319233117350.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220319233420494.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220319233704066.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320121338504.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320121404262.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320121454781.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320121520699.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320121542889.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320121703735.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320121646268.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320122821612.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320125048314.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320125320194.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320130647220.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320153129409.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320153715145.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320154218356.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320154424221.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220320154553779.png">
-<meta property="article:published_time" content="2022-03-19T14:47:12.000Z">
-<meta property="article:modified_time" content="2022-03-20T07:48:14.600Z">
+<meta property="og:image" content="https://congyx.com/resources/image-20220325124452772-16481835007181.png">
+<meta property="og:image" content="https://congyx.com/resources/image-20220325124606993.png">
+<meta property="og:image" content="https://congyx.com/resources/image-20220325124943481.png">
+<meta property="og:image" content="https://congyx.com/resources/image-20220325125357558.png">
+<meta property="og:image" content="https://congyx.com/resources/image-20220325130038347.png">
+<meta property="og:image" content="https://congyx.com/resources/image-20220325130249929.png">
+<meta property="og:image" content="https://congyx.com/resources/image-20220325131211578.png">
+<meta property="og:image" content="https://congyx.com/resources/image-20220325131409835.png">
+<meta property="article:published_time" content="2022-03-25T04:25:43.000Z">
+<meta property="article:modified_time" content="2022-03-25T05:14:15.741Z">
 <meta property="article:author" content="Cong yx">
-<meta property="article:tag" content="numpy&amp;pandas">
+<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://congyx.com/resources/image-20220319225611515.png">
+<meta name="twitter:image" content="https://congyx.com/resources/image-20220325124452772-16481835007181.png">
 
-<link rel="canonical" href="https://congyx.com/2022/03/19/numpy-pandas/">
+<link rel="canonical" href="https://congyx.com/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%9C/">
 
 
 <script id="page-configurations">
@@ -73,7 +55,7 @@
   };
 </script>
 
-  <title>numpy&pandas | 程序人生</title>
+  <title>python序列结构 | 程序人生</title>
   
 
 
@@ -222,7 +204,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/03/19/numpy-pandas/">
+    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%9C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -235,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          numpy&pandas
+          python序列结构
         </h1>
 
         <div class="post-meta">
@@ -246,16 +228,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-03-19 22:47:12" itemprop="dateCreated datePublished" datetime="2022-03-19T22:47:12+08:00">2022-03-19</time>
+              <time title="创建时间：2022-03-25 12:25:43 / 修改时间：13:14:15" itemprop="dateCreated datePublished" datetime="2022-03-25T12:25:43+08:00">2022-03-25</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-03-20 15:48:14" itemprop="dateModified" datetime="2022-03-20T15:48:14+08:00">2022-03-20</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -279,14 +255,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
+              <span>2k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -298,71 +274,52 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>由于打算后期学习机器学习以及 NLP 等课程，这里先学习一下有关的两个库 numpy 和 pandas。</p>
-<span id="more"></span>
+        <h3 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h3><p>序列（sequence）是一种用来存放多个值的数据类型，序列中对象类型可以相同也可以不同。</p>
+<p>序列中的每个元素可以通过索引来进行访问 （集合类型除外）。</p>
+<p>序列按照其中的元素是否可变分为<strong>可变序列</strong>和<strong>不可变序列</strong>，按照元素是否有序分为有序序列和无序序列。<span id="more"></span></p>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>列表是Python内置的有序、可变序列，列表的所有元素放 在一对中括号“[]”中，并使用逗号分隔开。</p>
+<p>在Python中，一个列表中的数据类型可以各不相同，可以同时为整数、实数、字符串等基本类型，甚至是列表、元组、字典、集合以及其他自定义类型的对象。</p>
+<p>例如：</p>
+<p>[‘Google’, ‘Baidu’, 1997, 2008] </p>
+<p> [1, 2, 3, 4, 5 ] </p>
+<p> [“a”, “b”, “c”, “d”] </p>
+<p> [123, [“das”, “aaa”], 234]</p>
+<p>列表是Python中最具灵活性的有序集合对象类型。<strong>和字符串不同</strong>的是，列表具有可变长度、异构以及任意嵌套列表的特点。</p>
+<h4 id="列表的创建"><a href="#列表的创建" class="headerlink" title="列表的创建"></a>列表的创建</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">lst1 = [<span class="string">&quot;cat&quot;</span>,<span class="string">&quot;dog&quot;</span>,<span class="string">&quot;tiger&quot;</span>,<span class="string">&quot;1024&quot;</span>]</span><br><span class="line">lst2 = [<span class="number">31</span>,<span class="number">32</span>,<span class="number">101.45</span>,<span class="string">&quot;door&quot;</span>]</span><br><span class="line">lst3 = [<span class="number">1</span>,<span class="number">2</span>,[<span class="string">&#x27;hello&#x27;</span>,<span class="number">5</span>]]</span><br><span class="line"><span class="built_in">print</span>(lst1,lst2)</span><br><span class="line"><span class="built_in">print</span>(lst3)</span><br></pre></td></tr></table></figure>
 
-<h3 id="Numpy"><a href="#Numpy" class="headerlink" title="Numpy"></a>Numpy</h3><p>官方文档介绍 numpy 为：numPy 是Python中科学计算的基础包。它是一个Python库，提供多维数组对象，各种派生对象（如掩码数组和矩阵），以及用于数组快速操作的各种API，有包括数学、逻辑、形状操作、排序、选择、输入输出、离散傅立叶变换、基本线性代数，基本统计运算和随机模拟等等。</p>
-<p>这里，我们做个练习。我们需要先下载 numpy 包，输入 pip install numpy 命令。</p>
-<p>导入 numpy包 输入一个二维矩阵：</p>
-<p><img src="/../resources/image-20220319225611515.png" alt="image-20220319225611515"></p>
-<p>生成一个3行4列矩阵：</p>
-<p><img src="/../resources/image-20220319230232125.png" alt="image-20220319230232125"></p>
-<p>生成一个3行4列全部为1的矩阵：</p>
-<p><img src="/../resources/image-20220319232342472.png" alt="image-20220319232342472"></p>
-<p>每隔三个数输出10-20：</p>
-<p><img src="/../resources/image-20220319230959161.png" alt="image-20220319230959161"></p>
-<p>生成 0-11, reshape为矩阵行列：</p>
-<p><img src="/../resources/image-20220319232411028.png" alt="image-20220319232411028"></p>
-<p>1-10分成5段数列：<br><img src="/../resources/image-20220319231555369.png"></p>
-<p><strong>需要注意：</strong> <strong>linspace</strong>包含终值，<strong>range</strong> 和 <strong>arange</strong>不包含终值。</p>
-<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p>矩阵a 减 矩阵b。同理也可以进行相加、相乘、相除。</p>
-<p>注意的是平方运算： ** 表示平方。</p>
-<p>也可以进行sin,cos,tan。</p>
-<p><img src="/../resources/image-20220319232540910.png" alt="image-20220319232540910"></p>
-<p>矩阵乘法运算：</p>
-<p>矩阵运算：c_dot &#x3D; <strong>np.dot(a,b)</strong> </p>
-<p>另一种形式：c_dot_2 &#x3D; <strong>a.dot(b)</strong></p>
-<p><img src="/../resources/image-20220319233117350.png" alt="image-20220319233117350"></p>
-<p>随机生成0-1之间数字，求和，找到最小值最大值：</p>
-<p><img src="/../resources/image-20220319233420494.png" alt="image-20220319233420494"></p>
-<p>axis&#x3D;1每一行中求和，寻找最大值最小值。axis&#x3D;0每一列中求和，寻找最大值最小值。</p>
-<p><img src="/../resources/image-20220319233704066.png" alt="image-20220319233704066"></p>
-<p>求矩阵中最大值，最小值索引：<br><img src="/../resources/image-20220320121338504.png" alt="image-20220320121338504"></p>
-<p>求平均值：</p>
-<p>注意：<strong>axis&#x3D;0列，axis&#x3D;1行</strong></p>
-<p><img src="/../resources/image-20220320121404262.png" alt="image-20220320121404262"></p>
-<p>中位数：</p>
-<p><img src="/../resources/image-20220320121454781.png" alt="image-20220320121454781"></p>
-<p>逐步累加：</p>
-<p><img src="/../resources/image-20220320121520699.png" alt="image-20220320121520699"></p>
-<p>后一项与前一项作差：</p>
-<p><img src="/../resources/image-20220320121542889.png" alt="image-20220320121542889"></p>
-<p>非0行索引：</p>
-<p><img src="/../resources/image-20220320121703735.png" alt="image-20220320121703735"></p>
-<p>矩阵转置：</p>
-<p><img src="/../resources/image-20220320121646268.png" alt="image-20220320121635225"></p>
-<p>flat: flat返回的是一个迭代器，可以用for访问数组每一个元素。</p>
-<p><img src="/../resources/image-20220320122821612.png" alt="image-20220320122821612"></p>
-<p>合并:</p>
-<p>vertical stack上下合并</p>
-<p>horizontal stack左右合并</p>
-<p><img src="/../resources/image-20220320125048314.png" alt="image-20220320125048314"></p>
-<p>向量的转置：<br><img src="/../resources/image-20220320125320194.png" alt="image-20220320125320194"></p>
-<p>分割：</p>
-<p><img src="/../resources/image-20220320130647220.png" alt="image-20220320130647220"></p>
-<p>deep copy：</p>
-<h4 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h4><p><strong>Pandas</strong> 是 python 的核心数据分析支持库，提供了快速、灵活、明确的数据结构，旨在简单、直观地处理关系型、标记型数据。Pandas 的目标是成为 Python 数据分析实践与实战的必备高级工具，其长远目标是成为<strong>最强大、最灵活、可以支持任何语言的开源数据分析工具</strong>。经过多年不懈的努力，Pandas 离这个目标已经越来越近了。</p>
-<p>Pandas 的主要数据结构是 <strong>Series（一维数据）</strong>与 <strong>DataFrame （二维数据）</strong>，这两种数据结构足以处理金融、统计、社会科学、工程等领域里的大多数典型用例。对于 R 用户，DataFrame 提供了比 R 语言 data.frame 更丰富的功能。Pandas 基于 NumPy 开发，可以与其它第三方科学计算支持库完美集成。</p>
-<p>Pandas还具有很多优点：官方文档中都有介绍。<a target="_blank" rel="noopener" href="https://www.pypandas.cn/docs/getting_started/overview.html#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">Pandas 概览 | Pandas 中文 (pypandas.cn)</a></p>
-<p>用值列表生成 Series 时，Pandas 默认自动生成整数索引：</p>
-<p><img src="/../resources/image-20220320153129409.png" alt="image-20220320153129409"></p>
-<p>用含日期时间索引与标签的 Numpy 数组生成 DataFrame：</p>
-<p><img src="/../resources/image-20220320153715145.png" alt="image-20220320153715145"></p>
-<p>用 Series字典对象生成DataFrame:</p>
-<p><img src="/../resources/image-20220320154218356.png" alt="image-20220320154218356"></p>
-<p>查看 DataFrame 头部和尾部数据：</p>
-<p><img src="/../resources/image-20220320154424221.png" alt="image-20220320154424221"></p>
-<p>显示索引与列名：<br><img src="/../resources/image-20220320154553779.png" alt="image-20220320154553779"></p>
+<p><img src="/../resources/image-20220325124452772-16481835007181.png"></p>
+<p>也可以使用list()函数将元组、range对象、字符串或其他类型的可迭代对象类型的数据转换为列表。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">list1 = <span class="built_in">list</span>(<span class="string">&quot;abc&quot;</span>)</span><br><span class="line">list2 = <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">1</span>,<span class="number">10</span>,<span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(list1)</span><br><span class="line"><span class="built_in">print</span>(list2)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220325124606993.png" alt="image-20220325124606993"></p>
+<h4 id="列表元素的访问与计数"><a href="#列表元素的访问与计数" class="headerlink" title="列表元素的访问与计数"></a>列表元素的访问与计数</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="string">&quot;abcd&quot;</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">len</span>(a))</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(a[<span class="number">6</span>][<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220325124943481.png" alt="image-20220325124943481"></p>
+<p>使用列表对象的index()方法获取指定元素首次出现的下标，若列表对象中不存在指定元素，则抛出异常。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">aList=[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">5.5</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">11</span>,<span class="number">13</span>,<span class="number">15</span>,<span class="number">17</span>]</span><br><span class="line"><span class="built_in">print</span>(aList.index(<span class="number">7</span>))</span><br><span class="line"><span class="built_in">print</span>(aList.index(<span class="number">1</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220325125357558.png" alt="image-20220325125357558"></p>
+<h4 id="改变列表元素值"><a href="#改变列表元素值" class="headerlink" title="改变列表元素值"></a>改变列表元素值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 通过修改下标修改列表里的值</span></span><br><span class="line">x = [<span class="number">1</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line">x[<span class="number">1</span>] = <span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表元素分段改变</span></span><br><span class="line">name = <span class="built_in">list</span>(<span class="string">&#x27;Perl&#x27;</span>)</span><br><span class="line">name[<span class="number">1</span>:] = <span class="built_in">list</span>(<span class="string">&#x27;ython&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(name)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220325130038347.png" alt="image-20220325130038347"></p>
+<p><img src="/../resources/image-20220325130249929.png" alt="image-20220325130249929"></p>
+<h4 id="列表元素添加"><a href="#列表元素添加" class="headerlink" title="列表元素添加"></a>列表元素添加</h4><p><strong>append()方法</strong>：通过append()方法在当前列表尾部追加元素，是原地修改列表，速度较快。 </p>
+<p><strong>extend()方法</strong>：使用列表对象的extend()方法可以将另一个迭代对象的所有元素添加至该列表对象尾部。通过extend()方法来增加列表元素也不改变其内存首地址，属于原地操作。</p>
+<p><strong>insert()方法：</strong>使用列表对象的insert(index,x)方法可以将元素添 加至列表的指定位置。</p>
+<p><strong>注意：</strong></p>
+<p>采用 + 和 * 的方式在形式上简单容易理解， 但严格意义上并不是真的为列表添加元素，而是有可能会被处理为<strong>创建一个新的列表</strong>，并将原列表中的元素和新元素依次复制到新列表的内存空间。</p>
+<p>由于涉及大量元素的复制，该操作速度较慢，对于列表元素较多和进行大量数据操作过程中从性能的考 虑不建议使用该方法。</p>
+<h4 id="列表元素删除"><a href="#列表元素删除" class="headerlink" title="列表元素删除"></a>列表元素删除</h4><p>使用 <strong>del</strong> 命令删除列表中指定位置的元素。如同一般的变量，del命令也可以删除整个列表变量。</p>
+<p>使用列表的 <strong>pop</strong> 方法删除并返回指定位置（默认为最后一个）上的元素。若指定的索引超出列表的范围，会抛出异常。</p>
+<p>使用列表的 <strong>remove()</strong> 方法删除<strong>首次</strong>出现的元素。 若没有此元素，会抛出异常。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">name = [<span class="string">&#x27;p&#x27;</span>,<span class="string">&#x27;y&#x27;</span>,<span class="string">&#x27;t&#x27;</span>,<span class="string">&#x27;h&#x27;</span>,<span class="string">&#x27;o&#x27;</span>,<span class="string">&#x27;n&#x27;</span>]</span><br><span class="line"><span class="keyword">del</span> name[<span class="number">1</span>]</span><br><span class="line">name[<span class="number">1</span>:<span class="number">4</span>] = []</span><br><span class="line"><span class="built_in">print</span>(name)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220325131211578.png" alt="image-20220325131211578"></p>
+<h4 id="列表元素的排序和反转"><a href="#列表元素的排序和反转" class="headerlink" title="列表元素的排序和反转"></a>列表元素的排序和反转</h4><p>列表结构具有对象自身提供的<strong>sort()方法</strong>进行原地排序，即这种排序是永久性排序，将会按照顺序改变列表中元素的次序。</p>
+<p>若要按与字母顺序相反的顺序排列列表元素，只需向sort()方法传递参数 reverse&#x3D;True。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cars = [<span class="string">&#x27;bmw&#x27;</span>,<span class="string">&#x27;audi&#x27;</span>,<span class="string">&#x27;toyota&#x27;</span>,<span class="string">&#x27;subaru&#x27;</span>]</span><br><span class="line">cars.sort()</span><br><span class="line"><span class="built_in">print</span>(cars)</span><br><span class="line">cars.sort(reverse = <span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(cars)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220325131409835.png" alt="image-20220325131409835"></p>
 
     </div>
 
@@ -388,7 +345,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://congyx.com/2022/03/19/numpy-pandas/" title="numpy&amp;pandas">https://congyx.com/2022/03/19/numpy-pandas/</a>
+    <a href="https://congyx.com/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%9C/" title="python序列结构">https://congyx.com/2022/03/25/python序列结果/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -399,7 +356,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/numpy-pandas/" rel="tag"># numpy&pandas</a>
+              <a href="/tags/python/" rel="tag"># python</a>
           </div>
 
         
@@ -408,13 +365,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/03/14/python/" rel="prev" title="python">
-      <i class="fa fa-chevron-left"></i> python
+    <a href="/2022/03/19/numpy-pandas/" rel="prev" title="numpy&pandas">
+      <i class="fa fa-chevron-left"></i> numpy&pandas
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%9C/" rel="next" title="python序列结构">
-      python序列结构 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -478,7 +432,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Numpy"><span class="nav-number">1.</span> <span class="nav-text">Numpy</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97"><span class="nav-number">1.1.</span> <span class="nav-text">矩阵运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pandas"><span class="nav-number">1.2.</span> <span class="nav-text">pandas</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%8F%E5%88%97"><span class="nav-number">1.</span> <span class="nav-text">序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">列表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">2.1.</span> <span class="nav-text">列表的创建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0%E7%9A%84%E8%AE%BF%E9%97%AE%E4%B8%8E%E8%AE%A1%E6%95%B0"><span class="nav-number">2.2.</span> <span class="nav-text">列表元素的访问与计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B9%E5%8F%98%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0%E5%80%BC"><span class="nav-number">2.3.</span> <span class="nav-text">改变列表元素值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0%E6%B7%BB%E5%8A%A0"><span class="nav-number">2.4.</span> <span class="nav-text">列表元素添加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0%E5%88%A0%E9%99%A4"><span class="nav-number">2.5.</span> <span class="nav-text">列表元素删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E5%85%83%E7%B4%A0%E7%9A%84%E6%8E%92%E5%BA%8F%E5%92%8C%E5%8F%8D%E8%BD%AC"><span class="nav-number">2.6.</span> <span class="nav-text">列表元素的排序和反转</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
