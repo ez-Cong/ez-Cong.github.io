@@ -130,7 +130,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#64;&#x67;&#x69;&#x74;&#x68;&#x75;&#x62;&#x2e;&#x63;&#111;&#109;">&#x67;&#x69;&#x74;&#64;&#x67;&#x69;&#x74;&#x68;&#x75;&#x62;&#x2e;&#x63;&#111;&#109;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#x69;&#116;&#64;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#x69;&#116;&#64;&#103;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -144,7 +144,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#x67;&#105;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;">&#x67;&#105;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#103;&#x69;&#x74;&#64;&#x67;&#x69;&#116;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#109;">&#103;&#x69;&#x74;&#64;&#x67;&#x69;&#116;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#109;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -693,6 +693,38 @@
 <figure class="highlight py"><table><tr><td class="code"><pre><span class="line">cars = [<span class="string">&#x27;bmw&#x27;</span>,<span class="string">&#x27;audi&#x27;</span>,<span class="string">&#x27;toyota&#x27;</span>,<span class="string">&#x27;subaru&#x27;</span>]</span><br><span class="line">cars.sort()</span><br><span class="line"><span class="built_in">print</span>(cars)</span><br><span class="line">cars.sort(reverse = <span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(cars)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/../resources/image-20220325131409835.png" alt="image-20220325131409835"></p>
+<p>要保留列表元素原来的排列顺序，同时以特定的顺序呈现它，可使用内置函数**sorted()**。</p>
+<p>sorted(iterable, key &#x3D; None, reverse &#x3D; False)     返回系列的排序列表</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">cars = [<span class="string">&#x27;bmw&#x27;</span>,<span class="string">&#x27;audi&#x27;</span>,<span class="string">&#x27;toyota&#x27;</span>,<span class="string">&#x27;subaru&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">sorted</span>(cars))</span><br><span class="line"><span class="built_in">print</span>(cars)</span><br><span class="line">s3 = <span class="string">&#x27;abAC&#x27;</span></span><br><span class="line"><span class="built_in">sorted</span>(s3, key = <span class="built_in">str</span>.lower)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220325155941681.png" alt="image-20220325155941681"></p>
+<p>sorted() 排序后会生成新列表，原列表不会改变。</p>
+<p>reverse() 方法用于将列表所有元素逆序或翻转。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = [<span class="number">15</span>,<span class="number">8</span>,<span class="number">14</span>,<span class="number">16</span>,<span class="number">10</span>,<span class="number">19</span>,<span class="number">13</span>,<span class="number">18</span>,<span class="number">11</span>,<span class="number">17</span>,<span class="number">12</span>,<span class="number">9</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(a))</span><br><span class="line">b = <span class="built_in">sorted</span>(a)</span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(b))</span><br><span class="line">a.sort(key=<span class="built_in">str</span>) <span class="comment"># 原地排序，指定排序依据根据字符串大小</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(a))</span><br><span class="line">a.reverse()		<span class="comment"># 反转列表，原地操作</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">id</span>(a))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220325161052956.png" alt="image-20220325161052956"></p>
+<h4 id="列表切片"><a href="#列表切片" class="headerlink" title="列表切片"></a>列表切片</h4><p>使用语法 **“list_name[start : end : step]” **来返回列表list_name 的一个片段。start表示切片开始位置，默认为0；end表示切片截止（但不包含）位置，默认为列表长度；step表示切片的步长，默认为1。</p>
+<p>当start为0时可以省略，当end为列表长度时可以省略，当 step为1时可以省略，省略步长时还可以同时省略最后一 个冒号。</p>
+<p>当step为负整数时，表示反向切片，这时start位置应该在 end位置的右侧，否则会返回空列表，start默认为-1，end 默认为列表第1个元素前面的位置。-1表示列表最后一个元素的位置，其它以此类推。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">numbers = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>]</span><br><span class="line"><span class="built_in">print</span>(numbers[::])		<span class="comment">#返回包含原列表中所有元素的新列表</span></span><br><span class="line"><span class="built_in">print</span>(numbers[::<span class="number">2</span>])		<span class="comment">#从第1个元素开始，隔1个取1个元素	</span></span><br><span class="line"><span class="built_in">print</span>(numbers[::-<span class="number">1</span>])	<span class="comment">#反向切片</span></span><br><span class="line"><span class="built_in">print</span>(numbers[<span class="number">1</span>:<span class="number">3</span>])		<span class="comment">#指定切片开始位置和结束位置，默认步长为1</span></span><br><span class="line"><span class="built_in">print</span>(numbers[<span class="number">1</span>::<span class="number">2</span>])	<span class="comment">#指定切片开始位置和步长，省略结束位置</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/../resources/image-20220325171227747.png" alt="image-20220325171227747"></p>
+<p>使用切片获取列表的部分元素，可以返回列表中部分元素组成的新列表。切片操作不会因为下标越界而抛出异常，而是简单地在列表尾部截断或者返回一个空列表，代码具有更强的健壮性。</p>
+<p>使用切片为列表增加&#x2F;删除元素，可以使用切片操作在列表任意位置插入新元素，但 是并不影响列表对象的内存地址，属于原地操作。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">num = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]</span><br><span class="line">num[<span class="built_in">len</span>(num):] = [<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>]</span><br><span class="line"><span class="built_in">print</span>(num)</span><br><span class="line">num[:<span class="number">0</span>] = [-<span class="number">2</span>,-<span class="number">1</span>]</span><br><span class="line"><span class="built_in">print</span>(num)</span><br><span class="line">aList = [<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>]</span><br><span class="line">aList[:<span class="number">3</span>] = []</span><br><span class="line"><span class="built_in">print</span>(aList)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220325172545950.png" alt="image-20220325172545950"></p>
+<p><strong>shuffle() 函数</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">lsit1=[<span class="number">2</span>,<span class="number">3</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">6</span>,<span class="number">12</span>]</span><br><span class="line">random.shuffle(list1)</span><br><span class="line">list1</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220325173802069.png" alt="image-20220325173802069"></p>
+<h3 id="元组"><a href="#元组" class="headerlink" title="元组"></a>元组</h3><p>列表的功能虽然很强大，但负担也很重，在很大程度上影响了运行效率。有时候我们并不需要那么多功能，很希望能有个轻量级的列表，元组（tuple）正是这样一种类型。 </p>
+<p>列表和元组都属于有序序列，都支持使用双向索引访问其中的元素。</p>
+<p>元组属于<strong>不可变（immutable）序列</strong>，一旦被创建，元组内的元素不可以修改，也无法添加或删除元素，若要调整，只能重新建立元组。 </p>
+<p>元组没有提供append()、extend()和insert()等方法，无法向元组中添加元素；同样，元组也没有remove()和pop()方法，也不支持对元组元素进行del操作，不能从元组中删除元素，而只 能使用del命令删除整个元组。</p>
+<p>虽然tuple的元素不可改变，但它可以包含可变的对象，比如list列表，可改变元组中可变对象的值。</p>
 ]]></content>
       <categories>
         <category>python</category>
