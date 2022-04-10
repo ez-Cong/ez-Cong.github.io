@@ -191,6 +191,167 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/03/26/python%E7%88%AC%E8%99%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Cong yx">
+      <meta itemprop="description" content="欲买桂花同载酒，终不似，少年游。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序人生">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/03/26/python%E7%88%AC%E8%99%AB/" class="post-title-link" itemprop="url">python爬虫</a>
+        </h2>
+
+        <div class="post-meta">
+
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-26 10:00:12" itemprop="dateCreated datePublished" datetime="2022-03-26T10:00:12+08:00">2022-03-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-10 11:33:27" itemprop="dateModified" datetime="2022-04-10T11:33:27+08:00">2022-04-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="python爬虫工作原理"><a href="#python爬虫工作原理" class="headerlink" title="python爬虫工作原理"></a>python爬虫工作原理</h3><p><strong>获取数据：</strong></p>
+<p>爬虫程序会根据我们提供的网址，向服务器发起请求，然后返回数据。</p>
+<p><strong>解析数据：</strong></p>
+<p>爬虫程序会把服务器返回的数据解析成我们能读懂的格式。</p>
+<p><strong>提取数据：</strong></p>
+<p>爬虫程序再从中提取出我们需要的数据。</p>
+<p><strong>储存数据:</strong><br>爬虫程序把这些有用的数据保存起来,便于你以后的使用和分析。</p>
+<h4 id="requests库"><a href="#requests库" class="headerlink" title="requests库"></a>requests库</h4><p>requests库可以帮我们下载网页源代码、文本、图片，甚至是音频。</p>
+<p><strong>requests.get()</strong></p>
+<p>requests.get 是在调用 requests 库中的 get() 方法，它向服务器发送了一个请求，括号里的参数是你需要的数据所在的网址，然后得到了服务器的响应。服务器返回的结果是个 Response 对象。</p>
+<p>response对象常用的四个属性：</p>
+<p><img src="/../resources/image-20220410100554836.png" alt="image-20220410100554836"></p>
+<p><strong>response.status_code属性：</strong></p>
+<p><img src="/../resources/image-20220410100621487.png" alt="image-20220410100621487"></p>
+<p><strong>response.content属性：</strong></p>
+<p>该属性能把Response对象的内容以二进制数据的形式返回，适用于图片、音频、视频的下载。</p>
+<p><strong>response.text属性：</strong></p>
+<p>该属性可以把Response对象的内容以字符串的形式返回， 适用于文字、网页源代码的下载。</p>
+<p><strong>response.encoding属性：</strong></p>
+<p>该属性能帮我们定义Response对象的编码。 遇上输出的文本有乱码问题，才考虑用res.encoding。首先，目标数据本身是什么编码是未知的。用requests.get() 发 送请求后，会取得一个Response对象，其中，requests库会对数据的编码类型做出自己的判断。但是这个判断有可能准确，也可能不准确。 如果它判断准确的话，打印出来的response.text的内容就是正常的、没有乱码的，就无需用res.encoding；如果判断不准确，就会出现一堆乱码，那我们就可以去查看目标数据的编码，然后再用res.encoding把编码定义成和目标数据一 致的类型即可。</p>
+<h4 id="robots协议"><a href="#robots协议" class="headerlink" title="robots协议"></a>robots协议</h4><p>查看robots协议，在网站的域名后加上 &#x2F;robots.txt</p>
+<p><img src="/../resources/image-20220410101501845.png" alt="image-20220410101501845"></p>
+<h4 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h4><p>HTML文档包含了HTML标签（TAG）和元素，通过它们来描述网页。Web浏览器的作用是将HTML源文件转化成 网页形式，并显示出它们。浏览器本身并不会显示出HTML 标签，而是使用它们来解释页面的内容。</p>
+<p><img src="/../resources/image-20220410101613520.png" alt="image-20220410101613520"></p>
+<p>HTML常见标签：</p>
+<p><img src="/../resources/image-20220410101647072.png" alt="image-20220410101647072"></p>
+<h4 id="解析数据"><a href="#解析数据" class="headerlink" title="解析数据"></a>解析数据</h4><p>我们平时使用浏览器上网，浏览器会把服务器返 回来的HTML源代码翻译为我们能看懂的样子，之后我们才能在网页上做各种操作。 而在爬虫中，也要使用能读懂html的工具，才能提取到想要的数据。</p>
+<p><strong>【提取数据】</strong>是指把我们需要的数据从众多数据中挑选出来。</p>
+<p><img src="/../resources/image-20220410102609214.png" alt="image-20220410102609214"></p>
+<p>在括号中，要输入两个参数，第0个参数是要被解析的文本，注意了，它必须是字符串。 括号中的第1个参数用来标识解析器，我们要用的是一个 Python内置库：html.parser。（它不是唯一的解析器，但是比较简单的）</p>
+<p>以该网站为例（url： <a target="_blank" rel="noopener" href="https://localprod.pandateacher.com/python%02manuscript/crawler-html/spider-men5.0.html%EF%BC%89%E5%81%87%E8%AE%BE%E6%88%91%E4%BB%AC%E6%83%B3%E7%88%AC%E5%8F%96%E7%BD%91%E9%A1%B5%E4%B8%AD%E7%9A%84%E4%B9%A6%E7%B1%8D%E7%B1%BB%E5%9E%8B%E3%80%81%E4%B9%A6%E5%90%8D%E3%80%81%E9%93%BE%E6%8E%A5%E3%80%81%E5%92%8C%E4%B9%A6%E7%B1%8D%E4%BB%8B%E7%BB%8D%E3%80%82%E6%A0%B9%E6%8D%AE%E4%B9%8B">https://localprod.pandateacher.com/pythonmanuscript/crawler-html/spider-men5.0.html）假设我们想爬取网页中的书籍类型、书名、链接、和书籍介绍。根据之</a> 前所学的 requests.get()，我们可以先获取到一个Response对象，并确认自己获取成功：</p>
+<p><img src="/../resources/image-20220410110621682.png" alt="image-20220410110621682"></p>
+<p>接着用BeautifulSoup解析数据，请特别留意第2行和第6 行新增的代码。第2行是引入BeautifulSoup库。第6行中的第 0个参数，必须是字符串类型；括号中的第1个参数是解析器。 这就是解析数据的用法。</p>
+<p><img src="/../resources/image-20220410110641745.png" alt="image-20220410110641745"></p>
+<p>接下来，我们来打印看看soup的数据类型，和soup本身 （第7行开始为新增代码）。</p>
+<p> import requests </p>
+<p>from bs4 import BeautifulSoup </p>
+<p>res &#x3D;  requests.get(‘<a target="_blank" rel="noopener" href="https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;">https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;</a>)  </p>
+<p>soup &#x3D; BeautifulSoup( res.text,’html.parser’) </p>
+<p>print(type(soup)) #查看soup的类型 </p>
+<p>print(soup) # 打印soup</p>
+<p>代码运行结果：</p>
+<p><img src="/../resources/image-20220410110850553.png" alt="image-20220410110850553"></p>
+<ul>
+<li><p>soup的数据类型是， 说明soup是一个BeautifulSoup对象。打印的soup， 它是所请求网页的完整HTML源代码。我们所要提取的书名、链接、书籍内容这些数据都在这里面。</p>
+</li>
+<li><p>打印soup出来的源代码和我们之前使用 response.text 打印出来的源代码是完全一样的。</p>
+</li>
+<li><p>虽然 response.text 和 soup 打印出的内容一样，但它们属于不同的类： &lt;class ‘str’&gt;与&lt;class ‘bs4.BeautifulSoup’&gt;。前者是字符串，后者是已经被解析过的 BeautifulSoup 对象。之所以打印出来的是一样的文本，是因为 BeautifulSoup 对象在直 接打印它的时候会调用该对象内的 str 方法，所以直接打印 bs 对象显示字符串是str的返回结果。</p>
+</li>
+<li><p>之后还会用 BeautifulSoup 库来提取数据，如果这不是一 个 BeautifulSoup 对象，就没法调用相关的属性和方法的，所以，用 BeautifulSoup 解析数据是非常有用的，并不是重复劳动。</p>
+</li>
+<li><p><img src="/../resources/image-20220410111622337.png" alt="image-20220410111622337"></p>
+</li>
+</ul>
+<p>仍然使用BeautifulSoup来提取数据。</p>
+<p><img src="/../resources/image-20220410111721377.png" alt="image-20220410111721377"></p>
+<p>find() 与 find_all()</p>
+<p><img src="/../resources/image-20220410112341145.png" alt="image-20220410112341145"></p>
+<p>Tag类对象的常用属性和方法</p>
+<p><img src="/../resources/image-20220410112633026.png" alt="image-20220410112633026"></p>
+<h4 id="定制请求头"><a href="#定制请求头" class="headerlink" title="定制请求头"></a>定制请求头</h4><p>最好将自己的爬虫伪装成真实的浏览器——因为在这种情况下，服务器很可能拒绝爬虫访问。甚至有的网站，一开始就不允许爬虫访问。 如，知乎、猫眼电影等。</p>
+<p>每一个 request 请求，都会有一个Requests Headers，把它称作请求头。 它里面会有一些关于该请求的基本信息，比如：这个请求是从什么设备 什么浏览器上发出？这个请求是从哪个页面跳转而来？ user-agent会记录你电脑的信息和浏览器版本（如图，就是windows10的64位操作系统， 使用谷歌浏览器），它最大的应用是帮助我们应对“反爬虫”技术。</p>
+<p><img src="/../resources/image-20220410113019785.png" alt="image-20220410113019785"></p>
+<p>基于【豆瓣官网】【下厨房】等网站突然IP反爬的情况， 程序开始需要加上headers里的 user-agent，以后面的实操例 子下厨房为例，user-agent在这里。</p>
+<p><img src="/../resources/image-20220410113100826.png" alt="image-20220410113100826"></p>
+<p>给爬虫代码加上请求头后是这样的 <strong>headers&#x3D;{‘User-Agent’: ‘Mozilla&#x2F;5.0 (Windows NT 10.0;  Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko)  Chrome&#x2F;86.0.4240.193 Safari&#x2F;537.36’}</strong> 这个请求头是万能的，可以直接保存下来，后面加请求头都可以直接使用。 注意！！！提取数据那一行的第二个参数也要加上请求头！！！</p>
+<p><img src="/../resources/image-20220410113214914.png" alt="image-20220410113214914"></p>
+<p>从最开始用requests库获取数据，到用BeautifulSoup库来解析数据，再继续用BeautifulSoup库提取数据，不断经历的是操作对象的类型转换</p>
+<p><img src="/../resources/image-20220410113315426.png" alt="image-20220410113315426"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+ 
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -290,7 +451,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%9C/">
+    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -304,7 +465,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%9C/" class="post-title-link" itemprop="url">python序列结构</a>
+            <a href="/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">python序列结构</a>
         </h2>
 
         <div class="post-meta">
@@ -365,7 +526,7 @@
 <p>序列按照其中的元素是否可变分为<strong>可变序列</strong>和<strong>不可变序列</strong>，按照元素是否有序分为有序序列和无序序列。</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%9C/#more" rel="contents">
+              <a class="btn" href="/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%84/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -852,7 +1013,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
