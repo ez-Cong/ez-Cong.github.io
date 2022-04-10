@@ -130,7 +130,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#105;&#116;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;">&#x67;&#105;&#116;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#x2e;&#x63;&#111;&#109;">&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#x2e;&#x63;&#111;&#109;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -144,7 +144,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#103;&#x69;&#x74;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#109;">&#103;&#x69;&#x74;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#109;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#109;">&#103;&#x69;&#116;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#109;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -253,12 +253,41 @@
 <p><img src="/../resources/image-20220319230232125.png" alt="image-20220319230232125"></p>
 <p>生成一个3行4列全部为1的矩阵：</p>
 <p><img src="/../resources/image-20220319232342472.png" alt="image-20220319232342472"></p>
+<p><strong>arange函数：</strong>创建等差一维数组</p>
 <p>每隔三个数输出10-20：</p>
 <p><img src="/../resources/image-20220319230959161.png" alt="image-20220319230959161"></p>
 <p>生成 0-11, reshape为矩阵行列：</p>
 <p><img src="/../resources/image-20220319232411028.png" alt="image-20220319232411028"></p>
+<p><strong>linspace函数</strong>：创建等差以为数组，接受元素数量作为参数。</p>
 <p>1-10分成5段数列：<br><img src="/../resources/image-20220319231555369.png"></p>
 <p><strong>需要注意：</strong> <strong>linspace</strong>包含终值，<strong>range</strong> 和 <strong>arange</strong>不包含终值。</p>
+<p><strong>logspace函数：</strong>创建等比一维数组</p>
+<p><img src="/../resources/image-20220410161730947.png" alt="image-20220410161730947"></p>
+<p>专门创建数组的函数：</p>
+<p><strong>zeros函数</strong>：创建指定长度或形状的全0数组。 格式：np.zeros(shape, dtype&#x3D;float, order&#x3D;’C’)</p>
+<p><strong>ones函数</strong>：创建指定长度或形状的全1数组。 格式：np. ones(shape, dtype&#x3D;None, order&#x3D;’C’)</p>
+<p>使用 **empty() **函数创建一个随机数组。 格式：np.empty(shape, dtype&#x3D;float, order&#x3D;’C’)</p>
+<p><strong>eye()函数</strong>:</p>
+<p>eye(N, M&#x3D;None, k&#x3D;0) </p>
+<p>返回值：返回一个对角线全1，其余位置全是0的二维数组， <strong>其中k&#x3D;0时，全1对角线为主对角线；k&gt;0时，全1对角线向 右上方偏移；k&lt;0时，全1对角线向左下方偏移。</strong> </p>
+<p>参数说明： </p>
+<p>N：行数；</p>
+<p>M：可选参数，列数，默认值为N；</p>
+<p>k：k&#x3D;0时，全1对角线为主对角线；k&gt;0时，全1对角线向上移 动相应的位置；k&lt;0时，全1对角线向下移动相应的位置。</p>
+<p><img src="/../resources/image-20220410162343643.png" alt="image-20220410162343643"></p>
+<p><img src="/../resources/image-20220410162428830.png" alt="image-20220410162428830"></p>
+<p><strong>使用full()函数创建数组</strong>:</p>
+<p>full(shape, fill_value, dtype&#x3D;None, order&#x3D;’C’) </p>
+<p>返回值：返回由固定值填充的数组。 </p>
+<p>参数说明： </p>
+<p>shape：int或int类型序列，表示矩阵形状； </p>
+<p>fill_value：填充值； </p>
+<p>dtype：可选参数，指定元素的数据类型； </p>
+<p>order：可选参数，取值’C’或者’F’，表示数组在内存的存放次序是以 行(C)为主还是以列(F)为主，默认值为’C’。</p>
+<p><img src="/../resources/image-20220410162626029.png" alt="image-20220410162626029"></p>
+<p><strong>随机分布：</strong></p>
+<p>normal(loc&#x3D;0.0, scale&#x3D;1.0, size&#x3D;None)：产生size个正态（高斯）分布的样本值。</p>
+<p><img src="/../resources/image-20220410164519264.png" alt="image-20220410164519264"></p>
 <h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p>矩阵a 减 矩阵b。同理也可以进行相加、相乘、相除。</p>
 <p>注意的是平方运算： ** 表示平方。</p>
 <p>也可以进行sin,cos,tan。</p>
@@ -929,6 +958,8 @@
 <p><img src="/../resources/image-20220410113214914.png" alt="image-20220410113214914"></p>
 <p>从最开始用requests库获取数据，到用BeautifulSoup库来解析数据，再继续用BeautifulSoup库提取数据，不断经历的是操作对象的类型转换</p>
 <p><img src="/../resources/image-20220410113315426.png" alt="image-20220410113315426"></p>
+<p>例子：</p>
+<p><img src="/../resources/image-20220410160211171.png" alt="image-20220410160211171"></p>
 ]]></content>
       <categories>
         <category>python</category>
