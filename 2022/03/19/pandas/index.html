@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"congyx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","positon":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="numpy官方文档介绍 numpy 为：numPy 是Python中科学计算的基础包。它是一个Python库，提供多维数组对象，各种派生对象（如掩码数组和矩阵），以及用于数组快速操作的各种API，有包括数学、逻辑、形状操作、排序、选择、输入输出、离散傅立叶变换、基本线性代数，基本统计运算和随机模拟等等。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="numpy">
+<meta property="og:url" content="https://congyx.com/2022/03/19/pandas/index.html">
+<meta property="og:site_name" content="程序人生">
+<meta property="og:description" content="numpy官方文档介绍 numpy 为：numPy 是Python中科学计算的基础包。它是一个Python库，提供多维数组对象，各种派生对象（如掩码数组和矩阵），以及用于数组快速操作的各种API，有包括数学、逻辑、形状操作、排序、选择、输入输出、离散傅立叶变换、基本线性代数，基本统计运算和随机模拟等等。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220319225611515.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220319230232125.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220319232342472.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220319230959161.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220319232411028.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220319231555369.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220410161730947.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220410162343643.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220410162428830.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220410162626029.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220410164519264.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220319232540910.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220319233117350.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220319233420494.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220319233704066.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220320121338504.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220320121404262.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220320121454781.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220320121520699.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220320121542889.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220320121703735.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220320121646268.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220320122821612.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220320125048314.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220320125320194.png">
+<meta property="og:image" content="https://congyx.com/pandas/image-20220320130647220.png">
+<meta property="article:published_time" content="2022-03-19T06:01:59.000Z">
+<meta property="article:modified_time" content="2022-04-15T06:06:27.868Z">
+<meta property="article:author" content="Cong yx">
+<meta property="article:tag" content="pandas">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://congyx.com/pandas/image-20220319225611515.png">
+
+<link rel="canonical" href="https://congyx.com/2022/03/19/pandas/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>numpy | 程序人生</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="程序人生" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">程序人生</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/03/19/pandas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Cong yx">
+      <meta itemprop="description" content="欲买桂花同载酒，终不似，少年游。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序人生">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          numpy
+        </h1>
+
+        <div class="post-meta">
+
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-03-19 14:01:59" itemprop="dateCreated datePublished" datetime="2022-03-19T14:01:59+08:00">2022-03-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-15 14:06:27" itemprop="dateModified" datetime="2022-04-15T14:06:27+08:00">2022-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h3><p>官方文档介绍 numpy 为：numPy 是Python中科学计算的基础包。它是一个Python库，提供多维数组对象，各种派生对象（如掩码数组和矩阵），以及用于数组快速操作的各种API，有包括数学、逻辑、形状操作、排序、选择、输入输出、离散傅立叶变换、基本线性代数，基本统计运算和随机模拟等等。<span id="more"></span></p>
+<p>这里，我们做个练习。我们需要先下载 numpy 包，输入 pip install numpy 命令。</p>
+<p>导入 numpy包 输入一个二维矩阵：</p>
+<p><img src="/pandas/image-20220319225611515.png" alt="image-20220319225611515"></p>
+<p>生成一个3行4列矩阵：</p>
+<p><img src="/pandas/image-20220319230232125.png" alt="image-20220319230232125"></p>
+<p>生成一个3行4列全部为1的矩阵：</p>
+<p><img src="/pandas/image-20220319232342472.png" alt="image-20220319232342472"></p>
+<p><strong>arange函数：</strong>创建等差一维数组</p>
+<p>每隔三个数输出10-20：</p>
+<p><img src="/pandas/image-20220319230959161.png" alt="image-20220319230959161"></p>
+<p>生成 0-11, reshape为矩阵行列：</p>
+<p><img src="/pandas/image-20220319232411028.png" alt="image-20220319232411028"></p>
+<p><strong>linspace函数</strong>：创建等差以为数组，接受元素数量作为参数。</p>
+<p>1-10分成5段数列：<br><img src="/pandas/image-20220319231555369.png"></p>
+<p><strong>需要注意：</strong> <strong>linspace</strong>包含终值，<strong>range</strong> 和 <strong>arange</strong>不包含终值。</p>
+<p><strong>logspace函数：</strong>创建等比一维数组</p>
+<p><img src="/pandas/image-20220410161730947.png" alt="image-20220410161730947"></p>
+<p>专门创建数组的函数：</p>
+<p><strong>zeros函数</strong>：创建指定长度或形状的全0数组。 格式：np.zeros(shape, dtype&#x3D;float, order&#x3D;’C’)</p>
+<p><strong>ones函数</strong>：创建指定长度或形状的全1数组。 格式：np. ones(shape, dtype&#x3D;None, order&#x3D;’C’)</p>
+<p>使用 **empty() **函数创建一个随机数组。 格式：np.empty(shape, dtype&#x3D;float, order&#x3D;’C’)</p>
+<p><strong>eye()函数</strong>:</p>
+<p>eye(N, M&#x3D;None, k&#x3D;0) </p>
+<p>返回值：返回一个对角线全1，其余位置全是0的二维数组， <strong>其中k&#x3D;0时，全1对角线为主对角线；k&gt;0时，全1对角线向 右上方偏移；k&lt;0时，全1对角线向左下方偏移。</strong> </p>
+<p>参数说明： </p>
+<p>N：行数；</p>
+<p>M：可选参数，列数，默认值为N；</p>
+<p>k：k&#x3D;0时，全1对角线为主对角线；k&gt;0时，全1对角线向上移 动相应的位置；k&lt;0时，全1对角线向下移动相应的位置。</p>
+<p><img src="/pandas/image-20220410162343643.png" alt="image-20220410162343643"></p>
+<p><img src="/pandas/image-20220410162428830.png" alt="image-20220410162428830"></p>
+<p><strong>使用full()函数创建数组</strong>:</p>
+<p>full(shape, fill_value, dtype&#x3D;None, order&#x3D;’C’) </p>
+<p>返回值：返回由固定值填充的数组。 </p>
+<p>参数说明： </p>
+<p>shape：int或int类型序列，表示矩阵形状； </p>
+<p>fill_value：填充值； </p>
+<p>dtype：可选参数，指定元素的数据类型； </p>
+<p>order：可选参数，取值’C’或者’F’，表示数组在内存的存放次序是以 行(C)为主还是以列(F)为主，默认值为’C’。</p>
+<p><img src="/pandas/image-20220410162626029.png" alt="image-20220410162626029"></p>
+<p><strong>随机分布：</strong></p>
+<p>normal(loc&#x3D;0.0, scale&#x3D;1.0, size&#x3D;None)：产生size个正态（高斯）分布的样本值。</p>
+<p><img src="/pandas/image-20220410164519264.png" alt="image-20220410164519264"></p>
+<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p>矩阵a 减 矩阵b。同理也可以进行相加、相乘、相除。</p>
+<p>注意的是平方运算： ** 表示平方。</p>
+<p>也可以进行sin,cos,tan。</p>
+<p><img src="/pandas/image-20220319232540910.png" alt="image-20220319232540910"></p>
+<p>矩阵乘法运算：</p>
+<p>矩阵运算：c_dot &#x3D; <strong>np.dot(a,b)</strong> </p>
+<p>另一种形式：c_dot_2 &#x3D; <strong>a.dot(b)</strong></p>
+<p><img src="/pandas/image-20220319233117350.png" alt="image-20220319233117350"></p>
+<p>随机生成0-1之间数字，求和，找到最小值最大值：</p>
+<p><img src="/pandas/image-20220319233420494.png" alt="image-20220319233420494"></p>
+<p>axis&#x3D;1每一行中求和，寻找最大值最小值。axis&#x3D;0每一列中求和，寻找最大值最小值。</p>
+<p><img src="/pandas/image-20220319233704066.png" alt="image-20220319233704066"></p>
+<p>求矩阵中最大值，最小值索引：<br><img src="/pandas/image-20220320121338504.png" alt="image-20220320121338504"></p>
+<p>求平均值：</p>
+<p>注意：<strong>axis&#x3D;0列，axis&#x3D;1行</strong></p>
+<p><img src="/pandas/image-20220320121404262.png" alt="image-20220320121404262"></p>
+<p>中位数：</p>
+<p><img src="/pandas/image-20220320121454781.png" alt="image-20220320121454781"></p>
+<p>逐步累加：</p>
+<p><img src="/pandas/image-20220320121520699.png" alt="image-20220320121520699"></p>
+<p>后一项与前一项作差：</p>
+<p><img src="/pandas/image-20220320121542889.png" alt="image-20220320121542889"></p>
+<p>非0行索引：</p>
+<p><img src="/pandas/image-20220320121703735.png" alt="image-20220320121703735"></p>
+<p>矩阵转置：</p>
+<p><img src="/pandas/image-20220320121646268.png" alt="image-20220320121635225"></p>
+<p>flat: flat返回的是一个迭代器，可以用for访问数组每一个元素。</p>
+<p><img src="/pandas/image-20220320122821612.png" alt="image-20220320122821612"></p>
+<p>合并:</p>
+<p>vertical stack上下合并</p>
+<p>horizontal stack左右合并</p>
+<p><img src="/pandas/image-20220320125048314.png" alt="image-20220320125048314"></p>
+<p>向量的转置：<br><img src="/pandas/image-20220320125320194.png" alt="image-20220320125320194"></p>
+<p>分割：</p>
+<p><img src="/pandas/image-20220320130647220.png" alt="image-20220320130647220"></p>
+<p>deep copy：</p>
+
+    </div>
+
+    
+    
+    
+
+ 
+   <div>
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+   </div>
+ 
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Cong yx
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://congyx.com/2022/03/19/pandas/" title="numpy">https://congyx.com/2022/03/19/pandas/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/pandas/" rel="tag"># pandas</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/03/14/python/" rel="prev" title="python">
+      <i class="fa fa-chevron-left"></i> python
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/03/19/numpy-pandas/" rel="next" title="pandas">
+      pandas <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NTU0Ny8zMjAxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy"><span class="nav-number">1.</span> <span class="nav-text">numpy</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E8%BF%90%E7%AE%97"><span class="nav-number">1.1.</span> <span class="nav-text">矩阵运算</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cong yx"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Cong yx</p>
+  <div class="site-description" itemprop="description">欲买桂花同载酒，终不似，少年游。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ez-Cong" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ez-Cong" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:Congyx0304@163.com" title="E-Mail → mailto:Congyx0304@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/?mkt=zh-cn" title="https:&#x2F;&#x2F;cn.bing.com&#x2F;?mkt&#x3D;zh-cn" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/signin?next=/" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;signin?next&#x3D;%2F" rel="noopener" target="_blank">知乎</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.csdn.net/" title="https:&#x2F;&#x2F;www.csdn.net&#x2F;" rel="noopener" target="_blank">CSDN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cong yx</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>

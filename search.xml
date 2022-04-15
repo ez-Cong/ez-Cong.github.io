@@ -113,6 +113,531 @@
       </tags>
   </entry>
   <entry>
+    <title>pandas</title>
+    <url>/2022/03/19/numpy-pandas/</url>
+    <content><![CDATA[<p>由于打算后期学习机器学习以及 NLP 等课程，这里先学习一下有关的两个库 numpy 和 pandas。</p>
+<span id="more"></span>
+
+<h3 id="Numpy"><a href="#Numpy" class="headerlink" title="Numpy"></a>Numpy</h3><p>官方文档介绍 numpy 为：numPy 是Python中科学计算的基础包。它是一个Python库，提供多维数组对象，各种派生对象（如掩码数组和矩阵），以及用于数组快速操作的各种API，有包括数学、逻辑、形状操作、排序、选择、输入输出、离散傅立叶变换、基本线性代数，基本统计运算和随机模拟等等。</p>
+<p>这里，我们做个练习。我们需要先下载 numpy 包，输入 pip install numpy 命令。</p>
+<p>导入 numpy包 输入一个二维矩阵：</p>
+<p><img src="/../resources/image-20220319225611515.png" alt="image-20220319225611515"></p>
+<p>生成一个3行4列矩阵：</p>
+<p><img src="/../resources/image-20220319230232125.png" alt="image-20220319230232125"></p>
+<p>生成一个3行4列全部为1的矩阵：</p>
+<p><img src="/../resources/image-20220319232342472.png" alt="image-20220319232342472"></p>
+<p><strong>arange函数：</strong>创建等差一维数组</p>
+<p>每隔三个数输出10-20：</p>
+<p><img src="/../resources/image-20220319230959161.png" alt="image-20220319230959161"></p>
+<p>生成 0-11, reshape为矩阵行列：</p>
+<p><img src="/../resources/image-20220319232411028.png" alt="image-20220319232411028"></p>
+<p><strong>linspace函数</strong>：创建等差以为数组，接受元素数量作为参数。</p>
+<p>1-10分成5段数列：<br><img src="/../resources/image-20220319231555369.png"></p>
+<p><strong>需要注意：</strong> <strong>linspace</strong>包含终值，<strong>range</strong> 和 <strong>arange</strong>不包含终值。</p>
+<p><strong>logspace函数：</strong>创建等比一维数组</p>
+<p><img src="/../resources/image-20220410161730947.png" alt="image-20220410161730947"></p>
+<p>专门创建数组的函数：</p>
+<p><strong>zeros函数</strong>：创建指定长度或形状的全0数组。 格式：np.zeros(shape, dtype&#x3D;float, order&#x3D;’C’)</p>
+<p><strong>ones函数</strong>：创建指定长度或形状的全1数组。 格式：np. ones(shape, dtype&#x3D;None, order&#x3D;’C’)</p>
+<p>使用 **empty() **函数创建一个随机数组。 格式：np.empty(shape, dtype&#x3D;float, order&#x3D;’C’)</p>
+<p><strong>eye()函数</strong>:</p>
+<p>eye(N, M&#x3D;None, k&#x3D;0) </p>
+<p>返回值：返回一个对角线全1，其余位置全是0的二维数组， <strong>其中k&#x3D;0时，全1对角线为主对角线；k&gt;0时，全1对角线向 右上方偏移；k&lt;0时，全1对角线向左下方偏移。</strong> </p>
+<p>参数说明： </p>
+<p>N：行数；</p>
+<p>M：可选参数，列数，默认值为N；</p>
+<p>k：k&#x3D;0时，全1对角线为主对角线；k&gt;0时，全1对角线向上移 动相应的位置；k&lt;0时，全1对角线向下移动相应的位置。</p>
+<p><img src="/../resources/image-20220410162343643.png" alt="image-20220410162343643"></p>
+<p><img src="/../resources/image-20220410162428830.png" alt="image-20220410162428830"></p>
+<p><strong>使用full()函数创建数组</strong>:</p>
+<p>full(shape, fill_value, dtype&#x3D;None, order&#x3D;’C’) </p>
+<p>返回值：返回由固定值填充的数组。 </p>
+<p>参数说明： </p>
+<p>shape：int或int类型序列，表示矩阵形状； </p>
+<p>fill_value：填充值； </p>
+<p>dtype：可选参数，指定元素的数据类型； </p>
+<p>order：可选参数，取值’C’或者’F’，表示数组在内存的存放次序是以 行(C)为主还是以列(F)为主，默认值为’C’。</p>
+<p><img src="/../resources/image-20220410162626029.png" alt="image-20220410162626029"></p>
+<p><strong>随机分布：</strong></p>
+<p>normal(loc&#x3D;0.0, scale&#x3D;1.0, size&#x3D;None)：产生size个正态（高斯）分布的样本值。</p>
+<p><img src="/../resources/image-20220410164519264.png" alt="image-20220410164519264"></p>
+<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p>矩阵a 减 矩阵b。同理也可以进行相加、相乘、相除。</p>
+<p>注意的是平方运算： ** 表示平方。</p>
+<p>也可以进行sin,cos,tan。</p>
+<p><img src="/../resources/image-20220319232540910.png" alt="image-20220319232540910"></p>
+<p>矩阵乘法运算：</p>
+<p>矩阵运算：c_dot &#x3D; <strong>np.dot(a,b)</strong> </p>
+<p>另一种形式：c_dot_2 &#x3D; <strong>a.dot(b)</strong></p>
+<p><img src="/../resources/image-20220319233117350.png" alt="image-20220319233117350"></p>
+<p>随机生成0-1之间数字，求和，找到最小值最大值：</p>
+<p><img src="/../resources/image-20220319233420494.png" alt="image-20220319233420494"></p>
+<p>axis&#x3D;1每一行中求和，寻找最大值最小值。axis&#x3D;0每一列中求和，寻找最大值最小值。</p>
+<p><img src="/../resources/image-20220319233704066.png" alt="image-20220319233704066"></p>
+<p>求矩阵中最大值，最小值索引：<br><img src="/../resources/image-20220320121338504.png" alt="image-20220320121338504"></p>
+<p>求平均值：</p>
+<p>注意：<strong>axis&#x3D;0列，axis&#x3D;1行</strong></p>
+<p><img src="/../resources/image-20220320121404262.png" alt="image-20220320121404262"></p>
+<p>中位数：</p>
+<p><img src="/../resources/image-20220320121454781.png" alt="image-20220320121454781"></p>
+<p>逐步累加：</p>
+<p><img src="/../resources/image-20220320121520699.png" alt="image-20220320121520699"></p>
+<p>后一项与前一项作差：</p>
+<p><img src="/../resources/image-20220320121542889.png" alt="image-20220320121542889"></p>
+<p>非0行索引：</p>
+<p><img src="/../resources/image-20220320121703735.png" alt="image-20220320121703735"></p>
+<p>矩阵转置：</p>
+<p><img src="/../resources/image-20220320121646268.png" alt="image-20220320121635225"></p>
+<p>flat: flat返回的是一个迭代器，可以用for访问数组每一个元素。</p>
+<p><img src="/../resources/image-20220320122821612.png" alt="image-20220320122821612"></p>
+<p>合并:</p>
+<p>vertical stack上下合并</p>
+<p>horizontal stack左右合并</p>
+<p><img src="/../resources/image-20220320125048314.png" alt="image-20220320125048314"></p>
+<p>向量的转置：<br><img src="/../resources/image-20220320125320194.png" alt="image-20220320125320194"></p>
+<p>分割：</p>
+<p><img src="/../resources/image-20220320130647220.png" alt="image-20220320130647220"></p>
+<p>deep copy：</p>
+<h3 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h3><p><strong>Pandas</strong> 是 python 的核心数据分析支持库，提供了快速、灵活、明确的数据结构，旨在简单、直观地处理关系型、标记型数据。Pandas 的目标是成为 Python 数据分析实践与实战的必备高级工具，其长远目标是成为<strong>最强大、最灵活、可以支持任何语言的开源数据分析工具</strong>。经过多年不懈的努力，Pandas 离这个目标已经越来越近了。</p>
+<p>Pandas 的主要数据结构是 <strong>Series（一维数据）</strong>与 <strong>DataFrame （二维数据）</strong>，这两种数据结构足以处理金融、统计、社会科学、工程等领域里的大多数典型用例。对于 R 用户，DataFrame 提供了比 R 语言 data.frame 更丰富的功能。Pandas 基于 NumPy 开发，可以与其它第三方科学计算支持库完美集成。</p>
+<p>Pandas还具有很多优点：官方文档中都有介绍。<a href="https://www.pypandas.cn/docs/getting_started/overview.html#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">Pandas 概览 | Pandas 中文 (pypandas.cn)</a></p>
+<h4 id="Series"><a href="#Series" class="headerlink" title="Series"></a>Series</h4><p>Series对象是一维数组结构，与NumPy中的一维数组ndarray类似，二者与Python基本的数据 结构list也很相近，其区别是list中的元素可以是不同的数据类型，而一维数组ndarray和 Series中则只允许存储同一数据类型的数据。</p>
+<p><strong>pandas.Series(data&#x3D;None,index&#x3D;None,dtype&#x3D;None, name&#x3D;None)</strong></p>
+<p>用一维ndarray数组创建Series对象：</p>
+<p><img src="/../resources/image-20220411220740985.png" alt="image-20220411220740985"></p>
+<p>用标量值创建Series对象：</p>
+<p><img src="/../resources/image-20220411220827773.png" alt="image-20220411220827773"></p>
+<p>通过列表创建Series：</p>
+<p><img src="/../resources/image-20220411220851709.png" alt="image-20220411220851709"></p>
+<p>通过指定索引方式创建Series:</p>
+<p><img src="/../resources/image-20220411220943084.png" alt="image-20220411220943084"></p>
+<p>用值列表生成 Series 时，Pandas 默认自动生成整数索引：</p>
+<p><img src="/../resources/image-20220320153129409.png" alt="image-20220320153129409"></p>
+<p><strong>Series对象的属性：</strong></p>
+<p>（1）shape属性获取Series对象的形状。 </p>
+<p>（2）dtype属性获取Series对象的数据数组中的数据 的数据类型。 </p>
+<p>（3）values属性获取Series对象的数据数组 </p>
+<p>（4）index属性获取Series对象的数据数组的索引 </p>
+<p>（5）Series对象本身及索引的name属性</p>
+<p><img src="/../resources/image-20220411221905083.png" alt="image-20220411221905083"></p>
+<p><strong>通过索引和切片查看Series对象的数据</strong></p>
+<p><img src="/../resources/image-20220411221943365.png" alt="image-20220411221943365"></p>
+<p>用含日期时间索引与标签的 Numpy 数组生成 DataFrame：</p>
+<p><img src="/../resources/image-20220320153715145.png" alt="image-20220320153715145"></p>
+<p>用 Series字典对象生成DataFrame:</p>
+<p><img src="/../resources/image-20220320154218356.png" alt="image-20220320154218356"></p>
+<p>查看 DataFrame 头部和尾部数据：</p>
+<p><img src="/../resources/image-20220320154424221.png" alt="image-20220320154424221"></p>
+<p>显示索引与列名：<br><img src="/../resources/image-20220320154553779.png" alt="image-20220320154553779"></p>
+<h4 id="DataFrame对象："><a href="#DataFrame对象：" class="headerlink" title="DataFrame对象："></a><strong>DataFrame对象</strong>：</h4><p>DataFrame是一个表格型的数据结构，既有行索引（保存在index） 又有列索引（保存在columns），是Series对象从一维到多维的扩展。 DataFrame对象每列相同位置处的元素共用一个行索引，每行相同位置处的元素共用一个列索引。DataFrame对象各列的数据类型可以不相同。</p>
+<p><img src="/../resources/image-20220411222437885.png" alt="image-20220411222437885"></p>
+<p><strong>创建DataFrame对象</strong></p>
+<p>创建DataFrame对象最常用的方法是使用 pandas 的 DataFrame() 构造函数，其语法格式如下：</p>
+<p>Pd.DataFrame(data&#x3D;None, index&#x3D;None, columns&#x3D;None, dtype&#x3D;None)</p>
+<p>返回值：DataFrame对象</p>
+<p>参数说明：</p>
+<p>data：创建DataFrame对象的数据，其类型可以是字典、嵌套列表、 元组列表、numpy的ndarray对象、其它DataFrame对象。</p>
+<p>index：行索引，创建DataFrame对象的数据时，如果没有提供索引， 默认赋值为arange(n)。 </p>
+<p>columns：列索引，没有提供索引时，默认赋值为arange(n)。 </p>
+<p>dtype：用来指定元素的数据类型，如果为空，自动推断类型。</p>
+<ul>
+<li>可将一个字典对象传递给DataFrame()函数来生成一个 DataFrame对象，字典的键作为DataFrame对象的列索引，字典的值作为列索引对应的列值，pandas也会自动为其添加一列从0开始的数值作为行索引。</li>
+</ul>
+<p><img src="/../resources/image-20220411222800911.png" alt="image-20220411222800911"></p>
+<ul>
+<li>可以只选择字典对象的一部分数据来创建DataFrame对象，只需在DataFrame构造函数中，用columns选项指定需要的列即可，新建的DataFrame对象各列顺序与指定的列顺序一致</li>
+</ul>
+<p><img src="/../resources/image-20220411222851739.png" alt="image-20220411222851739"></p>
+<ul>
+<li>创建DataFrame对象时，如果没有用index数组明确指定行索引，pandas也会自动为其添加一列从0开始的数值作为行索引。如果想用自己定义的行索引，则要把定义的索引放到一个数组中，赋值给index选项。</li>
+</ul>
+<p><img src="/../resources/image-20220411222949524.png" alt="image-20220411222949524"></p>
+<ul>
+<li>创建DataFrame对象时，可以同时指定行索引和列索引， 这时候就需要传递三个参数给DataFrame()构造函数，三个参数的顺序是：数据、index选项和columns选项。将存放行索引的数组赋给index选项，将存放列索引的数组赋给columns选项。</li>
+</ul>
+<p><img src="/../resources/image-20220411223015188.png" alt="image-20220411223015188"></p>
+<ul>
+<li>以字典的字典或Series的字典的结构创建DataFrame对象， pandas会将外边的键解释成列名称，将里面的键解释成行索引。</li>
+</ul>
+<p><img src="/../resources/image-20220411223043380.png" alt="image-20220411223043380"></p>
+<ul>
+<li>用键值为列表的字典构建DataFrame，其中每个列表（list）代 表的是一个列，字典的键则是列索引。这里要注意的是每个列表中 的元素数量应该相同，否则会报错。</li>
+</ul>
+<p><img src="/../resources/image-20220411223121140.png" alt="image-20220411223121140"></p>
+<ul>
+<li>以字典的列表构建DataFrame，其中每个字典代表的是每条记录（DataFrame中的一行），字典中各个键的键值对应的是这条记录的相关属性。</li>
+</ul>
+<p><img src="/../resources/image-20220411223143868.png" alt="image-20220411223143868"></p>
+<ul>
+<li>以numpy对象构建DataFrame。</li>
+</ul>
+<p><img src="/../resources/image-20220411223209421.png" alt="image-20220411223209421"></p>
+<p><strong>查看DataFrame的常用属性：</strong></p>
+<p><img src="/../resources/image-20220411223242765.png" alt="image-20220411223242765"></p>
+<p>每个索引都有一些方法和属性，它们可用于设置逻辑并回答 有关该索引所包含的数据的常见问题。</p>
+<p><img src="/../resources/image-20220412142324301.png" alt="image-20220412142324301"></p>
+<h4 id="DataFrame数据的编辑"><a href="#DataFrame数据的编辑" class="headerlink" title="DataFrame数据的编辑"></a>DataFrame数据的编辑</h4><p><strong>增加数据</strong></p>
+<p>增加一行直接通过 append 方法传入字典结构数据即可。</p>
+<p><img src="/../resources/image-20220413225447233.png" alt="image-20220413225447233"></p>
+<p><img src="/../resources/image-20220413225500870.png" alt="image-20220413225500870"></p>
+<p>增加列时，只需为要增加的列赋值即可创建一个新的列</p>
+<p><img src="/../resources/image-20220413225532747.png" alt="image-20220413225532747"></p>
+<p><strong>删除数据</strong></p>
+<p>删除数据直接用 drop 方法，通过 axis 参数确定是删除的行还是列。默认数据删除不修改原数据，需要在原数据删除行列需要设置参数 inplace &#x3D; True。</p>
+<p>删除数据：</p>
+<p><img src="/../resources/image-20220413225845769.png" alt="image-20220413225845769"></p>
+<p>删除数据的列</p>
+<p><img src="/../resources/image-20220413225927644.png" alt="image-20220413225927644"></p>
+<p><strong>修改数据</strong></p>
+<p>修改一个数据时直接对选择的数据赋值即可。</p>
+<p>需要注意的是，数据修改是直接对 DataFrame 数据修改，操作无法撤销，因此更改数据时要做好数据备份。</p>
+<p><img src="/../resources/image-20220413225957096.png" alt="image-20220413225957096"></p>
+<p>可以用 DataFrame对象的 name 属性为 DataFrame对象的列索引 columns 和行索引 index 指定别的名称，以便于识别。</p>
+<p><img src="/../resources/image-20220413230031750.png" alt="image-20220413230031750"></p>
+<p>为 DataFrame对象添加新的列，指定新列的名称，以及为新列赋值。</p>
+<p><img src="/../resources/image-20220413230051488.png" alt="image-20220413230051488"></p>
+<h4 id="DataFrame数据的查询"><a href="#DataFrame数据的查询" class="headerlink" title="DataFrame数据的查询"></a>DataFrame数据的查询</h4><ul>
+<li>选取列</li>
+</ul>
+<p><img src="/../resources/image-20220413230127764.png" alt="image-20220413230127764"></p>
+<ul>
+<li>选取行</li>
+</ul>
+<p>通过切片方式可以选取一行或多行数据</p>
+<p><img src="/../resources/image-20220413230155819.png" alt="image-20220413230155819"></p>
+<ul>
+<li>查看DataFrame对象中的一个元素</li>
+</ul>
+<p><img src="/../resources/image-20220413230339884.png" alt="image-20220413230339884"></p>
+<ul>
+<li>布尔选择</li>
+</ul>
+<p><img src="/../resources/image-20220413230401065.png" alt="image-20220413230401065"></p>
+<p>通过 DataFrame 对象的方法 isin() 判断一组元素是否属于 DataFrame对象</p>
+<p><img src="/../resources/image-20220413230528138.png" alt="image-20220413230528138"></p>
+<h4 id="数据运算与排序"><a href="#数据运算与排序" class="headerlink" title="数据运算与排序"></a>数据运算与排序</h4><p>DataFrame对象的数据运算与排序方法如表所示，表中的 df 表示一个DataFrame对象。</p>
+<p><img src="/../resources/image-20220413230628355.png" alt="image-20220413230628355"></p>
+<p><img src="/../resources/image-20220413230659106.png" alt="image-20220413230659106"></p>
+<h4 id="DataFrame数据的筛选"><a href="#DataFrame数据的筛选" class="headerlink" title="DataFrame数据的筛选"></a>DataFrame数据的筛选</h4><p>可以通过指定条件筛选 DataFrame 对象的元素。</p>
+<p><img src="/../resources/image-20220413230912611.png" alt="image-20220413230912611"></p>
+<p>常用的数据筛选方法：</p>
+<p><img src="/../resources/image-20220413231036462.png" alt="image-20220413231036462"></p>
+<p>head（） #默认获取前5行 </p>
+<p>head（n）#获取前n行 </p>
+<p>tail（）#默认获取后5行 </p>
+<p>head（n）#获取后n行 </p>
+<p>sample（n）#随机抽取n行显示</p>
+<p><strong>选取行和列</strong></p>
+<p><strong>DataFrame.loc    (行索引名称或条件，列索引名称)</strong></p>
+<p><strong>DataFrame.iloc    （行索引位置，列索引位置）</strong></p>
+<p><img src="/../resources/image-20220413233025459.png" alt="image-20220413233025459"></p>
+<p><img src="/../resources/image-20220413233057864.png" alt="image-20220413233057864"></p>
+<p><img src="/../resources/image-20220413233113685.png" alt="image-20220413233113685"></p>
+<h4 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h4><p>Pandas的数据对象在进行算术运算时，如果有相同索引则进行算术运算，如果没有，则会自动进行数据对齐，但会引入缺失值。</p>
+<p><img src="/../resources/image-20220414090051363.png" alt="image-20220414090051363"></p>
+<p>DataFrame类型的数据相加：</p>
+<p><img src="/../resources/image-20220414090426890.png" alt="image-20220414090426890"></p>
+<h4 id="函数应用和映射"><a href="#函数应用和映射" class="headerlink" title="函数应用和映射"></a>函数应用和映射</h4><p>已定义好的函数可以通过以下三种方法应用到数据： </p>
+<ol>
+<li><strong>map函数：</strong>将函数套用到Series的每个元素中； </li>
+<li><strong>apply函数</strong>，将函数套用到DataFrame的行或列上，行与列通过axis参数设置； </li>
+<li><strong>applymap函数</strong>，将函数套用到DataFrame的每个元素上。</li>
+</ol>
+<p><img src="/../resources/image-20220414094405392.png" alt="image-20220414094405392"></p>
+<p><strong>df.apply(func,axis&#x3D;0)</strong></p>
+<p>作用：将func函数应用到DataFrame对象df的行或列所构成的一维数组上。 </p>
+<p>func：应用到行或列上的函数。 </p>
+<p>axis：axis&#x3D;0，对每一列应用func函数；axis&#x3D;1，对每 一行应用函数。</p>
+<p><img src="/../resources/image-20220414105400861.png" alt="image-20220414105400861"></p>
+<p>apply函数的使用方法：</p>
+<p><img src="/../resources/image-20220414105420613.png" alt="image-20220414105420613"></p>
+<p><img src="/../resources/image-20220414105439048.png" alt="image-20220414105439048"></p>
+<p><strong>df.sort_values(by, axis&#x3D;0, ascending&#x3D;True)</strong></p>
+<p>作用：按指定的列或行进行值排序。 </p>
+<p>参数说明： by：指定某些行或列作为排序的依据。 </p>
+<p>axis：axis&#x3D;0，对行进行排序；axis&#x3D;1，对列进行排序。</p>
+<p><img src="/../resources/image-20220414105537114.png" alt="image-20220414105537114"></p>
+<p>sort_index方法：对索引进行排序，默认为升序，降序排序时加参数 ascending&#x3D;False。</p>
+<p><img src="/../resources/image-20220414105609080.png" alt="image-20220414105609080"></p>
+<p>对于DataFrame数据排序，通过指定轴方向，使用sort_index 函数对行或列索引进行排序。如果要进行列排序，则通过 sort_values函数把列名传给by参数即可。</p>
+<p><img src="/../resources/image-20220414105628383.png" alt="image-20220414105628383"></p>
+<p><strong>df.max(axis&#x3D;0)</strong></p>
+<p>作用：axis&#x3D;0表示返回df列的最大值，axis&#x3D;1表示返回df行的最大值。</p>
+<p><img src="/../resources/image-20220414111002930.png" alt="image-20220414111002930"></p>
+<p>在DataFrame中，可以通过<strong>sum方法</strong>对每列进行求和汇总，与 Excel中的sum函数类似。如果设置axis &#x3D; 1指定轴方向，可以实现按行汇总。</p>
+<p><img src="/../resources/image-20220414111040330.png" alt="image-20220414111040330"></p>
+<p>数据描述与统计：<strong>describe()</strong> 方法可以对每个数值型列进行描述性统计，形成统计报告。</p>
+<p><img src="/../resources/image-20220414111115951.png" alt="image-20220414111115951"></p>
+<p>pandas中常用的描述性统计量表：</p>
+<p><img src="/../resources/image-20220414111141347.png" alt="image-20220414111141347"></p>
+<p><strong>唯一值和值计数：</strong></p>
+<p> 通过Series对象的**unique()<strong>方法可以获取不重复的数据，而通过 Series对象的</strong>values_counts()**方法可以统计每个值出现的次数。</p>
+<p><img src="/../resources/image-20220414114545463.png" alt="image-20220414114545463"></p>
+<p><img src="/../resources/image-20220414114602335.png" alt="image-20220414114602335"></p>
+<h4 id="数据分组与聚合"><a href="#数据分组与聚合" class="headerlink" title="数据分组与聚合"></a>数据分组与聚合</h4><h5 id="groupby方法聚合"><a href="#groupby方法聚合" class="headerlink" title="groupby方法聚合"></a>groupby方法聚合</h5><p>在pandas中，分组运算主要通过 <strong>groupby</strong> 函数来完成，聚合操作主要通过 <strong>agg</strong> 函数来完成。</p>
+<p>分组的基本过程是，首先数据集按照分组键（key） 的方式分成小的数据片（split），然后对每一个数据片进行操作，最后将结果再组合起来形成新的数据集 （combine）。</p>
+<p>df.groupby(by&#x3D;None, axis&#x3D;0, level&#x3D;None, as_index&#x3D;True, sort&#x3D;True, group_keys&#x3D;True, squeeze&#x3D;False)</p>
+<p>作用：通过指定列索引或行索引，对df的数据元素进行分组。</p>
+<p><img src="/../resources/image-20220414114723308.png" alt="image-20220414114723308"></p>
+<p><img src="/../resources/image-20220414115821763.png" alt="image-20220414115821763"></p>
+<p><strong>按列名分组：</strong></p>
+<p>DataFrame数据的列索引名可以作为分组键，但需要注意的是用于 分组的对象必须是DataFrame数据本身，否则搜索不到索引名称会报错。</p>
+<p><img src="/../resources/image-20220415102735056.png" alt="image-20220415102735056"></p>
+<p><strong>按列分组：</strong></p>
+<p><img src="/../resources/image-20220415102816084.png" alt="image-20220415102816084"></p>
+<p><strong>按列表或元组分组：</strong></p>
+<p>分组键还可以是长度和DataFrame行数相同的列表或元组，相当于将列表或元组看做DataFrame的一列，然后将其分组。</p>
+<p><img src="/../resources/image-20220415103014610.png" alt="image-20220415103014610"></p>
+<p><strong>按字典分组：</strong></p>
+<p>如果原始的DataFrame中的分组信息很难确定或不存在，可以通过字典结构，定义分组信息。</p>
+<p><img src="/../resources/image-20220415103054320.png" alt="image-20220415103054320"></p>
+<p><strong>按函数分组：</strong></p>
+<p>函数作为分组键的原理类似于字典，通过映射关系进行分组，但是函数更加灵活。</p>
+<p><img src="/../resources/image-20220415103213758.png" alt="image-20220415103213758"></p>
+<p><strong>按分组统计：</strong></p>
+<p>在 df.groupby() 所生成的分组上应用 size()、sum()、 count()、mean() 等统计函数，能分别统计分组数量、 不同列的分组和、不同列的分组数量、分组不同列的平均值。</p>
+<p><img src="/../resources/image-20220415103507049.png" alt="image-20220415103507049"></p>
+<p><strong>常用的聚合运算：</strong></p>
+<p><img src="/../resources/image-20220415103630891.png" alt="image-20220415103630891"></p>
+<h5 id="使用agg方法聚合运算"><a href="#使用agg方法聚合运算" class="headerlink" title="使用agg方法聚合运算"></a>使用agg方法聚合运算</h5><p>agg、aggregate方法都支持对每个分组应用某个函数， 包括Python内置函数或自定义函数。同时，这两个方法也能够直接对DataFrame进行函数应用操作。</p>
+<p>agg和aggregate函数对DataFrame 对象操作的功能基本相同，因此只需掌握一个即可。</p>
+<p>agg函数的语法格式如下： <strong>DataFrame.agg(func, axis&#x3D;0)</strong> </p>
+<p>作用：通过func在指定的轴上进行聚合操作。 </p>
+<p>func：用来指定聚合操作的方式，其数据形式有函数、字符串、 字典以及字符串或函数所构成的列表。 </p>
+<p>axis：axis&#x3D;0表示在列上操作，axis&#x3D;1表示在行上操作。</p>
+<ul>
+<li>在DataFrame对象的行或列上执行聚合操作</li>
+</ul>
+<p><img src="/../resources/image-20220415104100456.png" alt="image-20220415104100456"></p>
+<p>在 df.groupby() 所生成的分组上应用 agg() 对于分组的某一列或者多个列，应用agg(func)可以对分 组后的数据应用 func 函数 。 例如 ： 用 group[‘data1’].agg(‘key1’)对分组后的’data1’列求均值。也可以推广到同时作用于多个列和使用多个函数。</p>
+<p><img src="/../resources/image-20220415104120965.png" alt="image-20220415104120965"></p>
+<ul>
+<li>在 df.groupby() 所生成的分组上应用agg()</li>
+</ul>
+<p><img src="/../resources/image-20220415104329703.png" alt="image-20220415104329703"></p>
+<p><img src="/../resources/image-20220415104349989.png" alt="image-20220415104349989"></p>
+<h3 id="分组运算"><a href="#分组运算" class="headerlink" title="分组运算"></a>分组运算</h3><ol>
+<li><p>transform方法 通过transform方法可以将运算分布到每一行。 </p>
+</li>
+<li><p>使用apply方法聚合数据 </p>
+<p>apply方法类似于agg方法，能够将函数应用于每一列。</p>
+</li>
+</ol>
+<p>应用agg()函数执行聚合操作。</p>
+<p>项目背景：王老师是某教育培训机构的数学老师。现在他想研究一下他的学生数学期末考试成绩和什么因素有关。于是王老师先提取了一小部分学生的数据，保存在 DataFrame 对象中， 王老师想要查看一下不同班级的学生数学平均分情况。就需要用到分组聚合操作。</p>
+<p>分组聚合操作的定义：分组聚合操作指的是按照某项规则对数据进行分组， 接着对分完组的数据执行总结性统计的操作（比如求和、求均值）。它可以帮助我们从庞杂的数据中提炼出我们想要的数据样式。 下图展现的就是利用分组聚合操作计算不同班级学生的均分的过程。</p>
+<p><img src="/../resources/image-20220415104948268.png" alt="image-20220415104948268"></p>
+<ul>
+<li>分组聚合操作根据其分组方式的不同可以分为单层分组聚合操作以及多层分组聚合操作。</li>
+<li>单层分组聚合操作</li>
+</ul>
+<p>单层分组聚合操作指的是针对某一个组进行聚合操作。王老师的案例就是单层分组聚合操作，因为他只需要针对班级这一列进行分组。</p>
+<p><img src="/../resources/image-20220415105617431.png" alt="image-20220415105617431"></p>
+<ul>
+<li>单层分组聚合操作的代码：df.groupby(by)[‘列索引’].mean()。这行代码可以拆分成两部分来看待，如下图所示。</li>
+</ul>
+<p><img src="/../resources/image-20220415105730628.png" alt="image-20220415105730628"></p>
+<ul>
+<li>首先来了解一下<strong>单层分组操作</strong>：df.groupby(by)。 参数 by 代表了要对哪一列数据进行分组操作。 这里要注意，单层分组操作只能根据一列数据进行分组。 如果要对班级进行分组，就可以将列索引’班级’传给参数 by。</li>
+</ul>
+<p><img src="/../resources/image-20220415110507960.png" alt="image-20220415110507960"></p>
+<p>代码效果如下图所示：</p>
+<p><img src="/../resources/image-20220415110603067.png" alt="image-20220415110603067"></p>
+<p><strong>聚合操作</strong>：</p>
+<p>在分完组之后，就可以对某一列数据进行聚合操作了。 [‘列索引’].mean() 中的 ‘列索引’ 指的是需要对哪一列数据进行聚合操作。如果想要对成绩这一列数据进行聚合操作，就可以将’ 成绩’传给’列索引’ 。</p>
+<p>mean() 指的是求平均值。整体效果如下图所示：</p>
+<p><img src="/../resources/image-20220415110818296.png" alt="image-20220415110818296"></p>
+<p><strong>常用的聚合操作方法见如下表格：</strong></p>
+<p><img src="/../resources/image-20220415110846491.png" alt="image-20220415110846491"></p>
+<p><strong>单层数据分组与聚合：</strong></p>
+<ul>
+<li><p>聚合操作</p>
+<p>帮助王老师求出不同性别学生的数学成绩中位数。</p>
+<p><img src="/../resources/image-20220415111340026.png" alt="image-20220415111340026"></p>
+</li>
+</ul>
+<p>从运行结果中可以发现，分组聚合操作返回的是一个 Series 对象。</p>
+<p>只不过这个 Series 对象和之前讲过的有些不一样，它的索引会多一个名字。</p>
+<p>这个名字对应的是分组操作中的列索引。由于刚才是对性别这一列进行分组，所以名字就是性别。</p>
+<p><img src="/../resources/image-20220415111423974.png" alt="image-20220415111423974"></p>
+<p><strong>多层分组与聚合：</strong></p>
+<ul>
+<li>王老师还想对这组数据有进一步的研究，他想知道如何获取不同班级下不同性别的学生的平均分，这个时候就需要用到多层分组聚合操作的知识了。</li>
+<li>下图展现的就是利用多层分组聚合操作计算不同班级下不同性别的学生均分的过程。</li>
+</ul>
+<p><img src="/../resources/image-20220415111508449.png" alt="image-20220415111508449"></p>
+<p><img src="/../resources/image-20220415113349416.png" alt="image-20220415113349416"></p>
+<p>多层分组聚合和单层分组聚合相比，代码是相同的，都是 df.groupby(by)[‘列索引’].mean()。</p>
+<p>从代码的运行结果来看，多层分组聚合操作返回的也是一个 Series 对象。</p>
+<p>唯一的不同点在于索引的层数上。</p>
+<p>单层分组聚合操作的索引只有一层，而多层分组聚合操作的索引至少有两层。</p>
+<p><img src="/../resources/image-20220415113359908.png" alt="image-20220415113359908"></p>
+<ul>
+<li><p>层数的不同体现在参数 by 的赋值方式上。</p>
+</li>
+<li><p>在单层分组聚合操作的时候，只需要将一个列索引传给参数 by 就可以了。</p>
+</li>
+<li><p>而多层分组聚合操作需要传多个列索引给参数 by。</p>
+</li>
+<li><p>需要注意的是，这些列索引在传进参数 by 之前，需要先被放 进一个“容器”里，这个容器可以是列表。</p>
+</li>
+</ul>
+<p><img src="/../resources/image-20220415113445220.png" alt="image-20220415113445220"></p>
+<p>代码运行结果中索引的效果如下图所示：</p>
+<p>仔细观察一下索引出现的次序。最左侧是班级，分为 1 班和 2 班。在 1 班 和 2 班这两个类别下，又继续分为男和女这两个类别，也就是性别这列数据所对应的取值集合。</p>
+<p><img src="/../resources/image-20220415113514624.png" alt="image-20220415113514624"></p>
+<p>分组的顺序和列表中的参数是对应的（从左往右依次拆分）。</p>
+<p><img src="/../resources/image-20220415113529796.png" alt="image-20220415113529796"></p>
+<ul>
+<li>如果现在想要先对性别分组，再对班级分组，那该如何向 by 传参呢？</li>
+</ul>
+<p><img src="/../resources/image-20220415113813099.png" alt="image-20220415113813099"></p>
+<p>假设现在王老师又想对数据有进一步的研究，他想知道尖子生是不是更容 易出现在戴眼镜的学生群体中。于是王老师想要在原先分组的基础上，再 对’眼镜’这一列进行拆分。</p>
+<p><img src="/../resources/image-20220415113832627.png" alt="image-20220415113832627"></p>
+<ul>
+<li><p>虽然通过多层分组聚合的方法，可以求出不同组别下的学生考试成绩的情况，但是返回的结果看起来却有些冗杂。</p>
+</li>
+<li><p>所有的组别信息都扎堆出现在了一个 Series 对象的索引中，有没有办法能 够让这些信息看起来更直观一些呢？</p>
+</li>
+<li><p><img src="/../resources/image-20220415113845806.png" alt="image-20220415113845806"></p>
+</li>
+</ul>
+<p><strong>s.unstack()</strong> 函数就是解决这问题的常见方法。它可以将一个多层分组聚合后的 Series 对象转变成 DataFrame 对象。</p>
+<p>s.unstack() 这个方法是针对多层分组聚合后的 Series 对象来使用的。作用就是将其索引的最后一列转变成 DataFrame 对象的列索引，而剩下的索引 则转变成 DataFrame 对象的行索引。</p>
+<p><img src="/../resources/image-20220415113926770.png" alt="image-20220415113926770"></p>
+<p><img src="/../resources/image-20220415114434120.png" alt="image-20220415114434120"></p>
+<p><strong>练习：</strong></p>
+<ul>
+<li><p>要求是获取如下图所示的表格（提示：聚合操作 的方法是求平均值）。</p>
+</li>
+<li><p>首先可以从表格中发现，列索引是’性别’ ，所以在给参数 by 赋值的时候， 应该将’性别’放在列表的末尾。其次，从 DataFrame 对象的行索引中可以 发现， ‘班级’在左， ‘眼镜’在右，所以最后传给参数 by 的列表应该是：[‘班 级’, ‘眼镜’, ‘性别’]。</p>
+</li>
+</ul>
+<p><img src="/../resources/image-20220415114525822.png" alt="image-20220415114525822"></p>
+<p><img src="/../resources/image-20220415114635216.png" alt="image-20220415114635216"></p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>pandas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>numpy</title>
+    <url>/2022/03/19/pandas/</url>
+    <content><![CDATA[<h3 id="numpy"><a href="#numpy" class="headerlink" title="numpy"></a>numpy</h3><p>官方文档介绍 numpy 为：numPy 是Python中科学计算的基础包。它是一个Python库，提供多维数组对象，各种派生对象（如掩码数组和矩阵），以及用于数组快速操作的各种API，有包括数学、逻辑、形状操作、排序、选择、输入输出、离散傅立叶变换、基本线性代数，基本统计运算和随机模拟等等。<span id="more"></span></p>
+<p>这里，我们做个练习。我们需要先下载 numpy 包，输入 pip install numpy 命令。</p>
+<p>导入 numpy包 输入一个二维矩阵：</p>
+<p><img src="/pandas/image-20220319225611515.png" alt="image-20220319225611515"></p>
+<p>生成一个3行4列矩阵：</p>
+<p><img src="/pandas/image-20220319230232125.png" alt="image-20220319230232125"></p>
+<p>生成一个3行4列全部为1的矩阵：</p>
+<p><img src="/pandas/image-20220319232342472.png" alt="image-20220319232342472"></p>
+<p><strong>arange函数：</strong>创建等差一维数组</p>
+<p>每隔三个数输出10-20：</p>
+<p><img src="/pandas/image-20220319230959161.png" alt="image-20220319230959161"></p>
+<p>生成 0-11, reshape为矩阵行列：</p>
+<p><img src="/pandas/image-20220319232411028.png" alt="image-20220319232411028"></p>
+<p><strong>linspace函数</strong>：创建等差以为数组，接受元素数量作为参数。</p>
+<p>1-10分成5段数列：<br><img src="/pandas/image-20220319231555369.png"></p>
+<p><strong>需要注意：</strong> <strong>linspace</strong>包含终值，<strong>range</strong> 和 <strong>arange</strong>不包含终值。</p>
+<p><strong>logspace函数：</strong>创建等比一维数组</p>
+<p><img src="/pandas/image-20220410161730947.png" alt="image-20220410161730947"></p>
+<p>专门创建数组的函数：</p>
+<p><strong>zeros函数</strong>：创建指定长度或形状的全0数组。 格式：np.zeros(shape, dtype&#x3D;float, order&#x3D;’C’)</p>
+<p><strong>ones函数</strong>：创建指定长度或形状的全1数组。 格式：np. ones(shape, dtype&#x3D;None, order&#x3D;’C’)</p>
+<p>使用 **empty() **函数创建一个随机数组。 格式：np.empty(shape, dtype&#x3D;float, order&#x3D;’C’)</p>
+<p><strong>eye()函数</strong>:</p>
+<p>eye(N, M&#x3D;None, k&#x3D;0) </p>
+<p>返回值：返回一个对角线全1，其余位置全是0的二维数组， <strong>其中k&#x3D;0时，全1对角线为主对角线；k&gt;0时，全1对角线向 右上方偏移；k&lt;0时，全1对角线向左下方偏移。</strong> </p>
+<p>参数说明： </p>
+<p>N：行数；</p>
+<p>M：可选参数，列数，默认值为N；</p>
+<p>k：k&#x3D;0时，全1对角线为主对角线；k&gt;0时，全1对角线向上移 动相应的位置；k&lt;0时，全1对角线向下移动相应的位置。</p>
+<p><img src="/pandas/image-20220410162343643.png" alt="image-20220410162343643"></p>
+<p><img src="/pandas/image-20220410162428830.png" alt="image-20220410162428830"></p>
+<p><strong>使用full()函数创建数组</strong>:</p>
+<p>full(shape, fill_value, dtype&#x3D;None, order&#x3D;’C’) </p>
+<p>返回值：返回由固定值填充的数组。 </p>
+<p>参数说明： </p>
+<p>shape：int或int类型序列，表示矩阵形状； </p>
+<p>fill_value：填充值； </p>
+<p>dtype：可选参数，指定元素的数据类型； </p>
+<p>order：可选参数，取值’C’或者’F’，表示数组在内存的存放次序是以 行(C)为主还是以列(F)为主，默认值为’C’。</p>
+<p><img src="/pandas/image-20220410162626029.png" alt="image-20220410162626029"></p>
+<p><strong>随机分布：</strong></p>
+<p>normal(loc&#x3D;0.0, scale&#x3D;1.0, size&#x3D;None)：产生size个正态（高斯）分布的样本值。</p>
+<p><img src="/pandas/image-20220410164519264.png" alt="image-20220410164519264"></p>
+<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p>矩阵a 减 矩阵b。同理也可以进行相加、相乘、相除。</p>
+<p>注意的是平方运算： ** 表示平方。</p>
+<p>也可以进行sin,cos,tan。</p>
+<p><img src="/pandas/image-20220319232540910.png" alt="image-20220319232540910"></p>
+<p>矩阵乘法运算：</p>
+<p>矩阵运算：c_dot &#x3D; <strong>np.dot(a,b)</strong> </p>
+<p>另一种形式：c_dot_2 &#x3D; <strong>a.dot(b)</strong></p>
+<p><img src="/pandas/image-20220319233117350.png" alt="image-20220319233117350"></p>
+<p>随机生成0-1之间数字，求和，找到最小值最大值：</p>
+<p><img src="/pandas/image-20220319233420494.png" alt="image-20220319233420494"></p>
+<p>axis&#x3D;1每一行中求和，寻找最大值最小值。axis&#x3D;0每一列中求和，寻找最大值最小值。</p>
+<p><img src="/pandas/image-20220319233704066.png" alt="image-20220319233704066"></p>
+<p>求矩阵中最大值，最小值索引：<br><img src="/pandas/image-20220320121338504.png" alt="image-20220320121338504"></p>
+<p>求平均值：</p>
+<p>注意：<strong>axis&#x3D;0列，axis&#x3D;1行</strong></p>
+<p><img src="/pandas/image-20220320121404262.png" alt="image-20220320121404262"></p>
+<p>中位数：</p>
+<p><img src="/pandas/image-20220320121454781.png" alt="image-20220320121454781"></p>
+<p>逐步累加：</p>
+<p><img src="/pandas/image-20220320121520699.png" alt="image-20220320121520699"></p>
+<p>后一项与前一项作差：</p>
+<p><img src="/pandas/image-20220320121542889.png" alt="image-20220320121542889"></p>
+<p>非0行索引：</p>
+<p><img src="/pandas/image-20220320121703735.png" alt="image-20220320121703735"></p>
+<p>矩阵转置：</p>
+<p><img src="/pandas/image-20220320121646268.png" alt="image-20220320121635225"></p>
+<p>flat: flat返回的是一个迭代器，可以用for访问数组每一个元素。</p>
+<p><img src="/pandas/image-20220320122821612.png" alt="image-20220320122821612"></p>
+<p>合并:</p>
+<p>vertical stack上下合并</p>
+<p>horizontal stack左右合并</p>
+<p><img src="/pandas/image-20220320125048314.png" alt="image-20220320125048314"></p>
+<p>向量的转置：<br><img src="/pandas/image-20220320125320194.png" alt="image-20220320125320194"></p>
+<p>分割：</p>
+<p><img src="/pandas/image-20220320130647220.png" alt="image-20220320130647220"></p>
+<p>deep copy：</p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>pandas</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python中lambda表达式</title>
+    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
+<ul>
+<li>lambda表达式必须使用lambda关键字定义。</li>
+<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
+<li>lambda表达式必须是单行的。</li>
+<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
+<li>lambda表达式的计算结果就是函数的返回值。 </li>
+<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
+<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
+<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo + github 搭建个人博客</title>
     <url>/2022/02/20/hello-world/</url>
     <content><![CDATA[<p>搭建博客最重要的就是<strong>耐心</strong>和<strong>坚持</strong>。搭建时候遇见许多问题(权限、版本等等)，经过耐心的搜索解决方案逐一解决还是非常开心的！<span id="more"></span></p>
@@ -130,7 +655,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#x2e;&#x63;&#111;&#109;">&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#116;&#x68;&#117;&#x62;&#x2e;&#x63;&#111;&#109;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#105;&#116;&#64;&#103;&#x69;&#x74;&#104;&#x75;&#98;&#46;&#x63;&#x6f;&#109;">&#103;&#105;&#116;&#64;&#103;&#x69;&#x74;&#104;&#x75;&#98;&#46;&#x63;&#x6f;&#109;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -144,7 +669,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#109;">&#103;&#x69;&#116;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#109;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#117;&#x62;&#46;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#117;&#x62;&#46;&#x63;&#x6f;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -237,136 +762,6 @@
       </categories>
       <tags>
         <tag>hexo搭建博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>numpy&amp;pandas</title>
-    <url>/2022/03/19/numpy-pandas/</url>
-    <content><![CDATA[<p>由于打算后期学习机器学习以及 NLP 等课程，这里先学习一下有关的两个库 numpy 和 pandas。</p>
-<span id="more"></span>
-
-<h3 id="Numpy"><a href="#Numpy" class="headerlink" title="Numpy"></a>Numpy</h3><p>官方文档介绍 numpy 为：numPy 是Python中科学计算的基础包。它是一个Python库，提供多维数组对象，各种派生对象（如掩码数组和矩阵），以及用于数组快速操作的各种API，有包括数学、逻辑、形状操作、排序、选择、输入输出、离散傅立叶变换、基本线性代数，基本统计运算和随机模拟等等。</p>
-<p>这里，我们做个练习。我们需要先下载 numpy 包，输入 pip install numpy 命令。</p>
-<p>导入 numpy包 输入一个二维矩阵：</p>
-<p><img src="/../resources/image-20220319225611515.png" alt="image-20220319225611515"></p>
-<p>生成一个3行4列矩阵：</p>
-<p><img src="/../resources/image-20220319230232125.png" alt="image-20220319230232125"></p>
-<p>生成一个3行4列全部为1的矩阵：</p>
-<p><img src="/../resources/image-20220319232342472.png" alt="image-20220319232342472"></p>
-<p><strong>arange函数：</strong>创建等差一维数组</p>
-<p>每隔三个数输出10-20：</p>
-<p><img src="/../resources/image-20220319230959161.png" alt="image-20220319230959161"></p>
-<p>生成 0-11, reshape为矩阵行列：</p>
-<p><img src="/../resources/image-20220319232411028.png" alt="image-20220319232411028"></p>
-<p><strong>linspace函数</strong>：创建等差以为数组，接受元素数量作为参数。</p>
-<p>1-10分成5段数列：<br><img src="/../resources/image-20220319231555369.png"></p>
-<p><strong>需要注意：</strong> <strong>linspace</strong>包含终值，<strong>range</strong> 和 <strong>arange</strong>不包含终值。</p>
-<p><strong>logspace函数：</strong>创建等比一维数组</p>
-<p><img src="/../resources/image-20220410161730947.png" alt="image-20220410161730947"></p>
-<p>专门创建数组的函数：</p>
-<p><strong>zeros函数</strong>：创建指定长度或形状的全0数组。 格式：np.zeros(shape, dtype&#x3D;float, order&#x3D;’C’)</p>
-<p><strong>ones函数</strong>：创建指定长度或形状的全1数组。 格式：np. ones(shape, dtype&#x3D;None, order&#x3D;’C’)</p>
-<p>使用 **empty() **函数创建一个随机数组。 格式：np.empty(shape, dtype&#x3D;float, order&#x3D;’C’)</p>
-<p><strong>eye()函数</strong>:</p>
-<p>eye(N, M&#x3D;None, k&#x3D;0) </p>
-<p>返回值：返回一个对角线全1，其余位置全是0的二维数组， <strong>其中k&#x3D;0时，全1对角线为主对角线；k&gt;0时，全1对角线向 右上方偏移；k&lt;0时，全1对角线向左下方偏移。</strong> </p>
-<p>参数说明： </p>
-<p>N：行数；</p>
-<p>M：可选参数，列数，默认值为N；</p>
-<p>k：k&#x3D;0时，全1对角线为主对角线；k&gt;0时，全1对角线向上移 动相应的位置；k&lt;0时，全1对角线向下移动相应的位置。</p>
-<p><img src="/../resources/image-20220410162343643.png" alt="image-20220410162343643"></p>
-<p><img src="/../resources/image-20220410162428830.png" alt="image-20220410162428830"></p>
-<p><strong>使用full()函数创建数组</strong>:</p>
-<p>full(shape, fill_value, dtype&#x3D;None, order&#x3D;’C’) </p>
-<p>返回值：返回由固定值填充的数组。 </p>
-<p>参数说明： </p>
-<p>shape：int或int类型序列，表示矩阵形状； </p>
-<p>fill_value：填充值； </p>
-<p>dtype：可选参数，指定元素的数据类型； </p>
-<p>order：可选参数，取值’C’或者’F’，表示数组在内存的存放次序是以 行(C)为主还是以列(F)为主，默认值为’C’。</p>
-<p><img src="/../resources/image-20220410162626029.png" alt="image-20220410162626029"></p>
-<p><strong>随机分布：</strong></p>
-<p>normal(loc&#x3D;0.0, scale&#x3D;1.0, size&#x3D;None)：产生size个正态（高斯）分布的样本值。</p>
-<p><img src="/../resources/image-20220410164519264.png" alt="image-20220410164519264"></p>
-<h4 id="矩阵运算"><a href="#矩阵运算" class="headerlink" title="矩阵运算"></a>矩阵运算</h4><p>矩阵a 减 矩阵b。同理也可以进行相加、相乘、相除。</p>
-<p>注意的是平方运算： ** 表示平方。</p>
-<p>也可以进行sin,cos,tan。</p>
-<p><img src="/../resources/image-20220319232540910.png" alt="image-20220319232540910"></p>
-<p>矩阵乘法运算：</p>
-<p>矩阵运算：c_dot &#x3D; <strong>np.dot(a,b)</strong> </p>
-<p>另一种形式：c_dot_2 &#x3D; <strong>a.dot(b)</strong></p>
-<p><img src="/../resources/image-20220319233117350.png" alt="image-20220319233117350"></p>
-<p>随机生成0-1之间数字，求和，找到最小值最大值：</p>
-<p><img src="/../resources/image-20220319233420494.png" alt="image-20220319233420494"></p>
-<p>axis&#x3D;1每一行中求和，寻找最大值最小值。axis&#x3D;0每一列中求和，寻找最大值最小值。</p>
-<p><img src="/../resources/image-20220319233704066.png" alt="image-20220319233704066"></p>
-<p>求矩阵中最大值，最小值索引：<br><img src="/../resources/image-20220320121338504.png" alt="image-20220320121338504"></p>
-<p>求平均值：</p>
-<p>注意：<strong>axis&#x3D;0列，axis&#x3D;1行</strong></p>
-<p><img src="/../resources/image-20220320121404262.png" alt="image-20220320121404262"></p>
-<p>中位数：</p>
-<p><img src="/../resources/image-20220320121454781.png" alt="image-20220320121454781"></p>
-<p>逐步累加：</p>
-<p><img src="/../resources/image-20220320121520699.png" alt="image-20220320121520699"></p>
-<p>后一项与前一项作差：</p>
-<p><img src="/../resources/image-20220320121542889.png" alt="image-20220320121542889"></p>
-<p>非0行索引：</p>
-<p><img src="/../resources/image-20220320121703735.png" alt="image-20220320121703735"></p>
-<p>矩阵转置：</p>
-<p><img src="/../resources/image-20220320121646268.png" alt="image-20220320121635225"></p>
-<p>flat: flat返回的是一个迭代器，可以用for访问数组每一个元素。</p>
-<p><img src="/../resources/image-20220320122821612.png" alt="image-20220320122821612"></p>
-<p>合并:</p>
-<p>vertical stack上下合并</p>
-<p>horizontal stack左右合并</p>
-<p><img src="/../resources/image-20220320125048314.png" alt="image-20220320125048314"></p>
-<p>向量的转置：<br><img src="/../resources/image-20220320125320194.png" alt="image-20220320125320194"></p>
-<p>分割：</p>
-<p><img src="/../resources/image-20220320130647220.png" alt="image-20220320130647220"></p>
-<p>deep copy：</p>
-<h4 id="pandas"><a href="#pandas" class="headerlink" title="pandas"></a>pandas</h4><p><strong>Pandas</strong> 是 python 的核心数据分析支持库，提供了快速、灵活、明确的数据结构，旨在简单、直观地处理关系型、标记型数据。Pandas 的目标是成为 Python 数据分析实践与实战的必备高级工具，其长远目标是成为<strong>最强大、最灵活、可以支持任何语言的开源数据分析工具</strong>。经过多年不懈的努力，Pandas 离这个目标已经越来越近了。</p>
-<p>Pandas 的主要数据结构是 <strong>Series（一维数据）</strong>与 <strong>DataFrame （二维数据）</strong>，这两种数据结构足以处理金融、统计、社会科学、工程等领域里的大多数典型用例。对于 R 用户，DataFrame 提供了比 R 语言 data.frame 更丰富的功能。Pandas 基于 NumPy 开发，可以与其它第三方科学计算支持库完美集成。</p>
-<p>Pandas还具有很多优点：官方文档中都有介绍。<a href="https://www.pypandas.cn/docs/getting_started/overview.html#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84">Pandas 概览 | Pandas 中文 (pypandas.cn)</a></p>
-<p>用值列表生成 Series 时，Pandas 默认自动生成整数索引：</p>
-<p><img src="/../resources/image-20220320153129409.png" alt="image-20220320153129409"></p>
-<p>用含日期时间索引与标签的 Numpy 数组生成 DataFrame：</p>
-<p><img src="/../resources/image-20220320153715145.png" alt="image-20220320153715145"></p>
-<p>用 Series字典对象生成DataFrame:</p>
-<p><img src="/../resources/image-20220320154218356.png" alt="image-20220320154218356"></p>
-<p>查看 DataFrame 头部和尾部数据：</p>
-<p><img src="/../resources/image-20220320154424221.png" alt="image-20220320154424221"></p>
-<p>显示索引与列名：<br><img src="/../resources/image-20220320154553779.png" alt="image-20220320154553779"></p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>numpy&amp;pandas</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python中lambda表达式</title>
-    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
-<ul>
-<li>lambda表达式必须使用lambda关键字定义。</li>
-<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
-<li>lambda表达式必须是单行的。</li>
-<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
-<li>lambda表达式的计算结果就是函数的返回值。 </li>
-<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
-<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
-<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
