@@ -20,39 +20,29 @@
     var CONFIG = {"hostname":"congyx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","positon":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="python爬虫工作原理获取数据： 爬虫程序会根据我们提供的网址，向服务器发起请求，然后返回数据。 解析数据： 爬虫程序会把服务器返回的数据解析成我们能读懂的格式。 提取数据： 爬虫程序再从中提取出我们需要的数据。 储存数据:爬虫程序把这些有用的数据保存起来,便于你以后的使用和分析。">
+  <meta name="description" content="Matplotlib数据可视化Python语言的matplotlib扩展包是一个提供了跨平台的2D 图形库，它可以将数据用多种形式展示出来。Matplotlib可画出折线图，柱状图，饼图，雷达图等。在matplotlib的官网上给出了500多个图表展示的例子程序 (https:&#x2F;&#x2F;matplotlib.org&#x2F;gallery&#x2F;index.html)。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python爬虫">
-<meta property="og:url" content="https://congyx.com/2022/03/26/python%E7%88%AC%E8%99%AB/index.html">
+<meta property="og:title" content="Matplotlib数据可视化">
+<meta property="og:url" content="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/index.html">
 <meta property="og:site_name" content="程序人生">
-<meta property="og:description" content="python爬虫工作原理获取数据： 爬虫程序会根据我们提供的网址，向服务器发起请求，然后返回数据。 解析数据： 爬虫程序会把服务器返回的数据解析成我们能读懂的格式。 提取数据： 爬虫程序再从中提取出我们需要的数据。 储存数据:爬虫程序把这些有用的数据保存起来,便于你以后的使用和分析。">
+<meta property="og:description" content="Matplotlib数据可视化Python语言的matplotlib扩展包是一个提供了跨平台的2D 图形库，它可以将数据用多种形式展示出来。Matplotlib可画出折线图，柱状图，饼图，雷达图等。在matplotlib的官网上给出了500多个图表展示的例子程序 (https:&#x2F;&#x2F;matplotlib.org&#x2F;gallery&#x2F;index.html)。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410100554836.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410100621487.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410101501845.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410101613520.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410101647072.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410102609214.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410110621682.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410110641745.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410110850553.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410111622337.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410111721377.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410112341145.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410112633026.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410113019785.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410113100826.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410113214914.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410113315426.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410160211171.png">
-<meta property="article:published_time" content="2022-03-26T02:00:12.000Z">
-<meta property="article:modified_time" content="2022-04-10T08:02:30.007Z">
+<meta property="og:image" content="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503093033761.png">
+<meta property="og:image" content="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503093443680.png">
+<meta property="og:image" content="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503094758601.png">
+<meta property="og:image" content="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503101252240.png">
+<meta property="og:image" content="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503101325862.png">
+<meta property="og:image" content="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503101341999.png">
+<meta property="og:image" content="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503105939185.png">
+<meta property="og:image" content="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503105957260.png">
+<meta property="article:published_time" content="2022-04-15T01:26:05.000Z">
+<meta property="article:modified_time" content="2022-05-03T03:00:11.676Z">
 <meta property="article:author" content="Cong yx">
-<meta property="article:tag" content="python">
+<meta property="article:tag" content="数据可视化">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://congyx.com/resources/image-20220410100554836.png">
+<meta name="twitter:image" content="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503093033761.png">
 
-<link rel="canonical" href="https://congyx.com/2022/03/26/python%E7%88%AC%E8%99%AB/">
+<link rel="canonical" href="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">
 
 
 <script id="page-configurations">
@@ -65,7 +55,7 @@
   };
 </script>
 
-  <title>python爬虫 | 程序人生</title>
+  <title>Matplotlib数据可视化 | 程序人生</title>
   
 
 
@@ -214,7 +204,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/03/26/python%E7%88%AC%E8%99%AB/">
+    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -227,7 +217,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          python爬虫
+          Matplotlib数据可视化
         </h1>
 
         <div class="post-meta">
@@ -239,14 +229,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2022-03-26 10:00:12" itemprop="dateCreated datePublished" datetime="2022-03-26T10:00:12+08:00">2022-03-26</time>
+              <time title="创建时间：2022-04-15 09:26:05" itemprop="dateCreated datePublished" datetime="2022-04-15T09:26:05+08:00">2022-04-15</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-10 16:02:30" itemprop="dateModified" datetime="2022-04-10T16:02:30+08:00">2022-04-10</time>
+                <time title="修改时间：2022-05-03 11:00:11" itemprop="dateModified" datetime="2022-05-03T11:00:11+08:00">2022-05-03</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -271,7 +261,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3k</span>
+              <span>3.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -290,81 +280,110 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="python爬虫工作原理"><a href="#python爬虫工作原理" class="headerlink" title="python爬虫工作原理"></a>python爬虫工作原理</h3><p><strong>获取数据：</strong></p>
-<p>爬虫程序会根据我们提供的网址，向服务器发起请求，然后返回数据。</p>
-<p><strong>解析数据：</strong></p>
-<p>爬虫程序会把服务器返回的数据解析成我们能读懂的格式。</p>
-<p><strong>提取数据：</strong></p>
-<p>爬虫程序再从中提取出我们需要的数据。</p>
-<p><strong>储存数据:</strong><br>爬虫程序把这些有用的数据保存起来,便于你以后的使用和分析。</p>
-<span id="more"></span>
+        <h1 id="Matplotlib数据可视化"><a href="#Matplotlib数据可视化" class="headerlink" title="Matplotlib数据可视化"></a>Matplotlib数据可视化</h1><p>Python语言的matplotlib扩展包是一个提供了跨平台的2D 图形库，它可以将数据用多种形式展示出来。Matplotlib可画出折线图，柱状图，饼图，雷达图等。在matplotlib的官网上给出了500多个图表展示的例子程序 (<a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/index.html)%E3%80%82">https://matplotlib.org/gallery/index.html)。</a><span id="more"></span></p>
+<p>Matplotlib提供了两种编程风格，一种是函数式绘图，这种方式参考了matlab里面的绘图函数语法。另一种是面向对象式绘图，这种方式更接近Matplotlib的底层架构，更能理 解细节。matplotlib.pyplot是一个函数式绘图的函数集合， 其中每一个pyplot的函数都对图进行一些改动，例如创建图， 画点或线，以及增加标签等。在面向对象方式中， matplotlib.axes.Axes和matplotlib.figure.Figure是最主要的两 个对象，分别表示坐标轴和图。这种模式下，通常使用 pyplot.subplots创建一个图和多个坐标轴，并在此基础上调用相关对象的方法绘制图。</p>
+<p>Matplotlib模块依赖于NumPy和tkinter模块，可以绘制多 种形式的图形，包括线图、直方图、饼图、散点图等，图形质量满足出版要求，是数据可视化的重要工具。Matplotlib 中应用最广的是matplotlib.pyplot模块。Pyplot提供了一套和 Matlab类似的绘图API，使得Matplotlib的机制更像Matlab。 我们只需要调用Pyplot模块所提供的函数就可以实现快速绘图并设置图表的各个细节。</p>
+<img src="/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503093033761.png" alt="image-20220503093033761" style="zoom:67%;">
 
-<h4 id="requests库"><a href="#requests库" class="headerlink" title="requests库"></a>requests库</h4><p>requests库可以帮我们下载网页源代码、文本、图片，甚至是音频。</p>
-<p><strong>requests.get()</strong></p>
-<p>requests.get 是在调用 requests 库中的 get() 方法，它向服务器发送了一个请求，括号里的参数是你需要的数据所在的网址，然后得到了服务器的响应。服务器返回的结果是个 Response 对象。</p>
-<p>response对象常用的四个属性：</p>
-<p><img src="/../resources/image-20220410100554836.png" alt="image-20220410100554836"></p>
-<p><strong>response.status_code属性：</strong></p>
-<p><img src="/../resources/image-20220410100621487.png" alt="image-20220410100621487"></p>
-<p><strong>response.content属性：</strong></p>
-<p>该属性能把Response对象的内容以二进制数据的形式返回，适用于图片、音频、视频的下载。</p>
-<p><strong>response.text属性：</strong></p>
-<p>该属性可以把Response对象的内容以字符串的形式返回， 适用于文字、网页源代码的下载。</p>
-<p><strong>response.encoding属性：</strong></p>
-<p>该属性能帮我们定义Response对象的编码。 遇上输出的文本有乱码问题，才考虑用res.encoding。首先，目标数据本身是什么编码是未知的。用requests.get() 发 送请求后，会取得一个Response对象，其中，requests库会对数据的编码类型做出自己的判断。但是这个判断有可能准确，也可能不准确。 如果它判断准确的话，打印出来的response.text的内容就是正常的、没有乱码的，就无需用res.encoding；如果判断不准确，就会出现一堆乱码，那我们就可以去查看目标数据的编码，然后再用res.encoding把编码定义成和目标数据一 致的类型即可。</p>
-<h4 id="robots协议"><a href="#robots协议" class="headerlink" title="robots协议"></a>robots协议</h4><p>查看robots协议，在网站的域名后加上 &#x2F;robots.txt</p>
-<p><img src="/../resources/image-20220410101501845.png" alt="image-20220410101501845"></p>
-<h4 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h4><p>HTML文档包含了HTML标签（TAG）和元素，通过它们来描述网页。Web浏览器的作用是将HTML源文件转化成 网页形式，并显示出它们。浏览器本身并不会显示出HTML 标签，而是使用它们来解释页面的内容。</p>
-<p><img src="/../resources/image-20220410101613520.png" alt="image-20220410101613520"></p>
-<p>HTML常见标签：</p>
-<p><img src="/../resources/image-20220410101647072.png" alt="image-20220410101647072"></p>
-<h4 id="解析数据"><a href="#解析数据" class="headerlink" title="解析数据"></a>解析数据</h4><p>我们平时使用浏览器上网，浏览器会把服务器返 回来的HTML源代码翻译为我们能看懂的样子，之后我们才能在网页上做各种操作。 而在爬虫中，也要使用能读懂html的工具，才能提取到想要的数据。</p>
-<p><strong>【提取数据】</strong>是指把我们需要的数据从众多数据中挑选出来。</p>
-<p><img src="/../resources/image-20220410102609214.png" alt="image-20220410102609214"></p>
-<p>在括号中，要输入两个参数，第0个参数是要被解析的文本，注意了，它必须是字符串。 括号中的第1个参数用来标识解析器，我们要用的是一个 Python内置库：html.parser。（它不是唯一的解析器，但是比较简单的）</p>
-<p>以该网站为例（url： <a target="_blank" rel="noopener" href="https://localprod.pandateacher.com/python%02manuscript/crawler-html/spider-men5.0.html%EF%BC%89%E5%81%87%E8%AE%BE%E6%88%91%E4%BB%AC%E6%83%B3%E7%88%AC%E5%8F%96%E7%BD%91%E9%A1%B5%E4%B8%AD%E7%9A%84%E4%B9%A6%E7%B1%8D%E7%B1%BB%E5%9E%8B%E3%80%81%E4%B9%A6%E5%90%8D%E3%80%81%E9%93%BE%E6%8E%A5%E3%80%81%E5%92%8C%E4%B9%A6%E7%B1%8D%E4%BB%8B%E7%BB%8D%E3%80%82%E6%A0%B9%E6%8D%AE%E4%B9%8B">https://localprod.pandateacher.com/pythonmanuscript/crawler-html/spider-men5.0.html）假设我们想爬取网页中的书籍类型、书名、链接、和书籍介绍。根据之</a> 前所学的 requests.get()，我们可以先获取到一个Response对象，并确认自己获取成功：</p>
-<p><img src="/../resources/image-20220410110621682.png" alt="image-20220410110621682"></p>
-<p>接着用BeautifulSoup解析数据，请特别留意第2行和第6 行新增的代码。第2行是引入BeautifulSoup库。第6行中的第 0个参数，必须是字符串类型；括号中的第1个参数是解析器。 这就是解析数据的用法。</p>
-<p><img src="/../resources/image-20220410110641745.png" alt="image-20220410110641745"></p>
-<p>接下来，我们来打印看看soup的数据类型，和soup本身 （第7行开始为新增代码）。</p>
-<p> import requests </p>
-<p>from bs4 import BeautifulSoup </p>
-<p>res &#x3D;  requests.get(‘<a target="_blank" rel="noopener" href="https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;">https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;</a>)  </p>
-<p>soup &#x3D; BeautifulSoup( res.text,’html.parser’) </p>
-<p>print(type(soup)) #查看soup的类型 </p>
-<p>print(soup) # 打印soup</p>
-<p>代码运行结果：</p>
-<p><img src="/../resources/image-20220410110850553.png" alt="image-20220410110850553"></p>
+<p><strong>标题：</strong>plt.title()</p>
+<p><strong>轴标签：</strong>plt.xlable(); plt.ylabel()</p>
+<p><strong>轴刻度标签：</strong>plt.xticks(); plt.yticks()</p>
+<p><strong>显示图像：</strong>plt.show()</p>
+<p><strong>显示图例：</strong>plt.legend()</p>
+<p><strong>数值标签：</strong>plt.text()</p>
+<p><strong>轴刻度范围：</strong>plt.xlim(); plt.ylim()</p>
+<p><strong>以一个简单的正弦函数为例说明图表的绘制方法。</strong></p>
+<p>程序首先准备了x，y两个数组，x是0~720度，y是对应的 正弦函数值。使用axis函数设定x，y坐标轴的起止范围， plot函数画出正弦曲线，xticks指定x轴的小刻度标示。xlabel 和ylabel分别是x，y轴的主题，title设置了图表的主题。</p>
+<img src="/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503093443680.png" alt="image-20220503093443680" style="zoom: 67%;">
+
+<p>figure（）：创建一个新的绘图窗口。  </p>
+<p>figtext（）：为figure添加文字  </p>
+<p>axes（）：为当前figure添加一个坐标轴 </p>
+<p>plot（）：绘图函数  </p>
+<p>polar（）：绘制极坐标图  </p>
+<p>axis（）：获取或设置轴属性的边界方法（坐标的取值 范围） </p>
+<p>clf ： 清除当前figure窗口  </p>
+<p>cla ： 清除当前axes窗口  </p>
+<p>close ： 关闭当前figure窗口  </p>
+<p>subplot ： 一个图中包含多个axes </p>
+<p>text（）： 在轴上添加文字</p>
+<p>title（）： 设置当前axes标题  </p>
+<p>xlabel&#x2F;ylabel：设置当前X轴或Y轴的标签  </p>
+<p>hist（）：绘制直方图  </p>
+<p>hist2d（）：绘制二维直方图  </p>
+<p>hold ：设置当前图窗状态；</p>
+<p>off或者on  imread（）：读取一个图像，从图形文件中提取数组 </p>
+<p>legend（）：为当前axes放置标签  </p>
+<p>pie（）：绘制饼状图 </p>
+<p>scatter（）：做一个X和Y的散点图，其中X和Y是相同长 度的序列对象  </p>
+<p>stackplot（）：绘制一个堆叠面积图 </p>
+<p>acorr（）：绘制X的自相关函数  </p>
+<p>annotate（）：用箭头在指定的数据点创建一个注释或 一段文本 </p>
+<p>bar（）：绘制垂直条形图  </p>
+<p>barh（）：绘制横向条形图  </p>
+<p>barbs（）：绘制一个倒钩的二维场 </p>
+<h2 id="图表类型："><a href="#图表类型：" class="headerlink" title="图表类型："></a>图表类型：</h2><h3 id="饼图"><a href="#饼图" class="headerlink" title="饼图"></a>饼图</h3><p>pie()</p>
+<h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><p>hist()</p>
+<h3 id="面积图"><a href="#面积图" class="headerlink" title="面积图"></a>面积图</h3><p>stackplot(x,*args,**kargs)</p>
+<h3 id="散点图"><a href="#散点图" class="headerlink" title="散点图"></a>散点图</h3><p>散点图由一些不连续的点组成，用来研究两个变量的相关性。包括正相关、负相关、不相关。主要通过scatter函数画散点图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">scatter</span>(<span class="params">x, y, s=<span class="literal">None</span>, c=<span class="literal">None</span>, marker=<span class="literal">None</span>, cmap=<span class="literal">None</span>, norm=<span class="literal">None</span>, </span></span><br><span class="line"><span class="params">vmin=<span class="literal">None</span>, vmax=<span class="literal">None</span>, alpha=<span class="literal">None</span>, linewidths=<span class="literal">None</span>, verts=<span class="literal">None</span>, </span></span><br><span class="line"><span class="params">edgecolors=<span class="literal">None</span>, hold=<span class="literal">None</span>, data=<span class="literal">None</span>, **kwargs</span>):</span><br><span class="line">    </span><br><span class="line"><span class="comment"># x/y：数据，都是向量，而且必须长度相等。</span></span><br><span class="line"><span class="comment"># s：标记大小;以像素点的平方为单位的标记面积，指定为下列形式之一：数值标量：以相同的大小绘制所有标记。行或列向量：使每个标记具有不同的大小。x、y 和 sz向量中的 相应元素确定每个标记的位置和面积。sz向量的长度必须等于 x 和 y 的长度。默认大小为rcParams[&#x27;lines.markersize&#x27;] ** 2。</span></span><br><span class="line"><span class="comment"># c:标记颜色;RGB三元数或颜色名称 - 使用相同的颜色绘制所有标记。由RGB三元数组成的三列矩阵 - 对每个标记使用不同的颜色。矩阵的每行为对应标记指定一种RGB三元数颜色。行数必须等于 x 和 y 的长度;向量 - 对每个标记使用不同的颜色，并以线性方式将 c 中的值映射到当前颜色图中的颜色。c 的长度必须等于 x 和 y 的长度。 要更改坐标区的颜色图，需使用 colormap 函数。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<img src="/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503094758601.png" alt="image-20220503094758601" style="zoom:67%;">
+
+<p><strong>edgecolors：</strong>轮廓颜色和 c 类似，参数也相同 </p>
+<p>alpha：透明度 [0,1]：1不透明，0透明 </p>
+<p><strong>cmap：</strong>色彩盘 可以使用默认的也可以使用自定义的，它实际上就是一个三列的矩阵(或者说，shape为 [N, 3]的 array ) </p>
+<p>• 矩阵中的值取值范围为 [0. , 1.] </p>
+<p>• 每一行代表一个颜色 (RGB) </p>
+<p><strong>linewidths：</strong>线宽标记边缘的宽度，默认是没有外围轮廓线。 </p>
+<p>注意事项： color、marker等不能同时作为一个参数，plt.scatter(x1, y1, ‘bo’, s&#x3D;5) 不合法。</p>
+<p>例：</p>
+<p>现在有一组女大学生的身高和体重数据，可以画散点图来观察两组数据之间的关系。</p>
+<img src="/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503101252240.png" alt="image-20220503101252240" style="zoom:67%;">
+
+<p>展示正相关，负相关，不相关:</p>
+<img src="/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503101325862.png" alt="image-20220503101325862" style="zoom:67%;">
+
+<img src="/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503101341999.png" alt="image-20220503101341999" style="zoom:67%;">
+
+<h3 id="折线图"><a href="#折线图" class="headerlink" title="折线图"></a>折线图</h3><p>折线图常用于显示数据序列随时间变化，数据变化的趋势。非常适用于显示在相等时间间隔下数据的走向变化。主要通过plot函数来画折线图。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">plot</span>(<span class="params">*args, **kwargs</span>):</span><br><span class="line"><span class="comment"># 其中参数args是一个可变长度参数，允许多个x，y对和一个可选的格式字符串。</span></span><br><span class="line"><span class="comment"># plot(x, y) plot x和y使用默认线条样式和颜色;plot(x, y, &#x27;bo&#x27;) plot x和y使用蓝色圆圈标记;plot(y) plot y使用x作为索引数组0..N-1;plot(y, &#x27;r+&#x27;) 同上，但是用红色加号</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>1.针对线条的处理</p>
 <ul>
-<li><p>soup的数据类型是， 说明soup是一个BeautifulSoup对象。打印的soup， 它是所请求网页的完整HTML源代码。我们所要提取的书名、链接、书籍内容这些数据都在这里面。</p>
-</li>
-<li><p>打印soup出来的源代码和我们之前使用 response.text 打印出来的源代码是完全一样的。</p>
-</li>
-<li><p>虽然 response.text 和 soup 打印出的内容一样，但它们属于不同的类： &lt;class ‘str’&gt;与&lt;class ‘bs4.BeautifulSoup’&gt;。前者是字符串，后者是已经被解析过的 BeautifulSoup 对象。之所以打印出来的是一样的文本，是因为 BeautifulSoup 对象在直 接打印它的时候会调用该对象内的 str 方法，所以直接打印 bs 对象显示字符串是str的返回结果。</p>
-</li>
-<li><p>之后还会用 BeautifulSoup 库来提取数据，如果这不是一 个 BeautifulSoup 对象，就没法调用相关的属性和方法的，所以，用 BeautifulSoup 解析数据是非常有用的，并不是重复劳动。</p>
-</li>
-<li><p><img src="/../resources/image-20220410111622337.png" alt="image-20220410111622337"></p>
-</li>
+<li>线条类型</li>
 </ul>
-<p>仍然使用BeautifulSoup来提取数据。</p>
-<p><img src="/../resources/image-20220410111721377.png" alt="image-20220410111721377"></p>
-<p>find() 与 find_all()</p>
-<p><img src="/../resources/image-20220410112341145.png" alt="image-20220410112341145"></p>
-<p>Tag类对象的常用属性和方法</p>
-<p><img src="/../resources/image-20220410112633026.png" alt="image-20220410112633026"></p>
-<h4 id="定制请求头"><a href="#定制请求头" class="headerlink" title="定制请求头"></a>定制请求头</h4><p>最好将自己的爬虫伪装成真实的浏览器——因为在这种情况下，服务器很可能拒绝爬虫访问。甚至有的网站，一开始就不允许爬虫访问。 如，知乎、猫眼电影等。</p>
-<p>每一个 request 请求，都会有一个Requests Headers，把它称作请求头。 它里面会有一些关于该请求的基本信息，比如：这个请求是从什么设备 什么浏览器上发出？这个请求是从哪个页面跳转而来？ user-agent会记录你电脑的信息和浏览器版本（如图，就是windows10的64位操作系统， 使用谷歌浏览器），它最大的应用是帮助我们应对“反爬虫”技术。</p>
-<p><img src="/../resources/image-20220410113019785.png" alt="image-20220410113019785"></p>
-<p>基于【豆瓣官网】【下厨房】等网站突然IP反爬的情况， 程序开始需要加上headers里的 user-agent，以后面的实操例 子下厨房为例，user-agent在这里。</p>
-<p><img src="/../resources/image-20220410113100826.png" alt="image-20220410113100826"></p>
-<p>给爬虫代码加上请求头后是这样的 <strong>headers&#x3D;{‘User-Agent’: ‘Mozilla&#x2F;5.0 (Windows NT 10.0;  Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko)  Chrome&#x2F;86.0.4240.193 Safari&#x2F;537.36’}</strong> 这个请求头是万能的，可以直接保存下来，后面加请求头都可以直接使用。 注意！！！提取数据那一行的第二个参数也要加上请求头！！！</p>
-<p><img src="/../resources/image-20220410113214914.png" alt="image-20220410113214914"></p>
-<p>从最开始用requests库获取数据，到用BeautifulSoup库来解析数据，再继续用BeautifulSoup库提取数据，不断经历的是操作对象的类型转换</p>
-<p><img src="/../resources/image-20220410113315426.png" alt="image-20220410113315426"></p>
-<p>例子：</p>
-<p><img src="/../resources/image-20220410160211171.png" alt="image-20220410160211171"></p>
+<p>​    参数：linestyle或者ls，表示折线的类型，可以是实线、虚线、点虚线、点点线等，即’-‘, ‘–’, ‘-.’, ‘:’等。</p>
+<ul>
+<li>线条粗细</li>
+</ul>
+<p>​    参数：linewidth或lw，可自行设置，默认值为1； </p>
+<ul>
+<li>线条颜色</li>
+</ul>
+<p>​    参数：color或c ，设置方法和散点图中设置颜色方法一致。</p>
+<p>2.针对数据标记的处理</p>
+<ul>
+<li>参数marker：数据标记的类型</li>
+<li>参数markeredgecolor 或 mec：数据标记的边界颜色</li>
+<li>参数markeredgewidth 或 mew：数据标记的宽度</li>
+<li>参数markerfacecolor 或 mfc：数据标记的填充色 </li>
+<li>alpha：接收值为0~1之间的小数，表示点的透明度；</li>
+</ul>
+<p>3.图例</p>
+<p>​    label：表示数据图例内容。参数中label&#x3D;‘数据序列名称’ 指定该数据序列的名称，其后通过调用legend()函数可显示不同数据序列的图例。 </p>
+<p><strong>下面以1万元分别存入活期，1年定期，3年定期后， 在30年中的价值变化。2019年的活期，1年定期，3 年定期的利率分别是0.35%，1.50%和2.75%。</strong></p>
+<img src="/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503105939185.png" alt="image-20220503105939185" style="zoom:67%;">
 
+<img src="/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/image-20220503105957260.png" alt="image-20220503105957260" style="zoom:67%;">
+
+
+
+
+
+<h3 id="条形图"><a href="#条形图" class="headerlink" title="条形图"></a>条形图</h3>
     </div>
 
     
@@ -389,7 +408,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://congyx.com/2022/03/26/python%E7%88%AC%E8%99%AB/" title="python爬虫">https://congyx.com/2022/03/26/python爬虫/</a>
+    <a href="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" title="Matplotlib数据可视化">https://congyx.com/2022/04/15/Matplotlib数据可视化/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -400,7 +419,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="tag"># 数据可视化</a>
           </div>
 
         
@@ -409,13 +428,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="prev" title="python中lambda表达式">
-      <i class="fa fa-chevron-left"></i> python中lambda表达式
+    <a href="/2022/03/26/python%E7%88%AC%E8%99%AB/" rel="prev" title="python爬虫">
+      <i class="fa fa-chevron-left"></i> python爬虫
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="next" title="Matplotlib数据可视化">
-      Matplotlib数据可视化 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -479,7 +495,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E7%88%AC%E8%99%AB%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">python爬虫工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#requests%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">requests库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#robots%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.</span> <span class="nav-text">robots协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML"><span class="nav-number">1.3.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E6%95%B0%E6%8D%AE"><span class="nav-number">1.4.</span> <span class="nav-text">解析数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E5%88%B6%E8%AF%B7%E6%B1%82%E5%A4%B4"><span class="nav-number">1.5.</span> <span class="nav-text">定制请求头</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">1.</span> <span class="nav-text">Matplotlib数据可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BE%E8%A1%A8%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">图表类型：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A5%BC%E5%9B%BE"><span class="nav-number">1.1.1.</span> <span class="nav-text">饼图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-number">1.1.2.</span> <span class="nav-text">直方图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E7%A7%AF%E5%9B%BE"><span class="nav-number">1.1.3.</span> <span class="nav-text">面积图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="nav-number">1.1.4.</span> <span class="nav-text">散点图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%98%E7%BA%BF%E5%9B%BE"><span class="nav-number">1.1.5.</span> <span class="nav-text">折线图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%A1%E5%BD%A2%E5%9B%BE"><span class="nav-number">1.1.6.</span> <span class="nav-text">条形图</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
