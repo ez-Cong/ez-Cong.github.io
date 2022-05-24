@@ -373,7 +373,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#117;&#98;&#x2e;&#99;&#111;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#117;&#98;&#x2e;&#99;&#111;&#x6d;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#99;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#99;&#x6f;&#x6d;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -387,7 +387,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#x67;&#x69;&#116;&#64;&#103;&#x69;&#116;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#109;">&#x67;&#x69;&#116;&#64;&#103;&#x69;&#116;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#109;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#104;&#x75;&#98;&#x2e;&#x63;&#x6f;&#109;">&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#104;&#x75;&#98;&#x2e;&#x63;&#x6f;&#109;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -480,6 +480,45 @@
       </categories>
       <tags>
         <tag>hexo搭建博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>java基础复习</title>
+    <url>/2022/05/24/java%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p>今天在刷牛客的时候，发现自己对一些数据结构的基础知识并不是很清晰。所以在这里做个笔记整理一下。<span id="more"></span></p>
+<p>List、LinkedList、ArrayList:</p>
+<p>List:是一个<strong>有序</strong>的集合，可以包含重复的元素。提供了按索引访问的方式。继承Collection。</p>
+<p>List有两个重要的实现类：ArrayList 和 LinkedList，那么 <strong>ArrayList 和 LinkedList 有什么区别呢？</strong></p>
+<p>ArrayList：我们可以将其看作是<strong>能够自动增长容量的数组</strong>。可以利用 ArrayList 的 toArray() 返回一个数组。</p>
+<p>同时，ArrayList采用数组实现的，查找效率一定会比 LinkedList 高。而 LinkedList 采用双向链表实现的，插入和删除的效率会比 ArrayList 高。如果要是在 list 的尾部添加元素，肯定是LinkedList效率高。</p>
+<p>我们再展开一个问题 <strong>ArrayList 和 HashSet 区别：</strong></p>
+<p>首先，ArrayList 底层是动态数组，可以存储重复的值，并且如果不约定下标的话，是有序的。而 hashset 底层是 hash 表，是不可重复并且是无序的。</p>
+<p>Queue</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Queue</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">Collection</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="comment">//往队列插入元素，如果出现异常会抛出异常</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span>;</span><br><span class="line">    <span class="comment">//往队列插入元素，如果出现异常则返回false</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">offer</span><span class="params">(E e)</span>;</span><br><span class="line">    <span class="comment">//移除队列元素，如果出现异常会抛出异常</span></span><br><span class="line">    E <span class="title function_">remove</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">//移除队列元素，如果出现异常则返回null</span></span><br><span class="line">    E <span class="title function_">poll</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">//获取队列头部元素，如果出现异常会抛出异常</span></span><br><span class="line">    E <span class="title function_">element</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">//获取队列头部元素，如果出现异常则返回null</span></span><br><span class="line">    E <span class="title function_">peek</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Deque 双端队列</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Deque</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">Queue</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">addFirst</span><span class="params">(E e)</span>;<span class="comment">//插入头部，异常会报错</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">offerFirst</span><span class="params">(E e)</span>;<span class="comment">//插入头部，异常返回false</span></span><br><span class="line">    E <span class="title function_">getFirst</span><span class="params">()</span>;<span class="comment">//获取头部，异常会报错</span></span><br><span class="line">    E <span class="title function_">peekFirst</span><span class="params">()</span>;<span class="comment">//获取头部，异常不报错</span></span><br><span class="line">    E <span class="title function_">removeFirst</span><span class="params">()</span>;<span class="comment">//移除头部，异常会报错</span></span><br><span class="line">    E <span class="title function_">pollFirst</span><span class="params">()</span>;<span class="comment">//移除头部，异常不报错</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">addLast</span><span class="params">(E e)</span>;<span class="comment">//插入尾部，异常会报错</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">offerLast</span><span class="params">(E e)</span>;<span class="comment">//插入尾部，异常返回false</span></span><br><span class="line">    E <span class="title function_">getLast</span><span class="params">()</span>;<span class="comment">//获取尾部，异常会报错</span></span><br><span class="line">    E <span class="title function_">peekLast</span><span class="params">()</span>;<span class="comment">//获取尾部，异常不报错</span></span><br><span class="line">    E <span class="title function_">removeLast</span><span class="params">()</span>;<span class="comment">//移除尾部，异常会报错</span></span><br><span class="line">    E <span class="title function_">pollLast</span><span class="params">()</span>;<span class="comment">//移除尾部，异常不报错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>ArrayDeque</p>
+<ul>
+<li>实现于Deque，拥有队列或者栈特性的接口</li>
+<li>实现于Cloneable，拥有克隆对象的特性</li>
+<li>实现于Serializable，拥有序列化的能力</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//数组存储元素</span></span><br><span class="line"><span class="keyword">transient</span> Object[] elements;</span><br><span class="line"><span class="comment">//头部元素索引</span></span><br><span class="line"><span class="keyword">transient</span> <span class="type">int</span> head;</span><br><span class="line"><span class="comment">//尾部元素索引</span></span><br><span class="line"><span class="keyword">transient</span> <span class="type">int</span> tail;</span><br><span class="line"><span class="comment">//最小容量</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">MIN_INITIAL_CAPACITY</span> <span class="operator">=</span> <span class="number">8</span>;</span><br></pre></td></tr></table></figure>
+
+<p>ArrayDeque底层使用数组存储元素，同时还使用head和tail来表示索引，但注意tail不是尾部元素的索引，而是尾部元素的下一位，即下一个将要被加入的元素的索引。</p>
+<p>ArrayDeque 是 Deque 接口的一种具体实现，是依赖于可变数组来实现的。ArrayDeque 没有容量限制，可根据需求自动进行扩容。ArrayDeque 可以作为栈来使用，效率要高于Stack；ArrayDeque 也可以作为队列来使用，效率相较于基于双向链表的LinkedList也要更好一些。</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
       </tags>
   </entry>
   <entry>
@@ -893,6 +932,31 @@
       </tags>
   </entry>
   <entry>
+    <title>python中lambda表达式</title>
+    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
+<ul>
+<li>lambda表达式必须使用lambda关键字定义。</li>
+<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
+<li>lambda表达式必须是单行的。</li>
+<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
+<li>lambda表达式的计算结果就是函数的返回值。 </li>
+<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
+<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
+<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python</title>
     <url>/2022/03/14/python/</url>
     <content><![CDATA[<h3 id="Python简介"><a href="#Python简介" class="headerlink" title="Python简介"></a>Python简介</h3><p>python 这一伟大语言诞生于1989年圣诞节期间，创始人是荷兰的Guido van Rossum。(python有两个主要的大版本: python2 和 python3。本文基于 python3 开发)<span id="more"></span></p>
@@ -1213,31 +1277,6 @@
 </ul>
 </li>
 </ul>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python中lambda表达式</title>
-    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
-<ul>
-<li>lambda表达式必须使用lambda关键字定义。</li>
-<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
-<li>lambda表达式必须是单行的。</li>
-<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
-<li>lambda表达式的计算结果就是函数的返回值。 </li>
-<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
-<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
-<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
 ]]></content>
       <categories>
         <category>python</category>
