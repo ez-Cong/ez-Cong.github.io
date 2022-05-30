@@ -28,7 +28,7 @@
 <meta property="og:description" content="最近在刷二叉树的相关题目，通过这篇博客记录相关知识点，梳理一些做题的思路。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-27T14:44:57.000Z">
-<meta property="article:modified_time" content="2022-05-30T03:18:14.601Z">
+<meta property="article:modified_time" content="2022-05-30T04:31:59.877Z">
 <meta property="article:author" content="Cong yx">
 <meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
@@ -227,7 +227,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-30 11:18:14" itemprop="dateModified" datetime="2022-05-30T11:18:14+08:00">2022-05-30</time>
+                <time title="修改时间：2022-05-30 12:31:59" itemprop="dateModified" datetime="2022-05-30T12:31:59+08:00">2022-05-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -252,14 +252,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>8k</span>
+              <span>11k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
+              <span>10 分钟</span>
             </span>
 
         </div>
@@ -316,7 +316,42 @@
 
 
 
-<h3 id="二叉树的层序遍历"><a href="#二叉树的层序遍历" class="headerlink" title="二叉树的层序遍历"></a>二叉树的层序遍历</h3>
+<h3 id="二叉树的层序遍历"><a href="#二叉树的层序遍历" class="headerlink" title="二叉树的层序遍历"></a>二叉树的层序遍历</h3><p><strong>递归：</strong></p>
+<p>按行遍历的关键是每一行的深度对应了它输出在二维数组中的深度，即深度可以与二维数组的下标对应，那我们可以在递归的访问每个节点的时候记录深度：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">traverse</span><span class="params">(TreeNode root,<span class="type">int</span> depth)</span></span><br></pre></td></tr></table></figure>
+
+<p>进入子节点时，深度加1</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">traverse(root.left,depth + <span class="number">1</span>);</span><br><span class="line">traverse(root.right,depth + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>每个节点值放入二维数组相应行。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res[depth - <span class="number">1</span>].push_back(root-&gt;val);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>首先，判断二叉树是否为空，空树则没有遍历结果</li>
+<li>递归进行层次遍历输出，每次递归记录当前二叉树的深度，每当遍历到一个节点，如果为空直接返回</li>
+<li>如果遍历的节点不为空，输出二维数组中一维数组的个数（即代表了输出的行数）小于深度，说明这个节点应该是新的一层，我们在二维数组中增加一个一维数组，然后再加入二叉树元素。</li>
+<li>如果不是第三种情况说明这个深度我们已经有了数组，直接根据深度作为下标取出数组，将元素加在最后就可以了。</li>
+<li>处理完这个节点，再依次递归进入左右节点，同时深度增加。因为我们进入递归的时候是先左后右，那么遍历的时候也是先左后右，正好是层次遍历的顺序。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *   int val = 0;</span></span><br><span class="line"><span class="comment"> *   TreeNode left = null;</span></span><br><span class="line"><span class="comment"> *   TreeNode right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> root TreeNode类 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型ArrayList&lt;ArrayList&lt;&gt;&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">	ArrayList&lt;ArrayList&lt;Integer&gt;&gt; res = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">traverse</span><span class="params">(TreeNode root,<span class="type">int</span> depth)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(res.size() &lt; depth)&#123;</span><br><span class="line">                ArrayList&lt;Integer&gt; row = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">                res.add(row);</span><br><span class="line">                row.add(root.val);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                ArrayList&lt;Integer&gt; row = res.get(depth - <span class="number">1</span>);</span><br><span class="line">                row.add(root.val);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        traverse(root.left,depth + <span class="number">1</span>);</span><br><span class="line">        traverse(root.right,depth + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt; <span class="title function_">levelOrder</span> <span class="params">(TreeNode root)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        traverse(root, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>队列</strong></p>
+<ul>
+<li>首先判断二叉树是否为空，空树没有遍历结果。</li>
+<li>建立辅助队列，根节点首先进入队列。不管层次怎么访问，根节点一定是第一个，那它肯定排在队伍的最前面。</li>
+<li>每次进入一层，统计队列中元素的个数。因为每当访问完一层，下一层作为这一层的子节点，一定都加入队列，而再下一层还没有加入，因此此时队列中的元素个数就是这一层的元素个数。</li>
+<li>每次遍历这一层这么多的节点数，将其依次从队列中弹出，然后加入这一行的一维数组中，如果它们有子节点，依次加入队列排队等待访问。</li>
+<li>访问完这一层的元素后，将这个一维数组加入二维数组中，再访问下一层。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *   int val = 0;</span></span><br><span class="line"><span class="comment"> *   TreeNode left = null;</span></span><br><span class="line"><span class="comment"> *   TreeNode right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> root TreeNode类 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型ArrayList&lt;ArrayList&lt;&gt;&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt; <span class="title function_">levelOrder</span> <span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; res = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        Queue&lt;TreeNode&gt; q = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;TreeNode&gt;();</span><br><span class="line">        q.add(root);</span><br><span class="line">        <span class="keyword">while</span>(!q.isEmpty())&#123;</span><br><span class="line">			ArrayList&lt;Integer&gt; row = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">            <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> q.size();</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">                <span class="type">TreeNode</span> <span class="variable">cur</span> <span class="operator">=</span> q.poll();</span><br><span class="line">                row.add(cur.val);</span><br><span class="line">                <span class="keyword">if</span>(cur.left != <span class="literal">null</span>)</span><br><span class="line">                    q.add(cur.left);</span><br><span class="line">                <span class="keyword">if</span>(cur.right != <span class="literal">null</span>)</span><br><span class="line">                    q.add(cur.right);</span><br><span class="line">            &#125;</span><br><span class="line">            res.add(row);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
     </div>
 
     

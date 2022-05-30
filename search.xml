@@ -373,7 +373,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#x69;&#x74;&#64;&#x67;&#x69;&#x74;&#x68;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;">&#103;&#x69;&#x74;&#64;&#x67;&#x69;&#x74;&#x68;&#x75;&#x62;&#x2e;&#x63;&#111;&#x6d;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#105;&#116;&#x40;&#103;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#105;&#116;&#x40;&#103;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -387,7 +387,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#x67;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#x6d;">&#x67;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#99;&#111;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -1261,31 +1261,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python中lambda表达式</title>
-    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
-<ul>
-<li>lambda表达式必须使用lambda关键字定义。</li>
-<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
-<li>lambda表达式必须是单行的。</li>
-<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
-<li>lambda表达式的计算结果就是函数的返回值。 </li>
-<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
-<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
-<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python序列结构</title>
     <url>/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<h3 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h3><p>序列（sequence）是一种用来存放多个值的数据类型，序列中对象类型可以相同也可以不同。</p>
@@ -1471,6 +1446,31 @@
       </tags>
   </entry>
   <entry>
+    <title>python中lambda表达式</title>
+    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
+<ul>
+<li>lambda表达式必须使用lambda关键字定义。</li>
+<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
+<li>lambda表达式必须是单行的。</li>
+<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
+<li>lambda表达式的计算结果就是函数的返回值。 </li>
+<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
+<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
+<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python爬虫</title>
     <url>/2022/03/26/python%E7%88%AC%E8%99%AB/</url>
     <content><![CDATA[<h3 id="python爬虫工作原理"><a href="#python爬虫工作原理" class="headerlink" title="python爬虫工作原理"></a>python爬虫工作原理</h3><p><strong>获取数据：</strong></p>
@@ -1603,7 +1603,42 @@
 
 
 
-<h3 id="二叉树的层序遍历"><a href="#二叉树的层序遍历" class="headerlink" title="二叉树的层序遍历"></a>二叉树的层序遍历</h3>]]></content>
+<h3 id="二叉树的层序遍历"><a href="#二叉树的层序遍历" class="headerlink" title="二叉树的层序遍历"></a>二叉树的层序遍历</h3><p><strong>递归：</strong></p>
+<p>按行遍历的关键是每一行的深度对应了它输出在二维数组中的深度，即深度可以与二维数组的下标对应，那我们可以在递归的访问每个节点的时候记录深度：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">void</span> <span class="title function_">traverse</span><span class="params">(TreeNode root,<span class="type">int</span> depth)</span></span><br></pre></td></tr></table></figure>
+
+<p>进入子节点时，深度加1</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">traverse(root.left,depth + <span class="number">1</span>);</span><br><span class="line">traverse(root.right,depth + <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+
+<p>每个节点值放入二维数组相应行。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">res[depth - <span class="number">1</span>].push_back(root-&gt;val);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>首先，判断二叉树是否为空，空树则没有遍历结果</li>
+<li>递归进行层次遍历输出，每次递归记录当前二叉树的深度，每当遍历到一个节点，如果为空直接返回</li>
+<li>如果遍历的节点不为空，输出二维数组中一维数组的个数（即代表了输出的行数）小于深度，说明这个节点应该是新的一层，我们在二维数组中增加一个一维数组，然后再加入二叉树元素。</li>
+<li>如果不是第三种情况说明这个深度我们已经有了数组，直接根据深度作为下标取出数组，将元素加在最后就可以了。</li>
+<li>处理完这个节点，再依次递归进入左右节点，同时深度增加。因为我们进入递归的时候是先左后右，那么遍历的时候也是先左后右，正好是层次遍历的顺序。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *   int val = 0;</span></span><br><span class="line"><span class="comment"> *   TreeNode left = null;</span></span><br><span class="line"><span class="comment"> *   TreeNode right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> root TreeNode类 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型ArrayList&lt;ArrayList&lt;&gt;&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">	ArrayList&lt;ArrayList&lt;Integer&gt;&gt; res = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">traverse</span><span class="params">(TreeNode root,<span class="type">int</span> depth)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">if</span>(res.size() &lt; depth)&#123;</span><br><span class="line">                ArrayList&lt;Integer&gt; row = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">                res.add(row);</span><br><span class="line">                row.add(root.val);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                ArrayList&lt;Integer&gt; row = res.get(depth - <span class="number">1</span>);</span><br><span class="line">                row.add(root.val);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        traverse(root.left,depth + <span class="number">1</span>);</span><br><span class="line">        traverse(root.right,depth + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt; <span class="title function_">levelOrder</span> <span class="params">(TreeNode root)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        traverse(root, <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>队列</strong></p>
+<ul>
+<li>首先判断二叉树是否为空，空树没有遍历结果。</li>
+<li>建立辅助队列，根节点首先进入队列。不管层次怎么访问，根节点一定是第一个，那它肯定排在队伍的最前面。</li>
+<li>每次进入一层，统计队列中元素的个数。因为每当访问完一层，下一层作为这一层的子节点，一定都加入队列，而再下一层还没有加入，因此此时队列中的元素个数就是这一层的元素个数。</li>
+<li>每次遍历这一层这么多的节点数，将其依次从队列中弹出，然后加入这一行的一维数组中，如果它们有子节点，依次加入队列排队等待访问。</li>
+<li>访问完这一层的元素后，将这个一维数组加入二维数组中，再访问下一层。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *   int val = 0;</span></span><br><span class="line"><span class="comment"> *   TreeNode left = null;</span></span><br><span class="line"><span class="comment"> *   TreeNode right = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> root TreeNode类 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> int整型ArrayList&lt;ArrayList&lt;&gt;&gt;</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt; <span class="title function_">levelOrder</span> <span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">        <span class="comment">// write code here</span></span><br><span class="line">        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; res = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> res;</span><br><span class="line">        Queue&lt;TreeNode&gt; q = <span class="keyword">new</span> <span class="title class_">ArrayDeque</span>&lt;TreeNode&gt;();</span><br><span class="line">        q.add(root);</span><br><span class="line">        <span class="keyword">while</span>(!q.isEmpty())&#123;</span><br><span class="line">			ArrayList&lt;Integer&gt; row = <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">            <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> q.size();</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">                <span class="type">TreeNode</span> <span class="variable">cur</span> <span class="operator">=</span> q.poll();</span><br><span class="line">                row.add(cur.val);</span><br><span class="line">                <span class="keyword">if</span>(cur.left != <span class="literal">null</span>)</span><br><span class="line">                    q.add(cur.left);</span><br><span class="line">                <span class="keyword">if</span>(cur.right != <span class="literal">null</span>)</span><br><span class="line">                    q.add(cur.right);</span><br><span class="line">            &#125;</span><br><span class="line">            res.add(row);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+]]></content>
       <categories>
         <category>算法</category>
       </categories>
