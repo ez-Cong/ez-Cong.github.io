@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"congyx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","positon":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="整理完二叉树的前序、中序、后序、层次遍历之后，进一步学习，记录一下其他有关二叉树的知识。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树的问题（二）">
+<meta property="og:url" content="https://congyx.com/2022/06/01/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="程序人生">
+<meta property="og:description" content="整理完二叉树的前序、中序、后序、层次遍历之后，进一步学习，记录一下其他有关二叉树的知识。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-01T00:36:05.000Z">
+<meta property="article:modified_time" content="2022-06-01T02:53:33.930Z">
+<meta property="article:author" content="Cong yx">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://congyx.com/2022/06/01/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>二叉树的问题（二） | 程序人生</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="程序人生" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">程序人生</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/06/01/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Cong yx">
+      <meta itemprop="description" content="欲买桂花同载酒，终不似，少年游。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序人生">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          二叉树的问题（二）
+        </h1>
+
+        <div class="post-meta">
+
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-06-01 08:36:05 / 修改时间：10:53:33" itemprop="dateCreated datePublished" datetime="2022-06-01T08:36:05+08:00">2022-06-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>7 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>整理完二叉树的前序、中序、后序、层次遍历之后，进一步学习，记录一下其他有关二叉树的知识。<span id="more"></span></p>
+<h3 id="二叉树的最大深度"><a href="#二叉树的最大深度" class="headerlink" title="二叉树的最大深度"></a>二叉树的最大深度</h3><p><strong>递归：</strong></p>
+<p>二叉树的深度是指树的根节点到任一叶子节点路径上节点的数量，因此从根节点每次向下一层深度都会加1。所以二叉树的深度等于根节点这个1层加上左子树和右子树深度的最大值。同时，我们可以将每一个子树都看成一个根节点，继续用上述方法求深度，将问题划分为子问题，利用递归解决。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxDepth</span> <span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">       <span class="keyword">if</span>(root == <span class="literal">null</span>)</span><br><span class="line">           <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> Math.max(maxDepth(root.left),maxDepth(root.right)) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>时间复杂度：O(n)，其中n为二叉树的节点数，遍历整棵二叉树。</p>
+<p>空间复杂度：O(n)，最坏情况下，二叉树化为链表，递归栈深度最大为n。</p>
+<p><strong>层次遍历（队列）</strong></p>
+<p>根据层次遍历来统计二叉树最大深度，有的层可能会有很多节点，有的层只有一个节点，无论有多少个节点，它们都是一层。所以采取层次遍历，只需统计层数。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">maxDepth</span> <span class="params">(TreeNode root)</span> &#123;</span><br><span class="line">    	Queue&lt;TreeNode&gt; q = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;TreeNode&gt;();</span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        q.offer(root);</span><br><span class="line">        <span class="type">int</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(!q.isEmpty())&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> q.size();</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;i &lt; n;i++)&#123;</span><br><span class="line">                <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> q.poll()</span><br><span class="line">                <span class="keyword">if</span>(node.left != <span class="literal">null</span>)</span><br><span class="line">                    q.offer(node.left);</span><br><span class="line">                <span class="keyword">if</span>(node.right != <span class="literal">null</span>)</span><br><span class="line">                    q.offer(node.right);</span><br><span class="line">            &#125;</span><br><span class="line">             res++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="合并二叉树"><a href="#合并二叉树" class="headerlink" title="合并二叉树"></a>合并二叉树</h3><p><strong>递归前序遍历：</strong></p>
+<p>如果想将两棵二叉树合并起来，那么一定要遍历两颗二叉树，那我们可以考虑同步遍历两棵二叉树，这样就可以将每次遍历的值相加在一起。</p>
+<ul>
+<li>首先判断t1与t2是否为空，若为则用另一个代替，若都为空，返回的值也是空。</li>
+<li>然后依据前序遍历的特点，优先访问根节点，将两个根点的值相加创建到新树中。</li>
+<li>s两棵树再依次同步进入左子树和右子树。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">mergeTrees</span> <span class="params">(TreeNode t1, TreeNode t2)</span> &#123;</span><br><span class="line">        <span class="comment">//若只有一个节点返回另一个，两个都为null自然返回null</span></span><br><span class="line">        <span class="keyword">if</span> (t1 == <span class="literal">null</span>) </span><br><span class="line">            <span class="keyword">return</span> t2;</span><br><span class="line">        <span class="keyword">if</span> (t2 == <span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> t1;</span><br><span class="line">        <span class="comment">//根左右的方式递归</span></span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">head</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeNode</span>(t1.val + t2.val);</span><br><span class="line">        head.left = mergeTrees(t1.left, t2.left);</span><br><span class="line">        head.right = mergeTrees(t1.right, t2.right);</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(min(n,m))，m和n分别为两棵树的节点树，当一个树访问完时，自然就连接上另一个树的节点，故只访问了小树的节点数。</li>
+<li>空间复杂度：O(min(n,m))，递归栈深度也同时间，只访问了小树的节点数。</li>
+</ul>
+<p><strong>队列：</strong></p>
+<p>使用队列辅助两个二叉树分别同时层次遍历。</p>
+<ul>
+<li>首先判断t1与t2是否为空，若为则用另一个代替，若都为空，返回的值也是空。</li>
+<li>使用三个辅助队列，第一个队列q用于暂存合并后的二叉树的层次遍历节点，第二个队列q1用于暂存t1的层次遍历节点，第三个队列q2用于暂存t2的层次遍历节点。</li>
+<li>两棵树同步层次遍历，先将根节点加入队列中，同时根节点优先合并。</li>
+<li>每次从队列分别弹出一个元素，判断分别二者的左右子节点是否存在，若是都存在，则相加合并，若是只存在一个则连接该存在的节点，若是都不存在则连接null。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">mergeTrees</span> <span class="params">(TreeNode t1, TreeNode t2)</span> &#123;</span><br><span class="line">        <span class="comment">//若只有一个节点返回另一个，两个都为null自然返回null</span></span><br><span class="line">        <span class="keyword">if</span> (t1 == <span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> t2;</span><br><span class="line">        <span class="keyword">if</span> (t2 == <span class="literal">null</span>)</span><br><span class="line">            <span class="keyword">return</span> t1;</span><br><span class="line">        <span class="comment">//合并根节点</span></span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">head</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeNode</span>(t1.val + t2.val); </span><br><span class="line">        <span class="comment">//连接后的树的层次遍历节点</span></span><br><span class="line">        Queue&lt;TreeNode&gt; q = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;TreeNode&gt;(); </span><br><span class="line">        <span class="comment">//分别存两棵树的层次遍历节点</span></span><br><span class="line">        Queue&lt;TreeNode&gt; q1 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;TreeNode&gt;(); </span><br><span class="line">        Queue&lt;TreeNode&gt; q2 = <span class="keyword">new</span> <span class="title class_">LinkedList</span>&lt;TreeNode&gt;();</span><br><span class="line">        q.offer(head);</span><br><span class="line">        q1.offer(t1);  </span><br><span class="line">        q2.offer(t2);</span><br><span class="line">        <span class="keyword">while</span> (!q1.isEmpty() &amp;&amp; !q2.isEmpty()) &#123;</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> q.poll();</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">node1</span> <span class="operator">=</span> q1.poll(); </span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">node2</span> <span class="operator">=</span> q2.poll();</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">left1</span> <span class="operator">=</span> node1.left;</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">left2</span> <span class="operator">=</span> node2.left;</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">right1</span> <span class="operator">=</span> node1.right;</span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">right2</span> <span class="operator">=</span> node2.right;</span><br><span class="line">            <span class="keyword">if</span>(left1 != <span class="literal">null</span> || left2 != <span class="literal">null</span>)&#123; </span><br><span class="line">                <span class="comment">//两个左节点都存在</span></span><br><span class="line">                <span class="keyword">if</span>(left1 != <span class="literal">null</span> &amp;&amp; left2 != <span class="literal">null</span>)&#123; </span><br><span class="line">                    <span class="type">TreeNode</span> <span class="variable">left</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeNode</span>(left1.val + left2.val);</span><br><span class="line">                    node.left = left; </span><br><span class="line">                    <span class="comment">//新节点入队列</span></span><br><span class="line">                    q.offer(left);  </span><br><span class="line">                    q1.offer(left1);</span><br><span class="line">                    q2.offer(left2);</span><br><span class="line">                <span class="comment">//只连接一个节点</span></span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(left1 != <span class="literal">null</span>) </span><br><span class="line">                    node.left = left1;</span><br><span class="line">                 <span class="keyword">else</span></span><br><span class="line">                    node.left = left2;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(right1 != <span class="literal">null</span> || right2 != <span class="literal">null</span>)&#123;</span><br><span class="line">                <span class="comment">//两个右节点都存在</span></span><br><span class="line">                <span class="keyword">if</span>(right1 != <span class="literal">null</span> &amp;&amp; right2 != <span class="literal">null</span>) &#123; </span><br><span class="line">                    <span class="type">TreeNode</span> <span class="variable">right</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">TreeNode</span>(right1.val + right2.val);</span><br><span class="line">                    node.right = right;</span><br><span class="line">                    <span class="comment">//新节点入队列</span></span><br><span class="line">                    q.offer(right); </span><br><span class="line">                    q1.offer(right1);</span><br><span class="line">                    q2.offer(right2);</span><br><span class="line">                <span class="comment">//只连接一个节点</span></span><br><span class="line">                &#125;<span class="keyword">else</span> <span class="keyword">if</span>(right1 != <span class="literal">null</span>)  </span><br><span class="line">                    node.right = right1;</span><br><span class="line">                 <span class="keyword">else</span> </span><br><span class="line">                    node.right = right2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> head;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="二叉树中和为某一值的路径"><a href="#二叉树中和为某一值的路径" class="headerlink" title="二叉树中和为某一值的路径"></a>二叉树中和为某一值的路径</h3><p><strong>递归：</strong></p>
+<p>检查从根节点到叶子节点有没有一条等于目标值的路径，肯定需要从根节点遍历到叶子，可以在根节点每次往下一层的时候，用sum减去节点值，最后检查是否完整等于0。遍历的方法可以选取二叉树常用的递归前序遍历。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasPathSum</span> <span class="params">(TreeNode root, <span class="type">int</span> sum)</span> &#123;</span><br><span class="line">        <span class="comment">//空节点找不到路径</span></span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>) </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">//叶子节点，且路径和为sum</span></span><br><span class="line">        <span class="keyword">if</span>(root.left == <span class="literal">null</span> &amp;&amp; root.right == <span class="literal">null</span> &amp;&amp; sum - root.val == <span class="number">0</span>) </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="comment">//递归进入子节点</span></span><br><span class="line">        <span class="keyword">return</span> hasPathSum(root.left, sum - root.val) || hasPathSum(root.right, sum - root.val); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>栈、dfs</strong></p>
+<p>遍历过程除了使用递归也可以使用栈辅助，进行dfs（深度优先搜索）遍历，检查往下的路径中是否有等于sum的路径和。</p>
+<p>注意，这里仅是dfs，而不是前序遍历，左右节点的顺序没有关系，因为每次往下都是单独添加某个节点的值相加然后继续往下，因此左右节点谁先遍历不管用。</p>
+<ul>
+<li>首先检查空节点，空树没有路径。</li>
+<li>使用两个栈同步遍历，一个栈记录节点，辅助深度优先搜索，另一个栈跟随记录到该节点为止的路径和。根节点及根节点值先进栈。</li>
+<li>遍历的时候每次弹出两个栈中的内容，判断是否是叶子节点且路径和是否等于目标值。</li>
+<li>没有到叶子节点就将左右子节点（如果有）加入栈中，并跟随加入路径和。</li>
+<li>如果遍历结束也没有找到路径和，则该二叉树中没有。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">hasPathSum</span> <span class="params">(TreeNode root, <span class="type">int</span> sum)</span> &#123;</span><br><span class="line">        <span class="comment">//空节点找不到路径</span></span><br><span class="line">        <span class="keyword">if</span>(root == <span class="literal">null</span>) </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="comment">//栈辅助深度优先遍历</span></span><br><span class="line">        Stack&lt;TreeNode&gt; s1 = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;TreeNode&gt;(); </span><br><span class="line">        <span class="comment">//跟随s1记录到相应节点为止的路径和</span></span><br><span class="line">        Stack&lt;Integer&gt; s2 = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;Integer&gt;(); </span><br><span class="line">        s1.push(root);</span><br><span class="line">        s2.push(root.val);</span><br><span class="line">        <span class="keyword">while</span>(!s1.isEmpty())&#123;</span><br><span class="line">            <span class="comment">//弹出相应节点</span></span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">temp</span> <span class="operator">=</span> s1.pop(); </span><br><span class="line">            <span class="comment">//弹出到该点为止的当前路径和</span></span><br><span class="line">            <span class="type">int</span> <span class="variable">cur_sum</span> <span class="operator">=</span> s2.pop(); </span><br><span class="line">            <span class="comment">//叶子节点且当前路径和等于sum</span></span><br><span class="line">            <span class="keyword">if</span>(temp.left == <span class="literal">null</span> &amp;&amp; temp.right == <span class="literal">null</span> &amp;&amp; cur_sum == sum)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            <span class="comment">//左节点及路径和入栈</span></span><br><span class="line">            <span class="keyword">if</span>(temp.left != <span class="literal">null</span>)&#123; </span><br><span class="line">                s1.push(temp.left);</span><br><span class="line">                s2.push(cur_sum + temp.left.val);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">//右节点及路径和入栈</span></span><br><span class="line">            <span class="keyword">if</span>(temp.right != <span class="literal">null</span>)&#123; </span><br><span class="line">                s1.push(temp.right);</span><br><span class="line">                s2.push(cur_sum + temp.right.val);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>时间复杂度：O(n)，其中n为二叉树所有节点，遍历二叉树所有节点。</li>
+<li>空间复杂度：O(n)，最坏情况二叉树化为链表，递归栈空间最大为n。</li>
+</ul>
+<h3 id="二叉树的镜像"><a href="#二叉树的镜像" class="headerlink" title="二叉树的镜像"></a>二叉树的镜像</h3><p><strong>递归：</strong></p>
+<p>将二叉树镜像，意味着每个左右子树都会交换位置，如果我们从上到下对遍历到的节点交换位置，但是它们后面的节点无法跟着他们一起被交换，因此我们可以考虑自底向上对每两个相对位置的节点交换位置，这样往上各个子树也会被交换位置。</p>
+<p>自底向上的遍历方式，我们可以采用<strong>后序递归</strong>的方法。</p>
+<ul>
+<li>时间复杂度：O(n)，其中n为二叉树的节点数，访问二叉树所有节点各一次。</li>
+<li>空间复杂度：O(n)，最坏情况下，二叉树退化为链表，递归栈最大值为n。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">Mirror</span> <span class="params">(TreeNode pRoot)</span> &#123;</span><br><span class="line">        <span class="comment">//空树返回</span></span><br><span class="line">        <span class="keyword">if</span>(pRoot == <span class="literal">null</span>) </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="comment">//先递归子树</span></span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">left</span> <span class="operator">=</span> Mirror(pRoot.left);  </span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">right</span> <span class="operator">=</span> Mirror(pRoot.right);</span><br><span class="line">        <span class="comment">//交换</span></span><br><span class="line">        pRoot.left = right; </span><br><span class="line">        pRoot.right = left;</span><br><span class="line">        <span class="keyword">return</span> pRoot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>栈：</strong></p>
+<p>栈的访问是一种自顶向下的访问，因此我们需要在左右子节点入栈后直接交换，然后再访问后续栈中内容。</p>
+<ul>
+<li>优先检查空树的情况。</li>
+<li>使用栈辅助遍历二叉树，根节点先进栈。</li>
+<li>遍历过程中每次弹出栈中一个元素，然后该节点左右节点分别入栈。</li>
+<li>同时我们交换入栈两个子节点的值，因为子节点已经入栈了再交换，就不怕后续没有交换。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">Mirror</span> <span class="params">(TreeNode pRoot)</span> &#123;</span><br><span class="line">        <span class="comment">//空树</span></span><br><span class="line">        <span class="keyword">if</span>(pRoot == <span class="literal">null</span>)  </span><br><span class="line">            <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">        <span class="comment">//辅助栈</span></span><br><span class="line">        Stack&lt;TreeNode&gt; s = <span class="keyword">new</span> <span class="title class_">Stack</span>&lt;TreeNode&gt;(); </span><br><span class="line">        <span class="comment">//根节点先进栈</span></span><br><span class="line">        s.push(pRoot); </span><br><span class="line">        <span class="keyword">while</span> (!s.isEmpty())&#123; </span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">node</span> <span class="operator">=</span> s.pop();</span><br><span class="line">            <span class="comment">//左右节点入栈</span></span><br><span class="line">            <span class="keyword">if</span>(node.left != <span class="literal">null</span>) </span><br><span class="line">                s.push(node.left);</span><br><span class="line">            <span class="keyword">if</span>(node.right != <span class="literal">null</span>) </span><br><span class="line">                s.push(node.right);</span><br><span class="line">            <span class="comment">//交换左右</span></span><br><span class="line">            <span class="type">TreeNode</span> <span class="variable">temp</span> <span class="operator">=</span> node.left; </span><br><span class="line">            node.left = node.right;</span><br><span class="line">            node.right = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> pRoot;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="重建二叉树"><a href="#重建二叉树" class="headerlink" title="重建二叉树"></a>重建二叉树</h3>
+    </div>
+
+    
+    
+    
+
+ 
+   <div>
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+   </div>
+ 
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Cong yx
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://congyx.com/2022/06/01/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%88%E4%BA%8C%EF%BC%89/" title="二叉树的问题（二）">https://congyx.com/2022/06/01/二叉树的问题（二）/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" rel="tag"># 数据结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/05/27/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/" rel="prev" title="二叉树的一些问题">
+      <i class="fa fa-chevron-left"></i> 二叉树的一些问题
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NTU0Ny8zMjAxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6"><span class="nav-number">1.</span> <span class="nav-text">二叉树的最大深度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%88%E5%B9%B6%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">2.</span> <span class="nav-text">合并二叉树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E5%92%8C%E4%B8%BA%E6%9F%90%E4%B8%80%E5%80%BC%E7%9A%84%E8%B7%AF%E5%BE%84"><span class="nav-number">3.</span> <span class="nav-text">二叉树中和为某一值的路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E9%95%9C%E5%83%8F"><span class="nav-number">4.</span> <span class="nav-text">二叉树的镜像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="nav-number">5.</span> <span class="nav-text">重建二叉树</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cong yx"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Cong yx</p>
+  <div class="site-description" itemprop="description">欲买桂花同载酒，终不似，少年游。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ez-Cong" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ez-Cong" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:Congyx0304@163.com" title="E-Mail → mailto:Congyx0304@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/?mkt=zh-cn" title="https:&#x2F;&#x2F;cn.bing.com&#x2F;?mkt&#x3D;zh-cn" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/signin?next=/" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;signin?next&#x3D;%2F" rel="noopener" target="_blank">知乎</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.csdn.net/" title="https:&#x2F;&#x2F;www.csdn.net&#x2F;" rel="noopener" target="_blank">CSDN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cong yx</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
