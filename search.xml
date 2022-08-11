@@ -1,6 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SpringBoot</title>
+    <url>/2022/03/09/SpringBoot/</url>
+    <content><![CDATA[<p>SpringBoot是整合Spring技术栈的一站式框架</p>
+<p>SpringBoot是简化Spring技术栈的快速开发脚手架<span id="more"></span></p>
+<h3 id="SpringBoot特点"><a href="#SpringBoot特点" class="headerlink" title="SpringBoot特点"></a>SpringBoot特点</h3><h4 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h4><p>父项目依赖管理</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">依赖管理    </span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">父项目</span><br><span class="line"> <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>start 场景启动器</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">1	spring-boot-starter-* ： *就某种场景</span><br><span class="line">2	只要引入starter，这个场景的所有常规需要的依赖我们都自动引入</span><br><span class="line">3	SpringBoot所有支持的场景</span><br><span class="line">https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-starter</span><br><span class="line">4	 *-spring-boot-starter： 第三方为我们提供的简化开发的场景启动器。</span><br><span class="line">5	所有场景启动器最底层的依赖</span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>自动配置 Tomcat</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    &lt;/dependency</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line">等同于</span><br><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan(&quot;xxx.xxx.xxx&quot;)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="容器功能"><a href="#容器功能" class="headerlink" title="容器功能"></a>容器功能</h3><h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><p><strong>@Configuration</strong></p>
+<ul>
+<li>Full模式于Lite模式<ul>
+<li>配置类组件之间无依赖关系用Lite模式加速容器启动过程，减少判断</li>
+<li>配置类组件之间有依赖关系，方法会被调用得到之前单实例组件，用Full模式</li>
+</ul>
+</li>
+</ul>
+<p>1、配置类里面使用@Bean标注在方法上给容器注册组件，默认也是单实例的</p>
+<p>2、配置类本身也是组件</p>
+<p>3、proxyBeanMethods：代理bean的方法</p>
+<ul>
+<li>Full(proxyBeanMethods &#x3D; true)、【保证每个@Bean方法被调用多少次返回的组件都是单实例的】</li>
+<li>Lite(proxyBeanMethods &#x3D; false)【每个@Bean方法被调用多少次返回的组件都是新创建的】</li>
+<li>组件依赖必须使用Full模式默认。其他默认是否Lite模式</li>
+</ul>
+<p><strong>@Bean、@Component、@Controller、@Service、@Repository</strong></p>
+<p><strong>@ComponentScan、@Import</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Import(&#123;User.class,DBHelper.class&#125;)</span></span><br><span class="line"><span class="meta">@Configuration(proxyBeanMethods = false)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Myconfig</span>()&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>@Conditional</strong></p>
+<p>条件装配 @Conditional：满足Conditional指定的条件，进行组件注入</p>
+<h4 id="原生配置文件引入"><a href="#原生配置文件引入" class="headerlink" title="原生配置文件引入"></a>原生配置文件引入</h4><p><strong>@ImportResource</strong></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">======================beans.xml=========================</span><br><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;haha&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.atguigu.boot.bean.User&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;zhangsan&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span> <span class="attr">value</span>=<span class="string">&quot;18&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;hehe&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.atguigu.boot.bean.Pet&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;tomcat&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ImportResource(&quot;classpath:beans.xml&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyConfig</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">======================测试=================</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">haha</span> <span class="operator">=</span> run.containsBean(<span class="string">&quot;haha&quot;</span>);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">hehe</span> <span class="operator">=</span> run.containsBean(<span class="string">&quot;hehe&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;haha：&quot;</span>+haha);<span class="comment">//true</span></span><br><span class="line">        System.out.println(<span class="string">&quot;hehe：&quot;</span>+hehe);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="配置绑定"><a href="#配置绑定" class="headerlink" title="配置绑定"></a>配置绑定</h4><p>读取properties文件中内容，封装到JavaBean中</p>
+<p><strong>@ConfigurationProperties</strong></p>
+<p><strong>@EnableConfigurationProperties + @ConfigurationProperties</strong></p>
+<p><strong>@Component + @ConfigurationProperties</strong></p>
+<h3 id="自动配置原理"><a href="#自动配置原理" class="headerlink" title="自动配置原理"></a>自动配置原理</h3><p><strong>SpringBootConfiguration</strong></p>
+<p>@Configuration。代表当前是一个配置类</p>
+<p><strong>@ComponentScan</strong></p>
+<p>指定扫描</p>
+<p><strong>@EnableAutoConfiguration</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@AutoConfigurationPackage</span></span><br><span class="line"><span class="meta">@Import(AutoConfigurationImportSelector.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAutoConfiguration &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>@AutoConfigurationPackage</strong></p>
+<p>自动配置包，指定默认的包规则。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Import(AutoConfigurationPackages.Registrar.class)</span>  <span class="comment">//给容器中导入一个组件</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> AutoConfigurationPackage &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//利用Registrar给容器中导入一系列组件</span></span><br><span class="line"><span class="comment">//将指定的一个包下的所有组件导入进来？MainApplication 所在包下。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>@Import(AutoConfigurationImportSelector.class)</strong></p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>、利用getAutoConfigurationEntry(annotationMetadata);给容器中批量导入一些组件</span><br><span class="line"><span class="number">2</span>、调用List&lt;String&gt; configurations = getCandidateConfigurations(annotationMetadata, attributes)获取到所有需要导入到容器中的配置类</span><br><span class="line"><span class="number">3</span>、利用工厂加载 Map&lt;String, List&lt;String&gt;&gt; <span class="title function_">loadSpringFactories</span><span class="params">(<span class="meta">@Nullable</span> ClassLoader classLoader)</span>；得到所有的组件</span><br><span class="line"><span class="number">4</span>、从META-INF/spring.factories位置来加载一个文件。</span><br><span class="line">	默认扫描我们当前系统里面所有META-INF/spring.factories位置的文件</span><br><span class="line">    spring-boot-autoconfigure-<span class="number">2.3</span><span class="number">.4</span>.RELEASE.jar包里面也有META-INF/spring.factories</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p><strong>蠢事：</strong>忘记填写@RestController</p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><h4 id="properties"><a href="#properties" class="headerlink" title="properties"></a>properties</h4><p>“YAML Ain’t Markup Language”</p>
+<h4 id="yaml"><a href="#yaml" class="headerlink" title="yaml"></a>yaml</h4><p>适合用来做以数据为中心的配置文件</p>
+<p><strong>自定义的类和配置文件绑定一般没有提示</strong></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">exclude</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="静态资源访问"><a href="#静态资源访问" class="headerlink" title="静态资源访问"></a>静态资源访问</h3><h4 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h4><p>静态资源放在类路径下：called <code>/static</code> (or <code>/public</code> or <code>/resources</code> or <code>/META-INF/resources</code></p>
+<p>访问：当前项目根路径&#x2F; + 静态资源名</p>
+<p><strong>原理：</strong>静态映射&#x2F;**</p>
+<p>请求进来，先去找Controller看能不能处理。不能处理的所有请求又都交给静态资源处理器。静态资源也找不到则响应404页面。</p>
+<p>改变默认的静态资源路径</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">mvc:</span></span><br><span class="line">    <span class="attr">static-path-pattern:</span> <span class="string">/res/**</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">static-locations:</span> [<span class="string">classpath:/haha/</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="欢迎页"><a href="#欢迎页" class="headerlink" title="欢迎页"></a>欢迎页</h4><p>静态资源路径下配置 index.html</p>
+<ul>
+<li>可以配置静态资源路径</li>
+<li>需要注意的是，如果配置了静态资源的访问前缀，会导致 index.html 不能被默认访问</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="comment">#  mvc:</span></span><br><span class="line"><span class="comment">#    static-path-pattern: /res/**   导致welcome page功能失效</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">static-locations:</span> [<span class="string">classpath:/haha/</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义-Favicon"><a href="#自定义-Favicon" class="headerlink" title="自定义 Favicon"></a>自定义 Favicon</h4><p>favicon.io 放在静态资源目录</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="comment">#  mvc:</span></span><br><span class="line"><span class="comment">#    static-path-pattern: /res/**   这个会导致 Favicon 功能失效</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="静态资源配置原理"><a href="#静态资源配置原理" class="headerlink" title="静态资源配置原理"></a>静态资源配置原理</h4><ul>
+<li>SpringBoot启动默认加载  xxxAutoConfiguration 类（自动配置类）</li>
+<li>SpringMVC功能的自动配置类 WebMvcAutoConfiguration，生效</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Matplotlib数据可视化</title>
     <url>/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
     <content><![CDATA[<h1 id="Matplotlib数据可视化"><a href="#Matplotlib数据可视化" class="headerlink" title="Matplotlib数据可视化"></a>Matplotlib数据可视化</h1><p>Python语言的matplotlib扩展包是一个提供了跨平台的2D 图形库，它可以将数据用多种形式展示出来。Matplotlib可画出折线图，柱状图，饼图，雷达图等。在matplotlib的官网上给出了500多个图表展示的例子程序 (<a href="https://matplotlib.org/gallery/index.html)%E3%80%82">https://matplotlib.org/gallery/index.html)。</a><span id="more"></span></p>
@@ -244,118 +356,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SpringBoot</title>
-    <url>/2022/03/09/SpringBoot/</url>
-    <content><![CDATA[<p>SpringBoot是整合Spring技术栈的一站式框架</p>
-<p>SpringBoot是简化Spring技术栈的快速开发脚手架<span id="more"></span></p>
-<h3 id="SpringBoot特点"><a href="#SpringBoot特点" class="headerlink" title="SpringBoot特点"></a>SpringBoot特点</h3><h4 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h4><p>父项目依赖管理</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">依赖管理    </span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">父项目</span><br><span class="line"> <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>start 场景启动器</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">1	spring-boot-starter-* ： *就某种场景</span><br><span class="line">2	只要引入starter，这个场景的所有常规需要的依赖我们都自动引入</span><br><span class="line">3	SpringBoot所有支持的场景</span><br><span class="line">https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-starter</span><br><span class="line">4	 *-spring-boot-starter： 第三方为我们提供的简化开发的场景启动器。</span><br><span class="line">5	所有场景启动器最底层的依赖</span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>自动配置 Tomcat</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    &lt;/dependency</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line">等同于</span><br><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan(&quot;xxx.xxx.xxx&quot;)</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="容器功能"><a href="#容器功能" class="headerlink" title="容器功能"></a>容器功能</h3><h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><p><strong>@Configuration</strong></p>
-<ul>
-<li>Full模式于Lite模式<ul>
-<li>配置类组件之间无依赖关系用Lite模式加速容器启动过程，减少判断</li>
-<li>配置类组件之间有依赖关系，方法会被调用得到之前单实例组件，用Full模式</li>
-</ul>
-</li>
-</ul>
-<p>1、配置类里面使用@Bean标注在方法上给容器注册组件，默认也是单实例的</p>
-<p>2、配置类本身也是组件</p>
-<p>3、proxyBeanMethods：代理bean的方法</p>
-<ul>
-<li>Full(proxyBeanMethods &#x3D; true)、【保证每个@Bean方法被调用多少次返回的组件都是单实例的】</li>
-<li>Lite(proxyBeanMethods &#x3D; false)【每个@Bean方法被调用多少次返回的组件都是新创建的】</li>
-<li>组件依赖必须使用Full模式默认。其他默认是否Lite模式</li>
-</ul>
-<p><strong>@Bean、@Component、@Controller、@Service、@Repository</strong></p>
-<p><strong>@ComponentScan、@Import</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Import(&#123;User.class,DBHelper.class&#125;)</span></span><br><span class="line"><span class="meta">@Configuration(proxyBeanMethods = false)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Myconfig</span>()&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>@Conditional</strong></p>
-<p>条件装配 @Conditional：满足Conditional指定的条件，进行组件注入</p>
-<h4 id="原生配置文件引入"><a href="#原生配置文件引入" class="headerlink" title="原生配置文件引入"></a>原生配置文件引入</h4><p><strong>@ImportResource</strong></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">======================beans.xml=========================</span><br><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;haha&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.atguigu.boot.bean.User&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;zhangsan&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span> <span class="attr">value</span>=<span class="string">&quot;18&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;hehe&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.atguigu.boot.bean.Pet&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;tomcat&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ImportResource(&quot;classpath:beans.xml&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyConfig</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">======================测试=================</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">haha</span> <span class="operator">=</span> run.containsBean(<span class="string">&quot;haha&quot;</span>);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">hehe</span> <span class="operator">=</span> run.containsBean(<span class="string">&quot;hehe&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;haha：&quot;</span>+haha);<span class="comment">//true</span></span><br><span class="line">        System.out.println(<span class="string">&quot;hehe：&quot;</span>+hehe);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="配置绑定"><a href="#配置绑定" class="headerlink" title="配置绑定"></a>配置绑定</h4><p>读取properties文件中内容，封装到JavaBean中</p>
-<p><strong>@ConfigurationProperties</strong></p>
-<p><strong>@EnableConfigurationProperties + @ConfigurationProperties</strong></p>
-<p><strong>@Component + @ConfigurationProperties</strong></p>
-<h3 id="自动配置原理"><a href="#自动配置原理" class="headerlink" title="自动配置原理"></a>自动配置原理</h3><p><strong>SpringBootConfiguration</strong></p>
-<p>@Configuration。代表当前是一个配置类</p>
-<p><strong>@ComponentScan</strong></p>
-<p>指定扫描</p>
-<p><strong>@EnableAutoConfiguration</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@AutoConfigurationPackage</span></span><br><span class="line"><span class="meta">@Import(AutoConfigurationImportSelector.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAutoConfiguration &#123;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>@AutoConfigurationPackage</strong></p>
-<p>自动配置包，指定默认的包规则。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Import(AutoConfigurationPackages.Registrar.class)</span>  <span class="comment">//给容器中导入一个组件</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> AutoConfigurationPackage &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//利用Registrar给容器中导入一系列组件</span></span><br><span class="line"><span class="comment">//将指定的一个包下的所有组件导入进来？MainApplication 所在包下。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>@Import(AutoConfigurationImportSelector.class)</strong></p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>、利用getAutoConfigurationEntry(annotationMetadata);给容器中批量导入一些组件</span><br><span class="line"><span class="number">2</span>、调用List&lt;String&gt; configurations = getCandidateConfigurations(annotationMetadata, attributes)获取到所有需要导入到容器中的配置类</span><br><span class="line"><span class="number">3</span>、利用工厂加载 Map&lt;String, List&lt;String&gt;&gt; <span class="title function_">loadSpringFactories</span><span class="params">(<span class="meta">@Nullable</span> ClassLoader classLoader)</span>；得到所有的组件</span><br><span class="line"><span class="number">4</span>、从META-INF/spring.factories位置来加载一个文件。</span><br><span class="line">	默认扫描我们当前系统里面所有META-INF/spring.factories位置的文件</span><br><span class="line">    spring-boot-autoconfigure-<span class="number">2.3</span><span class="number">.4</span>.RELEASE.jar包里面也有META-INF/spring.factories</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<p><strong>蠢事：</strong>忘记填写@RestController</p>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><h4 id="properties"><a href="#properties" class="headerlink" title="properties"></a>properties</h4><p>“YAML Ain’t Markup Language”</p>
-<h4 id="yaml"><a href="#yaml" class="headerlink" title="yaml"></a>yaml</h4><p>适合用来做以数据为中心的配置文件</p>
-<p><strong>自定义的类和配置文件绑定一般没有提示</strong></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">exclude</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="静态资源访问"><a href="#静态资源访问" class="headerlink" title="静态资源访问"></a>静态资源访问</h3><h4 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h4><p>静态资源放在类路径下：called <code>/static</code> (or <code>/public</code> or <code>/resources</code> or <code>/META-INF/resources</code></p>
-<p>访问：当前项目根路径&#x2F; + 静态资源名</p>
-<p><strong>原理：</strong>静态映射&#x2F;**</p>
-<p>请求进来，先去找Controller看能不能处理。不能处理的所有请求又都交给静态资源处理器。静态资源也找不到则响应404页面。</p>
-<p>改变默认的静态资源路径</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">mvc:</span></span><br><span class="line">    <span class="attr">static-path-pattern:</span> <span class="string">/res/**</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">static-locations:</span> [<span class="string">classpath:/haha/</span>]</span><br></pre></td></tr></table></figure>
-
-<h4 id="欢迎页"><a href="#欢迎页" class="headerlink" title="欢迎页"></a>欢迎页</h4><p>静态资源路径下配置 index.html</p>
-<ul>
-<li>可以配置静态资源路径</li>
-<li>需要注意的是，如果配置了静态资源的访问前缀，会导致 index.html 不能被默认访问</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="comment">#  mvc:</span></span><br><span class="line"><span class="comment">#    static-path-pattern: /res/**   导致welcome page功能失效</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">static-locations:</span> [<span class="string">classpath:/haha/</span>]</span><br></pre></td></tr></table></figure>
-
-<h4 id="自定义-Favicon"><a href="#自定义-Favicon" class="headerlink" title="自定义 Favicon"></a>自定义 Favicon</h4><p>favicon.io 放在静态资源目录</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="comment">#  mvc:</span></span><br><span class="line"><span class="comment">#    static-path-pattern: /res/**   这个会导致 Favicon 功能失效</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="静态资源配置原理"><a href="#静态资源配置原理" class="headerlink" title="静态资源配置原理"></a>静态资源配置原理</h4><ul>
-<li>SpringBoot启动默认加载  xxxAutoConfiguration 类（自动配置类）</li>
-<li>SpringMVC功能的自动配置类 WebMvcAutoConfiguration，生效</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>String、StringBuffer、StringBuilder之间的联系</title>
     <url>/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/</url>
     <content><![CDATA[<p>今天做题遇见 <strong>反转字符串中的单词</strong> 这道题，给定一个字符串需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。题目链接：<a href="https://leetcode.cn/problems/reverse-words-in-a-string-iii/">557. 反转字符串中的单词 III - 力扣（LeetCode）</a>。<span id="more"></span></p>
@@ -389,6 +389,45 @@
       </tags>
   </entry>
   <entry>
+    <title>java基础复习</title>
+    <url>/2022/05/24/java%E5%9F%BA%E7%A1%80/</url>
+    <content><![CDATA[<p>今天在刷牛客的时候，发现自己对一些数据结构的基础知识并不是很清晰。所以在这里做个笔记整理一下。<span id="more"></span></p>
+<p>List、LinkedList、ArrayList:</p>
+<p>List:是一个<strong>有序</strong>的集合，可以包含重复的元素。提供了按索引访问的方式。继承Collection。</p>
+<p>List有两个重要的实现类：ArrayList 和 LinkedList，那么 <strong>ArrayList 和 LinkedList 有什么区别呢？</strong></p>
+<p>ArrayList：我们可以将其看作是<strong>能够自动增长容量的数组</strong>。可以利用 ArrayList 的 toArray() 返回一个数组。</p>
+<p>同时，ArrayList采用数组实现的，查找效率一定会比 LinkedList 高。而 LinkedList 采用双向链表实现的，插入和删除的效率会比 ArrayList 高。如果要是在 list 的尾部添加元素，肯定是LinkedList效率高。</p>
+<p>我们再展开一个问题 <strong>ArrayList 和 HashSet 区别：</strong></p>
+<p>首先，ArrayList 底层是动态数组，可以存储重复的值，并且如果不约定下标的话，是有序的。而 hashset 底层是 hash 表，是不可重复并且是无序的。</p>
+<p>Queue</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Queue</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">Collection</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="comment">//往队列插入元素，如果出现异常会抛出异常</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span>;</span><br><span class="line">    <span class="comment">//往队列插入元素，如果出现异常则返回false</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">offer</span><span class="params">(E e)</span>;</span><br><span class="line">    <span class="comment">//移除队列元素，如果出现异常会抛出异常</span></span><br><span class="line">    E <span class="title function_">remove</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">//移除队列元素，如果出现异常则返回null</span></span><br><span class="line">    E <span class="title function_">poll</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">//获取队列头部元素，如果出现异常会抛出异常</span></span><br><span class="line">    E <span class="title function_">element</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">//获取队列头部元素，如果出现异常则返回null</span></span><br><span class="line">    E <span class="title function_">peek</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>Deque 双端队列</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Deque</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">Queue</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">addFirst</span><span class="params">(E e)</span>;<span class="comment">//插入头部，异常会报错</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">offerFirst</span><span class="params">(E e)</span>;<span class="comment">//插入头部，异常返回false</span></span><br><span class="line">    E <span class="title function_">getFirst</span><span class="params">()</span>;<span class="comment">//获取头部，异常会报错</span></span><br><span class="line">    E <span class="title function_">peekFirst</span><span class="params">()</span>;<span class="comment">//获取头部，异常不报错</span></span><br><span class="line">    E <span class="title function_">removeFirst</span><span class="params">()</span>;<span class="comment">//移除头部，异常会报错</span></span><br><span class="line">    E <span class="title function_">pollFirst</span><span class="params">()</span>;<span class="comment">//移除头部，异常不报错</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">addLast</span><span class="params">(E e)</span>;<span class="comment">//插入尾部，异常会报错</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">offerLast</span><span class="params">(E e)</span>;<span class="comment">//插入尾部，异常返回false</span></span><br><span class="line">    E <span class="title function_">getLast</span><span class="params">()</span>;<span class="comment">//获取尾部，异常会报错</span></span><br><span class="line">    E <span class="title function_">peekLast</span><span class="params">()</span>;<span class="comment">//获取尾部，异常不报错</span></span><br><span class="line">    E <span class="title function_">removeLast</span><span class="params">()</span>;<span class="comment">//移除尾部，异常会报错</span></span><br><span class="line">    E <span class="title function_">pollLast</span><span class="params">()</span>;<span class="comment">//移除尾部，异常不报错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>ArrayDeque</p>
+<ul>
+<li>实现于Deque，拥有队列或者栈特性的接口</li>
+<li>实现于Cloneable，拥有克隆对象的特性</li>
+<li>实现于Serializable，拥有序列化的能力</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//数组存储元素</span></span><br><span class="line"><span class="keyword">transient</span> Object[] elements;</span><br><span class="line"><span class="comment">//头部元素索引</span></span><br><span class="line"><span class="keyword">transient</span> <span class="type">int</span> head;</span><br><span class="line"><span class="comment">//尾部元素索引</span></span><br><span class="line"><span class="keyword">transient</span> <span class="type">int</span> tail;</span><br><span class="line"><span class="comment">//最小容量</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">MIN_INITIAL_CAPACITY</span> <span class="operator">=</span> <span class="number">8</span>;</span><br></pre></td></tr></table></figure>
+
+<p>ArrayDeque底层使用数组存储元素，同时还使用head和tail来表示索引，但注意tail不是尾部元素的索引，而是尾部元素的下一位，即下一个将要被加入的元素的索引。</p>
+<p>ArrayDeque 是 Deque 接口的一种具体实现，是依赖于可变数组来实现的。ArrayDeque 没有容量限制，可根据需求自动进行扩容。ArrayDeque 可以作为栈来使用，效率要高于Stack；ArrayDeque 也可以作为队列来使用，效率相较于基于双向链表的LinkedList也要更好一些。</p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo + github 搭建个人博客</title>
     <url>/2022/02/20/hello-world/</url>
     <content><![CDATA[<p>搭建博客最重要的就是<strong>耐心</strong>和<strong>坚持</strong>。搭建时候遇见许多问题(权限、版本等等)，经过耐心的搜索解决方案逐一解决还是非常开心的！<span id="more"></span></p>
@@ -406,7 +445,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#105;&#x74;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#98;&#46;&#x63;&#x6f;&#x6d;">&#103;&#105;&#x74;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#98;&#46;&#x63;&#x6f;&#x6d;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#x69;&#116;&#64;&#103;&#105;&#116;&#104;&#117;&#98;&#x2e;&#99;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#103;&#105;&#116;&#104;&#117;&#98;&#x2e;&#99;&#111;&#x6d;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -420,7 +459,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#103;&#x69;&#116;&#x40;&#103;&#105;&#116;&#x68;&#x75;&#98;&#46;&#99;&#111;&#x6d;">&#103;&#x69;&#116;&#x40;&#103;&#105;&#116;&#x68;&#x75;&#98;&#46;&#99;&#111;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#x67;&#105;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#117;&#98;&#46;&#x63;&#111;&#109;">&#x67;&#105;&#x74;&#x40;&#103;&#105;&#x74;&#104;&#117;&#98;&#46;&#x63;&#111;&#109;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -513,399 +552,6 @@
       </categories>
       <tags>
         <tag>hexo搭建博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>java基础复习</title>
-    <url>/2022/05/24/java%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<p>今天在刷牛客的时候，发现自己对一些数据结构的基础知识并不是很清晰。所以在这里做个笔记整理一下。<span id="more"></span></p>
-<p>List、LinkedList、ArrayList:</p>
-<p>List:是一个<strong>有序</strong>的集合，可以包含重复的元素。提供了按索引访问的方式。继承Collection。</p>
-<p>List有两个重要的实现类：ArrayList 和 LinkedList，那么 <strong>ArrayList 和 LinkedList 有什么区别呢？</strong></p>
-<p>ArrayList：我们可以将其看作是<strong>能够自动增长容量的数组</strong>。可以利用 ArrayList 的 toArray() 返回一个数组。</p>
-<p>同时，ArrayList采用数组实现的，查找效率一定会比 LinkedList 高。而 LinkedList 采用双向链表实现的，插入和删除的效率会比 ArrayList 高。如果要是在 list 的尾部添加元素，肯定是LinkedList效率高。</p>
-<p>我们再展开一个问题 <strong>ArrayList 和 HashSet 区别：</strong></p>
-<p>首先，ArrayList 底层是动态数组，可以存储重复的值，并且如果不约定下标的话，是有序的。而 hashset 底层是 hash 表，是不可重复并且是无序的。</p>
-<p>Queue</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Queue</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">Collection</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="comment">//往队列插入元素，如果出现异常会抛出异常</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">add</span><span class="params">(E e)</span>;</span><br><span class="line">    <span class="comment">//往队列插入元素，如果出现异常则返回false</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">offer</span><span class="params">(E e)</span>;</span><br><span class="line">    <span class="comment">//移除队列元素，如果出现异常会抛出异常</span></span><br><span class="line">    E <span class="title function_">remove</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">//移除队列元素，如果出现异常则返回null</span></span><br><span class="line">    E <span class="title function_">poll</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">//获取队列头部元素，如果出现异常会抛出异常</span></span><br><span class="line">    E <span class="title function_">element</span><span class="params">()</span>;</span><br><span class="line">    <span class="comment">//获取队列头部元素，如果出现异常则返回null</span></span><br><span class="line">    E <span class="title function_">peek</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>Deque 双端队列</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">Deque</span>&lt;E&gt; <span class="keyword">extends</span> <span class="title class_">Queue</span>&lt;E&gt; &#123;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">addFirst</span><span class="params">(E e)</span>;<span class="comment">//插入头部，异常会报错</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">offerFirst</span><span class="params">(E e)</span>;<span class="comment">//插入头部，异常返回false</span></span><br><span class="line">    E <span class="title function_">getFirst</span><span class="params">()</span>;<span class="comment">//获取头部，异常会报错</span></span><br><span class="line">    E <span class="title function_">peekFirst</span><span class="params">()</span>;<span class="comment">//获取头部，异常不报错</span></span><br><span class="line">    E <span class="title function_">removeFirst</span><span class="params">()</span>;<span class="comment">//移除头部，异常会报错</span></span><br><span class="line">    E <span class="title function_">pollFirst</span><span class="params">()</span>;<span class="comment">//移除头部，异常不报错</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">addLast</span><span class="params">(E e)</span>;<span class="comment">//插入尾部，异常会报错</span></span><br><span class="line">    <span class="type">boolean</span> <span class="title function_">offerLast</span><span class="params">(E e)</span>;<span class="comment">//插入尾部，异常返回false</span></span><br><span class="line">    E <span class="title function_">getLast</span><span class="params">()</span>;<span class="comment">//获取尾部，异常会报错</span></span><br><span class="line">    E <span class="title function_">peekLast</span><span class="params">()</span>;<span class="comment">//获取尾部，异常不报错</span></span><br><span class="line">    E <span class="title function_">removeLast</span><span class="params">()</span>;<span class="comment">//移除尾部，异常会报错</span></span><br><span class="line">    E <span class="title function_">pollLast</span><span class="params">()</span>;<span class="comment">//移除尾部，异常不报错</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>ArrayDeque</p>
-<ul>
-<li>实现于Deque，拥有队列或者栈特性的接口</li>
-<li>实现于Cloneable，拥有克隆对象的特性</li>
-<li>实现于Serializable，拥有序列化的能力</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//数组存储元素</span></span><br><span class="line"><span class="keyword">transient</span> Object[] elements;</span><br><span class="line"><span class="comment">//头部元素索引</span></span><br><span class="line"><span class="keyword">transient</span> <span class="type">int</span> head;</span><br><span class="line"><span class="comment">//尾部元素索引</span></span><br><span class="line"><span class="keyword">transient</span> <span class="type">int</span> tail;</span><br><span class="line"><span class="comment">//最小容量</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="variable">MIN_INITIAL_CAPACITY</span> <span class="operator">=</span> <span class="number">8</span>;</span><br></pre></td></tr></table></figure>
-
-<p>ArrayDeque底层使用数组存储元素，同时还使用head和tail来表示索引，但注意tail不是尾部元素的索引，而是尾部元素的下一位，即下一个将要被加入的元素的索引。</p>
-<p>ArrayDeque 是 Deque 接口的一种具体实现，是依赖于可变数组来实现的。ArrayDeque 没有容量限制，可根据需求自动进行扩容。ArrayDeque 可以作为栈来使用，效率要高于Stack；ArrayDeque 也可以作为队列来使用，效率相较于基于双向链表的LinkedList也要更好一些。</p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python</title>
-    <url>/2022/03/14/python/</url>
-    <content><![CDATA[<h3 id="Python简介"><a href="#Python简介" class="headerlink" title="Python简介"></a>Python简介</h3><p>python 这一伟大语言诞生于1989年圣诞节期间，创始人是荷兰的Guido van Rossum。(python有两个主要的大版本: python2 和 python3。本文基于 python3 开发)<span id="more"></span></p>
-<p>由于课程要求，利用 <strong>Anaconda</strong> 包管理器安装和管理 python 软件，选用了 <strong>jupyter notebook</strong> 编辑器。</p>
-<p>python官网：<a href="https://www.python.org/">Welcome to Python.org</a></p>
-<p>数据科学计算平台 Anaconda：Anaconda是一个集成的Python数据科学环境，Anaconda除了有Python外，还安装了180多个用于数据分析的第三方库，而且可 以使用conda命令安装第三方库和创建多个环境。相对于只安装 Python而言，避免了安装第三方库的麻烦。Anaconda的优点是已经内置了Jupyter notebook交互式计算环境、 Spyder集成开发环境，以及NumPy、pandas、Matplotlib、SciPy等各 类主要数据分析模块。Anaconda还是一个开源的包、环境管理器，可以在同一个机器上安装不同版本的软件包及其依赖，并能够在不同的环境之间切换。使用 Anaconda可以方便地进行包的管理（包的安装、卸载、更新），对于需要的各种Python的第三方包，可以直接在Anaconda中进行下载。Anaconda官网： <a href="https://www.anaconda.com/">Anaconda | The World’s Most Popular Data Science Platform</a></p>
-<p><strong>常用类库：</strong></p>
-<p><strong>Numpy：</strong>NumPy软件包是Python生态系统中数据分析、机器学习和科 学计算的主力军。它极大地简化了向量和矩阵的操作处理。除了能对数值数据进行切片（slice）和切块（dice）外， 使用NumPy还能为处理和调试上述库中的高级实例带来极大 便利。一般被很多大型金融公司使用，以及核心的科学计算组织 如Lawrence Livermore、NASA用其处理一些本来使用C++、 Fortran或Matlab等所做的任务。</p>
-<p><strong>SciPy：</strong> SciPy（<a href="http://scipy.org)是基于numpy开发的高级模块,/">http://scipy.org）是基于NumPy开发的高级模块，</a> 依赖于NumPy，提供了许多数学算法和函数的实现，可便 捷快速地解决科学计算中的一些标准问题，例如数值积分 和微分方程求解、最优化、甚至包括信号处理等。作为标准科学计算程序库， SciPy它是Python科学计算程序 的核心包，包含了科学计算中常见问题的各个功能模块， 不同子模块适用于不同的应用。</p>
-<p><strong>Pandas：</strong>Pandas提供了大量快速便捷处理数据的函数和方法。它是使Python成为强大而高效的数据分析环境的重要因素之一。 Pandas中主要的数据结构有Series、DataFrame和Panel。其中Series是一维数组，与NumPy中的一维array以及Python基本的数据结构List类似；DataFrame是二维的表格型数据结 构，可以将DataFrame理解为Series的容器； Panel是三维的 数组，可看作为DataFrame的容器。</p>
-<p><strong>Matplotlib：</strong>Matplotlib是Python 的绘图库，是用于生成出版质量 级别图形的桌面绘图包，让用户很轻松地将数据图形化，同时还提供多样化的输出格式。</p>
-<p><strong>Seaborn：</strong>Seaborn在Matplotlib基础上提供了一个绘制统计图形的高级接口，为数据的可视化分析工作提供了极大的 方便，使得绘图更加容易。用Matplotlib最大的困难是其默认的各种参数，而 Seaborn则完全避免了这一问题。一般来说，Seaborn 能满足数据分析90%的绘图需求。</p>
-<p><strong>Scikit-learn：</strong>Scikit-learn是专门面向机器学习的Python开源框架， 它实现了各种成熟的算法，容易安装和使用。 Scikit-learn的基本功能有分类、回归、聚类、数据 降维、模型选择和数据预处理六大部分。</p>
-<p>python库的一些常用命令:</p>
-<p><strong>import 模块名 [as 别名]</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#导入random随机函数模块中的所有对象并设置别名</span></span><br><span class="line"><span class="keyword">import</span> random <span class="keyword">as</span> rd</span><br><span class="line"><span class="comment">#通过别名访问模块中的对象</span></span><br><span class="line"><span class="comment">#返回[1,10]之间的一个随机整数</span></span><br><span class="line">rd.randint(<span class="number">1</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>from 模块名 import 对象名 [as 别名]</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#导入random模块中的randint,使用别名rt</span></span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint <span class="keyword">as</span> rt</span><br><span class="line"><span class="comment">#通过别名使用randint函数</span></span><br><span class="line">rt(<span class="number">1</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="语法常识"><a href="#语法常识" class="headerlink" title="语法常识"></a>语法常识</h3><p><strong>命名规则：</strong>驼峰规则</p>
-<p><strong>代码缩进：</strong>Tab和空格来进行缩进，注意不要混用。( Python中的缩进代表程序块的作用域，如果采用了错误的代码缩进，会导致程序抛出异常) </p>
-<p><strong>代码注释：</strong>Python的单行注释语句用#开始，从#开始一直到末尾的部分是注释部分。如果要进行多行的注释可以使用三个单引号（’’’） 或者双引号（”””）将注释内容包围。单引号和双引号在使用上没有本质的差别。</p>
-<p><strong>中文编码：</strong>Python中使用<strong>函数ord(x)<strong>查看x字符的编码，编码占2 个字节，因此一般再使用</strong>hex函数</strong>把编码转为十六进制显示。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(<span class="string">&quot;A&quot;</span>)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(<span class="string">&quot;我&quot;</span>)))</span><br></pre></td></tr></table></figure>
-
-<p><strong>关键字：</strong>关键字是Python语言本身使用的标识符，被Python语言保留，每个关键字都有其特殊的意义 ，因而不能用作标识符，否则容易产生编译错误。如False、True 、None 、and、or、not、as ………….</p>
-<p>检查是否是Python中的关键字（保留字符），用 <strong>keyword.iskeyword (word)</strong> </p>
-<p><strong>_ ：</strong>单独的下划线（_）用于表示上一次运算的结果。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In[]:<span class="number">2</span>*<span class="number">3</span></span><br><span class="line">Out[]:<span class="number">6</span></span><br><span class="line">In[]:_*<span class="number">10</span></span><br><span class="line">Out[]:<span class="number">60</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>内置函数：</strong></p>
-<p>类型转换函数：chr(97) ord(‘a’) str(3.15) int(3.3) </p>
-<p>数学运算函数：abs(x) max(3,2,5,1) pow(x,y)</p>
-<p><strong>变量赋值：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=<span class="number">0</span>;y=<span class="number">0</span>;z=<span class="number">0</span> <span class="comment">#多个语句间用分号分隔</span></span><br><span class="line">a, b = <span class="number">1</span>, <span class="number">2</span> <span class="comment">#采用多变量同时赋值</span></span><br><span class="line">c=d=<span class="number">3</span>		<span class="comment">#采用链式赋值</span></span><br><span class="line"><span class="built_in">print</span>(x,y,z,a,b,c,d)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>type()函数：</strong>一般形式：type(变量名)，其作用是查询变量的数字类型。</p>
-<p><strong>id()函数：</strong>是获取变 量的内存地址。</p>
-<p><strong>isinstance()函数：</strong>判断一个数值是否是某种数字类型。 </p>
-<p><strong>Python中有六个标准的数据类型：</strong></p>
-<ul>
-<li>number（数字）</li>
-<li>string（字符串） </li>
-<li>list（列表）</li>
-</ul>
-<p>列表是Python里面的容器之一，由方括号和方括号括起来的数据构成。里面的数据可以是整数、浮点数、字符串， 也可以是另一个列表或者其它的数据结构。列表里面的每 一项叫作列表的一个元素，每个元素之间使用英文逗号隔开，</p>
-<p>例如</p>
-<p>list_1 &#x3D; [1, 2, 3, 4, 5]                     #列表里面有5个元素，全部是数字 </p>
-<p>list_2 &#x3D; [‘abc’, ‘x’, ‘’, ‘kkk’]             #列表里面有4个元素，全部是字符串</p>
-<p>list_3 &#x3D; []                                         #空列表 </p>
-<p>list_4 &#x3D; [123, ‘xyz’, 3.14, [1, 2, ‘yy’]] #由多种元素组合起来的列表</p>
-<ul>
-<li>tuple（元组）</li>
-</ul>
-<p>元组是Python里面的容器之一，由小括号和小括号括起来 的数据构成。它的外型和列表非常像，只不过列表使用的 是方括号，元组使用的是小括号。“元组”中的“元”和 “二元一次方程”中的“元”是同一个意思，“组”就是组合的意思。</p>
-<p>tuple_1 &#x3D; (1, 2, 3, 4, 5)         #元组里面有5个元素，全部为数字 </p>
-<p>tuple_2 &#x3D; (‘abc’, ‘x’, ‘’, ‘kkk’) #元组里面有4个元素，全部是字符串 </p>
-<p>tuple_3 &#x3D; ()                             #空元组 </p>
-<p>tuple_4 &#x3D; (123, ‘xyz’, [1, ‘t’, ‘z’], (‘o’, ‘pp’)) #由多种元素组合起来的元组</p>
-<ul>
-<li>dictionary（字典）</li>
-<li>set（集合）</li>
-</ul>
-<p>不可变数据类型有：Number、String、Tuple； 可变数据类型有：List、Dictionary、Set。</p>
-<p><strong>元组和列表的区别：</strong></p>
-<p>列表: L&#x3D;[1,2,5,7]  </p>
-<p>元组: T&#x3D;(1,2,5,7)</p>
-<p>列表生成以后还可以往里面继续添加数据，也可以从里面删除数据；但是元组一旦生成就不能修改。如果它里面只 有整数、浮点数、字符串、另一个元组，就既不能添加数据，也不能删除数据，还不能修改里面数据的值。但是如 果元组里面包含了一个列表，那么这个元组里面的列表依旧可以变化。</p>
-<p>TT&#x3D;([a,b,c],12,“Hello”) </p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">example_list=[<span class="string">&#x27;我&#x27;</span>,<span class="string">&#x27;是&#x27;</span>,<span class="string">&#x27;列&#x27;</span>,<span class="string">&#x27;表&#x27;</span>]</span><br><span class="line">example_tuple=[<span class="string">&#x27;我&#x27;</span>,<span class="string">&#x27;是&#x27;</span>,<span class="string">&#x27;元&#x27;</span>,<span class="string">&#x27;组&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>((example_list[<span class="number">1</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_tuple[<span class="number">2</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_list[-<span class="number">2</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_tuple[-<span class="number">3</span>]))</span><br></pre></td></tr></table></figure>
-
-<p><strong>字典：</strong></p>
-<p>字典就是使用大括号括起来的键（Key）值（Value） 对（Key-Value对）。每个键值对之间使用英文逗号分隔， 每个Key与Value之间使用英文冒号分隔。</p>
-<p>Key可以使用中文、英文或者数字，但是不能重复。Value 可以是任意字符串、数字、列表、元组或者另一个字典， Value可以重复。</p>
-<p>可以通过Key来从字典中读取对应的Value，有3种主要的格式：  </p>
-<p>变量名[key]  </p>
-<p>变量名.get(key)  </p>
-<p>变量名.get(key, ‘在找不到key的情况下使用这个值’) </p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dict1=&#123;<span class="number">1</span>:<span class="string">&quot;good&quot;</span>,<span class="number">2</span>:<span class="string">&quot;bad&quot;</span>,<span class="number">3</span>:<span class="string">&quot;not good&quot;</span>&#125;</span><br><span class="line">value1=dict1.get(<span class="number">1</span>,<span class="string">&quot;1&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(value1)</span><br><span class="line"></span><br><span class="line">good</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>集合：</strong></p>
-<p>集合是使用大括号括起来的各种数据，可以看作没有 Value的字典。<strong>集合里面的元素不能重复。</strong>集合也是无序的。集合最大的应用之一就是去重。例如，<strong>把一个带有重复元素的列表先转换为集合，再转换回列表，那么重复元素就只会保留一个</strong>。把列表转换为集合需要使用set()函数， 把集合转换为列表使用list()函数：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">duplicated_list = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;a&#x27;</span>]</span><br><span class="line">unique_list = <span class="built_in">list</span>(<span class="built_in">set</span>(duplicated_list))</span><br><span class="line"><span class="built_in">print</span>(unique_list)</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;s&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="运算符与表达式"><a href="#运算符与表达式" class="headerlink" title="运算符与表达式"></a>运算符与表达式</h3><p>算术运算符（ +、–、*、&#x2F;、**、&#x2F;&#x2F;、％ ）</p>
-<p>关系运算符（ &gt;、&lt;、&gt;&#x3D;、&lt;&#x3D;、&#x3D; &#x3D;、!&#x3D; ）。  </p>
-<p>逻辑运算符（and、or、not ）。  </p>
-<p>位运算符（ &lt;&lt;、&gt;&gt;、~、|、^、&amp; ）。  </p>
-<p>赋值运算符（ &#x3D;、复合赋值运算符 ）。 </p>
-<p>成员运算符（ in、not in ）。  </p>
-<p>同一运算符（ is、is not ）。  </p>
-<p>下标运算符（ [ ] ）。  </p>
-<p>其他（ 如函数调用运算符（））。 </p>
-<p><strong>隐式类型转换：</strong></p>
-<p>当有一个操作数的类型是复数时，其它数据都自动转换成复数类型。  </p>
-<p>当有一个操作数的类型是小数时，其它数据都自动转换成小数类型。  </p>
-<p>不支持数字和字符之间的隐式转换。  </p>
-<p>数值的除法（&#x2F;）总是返回一个浮点数，要获取整数使用 &#x2F;&#x2F;操作符。  </p>
-<p>混合计算时，Python会把整型转换成为浮点数。 </p>
-<p>** 乘方运算</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In[]:<span class="number">4</span>*<span class="number">3</span>**<span class="number">2</span></span><br><span class="line">Out[]:<span class="number">36</span></span><br><span class="line"></span><br><span class="line">In[]:<span class="string">&quot;a&quot;</span>*<span class="number">10</span></span><br><span class="line">Out[]:<span class="string">&#x27;aaaaaaaaaa&#x27;</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">True</span> <span class="keyword">and</span> <span class="number">0</span></span><br><span class="line">Out[]:<span class="number">0</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">False</span> <span class="keyword">and</span> <span class="number">12</span></span><br><span class="line">Out[]:<span class="literal">False</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">True</span> <span class="keyword">or</span> <span class="number">0</span></span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In[]:<span class="literal">False</span> <span class="keyword">or</span> <span class="number">12</span></span><br><span class="line">Out[]:<span class="number">12</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">In[]:x=y=<span class="number">2.5</span></span><br><span class="line">	z=<span class="number">2.5</span></span><br><span class="line">	x <span class="keyword">is</span> <span class="keyword">not</span> z</span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;a&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;abcd&#x27;</span></span><br><span class="line">Out[]: <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;ac&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;abcd&#x27;</span></span><br><span class="line">Out[]:<span class="literal">False</span> </span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;a&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">&#x27;b,c,d&#x27;</span></span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="number">3</span> <span class="keyword">not</span> <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">Out[]:<span class="literal">False</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>链式关系表达式:</strong></p>
-<p>相当于多个表达式之间逻 辑与的关系。</p>
-<p> 1 &lt; 2 &lt; 3 #等价于1 &lt; 2 and 2 &lt; 3  </p>
-<p>2 &gt;&#x3D; 1 &gt; 10 #等价于2 &gt;&#x3D; 1 and 1 &gt; 10 </p>
-<p><strong>Python中的函数分为内置函数和模块函数。</strong> </p>
-<p><strong>内置函数:</strong></p>
-<ul>
-<li>内置函数（BIF，built-in functions）是Python内置对 象类型之一，不需要导入任何模块即可使用一类函数。 </li>
-<li>执行dir(<strong>builtins</strong>)可以列出所有的内置函数;</li>
-<li>使用help(函数名)可以查看某个函数的用法;  abs(x):返回数字x的绝对值或复数x的模;  bin(x)、oct(x)、hex(x):把整数x转换为二进制、八进 制、十六进制的表示形式。  bytes(x)：把指定对象x转换为字节串表示形式。 </li>
-<li>float(x)：把整数或字符串x转换为浮点数；</li>
-<li>int(x[, d])：返回实数（float）、分数（Fraction）或 高精度实数（Decimal）x的整数部分，或把d进制的字符 串x转换为十进制并返回，d默认为十进制；</li>
-<li>chr(x)：返回Unicode编码为x的字符；</li>
-<li>ord(x)：返回1个字符x的Unicode编码；</li>
-<li>isinstance(obj, type)：测试对象obj是否属于指定类型 type；</li>
-<li>type(obj)：返回对象obj的类型；</li>
-<li>max(x)、 min(x)：返回可迭代对象x中的最大值、最小值；</li>
-<li>len(obj)：返回对象obj包含的元素个数；</li>
-<li>reversed(seq):返回seq中所有元素逆序后的迭代器对象;</li>
-<li>sorted(iterable, key&#x3D;None, reverse&#x3D;False):返回排序后的列表，其中iterable表示要排序的序列或迭代对象， key用来指定排序规则或依据，reverse用来指定升序或降序，默认为升序。该函数不改变iterable内任何元素的顺序；</li>
-<li>sum(x, start&#x3D;0)：返回序列x中所有元素之和；</li>
-<li>exit()：退出当前解释器环境；</li>
-</ul>
-<p><strong>模块函数:</strong></p>
-<ul>
-<li><p>math模块 </p>
-<p>math.pi 圆周率pi </p>
-<p>math.e 自然常数e </p>
-<p>math.tau 数学常数τ </p>
-<p>math.inf 正无穷大 </p>
-<p>math.nan 非浮点数标记，NaN(Not a  Number)</p>
-</li>
-<li><p>random模块</p>
-<p>random.random() 返回[0.0,1.0]区间内的一个随机小数 random.random() 返回 0.9523521796999529</p>
-<p>random.uniform(a,b) 返回[a,b]区间内的一个随机小数 random.uniform(1,3) 返回 2.3403540401554146</p>
-<p>random.randint(a,b) 返回[a,b]区间内的一个随机整数 random.randint(1,3) 返回2</p>
-<p>random.randrange([ start],end,[step]) 返回[start,end)区间内的一个整数， start和step默认都是1 random.randrange(1,10)返回 5</p>
-<p>random.choice() 随机返回给定序列中的一个元素 random.choice([‘a’,’b’,’c’]) 返回’c‘</p>
-<p>random.shuffle(x,[ra ndom]) 将可变序列的所有元素随机排列 random.shuffle([1,2,3,4]) 返回[1, 4, 3, 2]</p>
-</li>
-</ul>
-<h3 id="输入输出与字符串"><a href="#输入输出与字符串" class="headerlink" title="输入输出与字符串"></a>输入输出与字符串</h3><p>input(“提示字符串”)</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="built_in">input</span>(<span class="string">&quot;请输入:&quot;</span>)</span><br><span class="line"><span class="built_in">type</span>(x)</span><br></pre></td></tr></table></figure>
-
-<p>input() 函数的返回结果都是字符串，实际使用时需要将其转换为相应的类型再进行处理。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入:&quot;</span>))</span><br><span class="line"><span class="built_in">type</span>(x)</span><br></pre></td></tr></table></figure>
-
-<p>input() 结合 <strong>eval()</strong> 可同时接受多个数据输入， 多个输入之间的间隔符必须是逗号。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a,b,c = <span class="built_in">eval</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入a,b,c三个数：&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(a,b,c,sep=<span class="string">&quot;,&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>实现多值输入，也可以使用 <strong>split()</strong> 方法进行输 入值的分割，不同的值之间以空格分隔。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x,y = <span class="built_in">input</span>(<span class="string">&#x27;请输入2个值:&#x27;</span>).split()</span><br><span class="line"><span class="built_in">print</span>(x,y,sep=<span class="string">&#x27;,&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>print()函数的格式如下： </p>
-<p>print([objects, sep&#x3D;’ ‘ &#x2F; end&#x3D;’\n’ &#x2F; file&#x3D;sys.stdout &#x2F; flush&#x3D;False) </p>
-<p>objects是输出的对象，多个对象之间用英文逗号分割； sep是对象之间插入的分隔符，默认是空格； end是添加在输出文本最后的一个字符，默认是换行符； file指定输出内容发送到的文件，默认是显示器； flush指定输出的内容是否立即写文件。</p>
-<p>字符串格式化%输出：</p>
-<p>“%格式控制符”%实际参数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;名字: %s,年龄: %d&#x27;</span> %(<span class="string">&#x27;张三&#x27;</span>,<span class="number">20</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-<p>字符串的 format 方法:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;:计算机&#123;&#125;的CPU占用率为&#123;&#125;%.&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;2022-03-15&#x27;</span>,<span class="string">&#x27;python&#x27;</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-<p>使用位置（序号）索引：<br>花括号内部可以写上待输出的目标字符串的索引，也可以省略。如果省略，则按format后面的括号里的待输出的目标字符串顺序依次替换。 </p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;1&#125;&#123;0&#125;&#123;1&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;言&#x27;</span>,<span class="string">&#x27;文&#x27;</span>))</span><br></pre></td></tr></table></figure>
-
-<p>使用“{序号：格式说明符}” 形式的格式说明符：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&#123;0:.2f&#125;,&#123;1&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">3.1415926</span>,<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
-
-<p> 使用关键字索引：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello,&#123;boy&#125; and &#123;girl&#125;!&quot;</span>.<span class="built_in">format</span>(boy=<span class="string">&quot;John&quot;</span>,girl=<span class="string">&quot;Mary&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&#123;a&#125;&#123;b&#125;&quot;</span>.<span class="built_in">format</span>(b=<span class="string">&quot;3&quot;</span>,a=<span class="string">&quot;Python&quot;</span>))</span><br></pre></td></tr></table></figure>
-
-<p>使用属性索引：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">c = <span class="number">3</span>-<span class="number">5j</span></span><br><span class="line"><span class="built_in">print</span>((<span class="string">&#x27;复数&#123;0&#125;的实部为&#123;0.real&#125;,虚部为&#123;0.imag&#125;。&#x27;</span>.<span class="built_in">format</span>(C)))</span><br></pre></td></tr></table></figure>
-
-<p>使用下标索引：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">coord = (<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;X:&#123;0[0]&#125;; Y:&#123;0[1]&#125;;Z:&#123;0[2]&#125;&#x27;</span>.<span class="built_in">format</span>(coord))</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>字符串访问方式：</strong></p>
-<p>左闭右开原则</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&quot;Python大数据基础与实战&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">0</span>],<span class="built_in">str</span>[<span class="number">5</span>],<span class="built_in">str</span>[-<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">2</span>:<span class="number">6</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[:<span class="number">6</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">6</span>:])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[:])</span><br></pre></td></tr></table></figure>
-
-<p><strong>字符串的分片：</strong></p>
-<p><strong>str[i:j:k]：</strong>i是索引起始位置，j是索引结束位置但<strong>不包括位置上的字符</strong>，索引编号每次增加的步长为k。 </p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str1=<span class="string">&quot;Python&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">2</span>:<span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">0</span>:-<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">1</span>:<span class="number">5</span>:<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
-
-<p><strong>字符串查找</strong></p>
-<ul>
-<li><strong>find() 和 rfind()</strong> 函数分别用来查找一个字符串在另一个字符串指定范围（默认是整个字符串）中<strong>首次</strong>和最后一次出现的位置，如果不存在则返回-1；</li>
-<li><strong>index() 和 rindex()</strong> 方法用来返回一个字符串在另一个字符串指定范围中<strong>首次</strong>和<strong>最后一次</strong>出现的位置，如果不存在则抛出异常；</li>
-<li><strong>count()<strong>方法用来返回一个字符串在当前字符串中</strong>出现的次数</strong>。</li>
-</ul>
-<p><strong>字符串分割</strong></p>
-<ul>
-<li>**split()、rsplit()**方法分别用来以指定字符为分隔符，把当前字符串从左往右、从右往左分隔成多个字符串，并返回包含分隔结果的列表。</li>
-<li>对于 <strong>split() 和 rsplit()</strong> 方法，如果不指定分隔符，则字符串中的任何空白符号（空格、换行符、制表符等）都将被认为是分隔符， 把连续多个空白字符看作一个分隔符。</li>
-<li>对于split() 和rsplit() 方法，如果不指定分隔符，则字符串中的任何空白符号（空格、换行符、制表符等）都将被认为是分隔符， 把连续多个空白字符看作一个分隔符。</li>
-</ul>
-<p><strong>字符串的连接</strong></p>
-<p><strong>join()</strong> 方法用来将列表中的多个字符串进行连接，并且在相邻两个字符串之间插入指定字符。示例如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">test = [<span class="string">&quot;I&quot;</span>,<span class="string">&quot;love&quot;</span>,<span class="string">&quot;Python&quot;</span>]</span><br><span class="line">s = <span class="string">&quot;&quot;</span>.join(test)	<span class="comment">#指定插入字符为空格</span></span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：使用“+”运算符也可以连接字符串，但是效率 较低，应优先使用join()方法。</strong></p>
-<p><strong>字符串的大小写转换</strong></p>
-<p>lower() 返回小写字符串，<strong>upper()</strong> 返回<strong>大写</strong>字符串， <strong>capitalize()</strong> 将<strong>字符串****首字符大写</strong>、<strong>title()</strong> 将字符串中每个<strong>单词首字符大写</strong>、<strong>swapcase()</strong> 完成<strong>大小写互换</strong>。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = <span class="string">&quot;i am a teacher&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s.lower())</span><br><span class="line"><span class="built_in">print</span>(s.upper())</span><br><span class="line"><span class="built_in">print</span>(s.capitalize())</span><br><span class="line"><span class="built_in">print</span>(s.title())</span><br><span class="line"><span class="built_in">print</span>(s.swapcase())</span><br></pre></td></tr></table></figure>
-
-
-
-<p> <strong>字符串替换</strong></p>
-<p>replace() 方法把字符串中的 old（旧字符串）替换成 new(新字符串)，如果指定第三个参数max，则替换不超过 max次。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&quot;this is string example..wow!!!this is really string&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>.replace(<span class="string">&quot;is&quot;</span>,<span class="string">&quot;was&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>.replace(<span class="string">&quot;is&quot;</span>,<span class="string">&quot;was&quot;</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>字符串删除</strong></p>
-<p><strong>strip()</strong> 删除字符串<strong>两端指定的字符</strong>，<strong>rstrip() 删除</strong>字符串<strong>右端</strong>指定字符，<strong>lstrip()</strong> 删除字符串<strong>左端</strong>指定字符。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = <span class="string">&quot; he is a student\t\t&quot;</span></span><br><span class="line"><span class="comment">#删除s左右两端的的空白字符</span></span><br><span class="line"><span class="built_in">print</span>(s.strip())</span><br><span class="line"><span class="built_in">print</span>(s.rstrip(<span class="string">&quot;\t&quot;</span>))</span><br><span class="line"><span class="string">&#x27;aabbccddeeeffg&#x27;</span>.strip(<span class="string">&#x27;gaef&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>字符串测试</strong></p>
-<p>isalnum()、isalpha()、isdigit()、isdecimal()、isnumeric()、 isspace()、isupper()、islower()，分别测试字符串是否为数字或字母、是否为字母、是否为数字字符、是否为空白字符、是否为大写字母以及是否为小写字母。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1234abcd&#x27;</span>.isalnum())</span><br><span class="line"><span class="comment">#全部为英文字母时返回True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1234abcd&#x27;</span>.isalpha())</span><br><span class="line"><span class="comment">#全部为数字时返回True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1234abcd&#x27;</span>.isdigit())</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>eval()</strong></p>
-<p>内置函数eval()尝试把任意字符串转化为Python表达式并求值。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&quot;10 * 2 / 5&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">4.0</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>startswith()、endswith()</strong></p>
-<p>这两个方法用来判断字符串是否以指定字符串开始 或者结束。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;test.py&quot;</span>.endswith((<span class="string">&quot;.py&quot;</span>,<span class="string">&quot;.cpp&quot;</span>,<span class="string">&quot;.java&quot;</span>))) <span class="comment"># True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;test.py&quot;</span>.startswith(<span class="string">&quot;test&quot;</span>,<span class="number">0</span>))			  <span class="comment"># True	</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>center()、ljust()、rjust()</strong></p>
-<p>返回指定宽度的新字符串，原字符串居中、左对齐或右对齐出现在新字符串中，如果指定的宽度大于字符串长度，则使用指定的字符（默认为空格）填充。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;let&#x27;s begin&quot;</span>.center(<span class="number">20</span>,<span class="string">&quot;+&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;let&#x27;s begin&quot;</span>.ljust(<span class="number">20</span>,<span class="string">&quot;-&quot;</span>))</span><br></pre></td></tr></table></figure>
-
-<p> ++++let’s begin+++++</p>
-<p>let’s begin———</p>
-<p><strong>字符串对象常用的方法</strong></p>
-<ul>
-<li><p><strong>字母大小写转换</strong></p>
-<ul>
-<li><p>s.upper():全部转换为大写字母。</p>
-</li>
-<li><p>s.lower():全部转换为小写字母。</p>
-</li>
-<li><p>s.swapcase():字母大小写互换。</p>
-</li>
-<li><p>s.capitalize():句子首字母大写，其余小写。</p>
-</li>
-<li><p>s.title():单词首字母大写。</p>
-<p>其中，s是一个字符串对象</p>
-</li>
-</ul>
-</li>
-<li><p><strong>字符串搜索</strong></p>
-<ul>
-<li>s.find(substr,[start,[end]])：返回s中出现substr的第1个字符的编号，如果s中没有substr则返回-1。start和end作用就相当于在s[start:end]中搜索。</li>
-<li>s.index(substr,[start,[end]])：与find()相同，只是在s中没有substr时，会返回一个运行错误。</li>
-<li>s.rfind(substr,[start,[end]])：<strong>返回s中最后出现的substr的第1个字符的编号</strong>，如果s中没有substr则返回-1，也就是说<strong>从右边算起的第1次出现的substr的首字符编号。</strong></li>
-<li>s.rindex(substr,[start,[end]])：与rfind()相同，只是在s中没有substr时，会返回一个运行时错误。</li>
-<li>s.count(substr,[start,[end]])：计算substr在s中出现的次数。</li>
-<li>s.startswith(prefix,[start,[end]])：是否<strong>以prefix开头</strong>，若是返回True，否则返回False。</li>
-<li>s.endswith(suffix,[start[end]])：<strong>以suffix结尾</strong>，若是返回 True，否则返回False。</li>
-</ul>
-</li>
-<li><p><strong>字符串替换</strong></p>
-<ul>
-<li>s.replace(oldstr,newstr,[count])：把s中的oldster替换为 newstr，count为替换次数。这是替换的通用形式，还有一些函数进行特殊字符的替换。</li>
-<li>s.strip([chars])：把s中前后chars中有的字符全部去掉，可以理解为把s前后chars替换为None。默认去掉前后空格。</li>
-<li>s.lstrip([chars])：把s左边chars中有的字符全部去掉。默认去掉左边空格。</li>
-<li>s.rstrip([chars])：把s右边chars中有的字符全部去掉。默认去掉右边空格。</li>
-<li>s.expandtabs([tabsize])：把s中的tab字符替换为空格，每个tab替换为tabsize个空格，默认是8个。</li>
-</ul>
-</li>
-<li><p><strong>字符串的拆分与组合</strong></p>
-<ul>
-<li>s.split([sep,[maxsplit]])：以sep为分隔符，把<strong>字符串s拆分成一个列表</strong>。默认的分隔符为空格。<strong>maxsplit表示拆分的次数</strong>，默认取-1，表示无限制拆分。</li>
-<li>s.rsplit([sep,[maxsplit]])：从右侧把字符串s拆分成一个列表。</li>
-<li>s.splitlines([keepends])：把s按行拆分为一个列表。 keepends是一个逻辑值，如果为True，则每行拆分后会保留行分隔符。</li>
-<li><strong>s.join(seq)：</strong>把seq代表的序列组合成字符串，用s将序列各元素连接起来。字符串中的字符是不能修改的，如果要修改，通常的方法是，用 list()函数把字符串s变为以单个字符为成员的列表(使用语句s&#x3D;list(s))，再使用给列表成员赋值的方式改变值(如s[3]&#x3D;’a’)，最后再使用语句 “s&#x3D;””.join(s)”还原成字符串。</li>
-</ul>
-</li>
-<li><p>字符串类型测试</p>
-<p>​    字符串类型测试函数返回的都是逻辑值。</p>
-<ul>
-<li>s.isalnum()：是否全是字母和数字，并至少有一个字符。</li>
-<li>s.isalpha()：是否全是字母，并至少有一个字符。</li>
-<li>s.isdigit()：是否全是数字，并至少有一个字符。</li>
-<li>s.isspace()：是否全是空格，并至少有一个空格。</li>
-<li>s.islower()：s中的字母是否全是小写。</li>
-<li>s.isupper()：s中的字母是否全是大写。</li>
-<li>s.istitle()：s是否为首字母大写。</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python中lambda表达式</title>
-    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
-<ul>
-<li>lambda表达式必须使用lambda关键字定义。</li>
-<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
-<li>lambda表达式必须是单行的。</li>
-<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
-<li>lambda表达式的计算结果就是函数的返回值。 </li>
-<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
-<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
-<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -1319,6 +965,360 @@
       </tags>
   </entry>
   <entry>
+    <title>python</title>
+    <url>/2022/03/14/python/</url>
+    <content><![CDATA[<h3 id="Python简介"><a href="#Python简介" class="headerlink" title="Python简介"></a>Python简介</h3><p>python 这一伟大语言诞生于1989年圣诞节期间，创始人是荷兰的Guido van Rossum。(python有两个主要的大版本: python2 和 python3。本文基于 python3 开发)<span id="more"></span></p>
+<p>由于课程要求，利用 <strong>Anaconda</strong> 包管理器安装和管理 python 软件，选用了 <strong>jupyter notebook</strong> 编辑器。</p>
+<p>python官网：<a href="https://www.python.org/">Welcome to Python.org</a></p>
+<p>数据科学计算平台 Anaconda：Anaconda是一个集成的Python数据科学环境，Anaconda除了有Python外，还安装了180多个用于数据分析的第三方库，而且可 以使用conda命令安装第三方库和创建多个环境。相对于只安装 Python而言，避免了安装第三方库的麻烦。Anaconda的优点是已经内置了Jupyter notebook交互式计算环境、 Spyder集成开发环境，以及NumPy、pandas、Matplotlib、SciPy等各 类主要数据分析模块。Anaconda还是一个开源的包、环境管理器，可以在同一个机器上安装不同版本的软件包及其依赖，并能够在不同的环境之间切换。使用 Anaconda可以方便地进行包的管理（包的安装、卸载、更新），对于需要的各种Python的第三方包，可以直接在Anaconda中进行下载。Anaconda官网： <a href="https://www.anaconda.com/">Anaconda | The World’s Most Popular Data Science Platform</a></p>
+<p><strong>常用类库：</strong></p>
+<p><strong>Numpy：</strong>NumPy软件包是Python生态系统中数据分析、机器学习和科 学计算的主力军。它极大地简化了向量和矩阵的操作处理。除了能对数值数据进行切片（slice）和切块（dice）外， 使用NumPy还能为处理和调试上述库中的高级实例带来极大 便利。一般被很多大型金融公司使用，以及核心的科学计算组织 如Lawrence Livermore、NASA用其处理一些本来使用C++、 Fortran或Matlab等所做的任务。</p>
+<p><strong>SciPy：</strong> SciPy（<a href="http://scipy.org)是基于numpy开发的高级模块,/">http://scipy.org）是基于NumPy开发的高级模块，</a> 依赖于NumPy，提供了许多数学算法和函数的实现，可便 捷快速地解决科学计算中的一些标准问题，例如数值积分 和微分方程求解、最优化、甚至包括信号处理等。作为标准科学计算程序库， SciPy它是Python科学计算程序 的核心包，包含了科学计算中常见问题的各个功能模块， 不同子模块适用于不同的应用。</p>
+<p><strong>Pandas：</strong>Pandas提供了大量快速便捷处理数据的函数和方法。它是使Python成为强大而高效的数据分析环境的重要因素之一。 Pandas中主要的数据结构有Series、DataFrame和Panel。其中Series是一维数组，与NumPy中的一维array以及Python基本的数据结构List类似；DataFrame是二维的表格型数据结 构，可以将DataFrame理解为Series的容器； Panel是三维的 数组，可看作为DataFrame的容器。</p>
+<p><strong>Matplotlib：</strong>Matplotlib是Python 的绘图库，是用于生成出版质量 级别图形的桌面绘图包，让用户很轻松地将数据图形化，同时还提供多样化的输出格式。</p>
+<p><strong>Seaborn：</strong>Seaborn在Matplotlib基础上提供了一个绘制统计图形的高级接口，为数据的可视化分析工作提供了极大的 方便，使得绘图更加容易。用Matplotlib最大的困难是其默认的各种参数，而 Seaborn则完全避免了这一问题。一般来说，Seaborn 能满足数据分析90%的绘图需求。</p>
+<p><strong>Scikit-learn：</strong>Scikit-learn是专门面向机器学习的Python开源框架， 它实现了各种成熟的算法，容易安装和使用。 Scikit-learn的基本功能有分类、回归、聚类、数据 降维、模型选择和数据预处理六大部分。</p>
+<p>python库的一些常用命令:</p>
+<p><strong>import 模块名 [as 别名]</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#导入random随机函数模块中的所有对象并设置别名</span></span><br><span class="line"><span class="keyword">import</span> random <span class="keyword">as</span> rd</span><br><span class="line"><span class="comment">#通过别名访问模块中的对象</span></span><br><span class="line"><span class="comment">#返回[1,10]之间的一个随机整数</span></span><br><span class="line">rd.randint(<span class="number">1</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>from 模块名 import 对象名 [as 别名]</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#导入random模块中的randint,使用别名rt</span></span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint <span class="keyword">as</span> rt</span><br><span class="line"><span class="comment">#通过别名使用randint函数</span></span><br><span class="line">rt(<span class="number">1</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="语法常识"><a href="#语法常识" class="headerlink" title="语法常识"></a>语法常识</h3><p><strong>命名规则：</strong>驼峰规则</p>
+<p><strong>代码缩进：</strong>Tab和空格来进行缩进，注意不要混用。( Python中的缩进代表程序块的作用域，如果采用了错误的代码缩进，会导致程序抛出异常) </p>
+<p><strong>代码注释：</strong>Python的单行注释语句用#开始，从#开始一直到末尾的部分是注释部分。如果要进行多行的注释可以使用三个单引号（’’’） 或者双引号（”””）将注释内容包围。单引号和双引号在使用上没有本质的差别。</p>
+<p><strong>中文编码：</strong>Python中使用<strong>函数ord(x)<strong>查看x字符的编码，编码占2 个字节，因此一般再使用</strong>hex函数</strong>把编码转为十六进制显示。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(<span class="string">&quot;A&quot;</span>)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(<span class="string">&quot;我&quot;</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键字：</strong>关键字是Python语言本身使用的标识符，被Python语言保留，每个关键字都有其特殊的意义 ，因而不能用作标识符，否则容易产生编译错误。如False、True 、None 、and、or、not、as ………….</p>
+<p>检查是否是Python中的关键字（保留字符），用 <strong>keyword.iskeyword (word)</strong> </p>
+<p><strong>_ ：</strong>单独的下划线（_）用于表示上一次运算的结果。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In[]:<span class="number">2</span>*<span class="number">3</span></span><br><span class="line">Out[]:<span class="number">6</span></span><br><span class="line">In[]:_*<span class="number">10</span></span><br><span class="line">Out[]:<span class="number">60</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>内置函数：</strong></p>
+<p>类型转换函数：chr(97) ord(‘a’) str(3.15) int(3.3) </p>
+<p>数学运算函数：abs(x) max(3,2,5,1) pow(x,y)</p>
+<p><strong>变量赋值：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=<span class="number">0</span>;y=<span class="number">0</span>;z=<span class="number">0</span> <span class="comment">#多个语句间用分号分隔</span></span><br><span class="line">a, b = <span class="number">1</span>, <span class="number">2</span> <span class="comment">#采用多变量同时赋值</span></span><br><span class="line">c=d=<span class="number">3</span>		<span class="comment">#采用链式赋值</span></span><br><span class="line"><span class="built_in">print</span>(x,y,z,a,b,c,d)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>type()函数：</strong>一般形式：type(变量名)，其作用是查询变量的数字类型。</p>
+<p><strong>id()函数：</strong>是获取变 量的内存地址。</p>
+<p><strong>isinstance()函数：</strong>判断一个数值是否是某种数字类型。 </p>
+<p><strong>Python中有六个标准的数据类型：</strong></p>
+<ul>
+<li>number（数字）</li>
+<li>string（字符串） </li>
+<li>list（列表）</li>
+</ul>
+<p>列表是Python里面的容器之一，由方括号和方括号括起来的数据构成。里面的数据可以是整数、浮点数、字符串， 也可以是另一个列表或者其它的数据结构。列表里面的每 一项叫作列表的一个元素，每个元素之间使用英文逗号隔开，</p>
+<p>例如</p>
+<p>list_1 &#x3D; [1, 2, 3, 4, 5]                     #列表里面有5个元素，全部是数字 </p>
+<p>list_2 &#x3D; [‘abc’, ‘x’, ‘’, ‘kkk’]             #列表里面有4个元素，全部是字符串</p>
+<p>list_3 &#x3D; []                                         #空列表 </p>
+<p>list_4 &#x3D; [123, ‘xyz’, 3.14, [1, 2, ‘yy’]] #由多种元素组合起来的列表</p>
+<ul>
+<li>tuple（元组）</li>
+</ul>
+<p>元组是Python里面的容器之一，由小括号和小括号括起来 的数据构成。它的外型和列表非常像，只不过列表使用的 是方括号，元组使用的是小括号。“元组”中的“元”和 “二元一次方程”中的“元”是同一个意思，“组”就是组合的意思。</p>
+<p>tuple_1 &#x3D; (1, 2, 3, 4, 5)         #元组里面有5个元素，全部为数字 </p>
+<p>tuple_2 &#x3D; (‘abc’, ‘x’, ‘’, ‘kkk’) #元组里面有4个元素，全部是字符串 </p>
+<p>tuple_3 &#x3D; ()                             #空元组 </p>
+<p>tuple_4 &#x3D; (123, ‘xyz’, [1, ‘t’, ‘z’], (‘o’, ‘pp’)) #由多种元素组合起来的元组</p>
+<ul>
+<li>dictionary（字典）</li>
+<li>set（集合）</li>
+</ul>
+<p>不可变数据类型有：Number、String、Tuple； 可变数据类型有：List、Dictionary、Set。</p>
+<p><strong>元组和列表的区别：</strong></p>
+<p>列表: L&#x3D;[1,2,5,7]  </p>
+<p>元组: T&#x3D;(1,2,5,7)</p>
+<p>列表生成以后还可以往里面继续添加数据，也可以从里面删除数据；但是元组一旦生成就不能修改。如果它里面只 有整数、浮点数、字符串、另一个元组，就既不能添加数据，也不能删除数据，还不能修改里面数据的值。但是如 果元组里面包含了一个列表，那么这个元组里面的列表依旧可以变化。</p>
+<p>TT&#x3D;([a,b,c],12,“Hello”) </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">example_list=[<span class="string">&#x27;我&#x27;</span>,<span class="string">&#x27;是&#x27;</span>,<span class="string">&#x27;列&#x27;</span>,<span class="string">&#x27;表&#x27;</span>]</span><br><span class="line">example_tuple=[<span class="string">&#x27;我&#x27;</span>,<span class="string">&#x27;是&#x27;</span>,<span class="string">&#x27;元&#x27;</span>,<span class="string">&#x27;组&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>((example_list[<span class="number">1</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_tuple[<span class="number">2</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_list[-<span class="number">2</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_tuple[-<span class="number">3</span>]))</span><br></pre></td></tr></table></figure>
+
+<p><strong>字典：</strong></p>
+<p>字典就是使用大括号括起来的键（Key）值（Value） 对（Key-Value对）。每个键值对之间使用英文逗号分隔， 每个Key与Value之间使用英文冒号分隔。</p>
+<p>Key可以使用中文、英文或者数字，但是不能重复。Value 可以是任意字符串、数字、列表、元组或者另一个字典， Value可以重复。</p>
+<p>可以通过Key来从字典中读取对应的Value，有3种主要的格式：  </p>
+<p>变量名[key]  </p>
+<p>变量名.get(key)  </p>
+<p>变量名.get(key, ‘在找不到key的情况下使用这个值’) </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dict1=&#123;<span class="number">1</span>:<span class="string">&quot;good&quot;</span>,<span class="number">2</span>:<span class="string">&quot;bad&quot;</span>,<span class="number">3</span>:<span class="string">&quot;not good&quot;</span>&#125;</span><br><span class="line">value1=dict1.get(<span class="number">1</span>,<span class="string">&quot;1&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(value1)</span><br><span class="line"></span><br><span class="line">good</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>集合：</strong></p>
+<p>集合是使用大括号括起来的各种数据，可以看作没有 Value的字典。<strong>集合里面的元素不能重复。</strong>集合也是无序的。集合最大的应用之一就是去重。例如，<strong>把一个带有重复元素的列表先转换为集合，再转换回列表，那么重复元素就只会保留一个</strong>。把列表转换为集合需要使用set()函数， 把集合转换为列表使用list()函数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">duplicated_list = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;a&#x27;</span>]</span><br><span class="line">unique_list = <span class="built_in">list</span>(<span class="built_in">set</span>(duplicated_list))</span><br><span class="line"><span class="built_in">print</span>(unique_list)</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;s&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="运算符与表达式"><a href="#运算符与表达式" class="headerlink" title="运算符与表达式"></a>运算符与表达式</h3><p>算术运算符（ +、–、*、&#x2F;、**、&#x2F;&#x2F;、％ ）</p>
+<p>关系运算符（ &gt;、&lt;、&gt;&#x3D;、&lt;&#x3D;、&#x3D; &#x3D;、!&#x3D; ）。  </p>
+<p>逻辑运算符（and、or、not ）。  </p>
+<p>位运算符（ &lt;&lt;、&gt;&gt;、~、|、^、&amp; ）。  </p>
+<p>赋值运算符（ &#x3D;、复合赋值运算符 ）。 </p>
+<p>成员运算符（ in、not in ）。  </p>
+<p>同一运算符（ is、is not ）。  </p>
+<p>下标运算符（ [ ] ）。  </p>
+<p>其他（ 如函数调用运算符（））。 </p>
+<p><strong>隐式类型转换：</strong></p>
+<p>当有一个操作数的类型是复数时，其它数据都自动转换成复数类型。  </p>
+<p>当有一个操作数的类型是小数时，其它数据都自动转换成小数类型。  </p>
+<p>不支持数字和字符之间的隐式转换。  </p>
+<p>数值的除法（&#x2F;）总是返回一个浮点数，要获取整数使用 &#x2F;&#x2F;操作符。  </p>
+<p>混合计算时，Python会把整型转换成为浮点数。 </p>
+<p>** 乘方运算</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In[]:<span class="number">4</span>*<span class="number">3</span>**<span class="number">2</span></span><br><span class="line">Out[]:<span class="number">36</span></span><br><span class="line"></span><br><span class="line">In[]:<span class="string">&quot;a&quot;</span>*<span class="number">10</span></span><br><span class="line">Out[]:<span class="string">&#x27;aaaaaaaaaa&#x27;</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">True</span> <span class="keyword">and</span> <span class="number">0</span></span><br><span class="line">Out[]:<span class="number">0</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">False</span> <span class="keyword">and</span> <span class="number">12</span></span><br><span class="line">Out[]:<span class="literal">False</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">True</span> <span class="keyword">or</span> <span class="number">0</span></span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In[]:<span class="literal">False</span> <span class="keyword">or</span> <span class="number">12</span></span><br><span class="line">Out[]:<span class="number">12</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">In[]:x=y=<span class="number">2.5</span></span><br><span class="line">	z=<span class="number">2.5</span></span><br><span class="line">	x <span class="keyword">is</span> <span class="keyword">not</span> z</span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;a&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;abcd&#x27;</span></span><br><span class="line">Out[]: <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;ac&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;abcd&#x27;</span></span><br><span class="line">Out[]:<span class="literal">False</span> </span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;a&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">&#x27;b,c,d&#x27;</span></span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="number">3</span> <span class="keyword">not</span> <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">Out[]:<span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>链式关系表达式:</strong></p>
+<p>相当于多个表达式之间逻 辑与的关系。</p>
+<p> 1 &lt; 2 &lt; 3 #等价于1 &lt; 2 and 2 &lt; 3  </p>
+<p>2 &gt;&#x3D; 1 &gt; 10 #等价于2 &gt;&#x3D; 1 and 1 &gt; 10 </p>
+<p><strong>Python中的函数分为内置函数和模块函数。</strong> </p>
+<p><strong>内置函数:</strong></p>
+<ul>
+<li>内置函数（BIF，built-in functions）是Python内置对 象类型之一，不需要导入任何模块即可使用一类函数。 </li>
+<li>执行dir(<strong>builtins</strong>)可以列出所有的内置函数;</li>
+<li>使用help(函数名)可以查看某个函数的用法;  abs(x):返回数字x的绝对值或复数x的模;  bin(x)、oct(x)、hex(x):把整数x转换为二进制、八进 制、十六进制的表示形式。  bytes(x)：把指定对象x转换为字节串表示形式。 </li>
+<li>float(x)：把整数或字符串x转换为浮点数；</li>
+<li>int(x[, d])：返回实数（float）、分数（Fraction）或 高精度实数（Decimal）x的整数部分，或把d进制的字符 串x转换为十进制并返回，d默认为十进制；</li>
+<li>chr(x)：返回Unicode编码为x的字符；</li>
+<li>ord(x)：返回1个字符x的Unicode编码；</li>
+<li>isinstance(obj, type)：测试对象obj是否属于指定类型 type；</li>
+<li>type(obj)：返回对象obj的类型；</li>
+<li>max(x)、 min(x)：返回可迭代对象x中的最大值、最小值；</li>
+<li>len(obj)：返回对象obj包含的元素个数；</li>
+<li>reversed(seq):返回seq中所有元素逆序后的迭代器对象;</li>
+<li>sorted(iterable, key&#x3D;None, reverse&#x3D;False):返回排序后的列表，其中iterable表示要排序的序列或迭代对象， key用来指定排序规则或依据，reverse用来指定升序或降序，默认为升序。该函数不改变iterable内任何元素的顺序；</li>
+<li>sum(x, start&#x3D;0)：返回序列x中所有元素之和；</li>
+<li>exit()：退出当前解释器环境；</li>
+</ul>
+<p><strong>模块函数:</strong></p>
+<ul>
+<li><p>math模块 </p>
+<p>math.pi 圆周率pi </p>
+<p>math.e 自然常数e </p>
+<p>math.tau 数学常数τ </p>
+<p>math.inf 正无穷大 </p>
+<p>math.nan 非浮点数标记，NaN(Not a  Number)</p>
+</li>
+<li><p>random模块</p>
+<p>random.random() 返回[0.0,1.0]区间内的一个随机小数 random.random() 返回 0.9523521796999529</p>
+<p>random.uniform(a,b) 返回[a,b]区间内的一个随机小数 random.uniform(1,3) 返回 2.3403540401554146</p>
+<p>random.randint(a,b) 返回[a,b]区间内的一个随机整数 random.randint(1,3) 返回2</p>
+<p>random.randrange([ start],end,[step]) 返回[start,end)区间内的一个整数， start和step默认都是1 random.randrange(1,10)返回 5</p>
+<p>random.choice() 随机返回给定序列中的一个元素 random.choice([‘a’,’b’,’c’]) 返回’c‘</p>
+<p>random.shuffle(x,[ra ndom]) 将可变序列的所有元素随机排列 random.shuffle([1,2,3,4]) 返回[1, 4, 3, 2]</p>
+</li>
+</ul>
+<h3 id="输入输出与字符串"><a href="#输入输出与字符串" class="headerlink" title="输入输出与字符串"></a>输入输出与字符串</h3><p>input(“提示字符串”)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="built_in">input</span>(<span class="string">&quot;请输入:&quot;</span>)</span><br><span class="line"><span class="built_in">type</span>(x)</span><br></pre></td></tr></table></figure>
+
+<p>input() 函数的返回结果都是字符串，实际使用时需要将其转换为相应的类型再进行处理。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入:&quot;</span>))</span><br><span class="line"><span class="built_in">type</span>(x)</span><br></pre></td></tr></table></figure>
+
+<p>input() 结合 <strong>eval()</strong> 可同时接受多个数据输入， 多个输入之间的间隔符必须是逗号。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a,b,c = <span class="built_in">eval</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入a,b,c三个数：&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(a,b,c,sep=<span class="string">&quot;,&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>实现多值输入，也可以使用 <strong>split()</strong> 方法进行输 入值的分割，不同的值之间以空格分隔。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x,y = <span class="built_in">input</span>(<span class="string">&#x27;请输入2个值:&#x27;</span>).split()</span><br><span class="line"><span class="built_in">print</span>(x,y,sep=<span class="string">&#x27;,&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>print()函数的格式如下： </p>
+<p>print([objects, sep&#x3D;’ ‘ &#x2F; end&#x3D;’\n’ &#x2F; file&#x3D;sys.stdout &#x2F; flush&#x3D;False) </p>
+<p>objects是输出的对象，多个对象之间用英文逗号分割； sep是对象之间插入的分隔符，默认是空格； end是添加在输出文本最后的一个字符，默认是换行符； file指定输出内容发送到的文件，默认是显示器； flush指定输出的内容是否立即写文件。</p>
+<p>字符串格式化%输出：</p>
+<p>“%格式控制符”%实际参数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;名字: %s,年龄: %d&#x27;</span> %(<span class="string">&#x27;张三&#x27;</span>,<span class="number">20</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>字符串的 format 方法:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;:计算机&#123;&#125;的CPU占用率为&#123;&#125;%.&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;2022-03-15&#x27;</span>,<span class="string">&#x27;python&#x27;</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用位置（序号）索引：<br>花括号内部可以写上待输出的目标字符串的索引，也可以省略。如果省略，则按format后面的括号里的待输出的目标字符串顺序依次替换。 </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;1&#125;&#123;0&#125;&#123;1&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;言&#x27;</span>,<span class="string">&#x27;文&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>使用“{序号：格式说明符}” 形式的格式说明符：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&#123;0:.2f&#125;,&#123;1&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">3.1415926</span>,<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+
+<p> 使用关键字索引：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello,&#123;boy&#125; and &#123;girl&#125;!&quot;</span>.<span class="built_in">format</span>(boy=<span class="string">&quot;John&quot;</span>,girl=<span class="string">&quot;Mary&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&#123;a&#125;&#123;b&#125;&quot;</span>.<span class="built_in">format</span>(b=<span class="string">&quot;3&quot;</span>,a=<span class="string">&quot;Python&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>使用属性索引：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">c = <span class="number">3</span>-<span class="number">5j</span></span><br><span class="line"><span class="built_in">print</span>((<span class="string">&#x27;复数&#123;0&#125;的实部为&#123;0.real&#125;,虚部为&#123;0.imag&#125;。&#x27;</span>.<span class="built_in">format</span>(C)))</span><br></pre></td></tr></table></figure>
+
+<p>使用下标索引：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">coord = (<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;X:&#123;0[0]&#125;; Y:&#123;0[1]&#125;;Z:&#123;0[2]&#125;&#x27;</span>.<span class="built_in">format</span>(coord))</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>字符串访问方式：</strong></p>
+<p>左闭右开原则</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&quot;Python大数据基础与实战&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">0</span>],<span class="built_in">str</span>[<span class="number">5</span>],<span class="built_in">str</span>[-<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">2</span>:<span class="number">6</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[:<span class="number">6</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">6</span>:])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[:])</span><br></pre></td></tr></table></figure>
+
+<p><strong>字符串的分片：</strong></p>
+<p><strong>str[i:j:k]：</strong>i是索引起始位置，j是索引结束位置但<strong>不包括位置上的字符</strong>，索引编号每次增加的步长为k。 </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str1=<span class="string">&quot;Python&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">2</span>:<span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">0</span>:-<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">1</span>:<span class="number">5</span>:<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<p><strong>字符串查找</strong></p>
+<ul>
+<li><strong>find() 和 rfind()</strong> 函数分别用来查找一个字符串在另一个字符串指定范围（默认是整个字符串）中<strong>首次</strong>和最后一次出现的位置，如果不存在则返回-1；</li>
+<li><strong>index() 和 rindex()</strong> 方法用来返回一个字符串在另一个字符串指定范围中<strong>首次</strong>和<strong>最后一次</strong>出现的位置，如果不存在则抛出异常；</li>
+<li><strong>count()<strong>方法用来返回一个字符串在当前字符串中</strong>出现的次数</strong>。</li>
+</ul>
+<p><strong>字符串分割</strong></p>
+<ul>
+<li>**split()、rsplit()**方法分别用来以指定字符为分隔符，把当前字符串从左往右、从右往左分隔成多个字符串，并返回包含分隔结果的列表。</li>
+<li>对于 <strong>split() 和 rsplit()</strong> 方法，如果不指定分隔符，则字符串中的任何空白符号（空格、换行符、制表符等）都将被认为是分隔符， 把连续多个空白字符看作一个分隔符。</li>
+<li>对于split() 和rsplit() 方法，如果不指定分隔符，则字符串中的任何空白符号（空格、换行符、制表符等）都将被认为是分隔符， 把连续多个空白字符看作一个分隔符。</li>
+</ul>
+<p><strong>字符串的连接</strong></p>
+<p><strong>join()</strong> 方法用来将列表中的多个字符串进行连接，并且在相邻两个字符串之间插入指定字符。示例如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">test = [<span class="string">&quot;I&quot;</span>,<span class="string">&quot;love&quot;</span>,<span class="string">&quot;Python&quot;</span>]</span><br><span class="line">s = <span class="string">&quot;&quot;</span>.join(test)	<span class="comment">#指定插入字符为空格</span></span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：使用“+”运算符也可以连接字符串，但是效率 较低，应优先使用join()方法。</strong></p>
+<p><strong>字符串的大小写转换</strong></p>
+<p>lower() 返回小写字符串，<strong>upper()</strong> 返回<strong>大写</strong>字符串， <strong>capitalize()</strong> 将<strong>字符串****首字符大写</strong>、<strong>title()</strong> 将字符串中每个<strong>单词首字符大写</strong>、<strong>swapcase()</strong> 完成<strong>大小写互换</strong>。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = <span class="string">&quot;i am a teacher&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s.lower())</span><br><span class="line"><span class="built_in">print</span>(s.upper())</span><br><span class="line"><span class="built_in">print</span>(s.capitalize())</span><br><span class="line"><span class="built_in">print</span>(s.title())</span><br><span class="line"><span class="built_in">print</span>(s.swapcase())</span><br></pre></td></tr></table></figure>
+
+
+
+<p> <strong>字符串替换</strong></p>
+<p>replace() 方法把字符串中的 old（旧字符串）替换成 new(新字符串)，如果指定第三个参数max，则替换不超过 max次。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&quot;this is string example..wow!!!this is really string&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>.replace(<span class="string">&quot;is&quot;</span>,<span class="string">&quot;was&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>.replace(<span class="string">&quot;is&quot;</span>,<span class="string">&quot;was&quot;</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>字符串删除</strong></p>
+<p><strong>strip()</strong> 删除字符串<strong>两端指定的字符</strong>，<strong>rstrip() 删除</strong>字符串<strong>右端</strong>指定字符，<strong>lstrip()</strong> 删除字符串<strong>左端</strong>指定字符。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = <span class="string">&quot; he is a student\t\t&quot;</span></span><br><span class="line"><span class="comment">#删除s左右两端的的空白字符</span></span><br><span class="line"><span class="built_in">print</span>(s.strip())</span><br><span class="line"><span class="built_in">print</span>(s.rstrip(<span class="string">&quot;\t&quot;</span>))</span><br><span class="line"><span class="string">&#x27;aabbccddeeeffg&#x27;</span>.strip(<span class="string">&#x27;gaef&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>字符串测试</strong></p>
+<p>isalnum()、isalpha()、isdigit()、isdecimal()、isnumeric()、 isspace()、isupper()、islower()，分别测试字符串是否为数字或字母、是否为字母、是否为数字字符、是否为空白字符、是否为大写字母以及是否为小写字母。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1234abcd&#x27;</span>.isalnum())</span><br><span class="line"><span class="comment">#全部为英文字母时返回True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1234abcd&#x27;</span>.isalpha())</span><br><span class="line"><span class="comment">#全部为数字时返回True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1234abcd&#x27;</span>.isdigit())</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>eval()</strong></p>
+<p>内置函数eval()尝试把任意字符串转化为Python表达式并求值。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&quot;10 * 2 / 5&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">4.0</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>startswith()、endswith()</strong></p>
+<p>这两个方法用来判断字符串是否以指定字符串开始 或者结束。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;test.py&quot;</span>.endswith((<span class="string">&quot;.py&quot;</span>,<span class="string">&quot;.cpp&quot;</span>,<span class="string">&quot;.java&quot;</span>))) <span class="comment"># True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;test.py&quot;</span>.startswith(<span class="string">&quot;test&quot;</span>,<span class="number">0</span>))			  <span class="comment"># True	</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>center()、ljust()、rjust()</strong></p>
+<p>返回指定宽度的新字符串，原字符串居中、左对齐或右对齐出现在新字符串中，如果指定的宽度大于字符串长度，则使用指定的字符（默认为空格）填充。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;let&#x27;s begin&quot;</span>.center(<span class="number">20</span>,<span class="string">&quot;+&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;let&#x27;s begin&quot;</span>.ljust(<span class="number">20</span>,<span class="string">&quot;-&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p> ++++let’s begin+++++</p>
+<p>let’s begin———</p>
+<p><strong>字符串对象常用的方法</strong></p>
+<ul>
+<li><p><strong>字母大小写转换</strong></p>
+<ul>
+<li><p>s.upper():全部转换为大写字母。</p>
+</li>
+<li><p>s.lower():全部转换为小写字母。</p>
+</li>
+<li><p>s.swapcase():字母大小写互换。</p>
+</li>
+<li><p>s.capitalize():句子首字母大写，其余小写。</p>
+</li>
+<li><p>s.title():单词首字母大写。</p>
+<p>其中，s是一个字符串对象</p>
+</li>
+</ul>
+</li>
+<li><p><strong>字符串搜索</strong></p>
+<ul>
+<li>s.find(substr,[start,[end]])：返回s中出现substr的第1个字符的编号，如果s中没有substr则返回-1。start和end作用就相当于在s[start:end]中搜索。</li>
+<li>s.index(substr,[start,[end]])：与find()相同，只是在s中没有substr时，会返回一个运行错误。</li>
+<li>s.rfind(substr,[start,[end]])：<strong>返回s中最后出现的substr的第1个字符的编号</strong>，如果s中没有substr则返回-1，也就是说<strong>从右边算起的第1次出现的substr的首字符编号。</strong></li>
+<li>s.rindex(substr,[start,[end]])：与rfind()相同，只是在s中没有substr时，会返回一个运行时错误。</li>
+<li>s.count(substr,[start,[end]])：计算substr在s中出现的次数。</li>
+<li>s.startswith(prefix,[start,[end]])：是否<strong>以prefix开头</strong>，若是返回True，否则返回False。</li>
+<li>s.endswith(suffix,[start[end]])：<strong>以suffix结尾</strong>，若是返回 True，否则返回False。</li>
+</ul>
+</li>
+<li><p><strong>字符串替换</strong></p>
+<ul>
+<li>s.replace(oldstr,newstr,[count])：把s中的oldster替换为 newstr，count为替换次数。这是替换的通用形式，还有一些函数进行特殊字符的替换。</li>
+<li>s.strip([chars])：把s中前后chars中有的字符全部去掉，可以理解为把s前后chars替换为None。默认去掉前后空格。</li>
+<li>s.lstrip([chars])：把s左边chars中有的字符全部去掉。默认去掉左边空格。</li>
+<li>s.rstrip([chars])：把s右边chars中有的字符全部去掉。默认去掉右边空格。</li>
+<li>s.expandtabs([tabsize])：把s中的tab字符替换为空格，每个tab替换为tabsize个空格，默认是8个。</li>
+</ul>
+</li>
+<li><p><strong>字符串的拆分与组合</strong></p>
+<ul>
+<li>s.split([sep,[maxsplit]])：以sep为分隔符，把<strong>字符串s拆分成一个列表</strong>。默认的分隔符为空格。<strong>maxsplit表示拆分的次数</strong>，默认取-1，表示无限制拆分。</li>
+<li>s.rsplit([sep,[maxsplit]])：从右侧把字符串s拆分成一个列表。</li>
+<li>s.splitlines([keepends])：把s按行拆分为一个列表。 keepends是一个逻辑值，如果为True，则每行拆分后会保留行分隔符。</li>
+<li><strong>s.join(seq)：</strong>把seq代表的序列组合成字符串，用s将序列各元素连接起来。字符串中的字符是不能修改的，如果要修改，通常的方法是，用 list()函数把字符串s变为以单个字符为成员的列表(使用语句s&#x3D;list(s))，再使用给列表成员赋值的方式改变值(如s[3]&#x3D;’a’)，最后再使用语句 “s&#x3D;””.join(s)”还原成字符串。</li>
+</ul>
+</li>
+<li><p>字符串类型测试</p>
+<p>​    字符串类型测试函数返回的都是逻辑值。</p>
+<ul>
+<li>s.isalnum()：是否全是字母和数字，并至少有一个字符。</li>
+<li>s.isalpha()：是否全是字母，并至少有一个字符。</li>
+<li>s.isdigit()：是否全是数字，并至少有一个字符。</li>
+<li>s.isspace()：是否全是空格，并至少有一个空格。</li>
+<li>s.islower()：s中的字母是否全是小写。</li>
+<li>s.isupper()：s中的字母是否全是大写。</li>
+<li>s.istitle()：s是否为首字母大写。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python中lambda表达式</title>
+    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
+<ul>
+<li>lambda表达式必须使用lambda关键字定义。</li>
+<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
+<li>lambda表达式必须是单行的。</li>
+<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
+<li>lambda表达式的计算结果就是函数的返回值。 </li>
+<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
+<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
+<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python序列结构</title>
     <url>/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<h3 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h3><p>序列（sequence）是一种用来存放多个值的数据类型，序列中对象类型可以相同也可以不同。</p>
@@ -1504,91 +1504,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python爬虫</title>
-    <url>/2022/03/26/python%E7%88%AC%E8%99%AB/</url>
-    <content><![CDATA[<h3 id="python爬虫工作原理"><a href="#python爬虫工作原理" class="headerlink" title="python爬虫工作原理"></a>python爬虫工作原理</h3><p><strong>获取数据：</strong></p>
-<p>爬虫程序会根据我们提供的网址，向服务器发起请求，然后返回数据。</p>
-<p><strong>解析数据：</strong></p>
-<p>爬虫程序会把服务器返回的数据解析成我们能读懂的格式。</p>
-<p><strong>提取数据：</strong></p>
-<p>爬虫程序再从中提取出我们需要的数据。</p>
-<p><strong>储存数据:</strong><br>爬虫程序把这些有用的数据保存起来,便于你以后的使用和分析。</p>
-<span id="more"></span>
-
-<h4 id="requests库"><a href="#requests库" class="headerlink" title="requests库"></a>requests库</h4><p>requests库可以帮我们下载网页源代码、文本、图片，甚至是音频。</p>
-<p><strong>requests.get()</strong></p>
-<p>requests.get 是在调用 requests 库中的 get() 方法，它向服务器发送了一个请求，括号里的参数是你需要的数据所在的网址，然后得到了服务器的响应。服务器返回的结果是个 Response 对象。</p>
-<p>response对象常用的四个属性：</p>
-<p><img src="/../resources/image-20220410100554836.png" alt="image-20220410100554836"></p>
-<p><strong>response.status_code属性：</strong></p>
-<p><img src="/../resources/image-20220410100621487.png" alt="image-20220410100621487"></p>
-<p><strong>response.content属性：</strong></p>
-<p>该属性能把Response对象的内容以二进制数据的形式返回，适用于图片、音频、视频的下载。</p>
-<p><strong>response.text属性：</strong></p>
-<p>该属性可以把Response对象的内容以字符串的形式返回， 适用于文字、网页源代码的下载。</p>
-<p><strong>response.encoding属性：</strong></p>
-<p>该属性能帮我们定义Response对象的编码。 遇上输出的文本有乱码问题，才考虑用res.encoding。首先，目标数据本身是什么编码是未知的。用requests.get() 发 送请求后，会取得一个Response对象，其中，requests库会对数据的编码类型做出自己的判断。但是这个判断有可能准确，也可能不准确。 如果它判断准确的话，打印出来的response.text的内容就是正常的、没有乱码的，就无需用res.encoding；如果判断不准确，就会出现一堆乱码，那我们就可以去查看目标数据的编码，然后再用res.encoding把编码定义成和目标数据一 致的类型即可。</p>
-<h4 id="robots协议"><a href="#robots协议" class="headerlink" title="robots协议"></a>robots协议</h4><p>查看robots协议，在网站的域名后加上 &#x2F;robots.txt</p>
-<p><img src="/../resources/image-20220410101501845.png" alt="image-20220410101501845"></p>
-<h4 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h4><p>HTML文档包含了HTML标签（TAG）和元素，通过它们来描述网页。Web浏览器的作用是将HTML源文件转化成 网页形式，并显示出它们。浏览器本身并不会显示出HTML 标签，而是使用它们来解释页面的内容。</p>
-<p><img src="/../resources/image-20220410101613520.png" alt="image-20220410101613520"></p>
-<p>HTML常见标签：</p>
-<p><img src="/../resources/image-20220410101647072.png" alt="image-20220410101647072"></p>
-<h4 id="解析数据"><a href="#解析数据" class="headerlink" title="解析数据"></a>解析数据</h4><p>我们平时使用浏览器上网，浏览器会把服务器返 回来的HTML源代码翻译为我们能看懂的样子，之后我们才能在网页上做各种操作。 而在爬虫中，也要使用能读懂html的工具，才能提取到想要的数据。</p>
-<p><strong>【提取数据】</strong>是指把我们需要的数据从众多数据中挑选出来。</p>
-<p><img src="/../resources/image-20220410102609214.png" alt="image-20220410102609214"></p>
-<p>在括号中，要输入两个参数，第0个参数是要被解析的文本，注意了，它必须是字符串。 括号中的第1个参数用来标识解析器，我们要用的是一个 Python内置库：html.parser。（它不是唯一的解析器，但是比较简单的）</p>
-<p>以该网站为例（url： <a href="https://localprod.pandateacher.com/python%02manuscript/crawler-html/spider-men5.0.html%EF%BC%89%E5%81%87%E8%AE%BE%E6%88%91%E4%BB%AC%E6%83%B3%E7%88%AC%E5%8F%96%E7%BD%91%E9%A1%B5%E4%B8%AD%E7%9A%84%E4%B9%A6%E7%B1%8D%E7%B1%BB%E5%9E%8B%E3%80%81%E4%B9%A6%E5%90%8D%E3%80%81%E9%93%BE%E6%8E%A5%E3%80%81%E5%92%8C%E4%B9%A6%E7%B1%8D%E4%BB%8B%E7%BB%8D%E3%80%82%E6%A0%B9%E6%8D%AE%E4%B9%8B">https://localprod.pandateacher.com/pythonmanuscript/crawler-html/spider-men5.0.html）假设我们想爬取网页中的书籍类型、书名、链接、和书籍介绍。根据之</a> 前所学的 requests.get()，我们可以先获取到一个Response对象，并确认自己获取成功：</p>
-<p><img src="/../resources/image-20220410110621682.png" alt="image-20220410110621682"></p>
-<p>接着用BeautifulSoup解析数据，请特别留意第2行和第6 行新增的代码。第2行是引入BeautifulSoup库。第6行中的第 0个参数，必须是字符串类型；括号中的第1个参数是解析器。 这就是解析数据的用法。</p>
-<p><img src="/../resources/image-20220410110641745.png" alt="image-20220410110641745"></p>
-<p>接下来，我们来打印看看soup的数据类型，和soup本身 （第7行开始为新增代码）。</p>
-<p> import requests </p>
-<p>from bs4 import BeautifulSoup </p>
-<p>res &#x3D;  requests.get(‘<a href="https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;">https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;</a>)  </p>
-<p>soup &#x3D; BeautifulSoup( res.text,’html.parser’) </p>
-<p>print(type(soup)) #查看soup的类型 </p>
-<p>print(soup) # 打印soup</p>
-<p>代码运行结果：</p>
-<p><img src="/../resources/image-20220410110850553.png" alt="image-20220410110850553"></p>
-<ul>
-<li><p>soup的数据类型是， 说明soup是一个BeautifulSoup对象。打印的soup， 它是所请求网页的完整HTML源代码。我们所要提取的书名、链接、书籍内容这些数据都在这里面。</p>
-</li>
-<li><p>打印soup出来的源代码和我们之前使用 response.text 打印出来的源代码是完全一样的。</p>
-</li>
-<li><p>虽然 response.text 和 soup 打印出的内容一样，但它们属于不同的类： &lt;class ‘str’&gt;与&lt;class ‘bs4.BeautifulSoup’&gt;。前者是字符串，后者是已经被解析过的 BeautifulSoup 对象。之所以打印出来的是一样的文本，是因为 BeautifulSoup 对象在直 接打印它的时候会调用该对象内的 str 方法，所以直接打印 bs 对象显示字符串是str的返回结果。</p>
-</li>
-<li><p>之后还会用 BeautifulSoup 库来提取数据，如果这不是一 个 BeautifulSoup 对象，就没法调用相关的属性和方法的，所以，用 BeautifulSoup 解析数据是非常有用的，并不是重复劳动。</p>
-</li>
-<li><p><img src="/../resources/image-20220410111622337.png" alt="image-20220410111622337"></p>
-</li>
-</ul>
-<p>仍然使用BeautifulSoup来提取数据。</p>
-<p><img src="/../resources/image-20220410111721377.png" alt="image-20220410111721377"></p>
-<p>find() 与 find_all()</p>
-<p><img src="/../resources/image-20220410112341145.png" alt="image-20220410112341145"></p>
-<p>Tag类对象的常用属性和方法</p>
-<p><img src="/../resources/image-20220410112633026.png" alt="image-20220410112633026"></p>
-<h4 id="定制请求头"><a href="#定制请求头" class="headerlink" title="定制请求头"></a>定制请求头</h4><p>最好将自己的爬虫伪装成真实的浏览器——因为在这种情况下，服务器很可能拒绝爬虫访问。甚至有的网站，一开始就不允许爬虫访问。 如，知乎、猫眼电影等。</p>
-<p>每一个 request 请求，都会有一个Requests Headers，把它称作请求头。 它里面会有一些关于该请求的基本信息，比如：这个请求是从什么设备 什么浏览器上发出？这个请求是从哪个页面跳转而来？ user-agent会记录你电脑的信息和浏览器版本（如图，就是windows10的64位操作系统， 使用谷歌浏览器），它最大的应用是帮助我们应对“反爬虫”技术。</p>
-<p><img src="/../resources/image-20220410113019785.png" alt="image-20220410113019785"></p>
-<p>基于【豆瓣官网】【下厨房】等网站突然IP反爬的情况， 程序开始需要加上headers里的 user-agent，以后面的实操例 子下厨房为例，user-agent在这里。</p>
-<p><img src="/../resources/image-20220410113100826.png" alt="image-20220410113100826"></p>
-<p>给爬虫代码加上请求头后是这样的 <strong>headers&#x3D;{‘User-Agent’: ‘Mozilla&#x2F;5.0 (Windows NT 10.0;  Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko)  Chrome&#x2F;86.0.4240.193 Safari&#x2F;537.36’}</strong> 这个请求头是万能的，可以直接保存下来，后面加请求头都可以直接使用。 注意！！！提取数据那一行的第二个参数也要加上请求头！！！</p>
-<p><img src="/../resources/image-20220410113214914.png" alt="image-20220410113214914"></p>
-<p>从最开始用requests库获取数据，到用BeautifulSoup库来解析数据，再继续用BeautifulSoup库提取数据，不断经历的是操作对象的类型转换</p>
-<p><img src="/../resources/image-20220410113315426.png" alt="image-20220410113315426"></p>
-<p>例子：</p>
-<p><img src="/../resources/image-20220410160211171.png" alt="image-20220410160211171"></p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>二叉树的一些问题</title>
     <url>/2022/05/27/%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<p>最近在刷二叉树的相关题目，通过这篇博客记录相关知识点，梳理一些做题的思路。</p>
@@ -1677,6 +1592,91 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python爬虫</title>
+    <url>/2022/03/26/python%E7%88%AC%E8%99%AB/</url>
+    <content><![CDATA[<h3 id="python爬虫工作原理"><a href="#python爬虫工作原理" class="headerlink" title="python爬虫工作原理"></a>python爬虫工作原理</h3><p><strong>获取数据：</strong></p>
+<p>爬虫程序会根据我们提供的网址，向服务器发起请求，然后返回数据。</p>
+<p><strong>解析数据：</strong></p>
+<p>爬虫程序会把服务器返回的数据解析成我们能读懂的格式。</p>
+<p><strong>提取数据：</strong></p>
+<p>爬虫程序再从中提取出我们需要的数据。</p>
+<p><strong>储存数据:</strong><br>爬虫程序把这些有用的数据保存起来,便于你以后的使用和分析。</p>
+<span id="more"></span>
+
+<h4 id="requests库"><a href="#requests库" class="headerlink" title="requests库"></a>requests库</h4><p>requests库可以帮我们下载网页源代码、文本、图片，甚至是音频。</p>
+<p><strong>requests.get()</strong></p>
+<p>requests.get 是在调用 requests 库中的 get() 方法，它向服务器发送了一个请求，括号里的参数是你需要的数据所在的网址，然后得到了服务器的响应。服务器返回的结果是个 Response 对象。</p>
+<p>response对象常用的四个属性：</p>
+<p><img src="/../resources/image-20220410100554836.png" alt="image-20220410100554836"></p>
+<p><strong>response.status_code属性：</strong></p>
+<p><img src="/../resources/image-20220410100621487.png" alt="image-20220410100621487"></p>
+<p><strong>response.content属性：</strong></p>
+<p>该属性能把Response对象的内容以二进制数据的形式返回，适用于图片、音频、视频的下载。</p>
+<p><strong>response.text属性：</strong></p>
+<p>该属性可以把Response对象的内容以字符串的形式返回， 适用于文字、网页源代码的下载。</p>
+<p><strong>response.encoding属性：</strong></p>
+<p>该属性能帮我们定义Response对象的编码。 遇上输出的文本有乱码问题，才考虑用res.encoding。首先，目标数据本身是什么编码是未知的。用requests.get() 发 送请求后，会取得一个Response对象，其中，requests库会对数据的编码类型做出自己的判断。但是这个判断有可能准确，也可能不准确。 如果它判断准确的话，打印出来的response.text的内容就是正常的、没有乱码的，就无需用res.encoding；如果判断不准确，就会出现一堆乱码，那我们就可以去查看目标数据的编码，然后再用res.encoding把编码定义成和目标数据一 致的类型即可。</p>
+<h4 id="robots协议"><a href="#robots协议" class="headerlink" title="robots协议"></a>robots协议</h4><p>查看robots协议，在网站的域名后加上 &#x2F;robots.txt</p>
+<p><img src="/../resources/image-20220410101501845.png" alt="image-20220410101501845"></p>
+<h4 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h4><p>HTML文档包含了HTML标签（TAG）和元素，通过它们来描述网页。Web浏览器的作用是将HTML源文件转化成 网页形式，并显示出它们。浏览器本身并不会显示出HTML 标签，而是使用它们来解释页面的内容。</p>
+<p><img src="/../resources/image-20220410101613520.png" alt="image-20220410101613520"></p>
+<p>HTML常见标签：</p>
+<p><img src="/../resources/image-20220410101647072.png" alt="image-20220410101647072"></p>
+<h4 id="解析数据"><a href="#解析数据" class="headerlink" title="解析数据"></a>解析数据</h4><p>我们平时使用浏览器上网，浏览器会把服务器返 回来的HTML源代码翻译为我们能看懂的样子，之后我们才能在网页上做各种操作。 而在爬虫中，也要使用能读懂html的工具，才能提取到想要的数据。</p>
+<p><strong>【提取数据】</strong>是指把我们需要的数据从众多数据中挑选出来。</p>
+<p><img src="/../resources/image-20220410102609214.png" alt="image-20220410102609214"></p>
+<p>在括号中，要输入两个参数，第0个参数是要被解析的文本，注意了，它必须是字符串。 括号中的第1个参数用来标识解析器，我们要用的是一个 Python内置库：html.parser。（它不是唯一的解析器，但是比较简单的）</p>
+<p>以该网站为例（url： <a href="https://localprod.pandateacher.com/python%02manuscript/crawler-html/spider-men5.0.html%EF%BC%89%E5%81%87%E8%AE%BE%E6%88%91%E4%BB%AC%E6%83%B3%E7%88%AC%E5%8F%96%E7%BD%91%E9%A1%B5%E4%B8%AD%E7%9A%84%E4%B9%A6%E7%B1%8D%E7%B1%BB%E5%9E%8B%E3%80%81%E4%B9%A6%E5%90%8D%E3%80%81%E9%93%BE%E6%8E%A5%E3%80%81%E5%92%8C%E4%B9%A6%E7%B1%8D%E4%BB%8B%E7%BB%8D%E3%80%82%E6%A0%B9%E6%8D%AE%E4%B9%8B">https://localprod.pandateacher.com/pythonmanuscript/crawler-html/spider-men5.0.html）假设我们想爬取网页中的书籍类型、书名、链接、和书籍介绍。根据之</a> 前所学的 requests.get()，我们可以先获取到一个Response对象，并确认自己获取成功：</p>
+<p><img src="/../resources/image-20220410110621682.png" alt="image-20220410110621682"></p>
+<p>接着用BeautifulSoup解析数据，请特别留意第2行和第6 行新增的代码。第2行是引入BeautifulSoup库。第6行中的第 0个参数，必须是字符串类型；括号中的第1个参数是解析器。 这就是解析数据的用法。</p>
+<p><img src="/../resources/image-20220410110641745.png" alt="image-20220410110641745"></p>
+<p>接下来，我们来打印看看soup的数据类型，和soup本身 （第7行开始为新增代码）。</p>
+<p> import requests </p>
+<p>from bs4 import BeautifulSoup </p>
+<p>res &#x3D;  requests.get(‘<a href="https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;">https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;</a>)  </p>
+<p>soup &#x3D; BeautifulSoup( res.text,’html.parser’) </p>
+<p>print(type(soup)) #查看soup的类型 </p>
+<p>print(soup) # 打印soup</p>
+<p>代码运行结果：</p>
+<p><img src="/../resources/image-20220410110850553.png" alt="image-20220410110850553"></p>
+<ul>
+<li><p>soup的数据类型是， 说明soup是一个BeautifulSoup对象。打印的soup， 它是所请求网页的完整HTML源代码。我们所要提取的书名、链接、书籍内容这些数据都在这里面。</p>
+</li>
+<li><p>打印soup出来的源代码和我们之前使用 response.text 打印出来的源代码是完全一样的。</p>
+</li>
+<li><p>虽然 response.text 和 soup 打印出的内容一样，但它们属于不同的类： &lt;class ‘str’&gt;与&lt;class ‘bs4.BeautifulSoup’&gt;。前者是字符串，后者是已经被解析过的 BeautifulSoup 对象。之所以打印出来的是一样的文本，是因为 BeautifulSoup 对象在直 接打印它的时候会调用该对象内的 str 方法，所以直接打印 bs 对象显示字符串是str的返回结果。</p>
+</li>
+<li><p>之后还会用 BeautifulSoup 库来提取数据，如果这不是一 个 BeautifulSoup 对象，就没法调用相关的属性和方法的，所以，用 BeautifulSoup 解析数据是非常有用的，并不是重复劳动。</p>
+</li>
+<li><p><img src="/../resources/image-20220410111622337.png" alt="image-20220410111622337"></p>
+</li>
+</ul>
+<p>仍然使用BeautifulSoup来提取数据。</p>
+<p><img src="/../resources/image-20220410111721377.png" alt="image-20220410111721377"></p>
+<p>find() 与 find_all()</p>
+<p><img src="/../resources/image-20220410112341145.png" alt="image-20220410112341145"></p>
+<p>Tag类对象的常用属性和方法</p>
+<p><img src="/../resources/image-20220410112633026.png" alt="image-20220410112633026"></p>
+<h4 id="定制请求头"><a href="#定制请求头" class="headerlink" title="定制请求头"></a>定制请求头</h4><p>最好将自己的爬虫伪装成真实的浏览器——因为在这种情况下，服务器很可能拒绝爬虫访问。甚至有的网站，一开始就不允许爬虫访问。 如，知乎、猫眼电影等。</p>
+<p>每一个 request 请求，都会有一个Requests Headers，把它称作请求头。 它里面会有一些关于该请求的基本信息，比如：这个请求是从什么设备 什么浏览器上发出？这个请求是从哪个页面跳转而来？ user-agent会记录你电脑的信息和浏览器版本（如图，就是windows10的64位操作系统， 使用谷歌浏览器），它最大的应用是帮助我们应对“反爬虫”技术。</p>
+<p><img src="/../resources/image-20220410113019785.png" alt="image-20220410113019785"></p>
+<p>基于【豆瓣官网】【下厨房】等网站突然IP反爬的情况， 程序开始需要加上headers里的 user-agent，以后面的实操例 子下厨房为例，user-agent在这里。</p>
+<p><img src="/../resources/image-20220410113100826.png" alt="image-20220410113100826"></p>
+<p>给爬虫代码加上请求头后是这样的 <strong>headers&#x3D;{‘User-Agent’: ‘Mozilla&#x2F;5.0 (Windows NT 10.0;  Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko)  Chrome&#x2F;86.0.4240.193 Safari&#x2F;537.36’}</strong> 这个请求头是万能的，可以直接保存下来，后面加请求头都可以直接使用。 注意！！！提取数据那一行的第二个参数也要加上请求头！！！</p>
+<p><img src="/../resources/image-20220410113214914.png" alt="image-20220410113214914"></p>
+<p>从最开始用requests库获取数据，到用BeautifulSoup库来解析数据，再继续用BeautifulSoup库提取数据，不断经历的是操作对象的类型转换</p>
+<p><img src="/../resources/image-20220410113315426.png" alt="image-20220410113315426"></p>
+<p>例子：</p>
+<p><img src="/../resources/image-20220410160211171.png" alt="image-20220410160211171"></p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -1836,6 +1836,18 @@
       </tags>
   </entry>
   <entry>
+    <title>字符串的一些问题</title>
+    <url>/2022/06/23/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>最近刷题发现字符串的一类题是自己的弱项，这里记录巩固复习</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>异或运算</title>
     <url>/2022/06/15/%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97/</url>
     <content><![CDATA[<p>今天遇到这样一个题目，<a href="https://leetcode.cn/problems/single-number/">136. 只出现一次的数字 - 力扣（LeetCode）</a></p>
@@ -1855,18 +1867,6 @@
 
 
 
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>数据结构</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>字符串的一些问题</title>
-    <url>/2022/06/23/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<p>最近刷题发现字符串的一类题是自己的弱项，这里记录巩固复习</p>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -1962,6 +1962,88 @@
 </li>
 </ol>
 <p>​        知识图谱是一个具有本体特征的语义网络，可以看成是按照本体模式组织数据的知识库，以知识图谱为基础进行搜索，可以根据查询的内容进行语义搜索，查找需要找的本体或者本体的信息，这种语义搜索功能在google、百度、阿里巴巴等数据量大的公司里得到应用。智能问答，和语义搜索类似，对于提问内容，计算机首先要分析提问问题的语义，然后再将语义转换为查询语句，到知识图谱中查找，将最贴近的答案提供给提问者。推荐系统首先要采集用户的需求，分析用户的以往数据，提取共同特征，然后根据一定的规则，对用户提供推荐的产品。比如淘宝中记录用户经常购买的商品，经常浏览的商品，提取这些商品的共同特征，然后给这个用户打上标签，然后就给用户推荐具有类似特征的商品。</p>
+]]></content>
+      <categories>
+        <category>知识图谱</category>
+      </categories>
+      <tags>
+        <tag>知识图谱</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>知识图谱实践(三)</title>
+    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%B8%89/</url>
+    <content><![CDATA[<h1 id="知识表示"><a href="#知识表示" class="headerlink" title="知识表示"></a>知识表示</h1>]]></content>
+      <categories>
+        <category>知识图谱</category>
+      </categories>
+      <tags>
+        <tag>知识表示</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>知识图谱实践(二)</title>
+    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%BA%8C/</url>
+    <content><![CDATA[<h1 id="知识图谱数据模型的构建"><a href="#知识图谱数据模型的构建" class="headerlink" title="知识图谱数据模型的构建"></a>知识图谱数据模型的构建</h1><p>数据模型就是数据组织方式，是构建知识图谱首要解决的问题，无论是开放域的知识图谱还是行业的知识图谱，都需要收集大量的数据，这些数据的收集是有选择性的，这个选择的依据就是数据模型。数据模型，也可以称为知识表达模型，解决知识图谱如何组织数据的问题，是数据的底层架构，是一个知识体系框架，能够涵盖住知识图谱所有的数据，决定了数据收集的范围。</p>
+<h2 id="数据的分类问题"><a href="#数据的分类问题" class="headerlink" title="数据的分类问题"></a>数据的分类问题</h2><p>通用知识图谱，它收集的数据比较全，涉及到各种各样的知识。我们可以把通用知识图谱认为是一个大而全的知识图谱，它基本能涵盖所有的知识，当然，这类通用知识图谱，由于涵盖的知识范围广，所有对于某一个知识点，可能不会说的特别细，也就是深度不够。行业知识图谱和通用知识图谱，正好是一个互补的关系，行业知识图谱是对某一个行业的知识，组织的很专业，研究的很深入。</p>
+<p>无论是通用知识图谱还是行业知识图谱，都存在数据的组织问题，首要的就是数据如何分类，可以画一个树状图，根节点为物体或者对象，就是包含万物，然后再一层层的进行分类，知识图谱中的所有知识都可以在树状图中找到对应的节点。</p>
+<p>下面我们以百科数据为例，介绍一下知识图谱的分类问题。其它通用知识图谱，也有自己的分类体系，和百科的分类大同小异，但也有自己的一些特点。</p>
+<p>百科知识的组织，第一层分类为艺术、科学、自然、文化、地理、生活、社会、人物、经济、体育、历史等。</p>
+<img src="/知识图谱实践-二\image-20220811154643178.png" alt="image-20220811154643178" style="zoom:67%;">
+
+<p>选择一个分类，比如科学分类，就能看到第二层分类科学的分类体系，包括健康医疗、航空航天、天文学、环境生态、农业科学、生命科学、数理科学、心理学、信息科学、工程技术、化学、地球科学、其它等。</p>
+<p><img src="/%5C%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%BA%8C%5C935893-20190707092245915-343172619.png" alt="img"></p>
+<p>再继续选择，比如健康医疗，就可以看到第三层的分类，医学知识库的知识分类情况，从医疗症状、药物、中医药、诊断技术等几个维度来组织医学知识。</p>
+<p><img src="/%5C%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%BA%8C%5C935893-20190707092301166-1243899689.png" alt="img"></p>
+<p>通过这种分类体系，就会发现，无论收集什么知识，我们都可以在体系中找到对应的分类，这样有利于大家在这个知识图谱中查找知识，也有利于添加知识，扩展知识图谱的数据内容。</p>
+<h2 id="数据的属性"><a href="#数据的属性" class="headerlink" title="数据的属性"></a>数据的属性</h2><p>对于数据组织体系，在分类到末端节点，也就是叶子节点，就需要对这个叶子节点（具体知识点）进行描述，如何将一个知识点描述清楚，在知识图谱中，需要使用属性来描述知识点。这些属性可以从多个方面，多个层次来描述事物。</p>
+<p>我们还是以百科数据为例，在医学知识库中，找到叶子知识点，比如糖尿病， 词条中最重要的一个是定义或者叫做简介，说明什么是糖尿病，然后是几个主要属性，英文名称、常见症状、就诊科室、传染性等。把这些属性放到最开始的位置，人们看到后，就可以对糖尿病有一个大致的了解，这些属性也能够简单反映糖尿病这个知识点的基本情况。</p>
+<p><img src="/%5C%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%BA%8C%5Cimage-20220811154917144.png" alt="image-20220811154917144"></p>
+<p>除了基本的属性，对于糖尿病这个知识点，还有更多的描述，百科是从病因、检查、鉴别诊断、临床表现、诊断、治疗这几个维度，来阐述糖尿病，通过这些更进一步的属性，人们就会对糖尿病有一个更深入的了解。</p>
+<p><img src="/%5C%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%BA%8C%5Cimage-20220811154935746.png" alt="image-20220811154935746"></p>
+<p>下面我们再继续来看一下，检查这个属性，都包括哪些内容。百科中列出了比较多的检查项目或者称为检查内容，血糖、尿糖、尿酮体、糖基化血红蛋白（HbA1c）、糖化血清蛋白等等，而且对于每一项检查内容，都有一个简短的说明。</p>
+<p><img src="/%5C%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%BA%8C%5Cimage-20220811155001033.png" alt="image-20220811155001033"></p>
+<p>上面的属性，就是百科对于疾病症状的知识组织方式，我们可以看一下其他的疾病症状，基本上都是按照这个方式，来组织属性数据。糖尿病这个疾病症状，通过一些属性，还可以关联到其它词条，比如检查内容中的血糖。这样就可以在知识点之间建立关联，形成一个网状的知识图谱。</p>
+<h2 id="数据模型的构建过程"><a href="#数据模型的构建过程" class="headerlink" title="数据模型的构建过程"></a>数据模型的构建过程</h2><p>在构建数据模型的实践中，基本上都会找一个类似的知识体系，或者粗略的数据分类体系，然后以其为基础，再进行扩展。当然，在收集数据的过程中，也可能会收集到大量脱离数据模型的数据，这时候，就可以根据这些数据进行数据模型的修改和完善。</p>
+<p>构建数据模型的初始阶段，可以找一个知识图谱的中心数据，比如构建一个音乐知识图谱，可以以歌曲为中心，先考虑歌曲的属性，比如演唱者、作词、作曲、分类、歌词、乐谱等等，对于这些属性，一方面是考虑在知识图谱中是否合适，需要不断地斟酌，修改、增加或者删除一些属性，从而达到完善属性的目的。另一方面，还要确定这些属性对应的属性值，比如演唱者、作词、作曲都是对应的人，人也是一种实体，也会有很多属性，比如出生日期、性别、姓名、籍贯、主要事迹、作品等等，对于人的属性，又可以开启属性论证工作，确定使用哪些属性，属性值的范围等。</p>
+<p>在不断确定属性和属性值范围的过程中，我们还要明确一个边界。因为对于这种关联关系，可以一直做下去，最后都会变成一个万物互联的通用知识图谱。我们有的时候，可能是构建一个行业知识图谱，这时候，边界的确定就很重要，比如出生日期，对于古代人，就不能写成年月日的形式，可能就是一个朝代，这个朝代也是一个实体，我们就没有必要再对朝代进行属性和属性值的确定。因为朝代对于我们知识图谱来说，已经是相关性很小的知识了。对于朝代这类和知识图谱相关性比较弱的知识实体来说，我们才觉得办法，最简单的处理就是直接写一个名称，将它看作一个字符串或者是一个枚举值，作为枚举值的话，需要罗列出所有的朝代。另外一种处理方法就是将包含的朝代链接到通用知识图谱，比如百度百科或者dbPedia等公认的通用知识图谱。我们专注于行业知识图谱中，关联性比较强的数据。</p>
+<h2 id="数据模型需要注意的问题"><a href="#数据模型需要注意的问题" class="headerlink" title="数据模型需要注意的问题"></a>数据模型需要注意的问题</h2><p>我们最终构建的数据模型，需要注意两个方面的问题。</p>
+<p>一个是体系的完备性。有类、子类这样的层次关系，实体都能划分到这个层次关系中。类的属性，子属性，每个类都有什么属性，属性之间存在什么样的关系，对于一个属性来说，它可以看作是谓语，主语和宾语的范围如何界定。将类、子类、属性、子属性之间的关系描述清楚，能够把知识图谱中的相关实体都纳入到这个体系中，并且通过属性叙述清楚实体，就表示这个数据模型满足了知识图谱的完备性要求。</p>
+<p>另一个需要注意的是数据模型度的把握。虽然有完备性的要求，但也不能将所有的内容都罗列到数据模型中。对于数据模型中的类和属性，要有所取舍，只选取那些和知识图谱相关性强的类和属性，一开始可以选的粗一些，然后再逐渐细化。也可以一开始就做的比较细致，后面再进行删减，最后形成一个内容适当的数据模型。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>现在构建知识图谱数据模型，都有一定的依据，一般不会从零开始，有一个雏形作为数据模型的基础，再进行完善。基本模式是以自顶向下为主，再根据收集的数据，对数据模型进行修正，也就是自底向上为辅，这样的构建方式比较普遍。</p>
+]]></content>
+      <categories>
+        <category>知识图谱</category>
+      </categories>
+      <tags>
+        <tag>知识图谱</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>知识图谱实践(四)</title>
+    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%9B%9B/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>知识图谱实践</title>
+    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<h1 id="知识图谱的演化过程"><a href="#知识图谱的演化过程" class="headerlink" title="知识图谱的演化过程"></a>知识图谱的演化过程</h1><p>知识图谱是一个包含很多技术内容的知识体系，总的来说，是处理关联的知识，核心是数据，但强调了数据之间的关联关系。简单来看，可以认为是数据库或知识库，和语义网有着千丝万缕的联系。<span id="more"></span>知识图谱是由谷歌首先提出来的，用于优化它的搜索能力，之后，获得了蓬勃的发展，研究的人也越来越多。</p>
+<p>知识图谱的出现，不是一蹴而就的，有一个缓慢演进的过程，包括现在，也还在发展中。知识图谱的发展，可以从多个方面进行阐述，比如开放链接数据的思想，知识表示，知识推理，知识存储等，伴随着信息技术特别是人工智能技术的发展，知识图谱不断融合新的技术，不断发展和完善。此处主要讲述知识图谱理论的形成过程。</p>
+<p><img src="/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5%5Cimage-20220811153004286.png" alt="image-20220811153004286"></p>
+<p>Knowledge is a familiarity, awareness, or  understanding of someone or something,  such as facts, information, descriptions, or  skills, which is acquired through experience or education by perceiving, discovering, or  learning.    ——–维基百科</p>
+<h2 id="信息及其Memex"><a href="#信息及其Memex" class="headerlink" title="信息及其Memex"></a>信息及其Memex</h2><p>1945年，一个美国科学家Vannevar Bush在《大西洋月刊》上发表了一篇文章《As We May Think》，提出一种信息机器的构想，就像下图中的样子。</p>
+<p><img src="/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5%5Cimage-20220811153233326.png" alt="image-20220811153233326"></p>
+<p>在Bush博士的设想中，这种机器还可以与图书馆联网。通过某种机制，将图书馆收藏的胶卷，自动装载到本地机器上。因此，只通过这一个机器，就可以实现海量的信息检索。他将这种机器命名为Memex，也就是“memory extender”这两个单词词首的组合，意思是“记忆的延伸”。这个设想的影响非常大，后来许多早期的计算机论文中都提到了这个机器。然后，文中关于信息切换的描述，直接启发了“超文本协议”（hypertext）的发明。现在，我们在互联网上不同的链接之间跳转，其源头都可以追溯到这篇文章。</p>
+<h2 id="以超链接为主的WEB"><a href="#以超链接为主的WEB" class="headerlink" title="以超链接为主的WEB"></a>以超链接为主的WEB</h2><p>1989年3 月，蒂姆·伯纳·李爵士（Tim Berners-Lee）向CERN递交了一份立项建议书，建议采用超文本技术（Hypertext）把CERN内部的各个实验室连接起来，在系统建成后，将可能扩展到全世界。</p>
+<p><img src="/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5%5C935893-20190707091638679-2026270082.png" alt="img"></p>
+<p>文中说明了超文本利用圆圈和箭头可以自由的描述任何事物，比使用层级结构的表格要灵活的多，特别是描述复杂系统，作用更加突出，这就是超文本的作用。这个思想也是现在比较流行的思维导图的核心思想，利用发散思维，建立联系。</p>
+<h2 id="已链接数据为核心的语义网"><a href="#已链接数据为核心的语义网" class="headerlink" title="已链接数据为核心的语义网"></a>已链接数据为核心的语义网</h2><p>语义网的概念也是由万维网联盟的蒂姆在1998年提出，它的核心是通过给万维网上的文档 （如：HTML文档、XML文档）添加能够被计算机所理解的语义“元数据”（外语：Meta data），从而使整个互联网成为一个通用的信息交换媒介。</p>
+<p>语义网不同于现在WWW，现有的WWW是面向文档而语义网则面向文档所表示的数据，而语义网更重视于计算机“理解与处理”，并且具有一定的判断、推理能力。</p>
+<p>2006年蒂姆·伯纳斯-李在普林斯顿大学演讲和后期接受媒体采访时公开表示，他最初将这种智能网络命名为语义网或许不够贴切，也许更准确的名称应该是数据网（外语：Data Web）。</p>
+<p><img src="/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5%5C935893-20190707091712841-1987031174.png" alt="img"></p>
+<h2 id="谷歌知识图谱-things-not-strings"><a href="#谷歌知识图谱-things-not-strings" class="headerlink" title="谷歌知识图谱,things,not strings"></a>谷歌知识图谱,things,not strings</h2><p>链接数据不断积累，数据量以几何量级增长，如何更好的使用这些数据，搜索引擎公司Google提出了知识图谱的概念。辛格博士曾经说过，The world is not made of strings , but is made of things. </p>
+<p>知识图谱的提出，目的在于更好的利用开放链接数据，将搜索字符串变为搜索真实世界中的事物，将一个事物通过内部特征（属性）和外部联系（关系），立体的呈现在人们面前，将知识图谱看作一张以关联关系为主的巨大图谱，图谱中，点代表客观事物，边代表了事物的属性或关系。</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/935893-20181229144559553-575365779.png" alt="img" style="zoom:67%;">
 ]]></content>
       <categories>
         <category>知识图谱</category>
