@@ -356,6 +356,39 @@
       </tags>
   </entry>
   <entry>
+    <title>String、StringBuffer、StringBuilder之间的联系</title>
+    <url>/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/</url>
+    <content><![CDATA[<p>今天做题遇见 <strong>反转字符串中的单词</strong> 这道题，给定一个字符串需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。题目链接：<a href="https://leetcode.cn/problems/reverse-words-in-a-string-iii/">557. 反转字符串中的单词 III - 力扣（LeetCode）</a>。<span id="more"></span></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;Let&#x27;s take LeetCode contest&quot;</span><br><span class="line">输出：&quot;s&#x27;teL ekat edoCteeL tsetnoc&quot;</span><br><span class="line"></span><br><span class="line">输入： s = &quot;God Ding&quot;</span><br><span class="line">输出：&quot;doG gniD&quot;</span><br></pre></td></tr></table></figure>
+
+<p>做题过程中，发现自己忘记了字符串的一些知识，所谓温故而知新。在此记录复习。</p>
+<p>在 java 中字符串属于对象，Java 提供了 String 类来创建和操作字符串。String 类是不可变类，即一旦一个 String 对象被创建以后，包含在这个对象中的字符序列是不可改变的，直至这个对象被销毁。</p>
+<p>Java 提供了两个可变字符串类 <strong>StringBuffer</strong> 和 <strong>StringBuilder</strong>，中文翻译为“字符串缓冲区”。</p>
+<p>StringBuilder 类是 JDK 1.5 新增的类，它也代表可变字符串对象。实际上，StringBuilder 和 StringBuffer 功能基本相似，方法也差不多。不同的是，StringBuffer 是线程安全的，而 StringBuilder 则没有实现线程安全功能，所以性能略高。因此在通常情况下，如果需要创建一个内容可变的字符串对象，则应该优先考虑使用 StringBuilder 类。</p>
+<p>StringBuffer、StringBuilder、String 中都实现了 CharSequence 接口。CharSequence 是一个定义字符串操作的接口，它只包括 length()、charAt(int index)、subSequence(int start, int end) 这几个 API。</p>
+<p>StringBuffer、StringBuilder、String 对 CharSequence 接口的实现过程不一样，</p>
+<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122937245.png" alt="image-20220605122937245" style="zoom:80%;">
+
+<p><strong>String、StringBuffer、StringBuilder 之间的区别：</strong></p>
+<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122516694.png" alt="image-20220605122516694" style="zoom:80%;">
+
+<p><strong>String:</strong></p>
+<p>对于String来说，是把数据存放在了常量池中，因为所有的String，默认都是以常量形式保存，且由final修饰，因此在线程池中它是线程安全的。因为每一个String当被创建好了以后，他就不再发生任何变化，但是它的执行速度是最差的。</p>
+<p>我们要创建String的时候，他在常量池中对这些信息进行处理，如果在程序中出现了大量字符串拼接的工作，效率是非常底下的。<br>因此使用场景是在少量字符串操作的时候才建议直接使用String来操作。</p>
+<p><strong>StringBuffer:</strong></p>
+<p>StringBuffer相对于StringBuilder效率要相对低一点，但也远比String要高的多。效率低的原因：对于StringBuffer来说更多的考虑到了多线程的情况，在进行字符串操作的时候，它使用了synchronize关键字，对方法进行了同步处理。因此StringBuffer适用于多线程环境下的大量操作。</p>
+<p><strong>StringBuilder:</strong></p>
+<p>线程安全与线程不安全：<br>在进行多线程处理的时候，如果多个线程对于这一个对象同时产生操作，会产生预期之外的结果。对于StringBuilder来说，执行效率虽然高，但是因为线程不安全，所以不建议在多线程的环境下对同一个StringBuilder对象进行操作。因此StringBuilder适用于单线程环境下的大量字符串操作。</p>
+<p><strong>参考：</strong><a href="http://c.biancheng.net/view/5822.html">String、StringBuffer和StringBuilder类的区别 (biancheng.net)</a></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo + github 搭建个人博客</title>
     <url>/2022/02/20/hello-world/</url>
     <content><![CDATA[<p>搭建博客最重要的就是<strong>耐心</strong>和<strong>坚持</strong>。搭建时候遇见许多问题(权限、版本等等)，经过耐心的搜索解决方案逐一解决还是非常开心的！<span id="more"></span></p>
@@ -373,7 +406,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#105;&#116;&#x40;&#103;&#x69;&#116;&#104;&#117;&#x62;&#x2e;&#99;&#111;&#109;">&#103;&#105;&#116;&#x40;&#103;&#x69;&#116;&#104;&#117;&#x62;&#x2e;&#99;&#111;&#109;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#105;&#116;&#x40;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#46;&#x63;&#x6f;&#109;">&#103;&#105;&#116;&#x40;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#46;&#x63;&#x6f;&#109;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -387,7 +420,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#46;&#99;&#111;&#x6d;">&#103;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#46;&#99;&#111;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#x67;&#105;&#x74;&#x40;&#x67;&#105;&#116;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;">&#x67;&#105;&#x74;&#x40;&#x67;&#105;&#116;&#104;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -483,39 +516,6 @@
       </tags>
   </entry>
   <entry>
-    <title>String、StringBuffer、StringBuilder之间的联系</title>
-    <url>/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/</url>
-    <content><![CDATA[<p>今天做题遇见 <strong>反转字符串中的单词</strong> 这道题，给定一个字符串需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。题目链接：<a href="https://leetcode.cn/problems/reverse-words-in-a-string-iii/">557. 反转字符串中的单词 III - 力扣（LeetCode）</a>。<span id="more"></span></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;Let&#x27;s take LeetCode contest&quot;</span><br><span class="line">输出：&quot;s&#x27;teL ekat edoCteeL tsetnoc&quot;</span><br><span class="line"></span><br><span class="line">输入： s = &quot;God Ding&quot;</span><br><span class="line">输出：&quot;doG gniD&quot;</span><br></pre></td></tr></table></figure>
-
-<p>做题过程中，发现自己忘记了字符串的一些知识，所谓温故而知新。在此记录复习。</p>
-<p>在 java 中字符串属于对象，Java 提供了 String 类来创建和操作字符串。String 类是不可变类，即一旦一个 String 对象被创建以后，包含在这个对象中的字符序列是不可改变的，直至这个对象被销毁。</p>
-<p>Java 提供了两个可变字符串类 <strong>StringBuffer</strong> 和 <strong>StringBuilder</strong>，中文翻译为“字符串缓冲区”。</p>
-<p>StringBuilder 类是 JDK 1.5 新增的类，它也代表可变字符串对象。实际上，StringBuilder 和 StringBuffer 功能基本相似，方法也差不多。不同的是，StringBuffer 是线程安全的，而 StringBuilder 则没有实现线程安全功能，所以性能略高。因此在通常情况下，如果需要创建一个内容可变的字符串对象，则应该优先考虑使用 StringBuilder 类。</p>
-<p>StringBuffer、StringBuilder、String 中都实现了 CharSequence 接口。CharSequence 是一个定义字符串操作的接口，它只包括 length()、charAt(int index)、subSequence(int start, int end) 这几个 API。</p>
-<p>StringBuffer、StringBuilder、String 对 CharSequence 接口的实现过程不一样，</p>
-<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122937245.png" alt="image-20220605122937245" style="zoom:80%;">
-
-<p><strong>String、StringBuffer、StringBuilder 之间的区别：</strong></p>
-<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122516694.png" alt="image-20220605122516694" style="zoom:80%;">
-
-<p><strong>String:</strong></p>
-<p>对于String来说，是把数据存放在了常量池中，因为所有的String，默认都是以常量形式保存，且由final修饰，因此在线程池中它是线程安全的。因为每一个String当被创建好了以后，他就不再发生任何变化，但是它的执行速度是最差的。</p>
-<p>我们要创建String的时候，他在常量池中对这些信息进行处理，如果在程序中出现了大量字符串拼接的工作，效率是非常底下的。<br>因此使用场景是在少量字符串操作的时候才建议直接使用String来操作。</p>
-<p><strong>StringBuffer:</strong></p>
-<p>StringBuffer相对于StringBuilder效率要相对低一点，但也远比String要高的多。效率低的原因：对于StringBuffer来说更多的考虑到了多线程的情况，在进行字符串操作的时候，它使用了synchronize关键字，对方法进行了同步处理。因此StringBuffer适用于多线程环境下的大量操作。</p>
-<p><strong>StringBuilder:</strong></p>
-<p>线程安全与线程不安全：<br>在进行多线程处理的时候，如果多个线程对于这一个对象同时产生操作，会产生预期之外的结果。对于StringBuilder来说，执行效率虽然高，但是因为线程不安全，所以不建议在多线程的环境下对同一个StringBuilder对象进行操作。因此StringBuilder适用于单线程环境下的大量字符串操作。</p>
-<p><strong>参考：</strong><a href="http://c.biancheng.net/view/5822.html">String、StringBuffer和StringBuilder类的区别 (biancheng.net)</a></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java基础复习</title>
     <url>/2022/05/24/java%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<p>今天在刷牛客的时候，发现自己对一些数据结构的基础知识并不是很清晰。所以在这里做个笔记整理一下。<span id="more"></span></p>
@@ -552,6 +552,335 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python</title>
+    <url>/2022/03/14/python/</url>
+    <content><![CDATA[<h3 id="Python简介"><a href="#Python简介" class="headerlink" title="Python简介"></a>Python简介</h3><p>python 这一伟大语言诞生于1989年圣诞节期间，创始人是荷兰的Guido van Rossum。(python有两个主要的大版本: python2 和 python3。本文基于 python3 开发)<span id="more"></span></p>
+<p>由于课程要求，利用 <strong>Anaconda</strong> 包管理器安装和管理 python 软件，选用了 <strong>jupyter notebook</strong> 编辑器。</p>
+<p>python官网：<a href="https://www.python.org/">Welcome to Python.org</a></p>
+<p>数据科学计算平台 Anaconda：Anaconda是一个集成的Python数据科学环境，Anaconda除了有Python外，还安装了180多个用于数据分析的第三方库，而且可 以使用conda命令安装第三方库和创建多个环境。相对于只安装 Python而言，避免了安装第三方库的麻烦。Anaconda的优点是已经内置了Jupyter notebook交互式计算环境、 Spyder集成开发环境，以及NumPy、pandas、Matplotlib、SciPy等各 类主要数据分析模块。Anaconda还是一个开源的包、环境管理器，可以在同一个机器上安装不同版本的软件包及其依赖，并能够在不同的环境之间切换。使用 Anaconda可以方便地进行包的管理（包的安装、卸载、更新），对于需要的各种Python的第三方包，可以直接在Anaconda中进行下载。Anaconda官网： <a href="https://www.anaconda.com/">Anaconda | The World’s Most Popular Data Science Platform</a></p>
+<p><strong>常用类库：</strong></p>
+<p><strong>Numpy：</strong>NumPy软件包是Python生态系统中数据分析、机器学习和科 学计算的主力军。它极大地简化了向量和矩阵的操作处理。除了能对数值数据进行切片（slice）和切块（dice）外， 使用NumPy还能为处理和调试上述库中的高级实例带来极大 便利。一般被很多大型金融公司使用，以及核心的科学计算组织 如Lawrence Livermore、NASA用其处理一些本来使用C++、 Fortran或Matlab等所做的任务。</p>
+<p><strong>SciPy：</strong> SciPy（<a href="http://scipy.org)是基于numpy开发的高级模块,/">http://scipy.org）是基于NumPy开发的高级模块，</a> 依赖于NumPy，提供了许多数学算法和函数的实现，可便 捷快速地解决科学计算中的一些标准问题，例如数值积分 和微分方程求解、最优化、甚至包括信号处理等。作为标准科学计算程序库， SciPy它是Python科学计算程序 的核心包，包含了科学计算中常见问题的各个功能模块， 不同子模块适用于不同的应用。</p>
+<p><strong>Pandas：</strong>Pandas提供了大量快速便捷处理数据的函数和方法。它是使Python成为强大而高效的数据分析环境的重要因素之一。 Pandas中主要的数据结构有Series、DataFrame和Panel。其中Series是一维数组，与NumPy中的一维array以及Python基本的数据结构List类似；DataFrame是二维的表格型数据结 构，可以将DataFrame理解为Series的容器； Panel是三维的 数组，可看作为DataFrame的容器。</p>
+<p><strong>Matplotlib：</strong>Matplotlib是Python 的绘图库，是用于生成出版质量 级别图形的桌面绘图包，让用户很轻松地将数据图形化，同时还提供多样化的输出格式。</p>
+<p><strong>Seaborn：</strong>Seaborn在Matplotlib基础上提供了一个绘制统计图形的高级接口，为数据的可视化分析工作提供了极大的 方便，使得绘图更加容易。用Matplotlib最大的困难是其默认的各种参数，而 Seaborn则完全避免了这一问题。一般来说，Seaborn 能满足数据分析90%的绘图需求。</p>
+<p><strong>Scikit-learn：</strong>Scikit-learn是专门面向机器学习的Python开源框架， 它实现了各种成熟的算法，容易安装和使用。 Scikit-learn的基本功能有分类、回归、聚类、数据 降维、模型选择和数据预处理六大部分。</p>
+<p>python库的一些常用命令:</p>
+<p><strong>import 模块名 [as 别名]</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#导入random随机函数模块中的所有对象并设置别名</span></span><br><span class="line"><span class="keyword">import</span> random <span class="keyword">as</span> rd</span><br><span class="line"><span class="comment">#通过别名访问模块中的对象</span></span><br><span class="line"><span class="comment">#返回[1,10]之间的一个随机整数</span></span><br><span class="line">rd.randint(<span class="number">1</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>from 模块名 import 对象名 [as 别名]</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#导入random模块中的randint,使用别名rt</span></span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint <span class="keyword">as</span> rt</span><br><span class="line"><span class="comment">#通过别名使用randint函数</span></span><br><span class="line">rt(<span class="number">1</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="语法常识"><a href="#语法常识" class="headerlink" title="语法常识"></a>语法常识</h3><p><strong>命名规则：</strong>驼峰规则</p>
+<p><strong>代码缩进：</strong>Tab和空格来进行缩进，注意不要混用。( Python中的缩进代表程序块的作用域，如果采用了错误的代码缩进，会导致程序抛出异常) </p>
+<p><strong>代码注释：</strong>Python的单行注释语句用#开始，从#开始一直到末尾的部分是注释部分。如果要进行多行的注释可以使用三个单引号（’’’） 或者双引号（”””）将注释内容包围。单引号和双引号在使用上没有本质的差别。</p>
+<p><strong>中文编码：</strong>Python中使用<strong>函数ord(x)<strong>查看x字符的编码，编码占2 个字节，因此一般再使用</strong>hex函数</strong>把编码转为十六进制显示。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(<span class="string">&quot;A&quot;</span>)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(<span class="string">&quot;我&quot;</span>)))</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键字：</strong>关键字是Python语言本身使用的标识符，被Python语言保留，每个关键字都有其特殊的意义 ，因而不能用作标识符，否则容易产生编译错误。如False、True 、None 、and、or、not、as ………….</p>
+<p>检查是否是Python中的关键字（保留字符），用 <strong>keyword.iskeyword (word)</strong> </p>
+<p><strong>_ ：</strong>单独的下划线（_）用于表示上一次运算的结果。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In[]:<span class="number">2</span>*<span class="number">3</span></span><br><span class="line">Out[]:<span class="number">6</span></span><br><span class="line">In[]:_*<span class="number">10</span></span><br><span class="line">Out[]:<span class="number">60</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>内置函数：</strong></p>
+<p>类型转换函数：chr(97) ord(‘a’) str(3.15) int(3.3) </p>
+<p>数学运算函数：abs(x) max(3,2,5,1) pow(x,y)</p>
+<p><strong>变量赋值：</strong></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=<span class="number">0</span>;y=<span class="number">0</span>;z=<span class="number">0</span> <span class="comment">#多个语句间用分号分隔</span></span><br><span class="line">a, b = <span class="number">1</span>, <span class="number">2</span> <span class="comment">#采用多变量同时赋值</span></span><br><span class="line">c=d=<span class="number">3</span>		<span class="comment">#采用链式赋值</span></span><br><span class="line"><span class="built_in">print</span>(x,y,z,a,b,c,d)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>type()函数：</strong>一般形式：type(变量名)，其作用是查询变量的数字类型。</p>
+<p><strong>id()函数：</strong>是获取变 量的内存地址。</p>
+<p><strong>isinstance()函数：</strong>判断一个数值是否是某种数字类型。 </p>
+<p><strong>Python中有六个标准的数据类型：</strong></p>
+<ul>
+<li>number（数字）</li>
+<li>string（字符串） </li>
+<li>list（列表）</li>
+</ul>
+<p>列表是Python里面的容器之一，由方括号和方括号括起来的数据构成。里面的数据可以是整数、浮点数、字符串， 也可以是另一个列表或者其它的数据结构。列表里面的每 一项叫作列表的一个元素，每个元素之间使用英文逗号隔开，</p>
+<p>例如</p>
+<p>list_1 &#x3D; [1, 2, 3, 4, 5]                     #列表里面有5个元素，全部是数字 </p>
+<p>list_2 &#x3D; [‘abc’, ‘x’, ‘’, ‘kkk’]             #列表里面有4个元素，全部是字符串</p>
+<p>list_3 &#x3D; []                                         #空列表 </p>
+<p>list_4 &#x3D; [123, ‘xyz’, 3.14, [1, 2, ‘yy’]] #由多种元素组合起来的列表</p>
+<ul>
+<li>tuple（元组）</li>
+</ul>
+<p>元组是Python里面的容器之一，由小括号和小括号括起来 的数据构成。它的外型和列表非常像，只不过列表使用的 是方括号，元组使用的是小括号。“元组”中的“元”和 “二元一次方程”中的“元”是同一个意思，“组”就是组合的意思。</p>
+<p>tuple_1 &#x3D; (1, 2, 3, 4, 5)         #元组里面有5个元素，全部为数字 </p>
+<p>tuple_2 &#x3D; (‘abc’, ‘x’, ‘’, ‘kkk’) #元组里面有4个元素，全部是字符串 </p>
+<p>tuple_3 &#x3D; ()                             #空元组 </p>
+<p>tuple_4 &#x3D; (123, ‘xyz’, [1, ‘t’, ‘z’], (‘o’, ‘pp’)) #由多种元素组合起来的元组</p>
+<ul>
+<li>dictionary（字典）</li>
+<li>set（集合）</li>
+</ul>
+<p>不可变数据类型有：Number、String、Tuple； 可变数据类型有：List、Dictionary、Set。</p>
+<p><strong>元组和列表的区别：</strong></p>
+<p>列表: L&#x3D;[1,2,5,7]  </p>
+<p>元组: T&#x3D;(1,2,5,7)</p>
+<p>列表生成以后还可以往里面继续添加数据，也可以从里面删除数据；但是元组一旦生成就不能修改。如果它里面只 有整数、浮点数、字符串、另一个元组，就既不能添加数据，也不能删除数据，还不能修改里面数据的值。但是如 果元组里面包含了一个列表，那么这个元组里面的列表依旧可以变化。</p>
+<p>TT&#x3D;([a,b,c],12,“Hello”) </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">example_list=[<span class="string">&#x27;我&#x27;</span>,<span class="string">&#x27;是&#x27;</span>,<span class="string">&#x27;列&#x27;</span>,<span class="string">&#x27;表&#x27;</span>]</span><br><span class="line">example_tuple=[<span class="string">&#x27;我&#x27;</span>,<span class="string">&#x27;是&#x27;</span>,<span class="string">&#x27;元&#x27;</span>,<span class="string">&#x27;组&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>((example_list[<span class="number">1</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_tuple[<span class="number">2</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_list[-<span class="number">2</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_tuple[-<span class="number">3</span>]))</span><br></pre></td></tr></table></figure>
+
+<p><strong>字典：</strong></p>
+<p>字典就是使用大括号括起来的键（Key）值（Value） 对（Key-Value对）。每个键值对之间使用英文逗号分隔， 每个Key与Value之间使用英文冒号分隔。</p>
+<p>Key可以使用中文、英文或者数字，但是不能重复。Value 可以是任意字符串、数字、列表、元组或者另一个字典， Value可以重复。</p>
+<p>可以通过Key来从字典中读取对应的Value，有3种主要的格式：  </p>
+<p>变量名[key]  </p>
+<p>变量名.get(key)  </p>
+<p>变量名.get(key, ‘在找不到key的情况下使用这个值’) </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dict1=&#123;<span class="number">1</span>:<span class="string">&quot;good&quot;</span>,<span class="number">2</span>:<span class="string">&quot;bad&quot;</span>,<span class="number">3</span>:<span class="string">&quot;not good&quot;</span>&#125;</span><br><span class="line">value1=dict1.get(<span class="number">1</span>,<span class="string">&quot;1&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(value1)</span><br><span class="line"></span><br><span class="line">good</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>集合：</strong></p>
+<p>集合是使用大括号括起来的各种数据，可以看作没有 Value的字典。<strong>集合里面的元素不能重复。</strong>集合也是无序的。集合最大的应用之一就是去重。例如，<strong>把一个带有重复元素的列表先转换为集合，再转换回列表，那么重复元素就只会保留一个</strong>。把列表转换为集合需要使用set()函数， 把集合转换为列表使用list()函数：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">duplicated_list = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;a&#x27;</span>]</span><br><span class="line">unique_list = <span class="built_in">list</span>(<span class="built_in">set</span>(duplicated_list))</span><br><span class="line"><span class="built_in">print</span>(unique_list)</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;s&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="运算符与表达式"><a href="#运算符与表达式" class="headerlink" title="运算符与表达式"></a>运算符与表达式</h3><p>算术运算符（ +、–、*、&#x2F;、**、&#x2F;&#x2F;、％ ）</p>
+<p>关系运算符（ &gt;、&lt;、&gt;&#x3D;、&lt;&#x3D;、&#x3D; &#x3D;、!&#x3D; ）。  </p>
+<p>逻辑运算符（and、or、not ）。  </p>
+<p>位运算符（ &lt;&lt;、&gt;&gt;、~、|、^、&amp; ）。  </p>
+<p>赋值运算符（ &#x3D;、复合赋值运算符 ）。 </p>
+<p>成员运算符（ in、not in ）。  </p>
+<p>同一运算符（ is、is not ）。  </p>
+<p>下标运算符（ [ ] ）。  </p>
+<p>其他（ 如函数调用运算符（））。 </p>
+<p><strong>隐式类型转换：</strong></p>
+<p>当有一个操作数的类型是复数时，其它数据都自动转换成复数类型。  </p>
+<p>当有一个操作数的类型是小数时，其它数据都自动转换成小数类型。  </p>
+<p>不支持数字和字符之间的隐式转换。  </p>
+<p>数值的除法（&#x2F;）总是返回一个浮点数，要获取整数使用 &#x2F;&#x2F;操作符。  </p>
+<p>混合计算时，Python会把整型转换成为浮点数。 </p>
+<p>** 乘方运算</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In[]:<span class="number">4</span>*<span class="number">3</span>**<span class="number">2</span></span><br><span class="line">Out[]:<span class="number">36</span></span><br><span class="line"></span><br><span class="line">In[]:<span class="string">&quot;a&quot;</span>*<span class="number">10</span></span><br><span class="line">Out[]:<span class="string">&#x27;aaaaaaaaaa&#x27;</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">True</span> <span class="keyword">and</span> <span class="number">0</span></span><br><span class="line">Out[]:<span class="number">0</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">False</span> <span class="keyword">and</span> <span class="number">12</span></span><br><span class="line">Out[]:<span class="literal">False</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">True</span> <span class="keyword">or</span> <span class="number">0</span></span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In[]:<span class="literal">False</span> <span class="keyword">or</span> <span class="number">12</span></span><br><span class="line">Out[]:<span class="number">12</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">In[]:x=y=<span class="number">2.5</span></span><br><span class="line">	z=<span class="number">2.5</span></span><br><span class="line">	x <span class="keyword">is</span> <span class="keyword">not</span> z</span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;a&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;abcd&#x27;</span></span><br><span class="line">Out[]: <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;ac&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;abcd&#x27;</span></span><br><span class="line">Out[]:<span class="literal">False</span> </span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;a&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">&#x27;b,c,d&#x27;</span></span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="number">3</span> <span class="keyword">not</span> <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">Out[]:<span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>链式关系表达式:</strong></p>
+<p>相当于多个表达式之间逻 辑与的关系。</p>
+<p> 1 &lt; 2 &lt; 3 #等价于1 &lt; 2 and 2 &lt; 3  </p>
+<p>2 &gt;&#x3D; 1 &gt; 10 #等价于2 &gt;&#x3D; 1 and 1 &gt; 10 </p>
+<p><strong>Python中的函数分为内置函数和模块函数。</strong> </p>
+<p><strong>内置函数:</strong></p>
+<ul>
+<li>内置函数（BIF，built-in functions）是Python内置对 象类型之一，不需要导入任何模块即可使用一类函数。 </li>
+<li>执行dir(<strong>builtins</strong>)可以列出所有的内置函数;</li>
+<li>使用help(函数名)可以查看某个函数的用法;  abs(x):返回数字x的绝对值或复数x的模;  bin(x)、oct(x)、hex(x):把整数x转换为二进制、八进 制、十六进制的表示形式。  bytes(x)：把指定对象x转换为字节串表示形式。 </li>
+<li>float(x)：把整数或字符串x转换为浮点数；</li>
+<li>int(x[, d])：返回实数（float）、分数（Fraction）或 高精度实数（Decimal）x的整数部分，或把d进制的字符 串x转换为十进制并返回，d默认为十进制；</li>
+<li>chr(x)：返回Unicode编码为x的字符；</li>
+<li>ord(x)：返回1个字符x的Unicode编码；</li>
+<li>isinstance(obj, type)：测试对象obj是否属于指定类型 type；</li>
+<li>type(obj)：返回对象obj的类型；</li>
+<li>max(x)、 min(x)：返回可迭代对象x中的最大值、最小值；</li>
+<li>len(obj)：返回对象obj包含的元素个数；</li>
+<li>reversed(seq):返回seq中所有元素逆序后的迭代器对象;</li>
+<li>sorted(iterable, key&#x3D;None, reverse&#x3D;False):返回排序后的列表，其中iterable表示要排序的序列或迭代对象， key用来指定排序规则或依据，reverse用来指定升序或降序，默认为升序。该函数不改变iterable内任何元素的顺序；</li>
+<li>sum(x, start&#x3D;0)：返回序列x中所有元素之和；</li>
+<li>exit()：退出当前解释器环境；</li>
+</ul>
+<p><strong>模块函数:</strong></p>
+<ul>
+<li><p>math模块 </p>
+<p>math.pi 圆周率pi </p>
+<p>math.e 自然常数e </p>
+<p>math.tau 数学常数τ </p>
+<p>math.inf 正无穷大 </p>
+<p>math.nan 非浮点数标记，NaN(Not a  Number)</p>
+</li>
+<li><p>random模块</p>
+<p>random.random() 返回[0.0,1.0]区间内的一个随机小数 random.random() 返回 0.9523521796999529</p>
+<p>random.uniform(a,b) 返回[a,b]区间内的一个随机小数 random.uniform(1,3) 返回 2.3403540401554146</p>
+<p>random.randint(a,b) 返回[a,b]区间内的一个随机整数 random.randint(1,3) 返回2</p>
+<p>random.randrange([ start],end,[step]) 返回[start,end)区间内的一个整数， start和step默认都是1 random.randrange(1,10)返回 5</p>
+<p>random.choice() 随机返回给定序列中的一个元素 random.choice([‘a’,’b’,’c’]) 返回’c‘</p>
+<p>random.shuffle(x,[ra ndom]) 将可变序列的所有元素随机排列 random.shuffle([1,2,3,4]) 返回[1, 4, 3, 2]</p>
+</li>
+</ul>
+<h3 id="输入输出与字符串"><a href="#输入输出与字符串" class="headerlink" title="输入输出与字符串"></a>输入输出与字符串</h3><p>input(“提示字符串”)</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="built_in">input</span>(<span class="string">&quot;请输入:&quot;</span>)</span><br><span class="line"><span class="built_in">type</span>(x)</span><br></pre></td></tr></table></figure>
+
+<p>input() 函数的返回结果都是字符串，实际使用时需要将其转换为相应的类型再进行处理。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入:&quot;</span>))</span><br><span class="line"><span class="built_in">type</span>(x)</span><br></pre></td></tr></table></figure>
+
+<p>input() 结合 <strong>eval()</strong> 可同时接受多个数据输入， 多个输入之间的间隔符必须是逗号。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a,b,c = <span class="built_in">eval</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入a,b,c三个数：&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(a,b,c,sep=<span class="string">&quot;,&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>实现多值输入，也可以使用 <strong>split()</strong> 方法进行输 入值的分割，不同的值之间以空格分隔。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x,y = <span class="built_in">input</span>(<span class="string">&#x27;请输入2个值:&#x27;</span>).split()</span><br><span class="line"><span class="built_in">print</span>(x,y,sep=<span class="string">&#x27;,&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>print()函数的格式如下： </p>
+<p>print([objects, sep&#x3D;’ ‘ &#x2F; end&#x3D;’\n’ &#x2F; file&#x3D;sys.stdout &#x2F; flush&#x3D;False) </p>
+<p>objects是输出的对象，多个对象之间用英文逗号分割； sep是对象之间插入的分隔符，默认是空格； end是添加在输出文本最后的一个字符，默认是换行符； file指定输出内容发送到的文件，默认是显示器； flush指定输出的内容是否立即写文件。</p>
+<p>字符串格式化%输出：</p>
+<p>“%格式控制符”%实际参数</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;名字: %s,年龄: %d&#x27;</span> %(<span class="string">&#x27;张三&#x27;</span>,<span class="number">20</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>字符串的 format 方法:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;:计算机&#123;&#125;的CPU占用率为&#123;&#125;%.&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;2022-03-15&#x27;</span>,<span class="string">&#x27;python&#x27;</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<p>使用位置（序号）索引：<br>花括号内部可以写上待输出的目标字符串的索引，也可以省略。如果省略，则按format后面的括号里的待输出的目标字符串顺序依次替换。 </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;1&#125;&#123;0&#125;&#123;1&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;言&#x27;</span>,<span class="string">&#x27;文&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>使用“{序号：格式说明符}” 形式的格式说明符：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&#123;0:.2f&#125;,&#123;1&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">3.1415926</span>,<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
+
+<p> 使用关键字索引：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello,&#123;boy&#125; and &#123;girl&#125;!&quot;</span>.<span class="built_in">format</span>(boy=<span class="string">&quot;John&quot;</span>,girl=<span class="string">&quot;Mary&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&#123;a&#125;&#123;b&#125;&quot;</span>.<span class="built_in">format</span>(b=<span class="string">&quot;3&quot;</span>,a=<span class="string">&quot;Python&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>使用属性索引：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">c = <span class="number">3</span>-<span class="number">5j</span></span><br><span class="line"><span class="built_in">print</span>((<span class="string">&#x27;复数&#123;0&#125;的实部为&#123;0.real&#125;,虚部为&#123;0.imag&#125;。&#x27;</span>.<span class="built_in">format</span>(C)))</span><br></pre></td></tr></table></figure>
+
+<p>使用下标索引：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">coord = (<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;X:&#123;0[0]&#125;; Y:&#123;0[1]&#125;;Z:&#123;0[2]&#125;&#x27;</span>.<span class="built_in">format</span>(coord))</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>字符串访问方式：</strong></p>
+<p>左闭右开原则</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&quot;Python大数据基础与实战&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">0</span>],<span class="built_in">str</span>[<span class="number">5</span>],<span class="built_in">str</span>[-<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">2</span>:<span class="number">6</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[:<span class="number">6</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">6</span>:])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[:])</span><br></pre></td></tr></table></figure>
+
+<p><strong>字符串的分片：</strong></p>
+<p><strong>str[i:j:k]：</strong>i是索引起始位置，j是索引结束位置但<strong>不包括位置上的字符</strong>，索引编号每次增加的步长为k。 </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str1=<span class="string">&quot;Python&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">2</span>:<span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">0</span>:-<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">1</span>:<span class="number">5</span>:<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+
+<p><strong>字符串查找</strong></p>
+<ul>
+<li><strong>find() 和 rfind()</strong> 函数分别用来查找一个字符串在另一个字符串指定范围（默认是整个字符串）中<strong>首次</strong>和最后一次出现的位置，如果不存在则返回-1；</li>
+<li><strong>index() 和 rindex()</strong> 方法用来返回一个字符串在另一个字符串指定范围中<strong>首次</strong>和<strong>最后一次</strong>出现的位置，如果不存在则抛出异常；</li>
+<li><strong>count()<strong>方法用来返回一个字符串在当前字符串中</strong>出现的次数</strong>。</li>
+</ul>
+<p><strong>字符串分割</strong></p>
+<ul>
+<li>**split()、rsplit()**方法分别用来以指定字符为分隔符，把当前字符串从左往右、从右往左分隔成多个字符串，并返回包含分隔结果的列表。</li>
+<li>对于 <strong>split() 和 rsplit()</strong> 方法，如果不指定分隔符，则字符串中的任何空白符号（空格、换行符、制表符等）都将被认为是分隔符， 把连续多个空白字符看作一个分隔符。</li>
+<li>对于split() 和rsplit() 方法，如果不指定分隔符，则字符串中的任何空白符号（空格、换行符、制表符等）都将被认为是分隔符， 把连续多个空白字符看作一个分隔符。</li>
+</ul>
+<p><strong>字符串的连接</strong></p>
+<p><strong>join()</strong> 方法用来将列表中的多个字符串进行连接，并且在相邻两个字符串之间插入指定字符。示例如下：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">test = [<span class="string">&quot;I&quot;</span>,<span class="string">&quot;love&quot;</span>,<span class="string">&quot;Python&quot;</span>]</span><br><span class="line">s = <span class="string">&quot;&quot;</span>.join(test)	<span class="comment">#指定插入字符为空格</span></span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：使用“+”运算符也可以连接字符串，但是效率 较低，应优先使用join()方法。</strong></p>
+<p><strong>字符串的大小写转换</strong></p>
+<p>lower() 返回小写字符串，<strong>upper()</strong> 返回<strong>大写</strong>字符串， <strong>capitalize()</strong> 将<strong>字符串****首字符大写</strong>、<strong>title()</strong> 将字符串中每个<strong>单词首字符大写</strong>、<strong>swapcase()</strong> 完成<strong>大小写互换</strong>。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = <span class="string">&quot;i am a teacher&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s.lower())</span><br><span class="line"><span class="built_in">print</span>(s.upper())</span><br><span class="line"><span class="built_in">print</span>(s.capitalize())</span><br><span class="line"><span class="built_in">print</span>(s.title())</span><br><span class="line"><span class="built_in">print</span>(s.swapcase())</span><br></pre></td></tr></table></figure>
+
+
+
+<p> <strong>字符串替换</strong></p>
+<p>replace() 方法把字符串中的 old（旧字符串）替换成 new(新字符串)，如果指定第三个参数max，则替换不超过 max次。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&quot;this is string example..wow!!!this is really string&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>.replace(<span class="string">&quot;is&quot;</span>,<span class="string">&quot;was&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>.replace(<span class="string">&quot;is&quot;</span>,<span class="string">&quot;was&quot;</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>字符串删除</strong></p>
+<p><strong>strip()</strong> 删除字符串<strong>两端指定的字符</strong>，<strong>rstrip() 删除</strong>字符串<strong>右端</strong>指定字符，<strong>lstrip()</strong> 删除字符串<strong>左端</strong>指定字符。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = <span class="string">&quot; he is a student\t\t&quot;</span></span><br><span class="line"><span class="comment">#删除s左右两端的的空白字符</span></span><br><span class="line"><span class="built_in">print</span>(s.strip())</span><br><span class="line"><span class="built_in">print</span>(s.rstrip(<span class="string">&quot;\t&quot;</span>))</span><br><span class="line"><span class="string">&#x27;aabbccddeeeffg&#x27;</span>.strip(<span class="string">&#x27;gaef&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>字符串测试</strong></p>
+<p>isalnum()、isalpha()、isdigit()、isdecimal()、isnumeric()、 isspace()、isupper()、islower()，分别测试字符串是否为数字或字母、是否为字母、是否为数字字符、是否为空白字符、是否为大写字母以及是否为小写字母。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1234abcd&#x27;</span>.isalnum())</span><br><span class="line"><span class="comment">#全部为英文字母时返回True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1234abcd&#x27;</span>.isalpha())</span><br><span class="line"><span class="comment">#全部为数字时返回True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1234abcd&#x27;</span>.isdigit())</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>eval()</strong></p>
+<p>内置函数eval()尝试把任意字符串转化为Python表达式并求值。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&quot;10 * 2 / 5&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">4.0</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>startswith()、endswith()</strong></p>
+<p>这两个方法用来判断字符串是否以指定字符串开始 或者结束。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;test.py&quot;</span>.endswith((<span class="string">&quot;.py&quot;</span>,<span class="string">&quot;.cpp&quot;</span>,<span class="string">&quot;.java&quot;</span>))) <span class="comment"># True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;test.py&quot;</span>.startswith(<span class="string">&quot;test&quot;</span>,<span class="number">0</span>))			  <span class="comment"># True	</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>center()、ljust()、rjust()</strong></p>
+<p>返回指定宽度的新字符串，原字符串居中、左对齐或右对齐出现在新字符串中，如果指定的宽度大于字符串长度，则使用指定的字符（默认为空格）填充。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;let&#x27;s begin&quot;</span>.center(<span class="number">20</span>,<span class="string">&quot;+&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;let&#x27;s begin&quot;</span>.ljust(<span class="number">20</span>,<span class="string">&quot;-&quot;</span>))</span><br></pre></td></tr></table></figure>
+
+<p> ++++let’s begin+++++</p>
+<p>let’s begin———</p>
+<p><strong>字符串对象常用的方法</strong></p>
+<ul>
+<li><p><strong>字母大小写转换</strong></p>
+<ul>
+<li><p>s.upper():全部转换为大写字母。</p>
+</li>
+<li><p>s.lower():全部转换为小写字母。</p>
+</li>
+<li><p>s.swapcase():字母大小写互换。</p>
+</li>
+<li><p>s.capitalize():句子首字母大写，其余小写。</p>
+</li>
+<li><p>s.title():单词首字母大写。</p>
+<p>其中，s是一个字符串对象</p>
+</li>
+</ul>
+</li>
+<li><p><strong>字符串搜索</strong></p>
+<ul>
+<li>s.find(substr,[start,[end]])：返回s中出现substr的第1个字符的编号，如果s中没有substr则返回-1。start和end作用就相当于在s[start:end]中搜索。</li>
+<li>s.index(substr,[start,[end]])：与find()相同，只是在s中没有substr时，会返回一个运行错误。</li>
+<li>s.rfind(substr,[start,[end]])：<strong>返回s中最后出现的substr的第1个字符的编号</strong>，如果s中没有substr则返回-1，也就是说<strong>从右边算起的第1次出现的substr的首字符编号。</strong></li>
+<li>s.rindex(substr,[start,[end]])：与rfind()相同，只是在s中没有substr时，会返回一个运行时错误。</li>
+<li>s.count(substr,[start,[end]])：计算substr在s中出现的次数。</li>
+<li>s.startswith(prefix,[start,[end]])：是否<strong>以prefix开头</strong>，若是返回True，否则返回False。</li>
+<li>s.endswith(suffix,[start[end]])：<strong>以suffix结尾</strong>，若是返回 True，否则返回False。</li>
+</ul>
+</li>
+<li><p><strong>字符串替换</strong></p>
+<ul>
+<li>s.replace(oldstr,newstr,[count])：把s中的oldster替换为 newstr，count为替换次数。这是替换的通用形式，还有一些函数进行特殊字符的替换。</li>
+<li>s.strip([chars])：把s中前后chars中有的字符全部去掉，可以理解为把s前后chars替换为None。默认去掉前后空格。</li>
+<li>s.lstrip([chars])：把s左边chars中有的字符全部去掉。默认去掉左边空格。</li>
+<li>s.rstrip([chars])：把s右边chars中有的字符全部去掉。默认去掉右边空格。</li>
+<li>s.expandtabs([tabsize])：把s中的tab字符替换为空格，每个tab替换为tabsize个空格，默认是8个。</li>
+</ul>
+</li>
+<li><p><strong>字符串的拆分与组合</strong></p>
+<ul>
+<li>s.split([sep,[maxsplit]])：以sep为分隔符，把<strong>字符串s拆分成一个列表</strong>。默认的分隔符为空格。<strong>maxsplit表示拆分的次数</strong>，默认取-1，表示无限制拆分。</li>
+<li>s.rsplit([sep,[maxsplit]])：从右侧把字符串s拆分成一个列表。</li>
+<li>s.splitlines([keepends])：把s按行拆分为一个列表。 keepends是一个逻辑值，如果为True，则每行拆分后会保留行分隔符。</li>
+<li><strong>s.join(seq)：</strong>把seq代表的序列组合成字符串，用s将序列各元素连接起来。字符串中的字符是不能修改的，如果要修改，通常的方法是，用 list()函数把字符串s变为以单个字符为成员的列表(使用语句s&#x3D;list(s))，再使用给列表成员赋值的方式改变值(如s[3]&#x3D;’a’)，最后再使用语句 “s&#x3D;””.join(s)”还原成字符串。</li>
+</ul>
+</li>
+<li><p>字符串类型测试</p>
+<p>​    字符串类型测试函数返回的都是逻辑值。</p>
+<ul>
+<li>s.isalnum()：是否全是字母和数字，并至少有一个字符。</li>
+<li>s.isalpha()：是否全是字母，并至少有一个字符。</li>
+<li>s.isdigit()：是否全是数字，并至少有一个字符。</li>
+<li>s.isspace()：是否全是空格，并至少有一个空格。</li>
+<li>s.islower()：s中的字母是否全是小写。</li>
+<li>s.isupper()：s中的字母是否全是大写。</li>
+<li>s.istitle()：s是否为首字母大写。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -965,360 +1294,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python</title>
-    <url>/2022/03/14/python/</url>
-    <content><![CDATA[<h3 id="Python简介"><a href="#Python简介" class="headerlink" title="Python简介"></a>Python简介</h3><p>python 这一伟大语言诞生于1989年圣诞节期间，创始人是荷兰的Guido van Rossum。(python有两个主要的大版本: python2 和 python3。本文基于 python3 开发)<span id="more"></span></p>
-<p>由于课程要求，利用 <strong>Anaconda</strong> 包管理器安装和管理 python 软件，选用了 <strong>jupyter notebook</strong> 编辑器。</p>
-<p>python官网：<a href="https://www.python.org/">Welcome to Python.org</a></p>
-<p>数据科学计算平台 Anaconda：Anaconda是一个集成的Python数据科学环境，Anaconda除了有Python外，还安装了180多个用于数据分析的第三方库，而且可 以使用conda命令安装第三方库和创建多个环境。相对于只安装 Python而言，避免了安装第三方库的麻烦。Anaconda的优点是已经内置了Jupyter notebook交互式计算环境、 Spyder集成开发环境，以及NumPy、pandas、Matplotlib、SciPy等各 类主要数据分析模块。Anaconda还是一个开源的包、环境管理器，可以在同一个机器上安装不同版本的软件包及其依赖，并能够在不同的环境之间切换。使用 Anaconda可以方便地进行包的管理（包的安装、卸载、更新），对于需要的各种Python的第三方包，可以直接在Anaconda中进行下载。Anaconda官网： <a href="https://www.anaconda.com/">Anaconda | The World’s Most Popular Data Science Platform</a></p>
-<p><strong>常用类库：</strong></p>
-<p><strong>Numpy：</strong>NumPy软件包是Python生态系统中数据分析、机器学习和科 学计算的主力军。它极大地简化了向量和矩阵的操作处理。除了能对数值数据进行切片（slice）和切块（dice）外， 使用NumPy还能为处理和调试上述库中的高级实例带来极大 便利。一般被很多大型金融公司使用，以及核心的科学计算组织 如Lawrence Livermore、NASA用其处理一些本来使用C++、 Fortran或Matlab等所做的任务。</p>
-<p><strong>SciPy：</strong> SciPy（<a href="http://scipy.org)是基于numpy开发的高级模块,/">http://scipy.org）是基于NumPy开发的高级模块，</a> 依赖于NumPy，提供了许多数学算法和函数的实现，可便 捷快速地解决科学计算中的一些标准问题，例如数值积分 和微分方程求解、最优化、甚至包括信号处理等。作为标准科学计算程序库， SciPy它是Python科学计算程序 的核心包，包含了科学计算中常见问题的各个功能模块， 不同子模块适用于不同的应用。</p>
-<p><strong>Pandas：</strong>Pandas提供了大量快速便捷处理数据的函数和方法。它是使Python成为强大而高效的数据分析环境的重要因素之一。 Pandas中主要的数据结构有Series、DataFrame和Panel。其中Series是一维数组，与NumPy中的一维array以及Python基本的数据结构List类似；DataFrame是二维的表格型数据结 构，可以将DataFrame理解为Series的容器； Panel是三维的 数组，可看作为DataFrame的容器。</p>
-<p><strong>Matplotlib：</strong>Matplotlib是Python 的绘图库，是用于生成出版质量 级别图形的桌面绘图包，让用户很轻松地将数据图形化，同时还提供多样化的输出格式。</p>
-<p><strong>Seaborn：</strong>Seaborn在Matplotlib基础上提供了一个绘制统计图形的高级接口，为数据的可视化分析工作提供了极大的 方便，使得绘图更加容易。用Matplotlib最大的困难是其默认的各种参数，而 Seaborn则完全避免了这一问题。一般来说，Seaborn 能满足数据分析90%的绘图需求。</p>
-<p><strong>Scikit-learn：</strong>Scikit-learn是专门面向机器学习的Python开源框架， 它实现了各种成熟的算法，容易安装和使用。 Scikit-learn的基本功能有分类、回归、聚类、数据 降维、模型选择和数据预处理六大部分。</p>
-<p>python库的一些常用命令:</p>
-<p><strong>import 模块名 [as 别名]</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#导入random随机函数模块中的所有对象并设置别名</span></span><br><span class="line"><span class="keyword">import</span> random <span class="keyword">as</span> rd</span><br><span class="line"><span class="comment">#通过别名访问模块中的对象</span></span><br><span class="line"><span class="comment">#返回[1,10]之间的一个随机整数</span></span><br><span class="line">rd.randint(<span class="number">1</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-
-<p><strong>from 模块名 import 对象名 [as 别名]</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment">#导入random模块中的randint,使用别名rt</span></span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint <span class="keyword">as</span> rt</span><br><span class="line"><span class="comment">#通过别名使用randint函数</span></span><br><span class="line">rt(<span class="number">1</span>,<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="语法常识"><a href="#语法常识" class="headerlink" title="语法常识"></a>语法常识</h3><p><strong>命名规则：</strong>驼峰规则</p>
-<p><strong>代码缩进：</strong>Tab和空格来进行缩进，注意不要混用。( Python中的缩进代表程序块的作用域，如果采用了错误的代码缩进，会导致程序抛出异常) </p>
-<p><strong>代码注释：</strong>Python的单行注释语句用#开始，从#开始一直到末尾的部分是注释部分。如果要进行多行的注释可以使用三个单引号（’’’） 或者双引号（”””）将注释内容包围。单引号和双引号在使用上没有本质的差别。</p>
-<p><strong>中文编码：</strong>Python中使用<strong>函数ord(x)<strong>查看x字符的编码，编码占2 个字节，因此一般再使用</strong>hex函数</strong>把编码转为十六进制显示。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(<span class="string">&quot;A&quot;</span>)))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">hex</span>(<span class="built_in">ord</span>(<span class="string">&quot;我&quot;</span>)))</span><br></pre></td></tr></table></figure>
-
-<p><strong>关键字：</strong>关键字是Python语言本身使用的标识符，被Python语言保留，每个关键字都有其特殊的意义 ，因而不能用作标识符，否则容易产生编译错误。如False、True 、None 、and、or、not、as ………….</p>
-<p>检查是否是Python中的关键字（保留字符），用 <strong>keyword.iskeyword (word)</strong> </p>
-<p><strong>_ ：</strong>单独的下划线（_）用于表示上一次运算的结果。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In[]:<span class="number">2</span>*<span class="number">3</span></span><br><span class="line">Out[]:<span class="number">6</span></span><br><span class="line">In[]:_*<span class="number">10</span></span><br><span class="line">Out[]:<span class="number">60</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>内置函数：</strong></p>
-<p>类型转换函数：chr(97) ord(‘a’) str(3.15) int(3.3) </p>
-<p>数学运算函数：abs(x) max(3,2,5,1) pow(x,y)</p>
-<p><strong>变量赋值：</strong></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=<span class="number">0</span>;y=<span class="number">0</span>;z=<span class="number">0</span> <span class="comment">#多个语句间用分号分隔</span></span><br><span class="line">a, b = <span class="number">1</span>, <span class="number">2</span> <span class="comment">#采用多变量同时赋值</span></span><br><span class="line">c=d=<span class="number">3</span>		<span class="comment">#采用链式赋值</span></span><br><span class="line"><span class="built_in">print</span>(x,y,z,a,b,c,d)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">3</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>type()函数：</strong>一般形式：type(变量名)，其作用是查询变量的数字类型。</p>
-<p><strong>id()函数：</strong>是获取变 量的内存地址。</p>
-<p><strong>isinstance()函数：</strong>判断一个数值是否是某种数字类型。 </p>
-<p><strong>Python中有六个标准的数据类型：</strong></p>
-<ul>
-<li>number（数字）</li>
-<li>string（字符串） </li>
-<li>list（列表）</li>
-</ul>
-<p>列表是Python里面的容器之一，由方括号和方括号括起来的数据构成。里面的数据可以是整数、浮点数、字符串， 也可以是另一个列表或者其它的数据结构。列表里面的每 一项叫作列表的一个元素，每个元素之间使用英文逗号隔开，</p>
-<p>例如</p>
-<p>list_1 &#x3D; [1, 2, 3, 4, 5]                     #列表里面有5个元素，全部是数字 </p>
-<p>list_2 &#x3D; [‘abc’, ‘x’, ‘’, ‘kkk’]             #列表里面有4个元素，全部是字符串</p>
-<p>list_3 &#x3D; []                                         #空列表 </p>
-<p>list_4 &#x3D; [123, ‘xyz’, 3.14, [1, 2, ‘yy’]] #由多种元素组合起来的列表</p>
-<ul>
-<li>tuple（元组）</li>
-</ul>
-<p>元组是Python里面的容器之一，由小括号和小括号括起来 的数据构成。它的外型和列表非常像，只不过列表使用的 是方括号，元组使用的是小括号。“元组”中的“元”和 “二元一次方程”中的“元”是同一个意思，“组”就是组合的意思。</p>
-<p>tuple_1 &#x3D; (1, 2, 3, 4, 5)         #元组里面有5个元素，全部为数字 </p>
-<p>tuple_2 &#x3D; (‘abc’, ‘x’, ‘’, ‘kkk’) #元组里面有4个元素，全部是字符串 </p>
-<p>tuple_3 &#x3D; ()                             #空元组 </p>
-<p>tuple_4 &#x3D; (123, ‘xyz’, [1, ‘t’, ‘z’], (‘o’, ‘pp’)) #由多种元素组合起来的元组</p>
-<ul>
-<li>dictionary（字典）</li>
-<li>set（集合）</li>
-</ul>
-<p>不可变数据类型有：Number、String、Tuple； 可变数据类型有：List、Dictionary、Set。</p>
-<p><strong>元组和列表的区别：</strong></p>
-<p>列表: L&#x3D;[1,2,5,7]  </p>
-<p>元组: T&#x3D;(1,2,5,7)</p>
-<p>列表生成以后还可以往里面继续添加数据，也可以从里面删除数据；但是元组一旦生成就不能修改。如果它里面只 有整数、浮点数、字符串、另一个元组，就既不能添加数据，也不能删除数据，还不能修改里面数据的值。但是如 果元组里面包含了一个列表，那么这个元组里面的列表依旧可以变化。</p>
-<p>TT&#x3D;([a,b,c],12,“Hello”) </p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">example_list=[<span class="string">&#x27;我&#x27;</span>,<span class="string">&#x27;是&#x27;</span>,<span class="string">&#x27;列&#x27;</span>,<span class="string">&#x27;表&#x27;</span>]</span><br><span class="line">example_tuple=[<span class="string">&#x27;我&#x27;</span>,<span class="string">&#x27;是&#x27;</span>,<span class="string">&#x27;元&#x27;</span>,<span class="string">&#x27;组&#x27;</span>]</span><br><span class="line"><span class="built_in">print</span>((example_list[<span class="number">1</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_tuple[<span class="number">2</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_list[-<span class="number">2</span>]))</span><br><span class="line"><span class="built_in">print</span>((example_tuple[-<span class="number">3</span>]))</span><br></pre></td></tr></table></figure>
-
-<p><strong>字典：</strong></p>
-<p>字典就是使用大括号括起来的键（Key）值（Value） 对（Key-Value对）。每个键值对之间使用英文逗号分隔， 每个Key与Value之间使用英文冒号分隔。</p>
-<p>Key可以使用中文、英文或者数字，但是不能重复。Value 可以是任意字符串、数字、列表、元组或者另一个字典， Value可以重复。</p>
-<p>可以通过Key来从字典中读取对应的Value，有3种主要的格式：  </p>
-<p>变量名[key]  </p>
-<p>变量名.get(key)  </p>
-<p>变量名.get(key, ‘在找不到key的情况下使用这个值’) </p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dict1=&#123;<span class="number">1</span>:<span class="string">&quot;good&quot;</span>,<span class="number">2</span>:<span class="string">&quot;bad&quot;</span>,<span class="number">3</span>:<span class="string">&quot;not good&quot;</span>&#125;</span><br><span class="line">value1=dict1.get(<span class="number">1</span>,<span class="string">&quot;1&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(value1)</span><br><span class="line"></span><br><span class="line">good</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>集合：</strong></p>
-<p>集合是使用大括号括起来的各种数据，可以看作没有 Value的字典。<strong>集合里面的元素不能重复。</strong>集合也是无序的。集合最大的应用之一就是去重。例如，<strong>把一个带有重复元素的列表先转换为集合，再转换回列表，那么重复元素就只会保留一个</strong>。把列表转换为集合需要使用set()函数， 把集合转换为列表使用list()函数：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">duplicated_list = [<span class="number">3</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;s&#x27;</span>,<span class="string">&#x27;a&#x27;</span>]</span><br><span class="line">unique_list = <span class="built_in">list</span>(<span class="built_in">set</span>(duplicated_list))</span><br><span class="line"><span class="built_in">print</span>(unique_list)</span><br><span class="line"></span><br><span class="line">[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;s&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="运算符与表达式"><a href="#运算符与表达式" class="headerlink" title="运算符与表达式"></a>运算符与表达式</h3><p>算术运算符（ +、–、*、&#x2F;、**、&#x2F;&#x2F;、％ ）</p>
-<p>关系运算符（ &gt;、&lt;、&gt;&#x3D;、&lt;&#x3D;、&#x3D; &#x3D;、!&#x3D; ）。  </p>
-<p>逻辑运算符（and、or、not ）。  </p>
-<p>位运算符（ &lt;&lt;、&gt;&gt;、~、|、^、&amp; ）。  </p>
-<p>赋值运算符（ &#x3D;、复合赋值运算符 ）。 </p>
-<p>成员运算符（ in、not in ）。  </p>
-<p>同一运算符（ is、is not ）。  </p>
-<p>下标运算符（ [ ] ）。  </p>
-<p>其他（ 如函数调用运算符（））。 </p>
-<p><strong>隐式类型转换：</strong></p>
-<p>当有一个操作数的类型是复数时，其它数据都自动转换成复数类型。  </p>
-<p>当有一个操作数的类型是小数时，其它数据都自动转换成小数类型。  </p>
-<p>不支持数字和字符之间的隐式转换。  </p>
-<p>数值的除法（&#x2F;）总是返回一个浮点数，要获取整数使用 &#x2F;&#x2F;操作符。  </p>
-<p>混合计算时，Python会把整型转换成为浮点数。 </p>
-<p>** 乘方运算</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In[]:<span class="number">4</span>*<span class="number">3</span>**<span class="number">2</span></span><br><span class="line">Out[]:<span class="number">36</span></span><br><span class="line"></span><br><span class="line">In[]:<span class="string">&quot;a&quot;</span>*<span class="number">10</span></span><br><span class="line">Out[]:<span class="string">&#x27;aaaaaaaaaa&#x27;</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">True</span> <span class="keyword">and</span> <span class="number">0</span></span><br><span class="line">Out[]:<span class="number">0</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">False</span> <span class="keyword">and</span> <span class="number">12</span></span><br><span class="line">Out[]:<span class="literal">False</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="literal">True</span> <span class="keyword">or</span> <span class="number">0</span></span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line"></span><br><span class="line">In[]:<span class="literal">False</span> <span class="keyword">or</span> <span class="number">12</span></span><br><span class="line">Out[]:<span class="number">12</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">In[]:x=y=<span class="number">2.5</span></span><br><span class="line">	z=<span class="number">2.5</span></span><br><span class="line">	x <span class="keyword">is</span> <span class="keyword">not</span> z</span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;a&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;abcd&#x27;</span></span><br><span class="line">Out[]: <span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;ac&#x27;</span> <span class="keyword">in</span> <span class="string">&#x27;abcd&#x27;</span></span><br><span class="line">Out[]:<span class="literal">False</span> </span><br><span class="line">    </span><br><span class="line">In[]:<span class="string">&#x27;a&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> <span class="string">&#x27;b,c,d&#x27;</span></span><br><span class="line">Out[]:<span class="literal">True</span></span><br><span class="line">    </span><br><span class="line">In[]:<span class="number">3</span> <span class="keyword">not</span> <span class="keyword">in</span> (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">Out[]:<span class="literal">False</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>链式关系表达式:</strong></p>
-<p>相当于多个表达式之间逻 辑与的关系。</p>
-<p> 1 &lt; 2 &lt; 3 #等价于1 &lt; 2 and 2 &lt; 3  </p>
-<p>2 &gt;&#x3D; 1 &gt; 10 #等价于2 &gt;&#x3D; 1 and 1 &gt; 10 </p>
-<p><strong>Python中的函数分为内置函数和模块函数。</strong> </p>
-<p><strong>内置函数:</strong></p>
-<ul>
-<li>内置函数（BIF，built-in functions）是Python内置对 象类型之一，不需要导入任何模块即可使用一类函数。 </li>
-<li>执行dir(<strong>builtins</strong>)可以列出所有的内置函数;</li>
-<li>使用help(函数名)可以查看某个函数的用法;  abs(x):返回数字x的绝对值或复数x的模;  bin(x)、oct(x)、hex(x):把整数x转换为二进制、八进 制、十六进制的表示形式。  bytes(x)：把指定对象x转换为字节串表示形式。 </li>
-<li>float(x)：把整数或字符串x转换为浮点数；</li>
-<li>int(x[, d])：返回实数（float）、分数（Fraction）或 高精度实数（Decimal）x的整数部分，或把d进制的字符 串x转换为十进制并返回，d默认为十进制；</li>
-<li>chr(x)：返回Unicode编码为x的字符；</li>
-<li>ord(x)：返回1个字符x的Unicode编码；</li>
-<li>isinstance(obj, type)：测试对象obj是否属于指定类型 type；</li>
-<li>type(obj)：返回对象obj的类型；</li>
-<li>max(x)、 min(x)：返回可迭代对象x中的最大值、最小值；</li>
-<li>len(obj)：返回对象obj包含的元素个数；</li>
-<li>reversed(seq):返回seq中所有元素逆序后的迭代器对象;</li>
-<li>sorted(iterable, key&#x3D;None, reverse&#x3D;False):返回排序后的列表，其中iterable表示要排序的序列或迭代对象， key用来指定排序规则或依据，reverse用来指定升序或降序，默认为升序。该函数不改变iterable内任何元素的顺序；</li>
-<li>sum(x, start&#x3D;0)：返回序列x中所有元素之和；</li>
-<li>exit()：退出当前解释器环境；</li>
-</ul>
-<p><strong>模块函数:</strong></p>
-<ul>
-<li><p>math模块 </p>
-<p>math.pi 圆周率pi </p>
-<p>math.e 自然常数e </p>
-<p>math.tau 数学常数τ </p>
-<p>math.inf 正无穷大 </p>
-<p>math.nan 非浮点数标记，NaN(Not a  Number)</p>
-</li>
-<li><p>random模块</p>
-<p>random.random() 返回[0.0,1.0]区间内的一个随机小数 random.random() 返回 0.9523521796999529</p>
-<p>random.uniform(a,b) 返回[a,b]区间内的一个随机小数 random.uniform(1,3) 返回 2.3403540401554146</p>
-<p>random.randint(a,b) 返回[a,b]区间内的一个随机整数 random.randint(1,3) 返回2</p>
-<p>random.randrange([ start],end,[step]) 返回[start,end)区间内的一个整数， start和step默认都是1 random.randrange(1,10)返回 5</p>
-<p>random.choice() 随机返回给定序列中的一个元素 random.choice([‘a’,’b’,’c’]) 返回’c‘</p>
-<p>random.shuffle(x,[ra ndom]) 将可变序列的所有元素随机排列 random.shuffle([1,2,3,4]) 返回[1, 4, 3, 2]</p>
-</li>
-</ul>
-<h3 id="输入输出与字符串"><a href="#输入输出与字符串" class="headerlink" title="输入输出与字符串"></a>输入输出与字符串</h3><p>input(“提示字符串”)</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="built_in">input</span>(<span class="string">&quot;请输入:&quot;</span>)</span><br><span class="line"><span class="built_in">type</span>(x)</span><br></pre></td></tr></table></figure>
-
-<p>input() 函数的返回结果都是字符串，实际使用时需要将其转换为相应的类型再进行处理。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x = <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入:&quot;</span>))</span><br><span class="line"><span class="built_in">type</span>(x)</span><br></pre></td></tr></table></figure>
-
-<p>input() 结合 <strong>eval()</strong> 可同时接受多个数据输入， 多个输入之间的间隔符必须是逗号。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a,b,c = <span class="built_in">eval</span>(<span class="built_in">input</span>(<span class="string">&quot;请输入a,b,c三个数：&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(a,b,c,sep=<span class="string">&quot;,&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<p>实现多值输入，也可以使用 <strong>split()</strong> 方法进行输 入值的分割，不同的值之间以空格分隔。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x,y = <span class="built_in">input</span>(<span class="string">&#x27;请输入2个值:&#x27;</span>).split()</span><br><span class="line"><span class="built_in">print</span>(x,y,sep=<span class="string">&#x27;,&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>print()函数的格式如下： </p>
-<p>print([objects, sep&#x3D;’ ‘ &#x2F; end&#x3D;’\n’ &#x2F; file&#x3D;sys.stdout &#x2F; flush&#x3D;False) </p>
-<p>objects是输出的对象，多个对象之间用英文逗号分割； sep是对象之间插入的分隔符，默认是空格； end是添加在输出文本最后的一个字符，默认是换行符； file指定输出内容发送到的文件，默认是显示器； flush指定输出的内容是否立即写文件。</p>
-<p>字符串格式化%输出：</p>
-<p>“%格式控制符”%实际参数</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;名字: %s,年龄: %d&#x27;</span> %(<span class="string">&#x27;张三&#x27;</span>,<span class="number">20</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-<p>字符串的 format 方法:</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125;:计算机&#123;&#125;的CPU占用率为&#123;&#125;%.&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;2022-03-15&#x27;</span>,<span class="string">&#x27;python&#x27;</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-<p>使用位置（序号）索引：<br>花括号内部可以写上待输出的目标字符串的索引，也可以省略。如果省略，则按format后面的括号里的待输出的目标字符串顺序依次替换。 </p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;&#123;1&#125;&#123;0&#125;&#123;1&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;言&#x27;</span>,<span class="string">&#x27;文&#x27;</span>))</span><br></pre></td></tr></table></figure>
-
-<p>使用“{序号：格式说明符}” 形式的格式说明符：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&#123;0:.2f&#125;,&#123;1&#125;&quot;</span>.<span class="built_in">format</span>(<span class="number">3.1415926</span>,<span class="number">100</span>))</span><br></pre></td></tr></table></figure>
-
-<p> 使用关键字索引：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Hello,&#123;boy&#125; and &#123;girl&#125;!&quot;</span>.<span class="built_in">format</span>(boy=<span class="string">&quot;John&quot;</span>,girl=<span class="string">&quot;Mary&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;&#123;a&#125;&#123;b&#125;&quot;</span>.<span class="built_in">format</span>(b=<span class="string">&quot;3&quot;</span>,a=<span class="string">&quot;Python&quot;</span>))</span><br></pre></td></tr></table></figure>
-
-<p>使用属性索引：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">c = <span class="number">3</span>-<span class="number">5j</span></span><br><span class="line"><span class="built_in">print</span>((<span class="string">&#x27;复数&#123;0&#125;的实部为&#123;0.real&#125;,虚部为&#123;0.imag&#125;。&#x27;</span>.<span class="built_in">format</span>(C)))</span><br></pre></td></tr></table></figure>
-
-<p>使用下标索引：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">coord = (<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;X:&#123;0[0]&#125;; Y:&#123;0[1]&#125;;Z:&#123;0[2]&#125;&#x27;</span>.<span class="built_in">format</span>(coord))</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>字符串访问方式：</strong></p>
-<p>左闭右开原则</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&quot;Python大数据基础与实战&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">0</span>],<span class="built_in">str</span>[<span class="number">5</span>],<span class="built_in">str</span>[-<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">2</span>:<span class="number">6</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[:<span class="number">6</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[<span class="number">6</span>:])</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>[:])</span><br></pre></td></tr></table></figure>
-
-<p><strong>字符串的分片：</strong></p>
-<p><strong>str[i:j:k]：</strong>i是索引起始位置，j是索引结束位置但<strong>不包括位置上的字符</strong>，索引编号每次增加的步长为k。 </p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">str1=<span class="string">&quot;Python&quot;</span></span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">0</span>])</span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">2</span>:<span class="number">5</span>])</span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">0</span>:-<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(str1[<span class="number">1</span>:<span class="number">5</span>:<span class="number">2</span>])</span><br></pre></td></tr></table></figure>
-
-<p><strong>字符串查找</strong></p>
-<ul>
-<li><strong>find() 和 rfind()</strong> 函数分别用来查找一个字符串在另一个字符串指定范围（默认是整个字符串）中<strong>首次</strong>和最后一次出现的位置，如果不存在则返回-1；</li>
-<li><strong>index() 和 rindex()</strong> 方法用来返回一个字符串在另一个字符串指定范围中<strong>首次</strong>和<strong>最后一次</strong>出现的位置，如果不存在则抛出异常；</li>
-<li><strong>count()<strong>方法用来返回一个字符串在当前字符串中</strong>出现的次数</strong>。</li>
-</ul>
-<p><strong>字符串分割</strong></p>
-<ul>
-<li>**split()、rsplit()**方法分别用来以指定字符为分隔符，把当前字符串从左往右、从右往左分隔成多个字符串，并返回包含分隔结果的列表。</li>
-<li>对于 <strong>split() 和 rsplit()</strong> 方法，如果不指定分隔符，则字符串中的任何空白符号（空格、换行符、制表符等）都将被认为是分隔符， 把连续多个空白字符看作一个分隔符。</li>
-<li>对于split() 和rsplit() 方法，如果不指定分隔符，则字符串中的任何空白符号（空格、换行符、制表符等）都将被认为是分隔符， 把连续多个空白字符看作一个分隔符。</li>
-</ul>
-<p><strong>字符串的连接</strong></p>
-<p><strong>join()</strong> 方法用来将列表中的多个字符串进行连接，并且在相邻两个字符串之间插入指定字符。示例如下：</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">test = [<span class="string">&quot;I&quot;</span>,<span class="string">&quot;love&quot;</span>,<span class="string">&quot;Python&quot;</span>]</span><br><span class="line">s = <span class="string">&quot;&quot;</span>.join(test)	<span class="comment">#指定插入字符为空格</span></span><br><span class="line"><span class="built_in">print</span>(s)</span><br></pre></td></tr></table></figure>
-
-<p><strong>注意：使用“+”运算符也可以连接字符串，但是效率 较低，应优先使用join()方法。</strong></p>
-<p><strong>字符串的大小写转换</strong></p>
-<p>lower() 返回小写字符串，<strong>upper()</strong> 返回<strong>大写</strong>字符串， <strong>capitalize()</strong> 将<strong>字符串****首字符大写</strong>、<strong>title()</strong> 将字符串中每个<strong>单词首字符大写</strong>、<strong>swapcase()</strong> 完成<strong>大小写互换</strong>。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = <span class="string">&quot;i am a teacher&quot;</span></span><br><span class="line"><span class="built_in">print</span>(s.lower())</span><br><span class="line"><span class="built_in">print</span>(s.upper())</span><br><span class="line"><span class="built_in">print</span>(s.capitalize())</span><br><span class="line"><span class="built_in">print</span>(s.title())</span><br><span class="line"><span class="built_in">print</span>(s.swapcase())</span><br></pre></td></tr></table></figure>
-
-
-
-<p> <strong>字符串替换</strong></p>
-<p>replace() 方法把字符串中的 old（旧字符串）替换成 new(新字符串)，如果指定第三个参数max，则替换不超过 max次。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">str</span> = <span class="string">&quot;this is string example..wow!!!this is really string&quot;</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>.replace(<span class="string">&quot;is&quot;</span>,<span class="string">&quot;was&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">str</span>.replace(<span class="string">&quot;is&quot;</span>,<span class="string">&quot;was&quot;</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>字符串删除</strong></p>
-<p><strong>strip()</strong> 删除字符串<strong>两端指定的字符</strong>，<strong>rstrip() 删除</strong>字符串<strong>右端</strong>指定字符，<strong>lstrip()</strong> 删除字符串<strong>左端</strong>指定字符。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">s = <span class="string">&quot; he is a student\t\t&quot;</span></span><br><span class="line"><span class="comment">#删除s左右两端的的空白字符</span></span><br><span class="line"><span class="built_in">print</span>(s.strip())</span><br><span class="line"><span class="built_in">print</span>(s.rstrip(<span class="string">&quot;\t&quot;</span>))</span><br><span class="line"><span class="string">&#x27;aabbccddeeeffg&#x27;</span>.strip(<span class="string">&#x27;gaef&#x27;</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>字符串测试</strong></p>
-<p>isalnum()、isalpha()、isdigit()、isdecimal()、isnumeric()、 isspace()、isupper()、islower()，分别测试字符串是否为数字或字母、是否为字母、是否为数字字符、是否为空白字符、是否为大写字母以及是否为小写字母。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1234abcd&#x27;</span>.isalnum())</span><br><span class="line"><span class="comment">#全部为英文字母时返回True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1234abcd&#x27;</span>.isalpha())</span><br><span class="line"><span class="comment">#全部为数字时返回True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;1234abcd&#x27;</span>.isdigit())</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>eval()</strong></p>
-<p>内置函数eval()尝试把任意字符串转化为Python表达式并求值。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">&quot;10 * 2 / 5&quot;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="number">4.0</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>startswith()、endswith()</strong></p>
-<p>这两个方法用来判断字符串是否以指定字符串开始 或者结束。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;test.py&quot;</span>.endswith((<span class="string">&quot;.py&quot;</span>,<span class="string">&quot;.cpp&quot;</span>,<span class="string">&quot;.java&quot;</span>))) <span class="comment"># True</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;test.py&quot;</span>.startswith(<span class="string">&quot;test&quot;</span>,<span class="number">0</span>))			  <span class="comment"># True	</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>center()、ljust()、rjust()</strong></p>
-<p>返回指定宽度的新字符串，原字符串居中、左对齐或右对齐出现在新字符串中，如果指定的宽度大于字符串长度，则使用指定的字符（默认为空格）填充。</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;let&#x27;s begin&quot;</span>.center(<span class="number">20</span>,<span class="string">&quot;+&quot;</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;let&#x27;s begin&quot;</span>.ljust(<span class="number">20</span>,<span class="string">&quot;-&quot;</span>))</span><br></pre></td></tr></table></figure>
-
-<p> ++++let’s begin+++++</p>
-<p>let’s begin———</p>
-<p><strong>字符串对象常用的方法</strong></p>
-<ul>
-<li><p><strong>字母大小写转换</strong></p>
-<ul>
-<li><p>s.upper():全部转换为大写字母。</p>
-</li>
-<li><p>s.lower():全部转换为小写字母。</p>
-</li>
-<li><p>s.swapcase():字母大小写互换。</p>
-</li>
-<li><p>s.capitalize():句子首字母大写，其余小写。</p>
-</li>
-<li><p>s.title():单词首字母大写。</p>
-<p>其中，s是一个字符串对象</p>
-</li>
-</ul>
-</li>
-<li><p><strong>字符串搜索</strong></p>
-<ul>
-<li>s.find(substr,[start,[end]])：返回s中出现substr的第1个字符的编号，如果s中没有substr则返回-1。start和end作用就相当于在s[start:end]中搜索。</li>
-<li>s.index(substr,[start,[end]])：与find()相同，只是在s中没有substr时，会返回一个运行错误。</li>
-<li>s.rfind(substr,[start,[end]])：<strong>返回s中最后出现的substr的第1个字符的编号</strong>，如果s中没有substr则返回-1，也就是说<strong>从右边算起的第1次出现的substr的首字符编号。</strong></li>
-<li>s.rindex(substr,[start,[end]])：与rfind()相同，只是在s中没有substr时，会返回一个运行时错误。</li>
-<li>s.count(substr,[start,[end]])：计算substr在s中出现的次数。</li>
-<li>s.startswith(prefix,[start,[end]])：是否<strong>以prefix开头</strong>，若是返回True，否则返回False。</li>
-<li>s.endswith(suffix,[start[end]])：<strong>以suffix结尾</strong>，若是返回 True，否则返回False。</li>
-</ul>
-</li>
-<li><p><strong>字符串替换</strong></p>
-<ul>
-<li>s.replace(oldstr,newstr,[count])：把s中的oldster替换为 newstr，count为替换次数。这是替换的通用形式，还有一些函数进行特殊字符的替换。</li>
-<li>s.strip([chars])：把s中前后chars中有的字符全部去掉，可以理解为把s前后chars替换为None。默认去掉前后空格。</li>
-<li>s.lstrip([chars])：把s左边chars中有的字符全部去掉。默认去掉左边空格。</li>
-<li>s.rstrip([chars])：把s右边chars中有的字符全部去掉。默认去掉右边空格。</li>
-<li>s.expandtabs([tabsize])：把s中的tab字符替换为空格，每个tab替换为tabsize个空格，默认是8个。</li>
-</ul>
-</li>
-<li><p><strong>字符串的拆分与组合</strong></p>
-<ul>
-<li>s.split([sep,[maxsplit]])：以sep为分隔符，把<strong>字符串s拆分成一个列表</strong>。默认的分隔符为空格。<strong>maxsplit表示拆分的次数</strong>，默认取-1，表示无限制拆分。</li>
-<li>s.rsplit([sep,[maxsplit]])：从右侧把字符串s拆分成一个列表。</li>
-<li>s.splitlines([keepends])：把s按行拆分为一个列表。 keepends是一个逻辑值，如果为True，则每行拆分后会保留行分隔符。</li>
-<li><strong>s.join(seq)：</strong>把seq代表的序列组合成字符串，用s将序列各元素连接起来。字符串中的字符是不能修改的，如果要修改，通常的方法是，用 list()函数把字符串s变为以单个字符为成员的列表(使用语句s&#x3D;list(s))，再使用给列表成员赋值的方式改变值(如s[3]&#x3D;’a’)，最后再使用语句 “s&#x3D;””.join(s)”还原成字符串。</li>
-</ul>
-</li>
-<li><p>字符串类型测试</p>
-<p>​    字符串类型测试函数返回的都是逻辑值。</p>
-<ul>
-<li>s.isalnum()：是否全是字母和数字，并至少有一个字符。</li>
-<li>s.isalpha()：是否全是字母，并至少有一个字符。</li>
-<li>s.isdigit()：是否全是数字，并至少有一个字符。</li>
-<li>s.isspace()：是否全是空格，并至少有一个空格。</li>
-<li>s.islower()：s中的字母是否全是小写。</li>
-<li>s.isupper()：s中的字母是否全是大写。</li>
-<li>s.istitle()：s是否为首字母大写。</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python中lambda表达式</title>
-    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
-<ul>
-<li>lambda表达式必须使用lambda关键字定义。</li>
-<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
-<li>lambda表达式必须是单行的。</li>
-<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
-<li>lambda表达式的计算结果就是函数的返回值。 </li>
-<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
-<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
-<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python序列结构</title>
     <url>/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<h3 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h3><p>序列（sequence）是一种用来存放多个值的数据类型，序列中对象类型可以相同也可以不同。</p>
@@ -1495,6 +1470,31 @@
 <p> <img src="/../resources/image-20220327192032281.png" alt="image-20220327192032281"></p>
 <p><img src="/../resources/image-20220327192049746.png" alt="image-20220327192049746"></p>
 <p><img src="/../resources/image-20220327192102639.png" alt="image-20220327192102639"></p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python中lambda表达式</title>
+    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
+<ul>
+<li>lambda表达式必须使用lambda关键字定义。</li>
+<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
+<li>lambda表达式必须是单行的。</li>
+<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
+<li>lambda表达式的计算结果就是函数的返回值。 </li>
+<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
+<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
+<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
 ]]></content>
       <categories>
         <category>python</category>
@@ -1876,6 +1876,23 @@
       </tags>
   </entry>
   <entry>
+    <title>知识图谱(二)</title>
+    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%BA%8C/</url>
+    <content><![CDATA[<h1 id="知识图谱的构建"><a href="#知识图谱的构建" class="headerlink" title="知识图谱的构建"></a>知识图谱的构建</h1><p>知识图谱的数据是通过三元组（主语，谓词，宾语）的方式进行组织，每一个三元组代表一条知识，这些三元组并不是杂乱无章的堆砌在知识图谱中，而是按照一定的逻辑组织起来的。<span id="more"></span></p>
+<h2 id="知识图谱的数据结构"><a href="#知识图谱的数据结构" class="headerlink" title="知识图谱的数据结构"></a>知识图谱的数据结构</h2><p>从知识图谱数据组织的架构来看，可以把知识图谱的数据分为两个层次，一个是<strong>数据模型层</strong>，数据模型是按照本体论的思想，勾画出来的数据组织模式，数据模型可以展示数据的组织方式，数据之间的相互关系，依据数据模型，数据才能得到有效的组织。数据模型除了确定对象之间的分类，关系，还要明确对象的属性，针对不同的知识图谱，需要收集的数据的内容也不相同，内容范围由对象的属性确定。数据模型的分类，关系反映了数据之间的关系特征，数据模型的属性反映了数据的内在特征。 另一个就是<strong>具体数据层</strong>，具体数据是一条条的知识，它是依据数据模型组织起来的。我们可以把数据模型看作是骨架，把具体数据看作是肌肉，两部分共同组成了一个健壮的整体，就是我们的知识图谱。不同类型的知识图谱，组织数据的方式也有所不同，涉及到具体数据，具体数据的内容也有差别。比如对于一个人物来说，如果是历史知识图谱，可能人物数据的内容主要侧重于人物的生平，主要事迹，人物关系等等，如果是文学知识图谱，人物数据的内容则会主要侧重人物的主要作品，师承关系，作品流派等等。 将知识图谱的数据分成了两个层次，在构建知识图谱的时候，是先确定数据模型再收集具体数据，还是先收集具体数据再确定数据模型，这就形成了两种构建知识图谱的方式。</p>
+<h2 id="自顶向下的构建方式"><a href="#自顶向下的构建方式" class="headerlink" title="自顶向下的构建方式"></a>自顶向下的构建方式</h2><p>自顶向下的构建方式，是指先确定知识图谱的数据模型，再根据模型去填充具体数据，最终形成知识图谱。数据模型的设计，是知识图谱的顶层设计，根据知识图谱的特点确定数据模型，就相当于确定了知识图谱收集数据的范围，以及数据的组织方式。这种构建方式，一般适用于行业知识图谱的构建，对于一个行业来说，数据内容，数据组织方式相对来说比较容易确定。</p>
+<p>总体来说，自顶向下的构建方式，适用于那些知识内容比较明确，关系比较清晰的领域构建知识图谱。</p>
+<h2 id="自下向上的构建方式"><a href="#自下向上的构建方式" class="headerlink" title="自下向上的构建方式"></a>自下向上的构建方式</h2><p>自下向上的构建方式，是指先按照三元组的方式收集具体数据，然后根据数据内容来提炼数据模型。 采用这种方式构建知识图谱，是因为在开始构建知识图谱的时候，还不清楚收集数据的范围，也不清楚数据怎么使用，就是先把所有的数据收集起来，形成一个庞大的数据集，然后再根据数据内容，总结数据的特点，将数据进行整理、分析、归纳、总结，形成一个框架，也就是数据模型。一般公共领域的知识图谱采用这种方式，因为公共领域的知识图谱，涉及到海量数据，并且包括方方面面的知识，做出来的效果是大而全，这在构建初期，很难想清楚数据的整体架构，只能是根据数据的内容总结提炼特征，形成数据框架模型。比如google，百度的知识图谱，属于典型的公共领域知识图谱，现实中，使用他们的搜索工具进行内容搜索时，用户可能输入的内容千差万别，各个领域的问题都可能问到，也就使得他们的后台知识图谱内容也要覆盖所有知识，在构建他们这种公共领域的知识图谱过程中，随着数据的不断积累，才会对数据知识进行分类，慢慢呈现出知识架构。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>两种构建方式也不是一成不变的，在构建初期两种方式区别很明显，在知识图谱构建后期，两种方式可能会结合使用。对于自顶向下的构建方式，随着数据量的不断积累，可能会发现原来的数据模型并不完善，有很多数据可能没有包含在数据模型的体系中，这时候就需要修订数据模型，根据数据的特点，完善数据模型。同样，在自下向上的构建方式中，慢慢形成的数据模型，对于后期的数据收集，也有一定的指导作用，按照形成的数据模型，可以快速准确地收集相关数据。总之，数据和数据模型之间，是一个相辅相成的关系，二者在构建知识图谱的过程中缺一不可。</p>
+]]></content>
+      <categories>
+        <category>知识图谱</category>
+      </categories>
+      <tags>
+        <tag>知识图谱</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>知识图谱(三)</title>
     <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%B8%89/</url>
     <content><![CDATA[<h1 id="知识图谱的构建过程"><a href="#知识图谱的构建过程" class="headerlink" title="知识图谱的构建过程"></a>知识图谱的构建过程</h1><h2 id="知识图谱的总体构建思路"><a href="#知识图谱的总体构建思路" class="headerlink" title="知识图谱的总体构建思路"></a>知识图谱的总体构建思路</h2><img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%B8%89/935893-20190109090654567-18322997.png" alt="img" style="zoom:80%;">
@@ -1906,23 +1923,6 @@
 <p>描述逻辑涉及到的内容也比较多，此处举几个例子，比如实体的分类包含关系，一个电脑椅是椅子，椅子是家具，可以说，一个电脑椅是家具。常识规则的推理，一个男人的孩子是A，一个女人的孩子是A，可以知道，这个男人和女人是配偶。</p>
 <p>通过推理发现新的知识，应用比较多，说明知识图谱的时候也经常不自觉的会应用推理，比如前两年比较受人关注的王宝强离婚案，为什么会聘用张起淮做律师，通过知识图谱可以很清楚知道，王宝强和冯小刚关系比较密切，冯小刚聘用张起淮作为律师顾问，所以王宝强很容易和张起淮建立关系，这也可以看作是知识推理的范畴。当然，更确切地说，应该是规则的范畴。推理更强调的是固有的逻辑，规则一般是和业务相关的自定义逻辑，但推理和规则都是通过逻辑准则，获取新的知识或发现，在这里先不做区分。</p>
 <h2 id="质量评估"><a href="#质量评估" class="headerlink" title="质量评估"></a>质量评估</h2><p>质量评估，就是对最后的结果数据进行评估，将合格的数据放入知识图谱中。质量评估的方法，根据所构建的知识图谱的不同，对数据要求的差异而有所差别。总的目的是要获得合乎要求的知识图谱数据，要求的标准根据具体情况确定。 比如对于公共领域的知识图谱，知识的获取采用了众包的方法，对于同一个知识点，可能会有很多人来完成，如果这个知识点只有一个答案，可以采用的一种策略是，将多人的标注结果进行比较，取投票多的结果作为最终的结果。当然，这是不严谨的，因为真理往往掌握在少数人的手里，特别是针对一些行业的知识图谱，表现尤为突出。行业内的一条知识，可能只有行业专家能够给出权威正确的答案，如果让大众投票来决定，可能会得到一条错误的知识。所以，针对行业知识图谱，可能会采用不同于公共知识图谱的策略，来进行知识的质量评估。</p>
-]]></content>
-      <categories>
-        <category>知识图谱</category>
-      </categories>
-      <tags>
-        <tag>知识图谱</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>知识图谱(二)</title>
-    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%BA%8C/</url>
-    <content><![CDATA[<h1 id="知识图谱的构建"><a href="#知识图谱的构建" class="headerlink" title="知识图谱的构建"></a>知识图谱的构建</h1><p>知识图谱的数据是通过三元组（主语，谓词，宾语）的方式进行组织，每一个三元组代表一条知识，这些三元组并不是杂乱无章的堆砌在知识图谱中，而是按照一定的逻辑组织起来的。<span id="more"></span></p>
-<h2 id="知识图谱的数据结构"><a href="#知识图谱的数据结构" class="headerlink" title="知识图谱的数据结构"></a>知识图谱的数据结构</h2><p>从知识图谱数据组织的架构来看，可以把知识图谱的数据分为两个层次，一个是<strong>数据模型层</strong>，数据模型是按照本体论的思想，勾画出来的数据组织模式，数据模型可以展示数据的组织方式，数据之间的相互关系，依据数据模型，数据才能得到有效的组织。数据模型除了确定对象之间的分类，关系，还要明确对象的属性，针对不同的知识图谱，需要收集的数据的内容也不相同，内容范围由对象的属性确定。数据模型的分类，关系反映了数据之间的关系特征，数据模型的属性反映了数据的内在特征。 另一个就是<strong>具体数据层</strong>，具体数据是一条条的知识，它是依据数据模型组织起来的。我们可以把数据模型看作是骨架，把具体数据看作是肌肉，两部分共同组成了一个健壮的整体，就是我们的知识图谱。不同类型的知识图谱，组织数据的方式也有所不同，涉及到具体数据，具体数据的内容也有差别。比如对于一个人物来说，如果是历史知识图谱，可能人物数据的内容主要侧重于人物的生平，主要事迹，人物关系等等，如果是文学知识图谱，人物数据的内容则会主要侧重人物的主要作品，师承关系，作品流派等等。 将知识图谱的数据分成了两个层次，在构建知识图谱的时候，是先确定数据模型再收集具体数据，还是先收集具体数据再确定数据模型，这就形成了两种构建知识图谱的方式。</p>
-<h2 id="自顶向下的构建方式"><a href="#自顶向下的构建方式" class="headerlink" title="自顶向下的构建方式"></a>自顶向下的构建方式</h2><p>自顶向下的构建方式，是指先确定知识图谱的数据模型，再根据模型去填充具体数据，最终形成知识图谱。数据模型的设计，是知识图谱的顶层设计，根据知识图谱的特点确定数据模型，就相当于确定了知识图谱收集数据的范围，以及数据的组织方式。这种构建方式，一般适用于行业知识图谱的构建，对于一个行业来说，数据内容，数据组织方式相对来说比较容易确定。</p>
-<p>总体来说，自顶向下的构建方式，适用于那些知识内容比较明确，关系比较清晰的领域构建知识图谱。</p>
-<h2 id="自下向上的构建方式"><a href="#自下向上的构建方式" class="headerlink" title="自下向上的构建方式"></a>自下向上的构建方式</h2><p>自下向上的构建方式，是指先按照三元组的方式收集具体数据，然后根据数据内容来提炼数据模型。 采用这种方式构建知识图谱，是因为在开始构建知识图谱的时候，还不清楚收集数据的范围，也不清楚数据怎么使用，就是先把所有的数据收集起来，形成一个庞大的数据集，然后再根据数据内容，总结数据的特点，将数据进行整理、分析、归纳、总结，形成一个框架，也就是数据模型。一般公共领域的知识图谱采用这种方式，因为公共领域的知识图谱，涉及到海量数据，并且包括方方面面的知识，做出来的效果是大而全，这在构建初期，很难想清楚数据的整体架构，只能是根据数据的内容总结提炼特征，形成数据框架模型。比如google，百度的知识图谱，属于典型的公共领域知识图谱，现实中，使用他们的搜索工具进行内容搜索时，用户可能输入的内容千差万别，各个领域的问题都可能问到，也就使得他们的后台知识图谱内容也要覆盖所有知识，在构建他们这种公共领域的知识图谱过程中，随着数据的不断积累，才会对数据知识进行分类，慢慢呈现出知识架构。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>两种构建方式也不是一成不变的，在构建初期两种方式区别很明显，在知识图谱构建后期，两种方式可能会结合使用。对于自顶向下的构建方式，随着数据量的不断积累，可能会发现原来的数据模型并不完善，有很多数据可能没有包含在数据模型的体系中，这时候就需要修订数据模型，根据数据的特点，完善数据模型。同样，在自下向上的构建方式中，慢慢形成的数据模型，对于后期的数据收集，也有一定的指导作用，按照形成的数据模型，可以快速准确地收集相关数据。总之，数据和数据模型之间，是一个相辅相成的关系，二者在构建知识图谱的过程中缺一不可。</p>
 ]]></content>
       <categories>
         <category>知识图谱</category>
@@ -2029,6 +2029,44 @@
       </tags>
   </entry>
   <entry>
+    <title>知识图谱实践(二)</title>
+    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%BA%8C/</url>
+    <content><![CDATA[<h1 id="知识图谱数据模型的构建"><a href="#知识图谱数据模型的构建" class="headerlink" title="知识图谱数据模型的构建"></a>知识图谱数据模型的构建</h1><p>数据模型就是数据组织方式，是构建知识图谱首要解决的问题，无论是开放域的知识图谱还是行业的知识图谱，都需要收集大量的数据，这些数据的收集是有选择性的，这个选择的依据就是数据模型。数据模型，也可以称为知识表达模型，解决知识图谱如何组织数据的问题，是数据的底层架构，是一个知识体系框架，能够涵盖住知识图谱所有的数据，决定了数据收集的范围。<span id="more"></span></p>
+<h2 id="数据的分类问题"><a href="#数据的分类问题" class="headerlink" title="数据的分类问题"></a>数据的分类问题</h2><p>通用知识图谱，它收集的数据比较全，涉及到各种各样的知识。我们可以把通用知识图谱认为是一个大而全的知识图谱，它基本能涵盖所有的知识，当然，这类通用知识图谱，由于涵盖的知识范围广，所有对于某一个知识点，可能不会说的特别细，也就是深度不够。行业知识图谱和通用知识图谱，正好是一个互补的关系，行业知识图谱是对某一个行业的知识，组织的很专业，研究的很深入。</p>
+<p>无论是通用知识图谱还是行业知识图谱，都存在数据的组织问题，首要的就是数据如何分类，可以画一个树状图，根节点为物体或者对象，就是包含万物，然后再一层层的进行分类，知识图谱中的所有知识都可以在树状图中找到对应的节点。</p>
+<p>下面我们以百科数据为例，介绍一下知识图谱的分类问题。其它通用知识图谱，也有自己的分类体系，和百科的分类大同小异，但也有自己的一些特点。</p>
+<p>百科知识的组织，第一层分类为艺术、科学、自然、文化、地理、生活、社会、人物、经济、体育、历史等。</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%BA%8C/resources/image-20220811154643178.png" alt="image-20220811154643178" style="zoom:67%;">
+
+<p>选择一个分类，比如科学分类，就能看到第二层分类科学的分类体系，包括健康医疗、航空航天、天文学、环境生态、农业科学、生命科学、数理科学、心理学、信息科学、工程技术、化学、地球科学、其它等。</p>
+<p><img src="/../resources%5C935893-20190707092245915-343172619.png" alt="img"></p>
+<p>再继续选择，比如健康医疗，就可以看到第三层的分类，医学知识库的知识分类情况，从医疗症状、药物、中医药、诊断技术等几个维度来组织医学知识。</p>
+<p><img src="/../resources%5C935893-20190707092301166-1243899689.png" alt="img"></p>
+<p>通过这种分类体系，就会发现，无论收集什么知识，我们都可以在体系中找到对应的分类，这样有利于大家在这个知识图谱中查找知识，也有利于添加知识，扩展知识图谱的数据内容。</p>
+<h2 id="数据的属性"><a href="#数据的属性" class="headerlink" title="数据的属性"></a>数据的属性</h2><p>对于数据组织体系，在分类到末端节点，也就是叶子节点，就需要对这个叶子节点（具体知识点）进行描述，如何将一个知识点描述清楚，在知识图谱中，需要使用属性来描述知识点。这些属性可以从多个方面，多个层次来描述事物。</p>
+<p>我们还是以百科数据为例，在医学知识库中，找到叶子知识点，比如糖尿病， 词条中最重要的一个是定义或者叫做简介，说明什么是糖尿病，然后是几个主要属性，英文名称、常见症状、就诊科室、传染性等。把这些属性放到最开始的位置，人们看到后，就可以对糖尿病有一个大致的了解，这些属性也能够简单反映糖尿病这个知识点的基本情况。</p>
+<p><img src="/../resources%5Cimage-20220811154917144.png" alt="image-20220811154917144"></p>
+<p>除了基本的属性，对于糖尿病这个知识点，还有更多的描述，百科是从病因、检查、鉴别诊断、临床表现、诊断、治疗这几个维度，来阐述糖尿病，通过这些更进一步的属性，人们就会对糖尿病有一个更深入的了解。</p>
+<p><img src="/../resources%5Cimage-20220811154935746.png" alt="image-20220811154935746"></p>
+<p>下面我们再继续来看一下，检查这个属性，都包括哪些内容。百科中列出了比较多的检查项目或者称为检查内容，血糖、尿糖、尿酮体、糖基化血红蛋白（HbA1c）、糖化血清蛋白等等，而且对于每一项检查内容，都有一个简短的说明。</p>
+<p><img src="/../resources%5Cimage-20220811155001033.png" alt="image-20220811155001033"></p>
+<p>上面的属性，就是百科对于疾病症状的知识组织方式，我们可以看一下其他的疾病症状，基本上都是按照这个方式，来组织属性数据。糖尿病这个疾病症状，通过一些属性，还可以关联到其它词条，比如检查内容中的血糖。这样就可以在知识点之间建立关联，形成一个网状的知识图谱。</p>
+<h2 id="数据模型的构建过程"><a href="#数据模型的构建过程" class="headerlink" title="数据模型的构建过程"></a>数据模型的构建过程</h2><p>在构建数据模型的实践中，基本上都会找一个类似的知识体系，或者粗略的数据分类体系，然后以其为基础，再进行扩展。当然，在收集数据的过程中，也可能会收集到大量脱离数据模型的数据，这时候，就可以根据这些数据进行数据模型的修改和完善。</p>
+<p>构建数据模型的初始阶段，可以找一个知识图谱的中心数据，比如构建一个音乐知识图谱，可以以歌曲为中心，先考虑歌曲的属性，比如演唱者、作词、作曲、分类、歌词、乐谱等等，对于这些属性，一方面是考虑在知识图谱中是否合适，需要不断地斟酌，修改、增加或者删除一些属性，从而达到完善属性的目的。另一方面，还要确定这些属性对应的属性值，比如演唱者、作词、作曲都是对应的人，人也是一种实体，也会有很多属性，比如出生日期、性别、姓名、籍贯、主要事迹、作品等等，对于人的属性，又可以开启属性论证工作，确定使用哪些属性，属性值的范围等。</p>
+<p>在不断确定属性和属性值范围的过程中，我们还要明确一个边界。因为对于这种关联关系，可以一直做下去，最后都会变成一个万物互联的通用知识图谱。我们有的时候，可能是构建一个行业知识图谱，这时候，边界的确定就很重要，比如出生日期，对于古代人，就不能写成年月日的形式，可能就是一个朝代，这个朝代也是一个实体，我们就没有必要再对朝代进行属性和属性值的确定。因为朝代对于我们知识图谱来说，已经是相关性很小的知识了。对于朝代这类和知识图谱相关性比较弱的知识实体来说，我们才觉得办法，最简单的处理就是直接写一个名称，将它看作一个字符串或者是一个枚举值，作为枚举值的话，需要罗列出所有的朝代。另外一种处理方法就是将包含的朝代链接到通用知识图谱，比如百度百科或者dbPedia等公认的通用知识图谱。我们专注于行业知识图谱中，关联性比较强的数据。</p>
+<h2 id="数据模型需要注意的问题"><a href="#数据模型需要注意的问题" class="headerlink" title="数据模型需要注意的问题"></a>数据模型需要注意的问题</h2><p>我们最终构建的数据模型，需要注意两个方面的问题。</p>
+<p>一个是体系的完备性。有类、子类这样的层次关系，实体都能划分到这个层次关系中。类的属性，子属性，每个类都有什么属性，属性之间存在什么样的关系，对于一个属性来说，它可以看作是谓语，主语和宾语的范围如何界定。将类、子类、属性、子属性之间的关系描述清楚，能够把知识图谱中的相关实体都纳入到这个体系中，并且通过属性叙述清楚实体，就表示这个数据模型满足了知识图谱的完备性要求。</p>
+<p>另一个需要注意的是数据模型度的把握。虽然有完备性的要求，但也不能将所有的内容都罗列到数据模型中。对于数据模型中的类和属性，要有所取舍，只选取那些和知识图谱相关性强的类和属性，一开始可以选的粗一些，然后再逐渐细化。也可以一开始就做的比较细致，后面再进行删减，最后形成一个内容适当的数据模型。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>现在构建知识图谱数据模型，都有一定的依据，一般不会从零开始，有一个雏形作为数据模型的基础，再进行完善。基本模式是以自顶向下为主，再根据收集的数据，对数据模型进行修正，也就是自底向上为辅，这样的构建方式比较普遍。</p>
+]]></content>
+      <categories>
+        <category>知识图谱</category>
+      </categories>
+      <tags>
+        <tag>知识图谱</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>知识图谱实践(三)</title>
     <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%B8%89/</url>
     <content><![CDATA[<h1 id="知识表示"><a href="#知识表示" class="headerlink" title="知识表示"></a>知识表示</h1><p>构建知识图谱的时候，首先是要建立知识表达的的数据模型，也就是知识图谱整个的数据组织体系，主要是数据的分类及层次关系，还有属性及属性的关系。数据组织体系建立之后，我们就要考虑数据如何表达的问题，这种表达方式应该是既可以让人们容易理解，也要让计算机能够理解和使用。<span id="more"></span></p>
@@ -2070,44 +2108,6 @@
       </categories>
       <tags>
         <tag>知识表示</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>知识图谱实践(二)</title>
-    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%BA%8C/</url>
-    <content><![CDATA[<h1 id="知识图谱数据模型的构建"><a href="#知识图谱数据模型的构建" class="headerlink" title="知识图谱数据模型的构建"></a>知识图谱数据模型的构建</h1><p>数据模型就是数据组织方式，是构建知识图谱首要解决的问题，无论是开放域的知识图谱还是行业的知识图谱，都需要收集大量的数据，这些数据的收集是有选择性的，这个选择的依据就是数据模型。数据模型，也可以称为知识表达模型，解决知识图谱如何组织数据的问题，是数据的底层架构，是一个知识体系框架，能够涵盖住知识图谱所有的数据，决定了数据收集的范围。<span id="more"></span></p>
-<h2 id="数据的分类问题"><a href="#数据的分类问题" class="headerlink" title="数据的分类问题"></a>数据的分类问题</h2><p>通用知识图谱，它收集的数据比较全，涉及到各种各样的知识。我们可以把通用知识图谱认为是一个大而全的知识图谱，它基本能涵盖所有的知识，当然，这类通用知识图谱，由于涵盖的知识范围广，所有对于某一个知识点，可能不会说的特别细，也就是深度不够。行业知识图谱和通用知识图谱，正好是一个互补的关系，行业知识图谱是对某一个行业的知识，组织的很专业，研究的很深入。</p>
-<p>无论是通用知识图谱还是行业知识图谱，都存在数据的组织问题，首要的就是数据如何分类，可以画一个树状图，根节点为物体或者对象，就是包含万物，然后再一层层的进行分类，知识图谱中的所有知识都可以在树状图中找到对应的节点。</p>
-<p>下面我们以百科数据为例，介绍一下知识图谱的分类问题。其它通用知识图谱，也有自己的分类体系，和百科的分类大同小异，但也有自己的一些特点。</p>
-<p>百科知识的组织，第一层分类为艺术、科学、自然、文化、地理、生活、社会、人物、经济、体育、历史等。</p>
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%BA%8C/resources/image-20220811154643178.png" alt="image-20220811154643178" style="zoom:67%;">
-
-<p>选择一个分类，比如科学分类，就能看到第二层分类科学的分类体系，包括健康医疗、航空航天、天文学、环境生态、农业科学、生命科学、数理科学、心理学、信息科学、工程技术、化学、地球科学、其它等。</p>
-<p><img src="/../resources%5C935893-20190707092245915-343172619.png" alt="img"></p>
-<p>再继续选择，比如健康医疗，就可以看到第三层的分类，医学知识库的知识分类情况，从医疗症状、药物、中医药、诊断技术等几个维度来组织医学知识。</p>
-<p><img src="/../resources%5C935893-20190707092301166-1243899689.png" alt="img"></p>
-<p>通过这种分类体系，就会发现，无论收集什么知识，我们都可以在体系中找到对应的分类，这样有利于大家在这个知识图谱中查找知识，也有利于添加知识，扩展知识图谱的数据内容。</p>
-<h2 id="数据的属性"><a href="#数据的属性" class="headerlink" title="数据的属性"></a>数据的属性</h2><p>对于数据组织体系，在分类到末端节点，也就是叶子节点，就需要对这个叶子节点（具体知识点）进行描述，如何将一个知识点描述清楚，在知识图谱中，需要使用属性来描述知识点。这些属性可以从多个方面，多个层次来描述事物。</p>
-<p>我们还是以百科数据为例，在医学知识库中，找到叶子知识点，比如糖尿病， 词条中最重要的一个是定义或者叫做简介，说明什么是糖尿病，然后是几个主要属性，英文名称、常见症状、就诊科室、传染性等。把这些属性放到最开始的位置，人们看到后，就可以对糖尿病有一个大致的了解，这些属性也能够简单反映糖尿病这个知识点的基本情况。</p>
-<p><img src="/../resources%5Cimage-20220811154917144.png" alt="image-20220811154917144"></p>
-<p>除了基本的属性，对于糖尿病这个知识点，还有更多的描述，百科是从病因、检查、鉴别诊断、临床表现、诊断、治疗这几个维度，来阐述糖尿病，通过这些更进一步的属性，人们就会对糖尿病有一个更深入的了解。</p>
-<p><img src="/../resources%5Cimage-20220811154935746.png" alt="image-20220811154935746"></p>
-<p>下面我们再继续来看一下，检查这个属性，都包括哪些内容。百科中列出了比较多的检查项目或者称为检查内容，血糖、尿糖、尿酮体、糖基化血红蛋白（HbA1c）、糖化血清蛋白等等，而且对于每一项检查内容，都有一个简短的说明。</p>
-<p><img src="/../resources%5Cimage-20220811155001033.png" alt="image-20220811155001033"></p>
-<p>上面的属性，就是百科对于疾病症状的知识组织方式，我们可以看一下其他的疾病症状，基本上都是按照这个方式，来组织属性数据。糖尿病这个疾病症状，通过一些属性，还可以关联到其它词条，比如检查内容中的血糖。这样就可以在知识点之间建立关联，形成一个网状的知识图谱。</p>
-<h2 id="数据模型的构建过程"><a href="#数据模型的构建过程" class="headerlink" title="数据模型的构建过程"></a>数据模型的构建过程</h2><p>在构建数据模型的实践中，基本上都会找一个类似的知识体系，或者粗略的数据分类体系，然后以其为基础，再进行扩展。当然，在收集数据的过程中，也可能会收集到大量脱离数据模型的数据，这时候，就可以根据这些数据进行数据模型的修改和完善。</p>
-<p>构建数据模型的初始阶段，可以找一个知识图谱的中心数据，比如构建一个音乐知识图谱，可以以歌曲为中心，先考虑歌曲的属性，比如演唱者、作词、作曲、分类、歌词、乐谱等等，对于这些属性，一方面是考虑在知识图谱中是否合适，需要不断地斟酌，修改、增加或者删除一些属性，从而达到完善属性的目的。另一方面，还要确定这些属性对应的属性值，比如演唱者、作词、作曲都是对应的人，人也是一种实体，也会有很多属性，比如出生日期、性别、姓名、籍贯、主要事迹、作品等等，对于人的属性，又可以开启属性论证工作，确定使用哪些属性，属性值的范围等。</p>
-<p>在不断确定属性和属性值范围的过程中，我们还要明确一个边界。因为对于这种关联关系，可以一直做下去，最后都会变成一个万物互联的通用知识图谱。我们有的时候，可能是构建一个行业知识图谱，这时候，边界的确定就很重要，比如出生日期，对于古代人，就不能写成年月日的形式，可能就是一个朝代，这个朝代也是一个实体，我们就没有必要再对朝代进行属性和属性值的确定。因为朝代对于我们知识图谱来说，已经是相关性很小的知识了。对于朝代这类和知识图谱相关性比较弱的知识实体来说，我们才觉得办法，最简单的处理就是直接写一个名称，将它看作一个字符串或者是一个枚举值，作为枚举值的话，需要罗列出所有的朝代。另外一种处理方法就是将包含的朝代链接到通用知识图谱，比如百度百科或者dbPedia等公认的通用知识图谱。我们专注于行业知识图谱中，关联性比较强的数据。</p>
-<h2 id="数据模型需要注意的问题"><a href="#数据模型需要注意的问题" class="headerlink" title="数据模型需要注意的问题"></a>数据模型需要注意的问题</h2><p>我们最终构建的数据模型，需要注意两个方面的问题。</p>
-<p>一个是体系的完备性。有类、子类这样的层次关系，实体都能划分到这个层次关系中。类的属性，子属性，每个类都有什么属性，属性之间存在什么样的关系，对于一个属性来说，它可以看作是谓语，主语和宾语的范围如何界定。将类、子类、属性、子属性之间的关系描述清楚，能够把知识图谱中的相关实体都纳入到这个体系中，并且通过属性叙述清楚实体，就表示这个数据模型满足了知识图谱的完备性要求。</p>
-<p>另一个需要注意的是数据模型度的把握。虽然有完备性的要求，但也不能将所有的内容都罗列到数据模型中。对于数据模型中的类和属性，要有所取舍，只选取那些和知识图谱相关性强的类和属性，一开始可以选的粗一些，然后再逐渐细化。也可以一开始就做的比较细致，后面再进行删减，最后形成一个内容适当的数据模型。</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>现在构建知识图谱数据模型，都有一定的依据，一般不会从零开始，有一个雏形作为数据模型的基础，再进行完善。基本模式是以自顶向下为主，再根据收集的数据，对数据模型进行修正，也就是自底向上为辅，这样的构建方式比较普遍。</p>
-]]></content>
-      <categories>
-        <category>知识图谱</category>
-      </categories>
-      <tags>
-        <tag>知识图谱</tag>
       </tags>
   </entry>
   <entry>
@@ -2165,37 +2165,6 @@
       </tags>
   </entry>
   <entry>
-    <title>知识图谱实践(六)</title>
-    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%85%AD/</url>
-    <content><![CDATA[<h1 id="从结构化数据进行知识抽取-D2RQ"><a href="#从结构化数据进行知识抽取-D2RQ" class="headerlink" title="从结构化数据进行知识抽取(D2RQ)"></a>从结构化数据进行知识抽取(D2RQ)</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>D2RQ，含义是把关系型数据库当作虚拟的RDF图数据库进行访问。D2RQ平台是一个将关系型数据库当作虚拟的、只读的RDF图数据库进行访问的系统。提供了基于RDF访问关系数据库的内容，而无需复制这个数据库将其以RDF的形式进行保存。D2RQ有以下功能：</p>
-<p>使用SPARQL查询非RDF数据库；</p>
-<p>在Web上，将数据库内容当作链接数据进行访问；</p>
-<p>以RDF形式创建一个自定义的数据库，加载成RDF存储；</p>
-<p>使用Apache Jena API访问非RDF数据库的信息。</p>
-<p>D2RQ是一个开源软件，基于Apache协议发布，源代码在Github上。</p>
-<p>D2RQ平台的组成</p>
-<p>l D2RQ映射语言，一种声明的映射语言，用于描述本体和关系数据模型之间的关系。</p>
-<p>l D2RA引擎，一种服务于Jena语义网工具库插件，使用映射重写对数据库的SQL访问的Jena API调用，并且将查询结果传递给框架高层。</p>
-<p>l D2R服务器，一个提供调试用的链接数据视图和HTML视图的HTTP服务器，还提供了一个SPARQL协议endpoint数据接口。</p>
-<p><img src="/../resources%5C935893-20190808153811462-1357317205.png" alt="img"></p>
-<h2 id="D2RQ映射语言"><a href="#D2RQ映射语言" class="headerlink" title="D2RQ映射语言"></a>D2RQ映射语言</h2><p>D2RQ是一种声明式语言，描述了关系型数据库规则和RDFS词汇或OWL本体之间的关系。D2RQ本身是一个符合Trutle语法的RDF文档，映射是用在D2RQ命名空间下的术语表示的，D2RQ命名空间是</p>
-<p><a href="http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#">http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#</a></p>
-<p>映射定义了一个虚拟RDF图，包括数据库的信息。和SQL视图概念类似，除了虚拟的数据结构是一个RDF图而不是虚拟的关系表。这个虚拟的RDF图能够以多种方式访问，取决于映射的实现形式。D2RQ平台提供了SPARQL访问，一个链接数据服务器，一个RDF数据集生成器，一个简单的HTML界面和Jena API访问D2RQ映射数据库。</p>
-<p>下图显示了一个D2RQ映射实例的结构</p>
-<p><img src="/../resources%5C935893-20190808153823045-818001472.png" alt="img"></p>
-<p>数据库映射为RDF术语，显示在右侧的，使用d2rq:ClassMaps and d2rq:PropertyBridges。映射中最重要的问题是类的映射，一个类映射表示一个类或者一组相似的本体类。类映射描述了类的实例如何生成URI或者空节点。它还有一组属性映射规则，能够描述实例的属性如何创建。</p>
-<h2 id="D2R服务器"><a href="#D2R服务器" class="headerlink" title="D2R服务器"></a>D2R服务器</h2><p>D2R服务器是一个工具，基于语义网发布关系型数据库的内容，所有的信息都是由链接数据组成。语义网上的数据都是用RDF模型化和表示，D2R服务器使用了一个定制化D2RQ映射将数据库内容转换为RDF的形式，允许以RDF数据浏览和搜索，这是语义网中最主要的两种访问数据的方式。</p>
-<p>网络的请求通过映射重写为SQL查询语句，这种即时转换允许从大型实时数据库发布RDF，并且无需将数据复制到专用的RDF三元组存储中。</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>非常简要的介绍了D2RQ的内容，实际的使用过程中，应该更深入的参考<a href="http://d2rq.org/%E7%9A%84%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9%E3%80%82">http://d2rq.org/的相关内容。</a></p>
-]]></content>
-      <categories>
-        <category>知识图谱</category>
-      </categories>
-      <tags>
-        <tag>D2RQ</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>知识图谱实践(四)</title>
     <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%9B%9B/</url>
     <content><![CDATA[<h1 id="Sparql的使用"><a href="#Sparql的使用" class="headerlink" title="Sparql的使用"></a>Sparql的使用</h1><h2 id="Sparql简介"><a href="#Sparql简介" class="headerlink" title="Sparql简介"></a>Sparql简介</h2><p>SPARQL的定义，是一个递归的定义，为SPARQL Protocal and RDF Query Language，是W3C制定的RDF知识图谱标准查询语言，大部分的图数据库都支持SPARQL查询。SPARQL在语法上借鉴了SQL。SPARQL是针对RDF三元组进行查询，通过图匹配的方式获得需要查找的内容。<span id="more"></span></p>
@@ -2247,6 +2216,37 @@
       </categories>
       <tags>
         <tag>知识图谱</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>知识图谱实践(六)</title>
+    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%85%AD/</url>
+    <content><![CDATA[<h1 id="从结构化数据进行知识抽取-D2RQ"><a href="#从结构化数据进行知识抽取-D2RQ" class="headerlink" title="从结构化数据进行知识抽取(D2RQ)"></a>从结构化数据进行知识抽取(D2RQ)</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>D2RQ，含义是把关系型数据库当作虚拟的RDF图数据库进行访问。D2RQ平台是一个将关系型数据库当作虚拟的、只读的RDF图数据库进行访问的系统。提供了基于RDF访问关系数据库的内容，而无需复制这个数据库将其以RDF的形式进行保存。D2RQ有以下功能：</p>
+<p>使用SPARQL查询非RDF数据库；</p>
+<p>在Web上，将数据库内容当作链接数据进行访问；</p>
+<p>以RDF形式创建一个自定义的数据库，加载成RDF存储；</p>
+<p>使用Apache Jena API访问非RDF数据库的信息。</p>
+<p>D2RQ是一个开源软件，基于Apache协议发布，源代码在Github上。</p>
+<p>D2RQ平台的组成</p>
+<p>l D2RQ映射语言，一种声明的映射语言，用于描述本体和关系数据模型之间的关系。</p>
+<p>l D2RA引擎，一种服务于Jena语义网工具库插件，使用映射重写对数据库的SQL访问的Jena API调用，并且将查询结果传递给框架高层。</p>
+<p>l D2R服务器，一个提供调试用的链接数据视图和HTML视图的HTTP服务器，还提供了一个SPARQL协议endpoint数据接口。</p>
+<p><img src="/../resources%5C935893-20190808153811462-1357317205.png" alt="img"></p>
+<h2 id="D2RQ映射语言"><a href="#D2RQ映射语言" class="headerlink" title="D2RQ映射语言"></a>D2RQ映射语言</h2><p>D2RQ是一种声明式语言，描述了关系型数据库规则和RDFS词汇或OWL本体之间的关系。D2RQ本身是一个符合Trutle语法的RDF文档，映射是用在D2RQ命名空间下的术语表示的，D2RQ命名空间是</p>
+<p><a href="http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#">http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#</a></p>
+<p>映射定义了一个虚拟RDF图，包括数据库的信息。和SQL视图概念类似，除了虚拟的数据结构是一个RDF图而不是虚拟的关系表。这个虚拟的RDF图能够以多种方式访问，取决于映射的实现形式。D2RQ平台提供了SPARQL访问，一个链接数据服务器，一个RDF数据集生成器，一个简单的HTML界面和Jena API访问D2RQ映射数据库。</p>
+<p>下图显示了一个D2RQ映射实例的结构</p>
+<p><img src="/../resources%5C935893-20190808153823045-818001472.png" alt="img"></p>
+<p>数据库映射为RDF术语，显示在右侧的，使用d2rq:ClassMaps and d2rq:PropertyBridges。映射中最重要的问题是类的映射，一个类映射表示一个类或者一组相似的本体类。类映射描述了类的实例如何生成URI或者空节点。它还有一组属性映射规则，能够描述实例的属性如何创建。</p>
+<h2 id="D2R服务器"><a href="#D2R服务器" class="headerlink" title="D2R服务器"></a>D2R服务器</h2><p>D2R服务器是一个工具，基于语义网发布关系型数据库的内容，所有的信息都是由链接数据组成。语义网上的数据都是用RDF模型化和表示，D2R服务器使用了一个定制化D2RQ映射将数据库内容转换为RDF的形式，允许以RDF数据浏览和搜索，这是语义网中最主要的两种访问数据的方式。</p>
+<p>网络的请求通过映射重写为SQL查询语句，这种即时转换允许从大型实时数据库发布RDF，并且无需将数据复制到专用的RDF三元组存储中。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>非常简要的介绍了D2RQ的内容，实际的使用过程中，应该更深入的参考<a href="http://d2rq.org/%E7%9A%84%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9%E3%80%82">http://d2rq.org/的相关内容。</a></p>
+]]></content>
+      <categories>
+        <category>知识图谱</category>
+      </categories>
+      <tags>
+        <tag>D2RQ</tag>
       </tags>
   </entry>
   <entry>
