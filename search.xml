@@ -406,7 +406,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#105;&#x74;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#99;&#x6f;&#109;">&#103;&#105;&#x74;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#99;&#x6f;&#109;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#105;&#x74;&#x40;&#103;&#105;&#116;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;">&#x67;&#105;&#x74;&#x40;&#103;&#105;&#116;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -420,7 +420,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#103;&#x69;&#116;&#x40;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#99;&#111;&#x6d;">&#103;&#x69;&#116;&#x40;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#x2e;&#99;&#111;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#x67;&#x69;&#x74;&#64;&#103;&#105;&#116;&#x68;&#117;&#x62;&#46;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#64;&#103;&#105;&#116;&#x68;&#117;&#x62;&#46;&#x63;&#x6f;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -1976,7 +1976,40 @@
   <entry>
     <title>知识图谱实践(三)</title>
     <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%B8%89/</url>
-    <content><![CDATA[<h1 id="知识表示"><a href="#知识表示" class="headerlink" title="知识表示"></a>知识表示</h1>]]></content>
+    <content><![CDATA[<h1 id="知识表示"><a href="#知识表示" class="headerlink" title="知识表示"></a>知识表示</h1><p>构建知识图谱的时候，首先是要建立知识表达的的数据模型，也就是知识图谱整个的数据组织体系，主要是数据的分类及层次关系，还有属性及属性的关系。数据组织体系建立之后，我们就要考虑数据如何表达的问题，这种表达方式应该是既可以让人们容易理解，也要让计算机能够理解和使用。<span id="more"></span></p>
+<h2 id="Linked-Data"><a href="#Linked-Data" class="headerlink" title="Linked Data"></a>Linked Data</h2><p><img src="/../resources%5C935893-20190720155337201-1798654001.png" alt="img"></p>
+<p>在语义网的技术栈中，数据表示占了很大比重，按照语义网技术标准要求，所有的实体或属性数据都应该用URI&#x2F;IRI来表示，除了文本描述的数据，所有数据都应该有一个统一的标识，标识的形式可以是XML、RDF、RDFS或者本体语言OWL，这些都说明数据表示是整个语义网的基础。</p>
+<p>万维网之父，也是语义网的创始人，Tim Berners-Lee也一直呼吁建立互联的数据（Linked Data），还在TED上发表了演讲，演讲题目是raw data now，号召人们开放共享原始数据，让整个世界成为一个互通互联的世界。他的演讲既说明了数据共享的重要性，也说明了数据互联互通的重要性。</p>
+<p>Tim Berners-Lee为了鼓励人们开放共享数据，制定了Linked Data的五星规则，数据每加一颗星，这样的数据就更容易被得到和利用，能够增强数据的互联互通。</p>
+<p>一星：以开放的协议提供到互联网上（不论什么格式），称为开放数据</p>
+<p>二星：能够被机器识别的结构化数据（比如excel，而不是表格的扫描图片）</p>
+<p>三星：非专有格式（比如csv代替excel）</p>
+<p>四星：加上以上要求，使用开放标准从W3C（RDF和SPARQL）到实体，让人们能够根据表述就能确定你所要表达的东西。</p>
+<p>五星：满足以上所有要求，并且能够将你的数据与其他人的数据链接起来，提供上下文。</p>
+<p><img src="/../resources%5C935893-20190720155347807-787014092.png" alt="img"></p>
+<h2 id="RDF"><a href="#RDF" class="headerlink" title="RDF"></a>RDF</h2><p>上面提到让数据互联互通，那么，数据以何种形式展示，才能更好的互联互通呢，知识图谱中，数据的展示形式就是RDF，RDF是应为Resource Description Framework的缩写，即资源描述框架，它可以看作是一个数据模型，也可以看作是表示数据的方法手段。</p>
+<p>其中Resource，资源，顾名思义，是一种数据资源，可以是图片、视频，也可以是人、物或者概念等等，是用URI可以唯一标识的对象。</p>
+<p>Description，描述，是对资源的描述，资源被IRI标识之后，我们能够确定资源，这个资源得内涵外延等具体的内容，还是需要资源的属性和关系来确定。描述就是对资源的属性和关系的内容。</p>
+<p>Framework，框架，是描述资源的语言、语法和模型。</p>
+<p>在RDF中，知识总是以三元组的形式出现，一条知识都是分解为主语（subject）、谓语（predicate）和宾语（object）的三元组（triple）来表示。</p>
+<p>我们以维基百科里面的莎士比亚为例，来看一下RDF的表示方式，莎士比亚的作品有哈姆雷特，用RDF表示为：</p>
+<p><a href="https://www.wikidata.org/wiki/Q692">https://www.wikidata.org/wiki/Q692</a>  <a href="https://www.wikidata.org/wiki/Property:P800">https://www.wikidata.org/wiki/Property:P800</a> <a href="https://www.wikidata.org/wiki/Q41567">https://www.wikidata.org/wiki/Q41567</a></p>
+<p>其中<a href="https://www.wikidata.org/wiki/Q692%E6%98%AF%E8%8E%8E%E5%A3%AB%E6%AF%94%E4%BA%9A%E7%9A%84URI%EF%BC%8Chttps://www.wikidata.org/wiki/Property:P800%E6%98%AFnotable">https://www.wikidata.org/wiki/Q692是莎士比亚的URI，https://www.wikidata.org/wiki/Property:P800是notable</a> work的URI</p>
+<p><a href="https://www.wikidata.org/wiki/Q41567%E6%98%AF%E5%93%88%E5%A7%86%E9%9B%B7%E7%89%B9%E7%9A%84URI%E3%80%82">https://www.wikidata.org/wiki/Q41567是哈姆雷特的URI。</a></p>
+<p>在维基数据里，关于莎士比亚的知识，都是通过这样的RDF，将一条条的知识汇聚起来，形成莎士比亚的知识卡片。以下是莎士比亚的知识卡片的一部分。</p>
+<p><img src="/../resources%5C935893-20190720155402433-153410570.png" alt="img"></p>
+<p>在实际的应用中，RDF还有几种序列化方法，也就是存储和传输RDF数据的具体实现形式，主要有RDF&#x2F;XML，N-Triples，Turtle，RDFa，JSON-LD等。这些都是满足RDF规则的数据表现形式，各有特点，适于不同的应用场景。</p>
+<p>XML格式技术成熟，存储和解析方便，但该格式比较冗长，不便于阅读，知识图谱很少使用这种格式来表示数据。N-Triples，比较直观简单，一行一个三元组表示一条知识，方便解析和处理，在知识图谱中应用较多。Turtle可以看作是N-Triples的全面版本，比N-Triples要复杂一些，但相对原始的RDF要简洁，语法规则也比较严谨清晰，在知识图谱中使用比较广泛。RDFa，RDF in Attributes，是将RDF数据嵌到网页中，对于前端显示没有影响，对于浏览器来说，能够在非结构化数据中较方便的提取结构化信息，有利于数据的获取和共享。JSON-LD，JSON for Linking Data，用键值对的形式存储RDF数据，也是为了网络数据的共享和传播。</p>
+<p>和RDF一起使用的还有RDFS（RDF Schema），RDF表示的是数据层的内容，RDFS表示的是模型层的内容，RDFS为RDF数据提供一个类型系统，定义了数据的类型、子类型、属性、子属性、主语的范围、宾语的范围等信息，RDFS为数据定义了一个规则范围，RDF数据按照RDFS制定的规则组织数据。</p>
+<h2 id="OWL"><a href="#OWL" class="headerlink" title="OWL"></a>OWL</h2><p>OWL，不是猫头鹰，是Web Ontology Language，Web本体语言，是W3C制定一种适用于语义网使用的数据模型规范，它融合了哲学中的本体的概念，研究世界上的各种实体以及它们是如何关联的。OWL是对RDFS的一种扩展，弥补了RDFS在表达能力的一些缺陷。OWL也是遵循RDF规范的，比RDF更加严谨，丰富了属性以及属性约束，定义域、值域的约束等等。</p>
+<p>OWL又分为OWL Lite、OWL DL和OWL Full三个子语言。OWL Lite是最简单的OWL，可以看作是OWL Full的简化版本。OWL DL在OWL Lite的基础上，包括了OWL的所有属性约束。OWL Full允许在预定义的词汇上增加词汇，导致逻辑蕴含不可判定。</p>
+<p>OWL的新版本是OWL2，OWL2也有三个子语言，OWL2 QL、OWL2 EL和OWL2 RL，OWL2 QL代表Query Language，专为基于本体的查询设计，可以使用标准关系型数据库技术（例如SQL）来实现，仅需要依据公理扩展查询。OWL2 EL为概念术语描述、推理而设计，拥有一个具备相对表达力的类表达式语言，并且对类表达式如何可以用在公理中没有限制。应用在大型生物健康本体模型的构建中。OWL2 RL面向需要可扩展又不能牺牲太多表达能力的应用程序，被设计用来适应可以牺牲语言的完整表达力以换取效率的OWL2应用程序，以及需要一些来自OWL2的额外表达力的RDF（S）应用程序。</p>
+<p>OWL和OWL2属于W3C推荐的语义网数据模型组织语言，结构严谨，逻辑全面，但在实际的企业级应用中较少使用，主要是因为OWL相对来说比较复杂，不如直接使用Turtle或者N-Triples来的方便。</p>
+<p>参考资料：</p>
+<p>1 <a href="https://www.w3.org/DesignIssues/LinkedData.html">https://www.w3.org/DesignIssues/LinkedData.html</a></p>
+<p>2 <a href="https://zhuanlan.zhihu.com/p/32122644">https://zhuanlan.zhihu.com/p/32122644</a></p>
+<p>3 <a href="https://my.oschina.net/airship/blog/920020">https://my.oschina.net/airship/blog/920020</a></p>
+]]></content>
       <categories>
         <category>知识图谱</category>
       </categories>
@@ -2023,9 +2056,63 @@
       </tags>
   </entry>
   <entry>
+    <title>知识图谱实践(五)</title>
+    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%BA%94/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>知识图谱实践(四)</title>
     <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%9B%9B/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h1 id="Sparql的使用"><a href="#Sparql的使用" class="headerlink" title="Sparql的使用"></a>Sparql的使用</h1><h2 id="Sparql简介"><a href="#Sparql简介" class="headerlink" title="Sparql简介"></a>Sparql简介</h2><p>SPARQL的定义，是一个递归的定义，为SPARQL Protocal and RDF Query Language，是W3C制定的RDF知识图谱标准查询语言，大部分的图数据库都支持SPARQL查询。SPARQL在语法上借鉴了SQL。SPARQL是针对RDF三元组进行查询，通过图匹配的方式获得需要查找的内容。</p>
+<p>下面通过一个例子来说明SPARQL的查询语句的基本结构。这个例子可以在<a href="http://dbpedia.org/sparql%E4%B8%AD%E8%BF%90%E8%A1%8C%EF%BC%8C%E8%8E%B7%E5%8F%96%E7%BB%93%E6%9E%9C%E3%80%82">http://dbpedia.org/sparql中运行，获取结果。</a></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">prefix ontology:&lt;http://dbpedia.org/ontology/&gt;</span><br><span class="line"></span><br><span class="line">select distinct  ?p  ?o</span><br><span class="line"></span><br><span class="line">from &lt;http://dbpedia.org&gt;</span><br><span class="line"></span><br><span class="line">where &#123;ontology:deathDate ?p ?o&#125;</span><br><span class="line"></span><br><span class="line">LIMIT 10</span><br></pre></td></tr></table></figure>
+
+<p>查询例句，包括了5个部分。</p>
+<p>第一部分是前缀声明，这部分主要是为了后面查询内容的简洁，本例中用ontology代替<a href="http://dbpedia.org/ontology/%EF%BC%8C%E5%9C%A8%E5%90%8E%E9%9D%A2%E7%9A%84%E6%9F%A5%E8%AF%A2%E4%B8%AD%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8ontology%EF%BC%8C%E6%AF%94%E5%A6%82ontology:deathDate%E5%B0%B1%E8%A1%A8%E7%A4%BAhttp://dbpedia.org/ontology/deathDate%EF%BC%8C">http://dbpedia.org/ontology/，在后面的查询中直接使用ontology，比如ontology:deathDate就表示http://dbpedia.org/ontology/deathDate，</a></p>
+<p>第二部分是select子句，用来确定需要查找的内容。以变量的形式体现，本例中就是查找?p和?o，按照三元组的主谓宾结构，这里查找的是谓语和宾语，分别用带问号的字符（串）来表示。</p>
+<p>第三部分是from子句，用来确定从哪个图数据库中查找，类似于关系数据库的表名。本例需要查找的数据是在图数据库<a href="http://dbpedia.org中进行查找.也可以把http//dbpedia.org%E8%BF%99%E4%B8%AAGraph">http://dbpedia.org中进行查找。也可以把http://dbpedia.org这个Graph</a> IRI放到第一个方框内，作为默认的数据集名称。</p>
+<p>第四部分是where子句，这部分是用来匹配三元组，把需要匹配的内容放到{}中，本例中，ontology:deathDate ?p ?o的含义就是主语是ontology:deathDate，即<a href="http://dbpedia.org/ontology/deathDate%EF%BC%8C%E8%B0%93%E8%AF%AD%E6%98%AF?p%EF%BC%8C%E5%AE%BE%E8%AF%AD%E6%98%AF?o%EF%BC%8C%E5%8C%B9%E9%85%8D%E8%BF%99%E4%B8%AA%E5%86%85%E5%AE%B9%E7%BB%93%E6%9E%84%E7%9A%84%E6%89%80%E6%9C%89%E4%B8%89%E5%85%83%E7%BB%84%EF%BC%8C%E4%B9%9F%E5%B0%B1%E6%98%AF%E6%89%BE%E5%87%BA%E4%B8%BB%E8%AF%AD%E6%98%AFhttp://dbpedia.org/ontology/deathDate%E7%9A%84%E6%89%80%E6%9C%89%E4%B8%89%E5%85%83%E7%BB%84%E3%80%82">http://dbpedia.org/ontology/deathDate，谓语是?p，宾语是?o，匹配这个内容结构的所有三元组，也就是找出主语是http://dbpedia.org/ontology/deathDate的所有三元组。</a></p>
+<p>第五部分是查询修正的内容，类似于关系数据查询最后的一些限定子句，比如排序order by，限定前几个输出的limit等。本例就是用的limit 10，限定只输出10个结果。</p>
+<p>查询结果如下</p>
+<p><img src="/../resources%5Cimage-20220811201102773.png" alt="image-20220811201102773"></p>
+<h2 id="一些常用的查询语句"><a href="#一些常用的查询语句" class="headerlink" title="一些常用的查询语句"></a>一些常用的查询语句</h2><h3 id="最简单的查询"><a href="#最简单的查询" class="headerlink" title="最简单的查询"></a>最简单的查询</h3><p>就像SQL语句中的查询所有内容select * from table，SPARQL也有一个查询全部数据的语句，也是最简单的语句。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select ?s ?p ?o where &#123;?o ?p ?o&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个语句可以查看图数据库里面的所有三元组，不过如果数据集比较庞大，可能发生延时错误，也就是在一定的时间内查询不能完成导致最后无法完成查询，从而不能提供查询结果。</p>
+<h3 id="聚合函数"><a href="#聚合函数" class="headerlink" title="聚合函数"></a>聚合函数</h3><p>在SPARQL中，也有类似SQL中的聚合函数，比如count，比较常用的一个就是查询图数据库的三元组数量。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">select count(?s) where &#123;?o ?p ?o&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们用上面的语句查询<a href="http://dbpedia.org中三元组的数量,我查了几次,有几次是给出延时错误,有的时候能给出结果./">http://dbpedia.org中三元组的数量，我查了几次，有几次是给出延时错误，有的时候能给出结果。</a></p>
+<p><img src="/../resources%5Cimage-20220811201207293.png" alt="image-20220811201207293"></p>
+<p>可以看到，<a href="http://dbpedia.org这个图数据库一共有3亿多条数据./">http://dbpedia.org这个图数据库一共有3亿多条数据。</a></p>
+<h2 id="opional过滤"><a href="#opional过滤" class="headerlink" title="opional过滤"></a>opional过滤</h2><p>使用optional，可以起到过滤的作用，如果满足optional后面匹配的条件，则结果显示出来。比如下面的语句</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">prefix ontology:&lt;http://dbpedia.org/ontology/&gt;</span><br><span class="line"></span><br><span class="line">select distinct ?p ?o</span><br><span class="line"></span><br><span class="line">where &#123;&#123;?s ?p &lt;http://schema.org/deathDate&gt;&#125; optional &#123;?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?o&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查询的含义是先查找宾语是<a href="http://schema.org/deathDate">http://schema.org/deathDate</a> 的主语?s和谓语?p，将主语?s满足模式?s <a href="http://www.w3.org/2000/01/rdf-schema#label">http://www.w3.org/2000/01/rdf-schema#label</a> ?o的内容找出来，最后显示出两个条件都满足的结果，也可以理解为，通过optional后面的子句过滤掉一部分第一个子句的结果，得到最终的结果。<img src="/../resources%5Cimage-20220811201251463.png" alt="image-20220811201251463"></p>
+<h2 id="union全集"><a href="#union全集" class="headerlink" title="union全集"></a>union全集</h2><p>union也是一个在SPARQL中常用的关键字，使用union表示，将所有union连接的子句匹配的结果都显示出来。我们还用2.3的例子，不过把optional替换为union，可以比较一下二者的不同。</p>
+<p>查询语句为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">prefix ontology:&lt;http://dbpedia.org/ontology/&gt;</span><br><span class="line"></span><br><span class="line">select distinct ?p ?o</span><br><span class="line"></span><br><span class="line">where &#123;&#123;?s ?p &lt;http://schema.org/deathDate&gt;&#125; union &#123;?s &lt;http://www.w3.org/2000/01/rdf-schema#label&gt; ?o&#125;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>查询结果为（部分结果）</p>
+<p><img src="/../resources%5C935893-20190725115131858-68266755.png" alt="img"></p>
+<h2 id="模糊查询"><a href="#模糊查询" class="headerlink" title="模糊查询"></a>模糊查询</h2><p>在SQL中的like查询，在SPARQL中也有对应的语句，就是使用FILTER 和regex。</p>
+<p>例句为</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">prefix ontology:&lt;http://dbpedia.org/ontology/&gt;</span><br><span class="line"></span><br><span class="line">select distinct ?p ?o</span><br><span class="line"></span><br><span class="line">where &#123;ontology:deathDate ?p ?o filter regex(?p,&#x27;label&#x27;)&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还是查找主语deathDate这个主语的谓语和宾语列表，模糊查询的是谓语中含有’label’的谓语和宾语，这个filter和regex的组合实现的功能就是类似SQL的like功能。</p>
+<p>查询结果为</p>
+<p><img src="/../resources%5Cimage-20220811201343311.png" alt="image-20220811201343311"></p>
+<p>从结果可以看到，模糊查询中谓语只包含了有label的内容，其它的给过滤掉了。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这里只是简单介绍了SPARQL的语法和常用的查询语句，实际环境中，应用SPARQL进行查询可能会复杂的多，会有很多复合语句，更为复杂的可能会跨数据集进行查询，也可能用到RDF的一些特性，比如只查找字面量或者只查找IRI的数据等等。总之，SPARQL查询，在实际的使用中，会碰到各种不同的需求，还要根据具体情况写出各种查询语句。</p>
+<p>书写SPARQL查询语句的时候，还要细心，不能出错，不能写错一个字符，有的时候还要注意顺序，这些问题没有注意到，都可能导致查不到结果，或者是直接报错。在拼接SPARQL的时候，要多一些耐心，按照SPARQL规则来，循序渐进，慢慢就会初步掌握这种查询语言。</p>
+<p>另外SPARQL还有UPDATE功能，有insert和delete关键字，但是没有update关键字，也就是说，SPARQL如果实现update操作，需要先insert再delete，从而达到update的效果。SPARQL的UPDATE功能，不如查询功能用的广泛，可能是因为数据集一般数据量大，都是直接以文件的形式存到数据库中的缘故。</p>
+]]></content>
+      <categories>
+        <category>知识图谱</category>
+      </categories>
+      <tags>
+        <tag>知识图谱</tag>
+      </tags>
   </entry>
   <entry>
     <title>知识图谱实践</title>
