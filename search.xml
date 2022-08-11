@@ -244,6 +244,39 @@
       </tags>
   </entry>
   <entry>
+    <title>String、StringBuffer、StringBuilder之间的联系</title>
+    <url>/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/</url>
+    <content><![CDATA[<p>今天做题遇见 <strong>反转字符串中的单词</strong> 这道题，给定一个字符串需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。题目链接：<a href="https://leetcode.cn/problems/reverse-words-in-a-string-iii/">557. 反转字符串中的单词 III - 力扣（LeetCode）</a>。<span id="more"></span></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;Let&#x27;s take LeetCode contest&quot;</span><br><span class="line">输出：&quot;s&#x27;teL ekat edoCteeL tsetnoc&quot;</span><br><span class="line"></span><br><span class="line">输入： s = &quot;God Ding&quot;</span><br><span class="line">输出：&quot;doG gniD&quot;</span><br></pre></td></tr></table></figure>
+
+<p>做题过程中，发现自己忘记了字符串的一些知识，所谓温故而知新。在此记录复习。</p>
+<p>在 java 中字符串属于对象，Java 提供了 String 类来创建和操作字符串。String 类是不可变类，即一旦一个 String 对象被创建以后，包含在这个对象中的字符序列是不可改变的，直至这个对象被销毁。</p>
+<p>Java 提供了两个可变字符串类 <strong>StringBuffer</strong> 和 <strong>StringBuilder</strong>，中文翻译为“字符串缓冲区”。</p>
+<p>StringBuilder 类是 JDK 1.5 新增的类，它也代表可变字符串对象。实际上，StringBuilder 和 StringBuffer 功能基本相似，方法也差不多。不同的是，StringBuffer 是线程安全的，而 StringBuilder 则没有实现线程安全功能，所以性能略高。因此在通常情况下，如果需要创建一个内容可变的字符串对象，则应该优先考虑使用 StringBuilder 类。</p>
+<p>StringBuffer、StringBuilder、String 中都实现了 CharSequence 接口。CharSequence 是一个定义字符串操作的接口，它只包括 length()、charAt(int index)、subSequence(int start, int end) 这几个 API。</p>
+<p>StringBuffer、StringBuilder、String 对 CharSequence 接口的实现过程不一样，</p>
+<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122937245.png" alt="image-20220605122937245" style="zoom:80%;">
+
+<p><strong>String、StringBuffer、StringBuilder 之间的区别：</strong></p>
+<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122516694.png" alt="image-20220605122516694" style="zoom:80%;">
+
+<p><strong>String:</strong></p>
+<p>对于String来说，是把数据存放在了常量池中，因为所有的String，默认都是以常量形式保存，且由final修饰，因此在线程池中它是线程安全的。因为每一个String当被创建好了以后，他就不再发生任何变化，但是它的执行速度是最差的。</p>
+<p>我们要创建String的时候，他在常量池中对这些信息进行处理，如果在程序中出现了大量字符串拼接的工作，效率是非常底下的。<br>因此使用场景是在少量字符串操作的时候才建议直接使用String来操作。</p>
+<p><strong>StringBuffer:</strong></p>
+<p>StringBuffer相对于StringBuilder效率要相对低一点，但也远比String要高的多。效率低的原因：对于StringBuffer来说更多的考虑到了多线程的情况，在进行字符串操作的时候，它使用了synchronize关键字，对方法进行了同步处理。因此StringBuffer适用于多线程环境下的大量操作。</p>
+<p><strong>StringBuilder:</strong></p>
+<p>线程安全与线程不安全：<br>在进行多线程处理的时候，如果多个线程对于这一个对象同时产生操作，会产生预期之外的结果。对于StringBuilder来说，执行效率虽然高，但是因为线程不安全，所以不建议在多线程的环境下对同一个StringBuilder对象进行操作。因此StringBuilder适用于单线程环境下的大量字符串操作。</p>
+<p><strong>参考：</strong><a href="http://c.biancheng.net/view/5822.html">String、StringBuffer和StringBuilder类的区别 (biancheng.net)</a></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>SpringBoot</title>
     <url>/2022/03/09/SpringBoot/</url>
     <content><![CDATA[<p>SpringBoot是整合Spring技术栈的一站式框架</p>
@@ -356,39 +389,6 @@
       </tags>
   </entry>
   <entry>
-    <title>String、StringBuffer、StringBuilder之间的联系</title>
-    <url>/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/</url>
-    <content><![CDATA[<p>今天做题遇见 <strong>反转字符串中的单词</strong> 这道题，给定一个字符串需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。题目链接：<a href="https://leetcode.cn/problems/reverse-words-in-a-string-iii/">557. 反转字符串中的单词 III - 力扣（LeetCode）</a>。<span id="more"></span></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;Let&#x27;s take LeetCode contest&quot;</span><br><span class="line">输出：&quot;s&#x27;teL ekat edoCteeL tsetnoc&quot;</span><br><span class="line"></span><br><span class="line">输入： s = &quot;God Ding&quot;</span><br><span class="line">输出：&quot;doG gniD&quot;</span><br></pre></td></tr></table></figure>
-
-<p>做题过程中，发现自己忘记了字符串的一些知识，所谓温故而知新。在此记录复习。</p>
-<p>在 java 中字符串属于对象，Java 提供了 String 类来创建和操作字符串。String 类是不可变类，即一旦一个 String 对象被创建以后，包含在这个对象中的字符序列是不可改变的，直至这个对象被销毁。</p>
-<p>Java 提供了两个可变字符串类 <strong>StringBuffer</strong> 和 <strong>StringBuilder</strong>，中文翻译为“字符串缓冲区”。</p>
-<p>StringBuilder 类是 JDK 1.5 新增的类，它也代表可变字符串对象。实际上，StringBuilder 和 StringBuffer 功能基本相似，方法也差不多。不同的是，StringBuffer 是线程安全的，而 StringBuilder 则没有实现线程安全功能，所以性能略高。因此在通常情况下，如果需要创建一个内容可变的字符串对象，则应该优先考虑使用 StringBuilder 类。</p>
-<p>StringBuffer、StringBuilder、String 中都实现了 CharSequence 接口。CharSequence 是一个定义字符串操作的接口，它只包括 length()、charAt(int index)、subSequence(int start, int end) 这几个 API。</p>
-<p>StringBuffer、StringBuilder、String 对 CharSequence 接口的实现过程不一样，</p>
-<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122937245.png" alt="image-20220605122937245" style="zoom:80%;">
-
-<p><strong>String、StringBuffer、StringBuilder 之间的区别：</strong></p>
-<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122516694.png" alt="image-20220605122516694" style="zoom:80%;">
-
-<p><strong>String:</strong></p>
-<p>对于String来说，是把数据存放在了常量池中，因为所有的String，默认都是以常量形式保存，且由final修饰，因此在线程池中它是线程安全的。因为每一个String当被创建好了以后，他就不再发生任何变化，但是它的执行速度是最差的。</p>
-<p>我们要创建String的时候，他在常量池中对这些信息进行处理，如果在程序中出现了大量字符串拼接的工作，效率是非常底下的。<br>因此使用场景是在少量字符串操作的时候才建议直接使用String来操作。</p>
-<p><strong>StringBuffer:</strong></p>
-<p>StringBuffer相对于StringBuilder效率要相对低一点，但也远比String要高的多。效率低的原因：对于StringBuffer来说更多的考虑到了多线程的情况，在进行字符串操作的时候，它使用了synchronize关键字，对方法进行了同步处理。因此StringBuffer适用于多线程环境下的大量操作。</p>
-<p><strong>StringBuilder:</strong></p>
-<p>线程安全与线程不安全：<br>在进行多线程处理的时候，如果多个线程对于这一个对象同时产生操作，会产生预期之外的结果。对于StringBuilder来说，执行效率虽然高，但是因为线程不安全，所以不建议在多线程的环境下对同一个StringBuilder对象进行操作。因此StringBuilder适用于单线程环境下的大量字符串操作。</p>
-<p><strong>参考：</strong><a href="http://c.biancheng.net/view/5822.html">String、StringBuffer和StringBuilder类的区别 (biancheng.net)</a></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>hexo + github 搭建个人博客</title>
     <url>/2022/02/20/hello-world/</url>
     <content><![CDATA[<p>搭建博客最重要的就是<strong>耐心</strong>和<strong>坚持</strong>。搭建时候遇见许多问题(权限、版本等等)，经过耐心的搜索解决方案逐一解决还是非常开心的！<span id="more"></span></p>
@@ -406,7 +406,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#105;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;">&#x67;&#105;&#116;&#x40;&#103;&#x69;&#116;&#x68;&#117;&#x62;&#46;&#99;&#x6f;&#x6d;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#46;&#99;&#x6f;&#109;">&#103;&#105;&#116;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#46;&#99;&#x6f;&#109;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -420,7 +420,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#98;&#46;&#x63;&#111;&#x6d;">&#x67;&#105;&#116;&#x40;&#x67;&#x69;&#x74;&#x68;&#x75;&#98;&#46;&#x63;&#111;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#x6f;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -1976,16 +1976,22 @@
   <entry>
     <title>知识图谱实践(七)</title>
     <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%B8%83/</url>
-    <content><![CDATA[<h1 id="网页数据抽取"><a href="#网页数据抽取" class="headerlink" title="网页数据抽取"></a>网页数据抽取</h1><p>互联网中蕴含着大量的数据资源，这些数据存在于html的代码之中，如何从浩瀚的代码中提取有效的数据，针对不同的情况，可以采用多种方法来实现网页数据的提取。</p>
+    <content><![CDATA[<h1 id="网页数据抽取"><a href="#网页数据抽取" class="headerlink" title="网页数据抽取"></a>网页数据抽取</h1><p>互联网中蕴含着大量的数据资源，这些数据存在于html的代码之中，如何从浩瀚的代码中提取有效的数据，针对不同的情况，可以采用多种方法来实现网页数据的提取。<span id="more"></span></p>
 <h2 id="手工方法"><a href="#手工方法" class="headerlink" title="手工方法"></a>手工方法</h2><p>网页呈现数据的方式，一般都是按照导航页、列表页、详情页进行设计，这就会使得数据展示存在一定的规律，我们找出这种规律，就可以制定相应的规则，来获取数据。比如。京东商城中笔记本的列表页面。</p>
 <p><img src="/../resources%5C935893-20190923153137663-1112940991.png" alt="img"></p>
 <p> 我们想要在该页面提取笔记本的价格数据，则需要对页面的html代码进行分析，获取其html代码，如下所示：</p>
 <p><img src="/../resources%5C935893-20190923153204804-1915389282.png" alt="img"></p>
 <h3 id="利用XPath语言"><a href="#利用XPath语言" class="headerlink" title="利用XPath语言"></a>利用XPath语言</h3><p>利用其html代码进行数据提取，可以采用XPath语言，XPath即为XML路径语言（XML Path Language），它是一种用来确定XML文档中某部分位置的语言。XPath基于XML的树状结构，提供在数据结构树中找寻节点的能力。XPath被开发者采用来当作小型查询语言。</p>
 <p>​    价格信息的Xpath代码为：</p>
-<p>&#x2F;&#x2F;*[@id&#x3D;”plist”]&#x2F;ul&#x2F;li[5]&#x2F;div&#x2F;div[3]&#x2F;strong</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//*[@id=”plist”]/ul/li[5]/div/div[3]/strong</span><br></pre></td></tr></table></figure>
+
+
+
 <h3 id="利用CSS选择器"><a href="#利用CSS选择器" class="headerlink" title="利用CSS选择器"></a>利用CSS选择器</h3><p>与之类似的，也可以采用CSS选择器来进行定位笔记本价格，把html代码看作是一个dom树，按照树的层次结构，利用CSS选择器来一层层的定位到价格。该笔记本价格信息的CSS选择器的表达式为：</p>
-<p>#plist&gt;ul&gt;li:nth-child(5)&gt;div&gt;div.p-price&gt;strong</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">\#plist&gt;ul&gt;li:nth-child(5)&gt;div&gt;div.p-price&gt;strong</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="包装器归纳"><a href="#包装器归纳" class="headerlink" title="包装器归纳"></a>包装器归纳</h2><p>包装器就是将数据从网页中抽取出来，并将数据还原为结构化数据。包装器归纳是基于有监督学习的，它从标注好的训练样例集合中学习数据抽取规则，用于从其它相同标记或相同网页模板中抽取目标数据。</p>
 <p>包装器归纳主要包括网页清洗、网页标注、包装器空间生成、包装器评估、包装器归纳结果等步骤。</p>
 <h3 id="网页清洗"><a href="#网页清洗" class="headerlink" title="网页清洗"></a>网页清洗</h3><p>网页清洗主要解决网页代码不规范的问题，比如网页中的标签没有闭合，个别标签使用不规范等，网页结构代码不严谨，就会导致在抽取过程中的噪声，使用一些工具比如Tidy，对网页进行规范化处理，可以在后期的抽取过程中减少噪声的影响。</p>
