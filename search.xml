@@ -1,6 +1,151 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>SpringBoot</title>
+    <url>/2022/03/09/SpringBoot/</url>
+    <content><![CDATA[<p>SpringBoot是整合Spring技术栈的一站式框架</p>
+<p>SpringBoot是简化Spring技术栈的快速开发脚手架<span id="more"></span></p>
+<h3 id="SpringBoot特点"><a href="#SpringBoot特点" class="headerlink" title="SpringBoot特点"></a>SpringBoot特点</h3><h4 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h4><p>父项目依赖管理</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">依赖管理    </span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">父项目</span><br><span class="line"> <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>start 场景启动器</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">1	spring-boot-starter-* ： *就某种场景</span><br><span class="line">2	只要引入starter，这个场景的所有常规需要的依赖我们都自动引入</span><br><span class="line">3	SpringBoot所有支持的场景</span><br><span class="line">https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-starter</span><br><span class="line">4	 *-spring-boot-starter： 第三方为我们提供的简化开发的场景启动器。</span><br><span class="line">5	所有场景启动器最底层的依赖</span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>自动配置 Tomcat</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    &lt;/dependency</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line">等同于</span><br><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan(&quot;xxx.xxx.xxx&quot;)</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="容器功能"><a href="#容器功能" class="headerlink" title="容器功能"></a>容器功能</h3><h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><p><strong>@Configuration</strong></p>
+<ul>
+<li>Full模式于Lite模式<ul>
+<li>配置类组件之间无依赖关系用Lite模式加速容器启动过程，减少判断</li>
+<li>配置类组件之间有依赖关系，方法会被调用得到之前单实例组件，用Full模式</li>
+</ul>
+</li>
+</ul>
+<p>1、配置类里面使用@Bean标注在方法上给容器注册组件，默认也是单实例的</p>
+<p>2、配置类本身也是组件</p>
+<p>3、proxyBeanMethods：代理bean的方法</p>
+<ul>
+<li>Full(proxyBeanMethods &#x3D; true)、【保证每个@Bean方法被调用多少次返回的组件都是单实例的】</li>
+<li>Lite(proxyBeanMethods &#x3D; false)【每个@Bean方法被调用多少次返回的组件都是新创建的】</li>
+<li>组件依赖必须使用Full模式默认。其他默认是否Lite模式</li>
+</ul>
+<p><strong>@Bean、@Component、@Controller、@Service、@Repository</strong></p>
+<p><strong>@ComponentScan、@Import</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Import(&#123;User.class,DBHelper.class&#125;)</span></span><br><span class="line"><span class="meta">@Configuration(proxyBeanMethods = false)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Myconfig</span>()&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>@Conditional</strong></p>
+<p>条件装配 @Conditional：满足Conditional指定的条件，进行组件注入</p>
+<h4 id="原生配置文件引入"><a href="#原生配置文件引入" class="headerlink" title="原生配置文件引入"></a>原生配置文件引入</h4><p><strong>@ImportResource</strong></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">======================beans.xml=========================</span><br><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;haha&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.atguigu.boot.bean.User&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;zhangsan&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span> <span class="attr">value</span>=<span class="string">&quot;18&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;hehe&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.atguigu.boot.bean.Pet&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;tomcat&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ImportResource(&quot;classpath:beans.xml&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyConfig</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">======================测试=================</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">haha</span> <span class="operator">=</span> run.containsBean(<span class="string">&quot;haha&quot;</span>);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">hehe</span> <span class="operator">=</span> run.containsBean(<span class="string">&quot;hehe&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;haha：&quot;</span>+haha);<span class="comment">//true</span></span><br><span class="line">        System.out.println(<span class="string">&quot;hehe：&quot;</span>+hehe);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="配置绑定"><a href="#配置绑定" class="headerlink" title="配置绑定"></a>配置绑定</h4><p>读取properties文件中内容，封装到JavaBean中</p>
+<p><strong>@ConfigurationProperties</strong></p>
+<p><strong>@EnableConfigurationProperties + @ConfigurationProperties</strong></p>
+<p><strong>@Component + @ConfigurationProperties</strong></p>
+<h3 id="自动配置原理"><a href="#自动配置原理" class="headerlink" title="自动配置原理"></a>自动配置原理</h3><p><strong>SpringBootConfiguration</strong></p>
+<p>@Configuration。代表当前是一个配置类</p>
+<p><strong>@ComponentScan</strong></p>
+<p>指定扫描</p>
+<p><strong>@EnableAutoConfiguration</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@AutoConfigurationPackage</span></span><br><span class="line"><span class="meta">@Import(AutoConfigurationImportSelector.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAutoConfiguration &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>@AutoConfigurationPackage</strong></p>
+<p>自动配置包，指定默认的包规则。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Import(AutoConfigurationPackages.Registrar.class)</span>  <span class="comment">//给容器中导入一个组件</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> AutoConfigurationPackage &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//利用Registrar给容器中导入一系列组件</span></span><br><span class="line"><span class="comment">//将指定的一个包下的所有组件导入进来？MainApplication 所在包下。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>@Import(AutoConfigurationImportSelector.class)</strong></p>
+ <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>、利用getAutoConfigurationEntry(annotationMetadata);给容器中批量导入一些组件</span><br><span class="line"><span class="number">2</span>、调用List&lt;String&gt; configurations = getCandidateConfigurations(annotationMetadata, attributes)获取到所有需要导入到容器中的配置类</span><br><span class="line"><span class="number">3</span>、利用工厂加载 Map&lt;String, List&lt;String&gt;&gt; <span class="title function_">loadSpringFactories</span><span class="params">(<span class="meta">@Nullable</span> ClassLoader classLoader)</span>；得到所有的组件</span><br><span class="line"><span class="number">4</span>、从META-INF/spring.factories位置来加载一个文件。</span><br><span class="line">	默认扫描我们当前系统里面所有META-INF/spring.factories位置的文件</span><br><span class="line">    spring-boot-autoconfigure-<span class="number">2.3</span><span class="number">.4</span>.RELEASE.jar包里面也有META-INF/spring.factories</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p><strong>蠢事：</strong>忘记填写@RestController</p>
+<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><h4 id="properties"><a href="#properties" class="headerlink" title="properties"></a>properties</h4><p>“YAML Ain’t Markup Language”</p>
+<h4 id="yaml"><a href="#yaml" class="headerlink" title="yaml"></a>yaml</h4><p>适合用来做以数据为中心的配置文件</p>
+<p><strong>自定义的类和配置文件绑定一般没有提示</strong></p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">exclude</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="静态资源访问"><a href="#静态资源访问" class="headerlink" title="静态资源访问"></a>静态资源访问</h3><h4 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h4><p>静态资源放在类路径下：called <code>/static</code> (or <code>/public</code> or <code>/resources</code> or <code>/META-INF/resources</code></p>
+<p>访问：当前项目根路径&#x2F; + 静态资源名</p>
+<p><strong>原理：</strong>静态映射&#x2F;**</p>
+<p>请求进来，先去找Controller看能不能处理。不能处理的所有请求又都交给静态资源处理器。静态资源也找不到则响应404页面。</p>
+<p>改变默认的静态资源路径</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">mvc:</span></span><br><span class="line">    <span class="attr">static-path-pattern:</span> <span class="string">/res/**</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">static-locations:</span> [<span class="string">classpath:/haha/</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="欢迎页"><a href="#欢迎页" class="headerlink" title="欢迎页"></a>欢迎页</h4><p>静态资源路径下配置 index.html</p>
+<ul>
+<li>可以配置静态资源路径</li>
+<li>需要注意的是，如果配置了静态资源的访问前缀，会导致 index.html 不能被默认访问</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="comment">#  mvc:</span></span><br><span class="line"><span class="comment">#    static-path-pattern: /res/**   导致welcome page功能失效</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">static-locations:</span> [<span class="string">classpath:/haha/</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义-Favicon"><a href="#自定义-Favicon" class="headerlink" title="自定义 Favicon"></a>自定义 Favicon</h4><p>favicon.io 放在静态资源目录</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="comment">#  mvc:</span></span><br><span class="line"><span class="comment">#    static-path-pattern: /res/**   这个会导致 Favicon 功能失效</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="静态资源配置原理"><a href="#静态资源配置原理" class="headerlink" title="静态资源配置原理"></a>静态资源配置原理</h4><ul>
+<li>SpringBoot启动默认加载  xxxAutoConfiguration 类（自动配置类）</li>
+<li>SpringMVC功能的自动配置类 WebMvcAutoConfiguration，生效</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Java</category>
+      </categories>
+      <tags>
+        <tag>Java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>String、StringBuffer、StringBuilder之间的联系</title>
+    <url>/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/</url>
+    <content><![CDATA[<p>今天做题遇见 <strong>反转字符串中的单词</strong> 这道题，给定一个字符串需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。题目链接：<a href="https://leetcode.cn/problems/reverse-words-in-a-string-iii/">557. 反转字符串中的单词 III - 力扣（LeetCode）</a>。<span id="more"></span></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;Let&#x27;s take LeetCode contest&quot;</span><br><span class="line">输出：&quot;s&#x27;teL ekat edoCteeL tsetnoc&quot;</span><br><span class="line"></span><br><span class="line">输入： s = &quot;God Ding&quot;</span><br><span class="line">输出：&quot;doG gniD&quot;</span><br></pre></td></tr></table></figure>
+
+<p>做题过程中，发现自己忘记了字符串的一些知识，所谓温故而知新。在此记录复习。</p>
+<p>在 java 中字符串属于对象，Java 提供了 String 类来创建和操作字符串。String 类是不可变类，即一旦一个 String 对象被创建以后，包含在这个对象中的字符序列是不可改变的，直至这个对象被销毁。</p>
+<p>Java 提供了两个可变字符串类 <strong>StringBuffer</strong> 和 <strong>StringBuilder</strong>，中文翻译为“字符串缓冲区”。</p>
+<p>StringBuilder 类是 JDK 1.5 新增的类，它也代表可变字符串对象。实际上，StringBuilder 和 StringBuffer 功能基本相似，方法也差不多。不同的是，StringBuffer 是线程安全的，而 StringBuilder 则没有实现线程安全功能，所以性能略高。因此在通常情况下，如果需要创建一个内容可变的字符串对象，则应该优先考虑使用 StringBuilder 类。</p>
+<p>StringBuffer、StringBuilder、String 中都实现了 CharSequence 接口。CharSequence 是一个定义字符串操作的接口，它只包括 length()、charAt(int index)、subSequence(int start, int end) 这几个 API。</p>
+<p>StringBuffer、StringBuilder、String 对 CharSequence 接口的实现过程不一样，</p>
+<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122937245.png" alt="image-20220605122937245" style="zoom:80%;">
+
+<p><strong>String、StringBuffer、StringBuilder 之间的区别：</strong></p>
+<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122516694.png" alt="image-20220605122516694" style="zoom:80%;">
+
+<p><strong>String:</strong></p>
+<p>对于String来说，是把数据存放在了常量池中，因为所有的String，默认都是以常量形式保存，且由final修饰，因此在线程池中它是线程安全的。因为每一个String当被创建好了以后，他就不再发生任何变化，但是它的执行速度是最差的。</p>
+<p>我们要创建String的时候，他在常量池中对这些信息进行处理，如果在程序中出现了大量字符串拼接的工作，效率是非常底下的。<br>因此使用场景是在少量字符串操作的时候才建议直接使用String来操作。</p>
+<p><strong>StringBuffer:</strong></p>
+<p>StringBuffer相对于StringBuilder效率要相对低一点，但也远比String要高的多。效率低的原因：对于StringBuffer来说更多的考虑到了多线程的情况，在进行字符串操作的时候，它使用了synchronize关键字，对方法进行了同步处理。因此StringBuffer适用于多线程环境下的大量操作。</p>
+<p><strong>StringBuilder:</strong></p>
+<p>线程安全与线程不安全：<br>在进行多线程处理的时候，如果多个线程对于这一个对象同时产生操作，会产生预期之外的结果。对于StringBuilder来说，执行效率虽然高，但是因为线程不安全，所以不建议在多线程的环境下对同一个StringBuilder对象进行操作。因此StringBuilder适用于单线程环境下的大量字符串操作。</p>
+<p><strong>参考：</strong><a href="http://c.biancheng.net/view/5822.html">String、StringBuffer和StringBuilder类的区别 (biancheng.net)</a></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Matplotlib数据可视化</title>
     <url>/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
     <content><![CDATA[<h1 id="Matplotlib数据可视化"><a href="#Matplotlib数据可视化" class="headerlink" title="Matplotlib数据可视化"></a>Matplotlib数据可视化</h1><p>Python语言的matplotlib扩展包是一个提供了跨平台的2D 图形库，它可以将数据用多种形式展示出来。Matplotlib可画出折线图，柱状图，饼图，雷达图等。在matplotlib的官网上给出了500多个图表展示的例子程序 (<a href="https://matplotlib.org/gallery/index.html)%E3%80%82">https://matplotlib.org/gallery/index.html)。</a><span id="more"></span></p>
@@ -244,151 +389,6 @@
       </tags>
   </entry>
   <entry>
-    <title>String、StringBuffer、StringBuilder之间的联系</title>
-    <url>/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/</url>
-    <content><![CDATA[<p>今天做题遇见 <strong>反转字符串中的单词</strong> 这道题，给定一个字符串需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。题目链接：<a href="https://leetcode.cn/problems/reverse-words-in-a-string-iii/">557. 反转字符串中的单词 III - 力扣（LeetCode）</a>。<span id="more"></span></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;Let&#x27;s take LeetCode contest&quot;</span><br><span class="line">输出：&quot;s&#x27;teL ekat edoCteeL tsetnoc&quot;</span><br><span class="line"></span><br><span class="line">输入： s = &quot;God Ding&quot;</span><br><span class="line">输出：&quot;doG gniD&quot;</span><br></pre></td></tr></table></figure>
-
-<p>做题过程中，发现自己忘记了字符串的一些知识，所谓温故而知新。在此记录复习。</p>
-<p>在 java 中字符串属于对象，Java 提供了 String 类来创建和操作字符串。String 类是不可变类，即一旦一个 String 对象被创建以后，包含在这个对象中的字符序列是不可改变的，直至这个对象被销毁。</p>
-<p>Java 提供了两个可变字符串类 <strong>StringBuffer</strong> 和 <strong>StringBuilder</strong>，中文翻译为“字符串缓冲区”。</p>
-<p>StringBuilder 类是 JDK 1.5 新增的类，它也代表可变字符串对象。实际上，StringBuilder 和 StringBuffer 功能基本相似，方法也差不多。不同的是，StringBuffer 是线程安全的，而 StringBuilder 则没有实现线程安全功能，所以性能略高。因此在通常情况下，如果需要创建一个内容可变的字符串对象，则应该优先考虑使用 StringBuilder 类。</p>
-<p>StringBuffer、StringBuilder、String 中都实现了 CharSequence 接口。CharSequence 是一个定义字符串操作的接口，它只包括 length()、charAt(int index)、subSequence(int start, int end) 这几个 API。</p>
-<p>StringBuffer、StringBuilder、String 对 CharSequence 接口的实现过程不一样，</p>
-<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122937245.png" alt="image-20220605122937245" style="zoom:80%;">
-
-<p><strong>String、StringBuffer、StringBuilder 之间的区别：</strong></p>
-<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122516694.png" alt="image-20220605122516694" style="zoom:80%;">
-
-<p><strong>String:</strong></p>
-<p>对于String来说，是把数据存放在了常量池中，因为所有的String，默认都是以常量形式保存，且由final修饰，因此在线程池中它是线程安全的。因为每一个String当被创建好了以后，他就不再发生任何变化，但是它的执行速度是最差的。</p>
-<p>我们要创建String的时候，他在常量池中对这些信息进行处理，如果在程序中出现了大量字符串拼接的工作，效率是非常底下的。<br>因此使用场景是在少量字符串操作的时候才建议直接使用String来操作。</p>
-<p><strong>StringBuffer:</strong></p>
-<p>StringBuffer相对于StringBuilder效率要相对低一点，但也远比String要高的多。效率低的原因：对于StringBuffer来说更多的考虑到了多线程的情况，在进行字符串操作的时候，它使用了synchronize关键字，对方法进行了同步处理。因此StringBuffer适用于多线程环境下的大量操作。</p>
-<p><strong>StringBuilder:</strong></p>
-<p>线程安全与线程不安全：<br>在进行多线程处理的时候，如果多个线程对于这一个对象同时产生操作，会产生预期之外的结果。对于StringBuilder来说，执行效率虽然高，但是因为线程不安全，所以不建议在多线程的环境下对同一个StringBuilder对象进行操作。因此StringBuilder适用于单线程环境下的大量字符串操作。</p>
-<p><strong>参考：</strong><a href="http://c.biancheng.net/view/5822.html">String、StringBuffer和StringBuilder类的区别 (biancheng.net)</a></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringBoot</title>
-    <url>/2022/03/09/SpringBoot/</url>
-    <content><![CDATA[<p>SpringBoot是整合Spring技术栈的一站式框架</p>
-<p>SpringBoot是简化Spring技术栈的快速开发脚手架<span id="more"></span></p>
-<h3 id="SpringBoot特点"><a href="#SpringBoot特点" class="headerlink" title="SpringBoot特点"></a>SpringBoot特点</h3><h4 id="依赖管理"><a href="#依赖管理" class="headerlink" title="依赖管理"></a>依赖管理</h4><p>父项目依赖管理</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">依赖管理    </span><br><span class="line"><span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-parent<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"></span><br><span class="line">父项目</span><br><span class="line"> <span class="tag">&lt;<span class="name">parent</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-dependencies<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>start 场景启动器</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">1	spring-boot-starter-* ： *就某种场景</span><br><span class="line">2	只要引入starter，这个场景的所有常规需要的依赖我们都自动引入</span><br><span class="line">3	SpringBoot所有支持的场景</span><br><span class="line">https://docs.spring.io/spring-boot/docs/current/reference/html/using-spring-boot.html#using-boot-starter</span><br><span class="line">4	 *-spring-boot-starter： 第三方为我们提供的简化开发的场景启动器。</span><br><span class="line">5	所有场景启动器最底层的依赖</span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>自动配置 Tomcat</p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.3.4.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">scope</span>&gt;</span>compile<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line">    &lt;/dependency</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line">等同于</span><br><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="meta">@EnableAutoConfiguration</span></span><br><span class="line"><span class="meta">@ComponentScan(&quot;xxx.xxx.xxx&quot;)</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="容器功能"><a href="#容器功能" class="headerlink" title="容器功能"></a>容器功能</h3><h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><p><strong>@Configuration</strong></p>
-<ul>
-<li>Full模式于Lite模式<ul>
-<li>配置类组件之间无依赖关系用Lite模式加速容器启动过程，减少判断</li>
-<li>配置类组件之间有依赖关系，方法会被调用得到之前单实例组件，用Full模式</li>
-</ul>
-</li>
-</ul>
-<p>1、配置类里面使用@Bean标注在方法上给容器注册组件，默认也是单实例的</p>
-<p>2、配置类本身也是组件</p>
-<p>3、proxyBeanMethods：代理bean的方法</p>
-<ul>
-<li>Full(proxyBeanMethods &#x3D; true)、【保证每个@Bean方法被调用多少次返回的组件都是单实例的】</li>
-<li>Lite(proxyBeanMethods &#x3D; false)【每个@Bean方法被调用多少次返回的组件都是新创建的】</li>
-<li>组件依赖必须使用Full模式默认。其他默认是否Lite模式</li>
-</ul>
-<p><strong>@Bean、@Component、@Controller、@Service、@Repository</strong></p>
-<p><strong>@ComponentScan、@Import</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Import(&#123;User.class,DBHelper.class&#125;)</span></span><br><span class="line"><span class="meta">@Configuration(proxyBeanMethods = false)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Myconfig</span>()&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>@Conditional</strong></p>
-<p>条件装配 @Conditional：满足Conditional指定的条件，进行组件注入</p>
-<h4 id="原生配置文件引入"><a href="#原生配置文件引入" class="headerlink" title="原生配置文件引入"></a>原生配置文件引入</h4><p><strong>@ImportResource</strong></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">======================beans.xml=========================</span><br><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:context</span>=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;haha&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.atguigu.boot.bean.User&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;zhangsan&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;age&quot;</span> <span class="attr">value</span>=<span class="string">&quot;18&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">&quot;hehe&quot;</span> <span class="attr">class</span>=<span class="string">&quot;com.atguigu.boot.bean.Pet&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">&quot;name&quot;</span> <span class="attr">value</span>=<span class="string">&quot;tomcat&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ImportResource(&quot;classpath:beans.xml&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyConfig</span> &#123;&#125;</span><br><span class="line"></span><br><span class="line">======================测试=================</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">haha</span> <span class="operator">=</span> run.containsBean(<span class="string">&quot;haha&quot;</span>);</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">hehe</span> <span class="operator">=</span> run.containsBean(<span class="string">&quot;hehe&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;haha：&quot;</span>+haha);<span class="comment">//true</span></span><br><span class="line">        System.out.println(<span class="string">&quot;hehe：&quot;</span>+hehe);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="配置绑定"><a href="#配置绑定" class="headerlink" title="配置绑定"></a>配置绑定</h4><p>读取properties文件中内容，封装到JavaBean中</p>
-<p><strong>@ConfigurationProperties</strong></p>
-<p><strong>@EnableConfigurationProperties + @ConfigurationProperties</strong></p>
-<p><strong>@Component + @ConfigurationProperties</strong></p>
-<h3 id="自动配置原理"><a href="#自动配置原理" class="headerlink" title="自动配置原理"></a>自动配置原理</h3><p><strong>SpringBootConfiguration</strong></p>
-<p>@Configuration。代表当前是一个配置类</p>
-<p><strong>@ComponentScan</strong></p>
-<p>指定扫描</p>
-<p><strong>@EnableAutoConfiguration</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@AutoConfigurationPackage</span></span><br><span class="line"><span class="meta">@Import(AutoConfigurationImportSelector.class)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableAutoConfiguration &#123;&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>@AutoConfigurationPackage</strong></p>
-<p>自动配置包，指定默认的包规则。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Import(AutoConfigurationPackages.Registrar.class)</span>  <span class="comment">//给容器中导入一个组件</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> AutoConfigurationPackage &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//利用Registrar给容器中导入一系列组件</span></span><br><span class="line"><span class="comment">//将指定的一个包下的所有组件导入进来？MainApplication 所在包下。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<p><strong>@Import(AutoConfigurationImportSelector.class)</strong></p>
- <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span>、利用getAutoConfigurationEntry(annotationMetadata);给容器中批量导入一些组件</span><br><span class="line"><span class="number">2</span>、调用List&lt;String&gt; configurations = getCandidateConfigurations(annotationMetadata, attributes)获取到所有需要导入到容器中的配置类</span><br><span class="line"><span class="number">3</span>、利用工厂加载 Map&lt;String, List&lt;String&gt;&gt; <span class="title function_">loadSpringFactories</span><span class="params">(<span class="meta">@Nullable</span> ClassLoader classLoader)</span>；得到所有的组件</span><br><span class="line"><span class="number">4</span>、从META-INF/spring.factories位置来加载一个文件。</span><br><span class="line">	默认扫描我们当前系统里面所有META-INF/spring.factories位置的文件</span><br><span class="line">    spring-boot-autoconfigure-<span class="number">2.3</span><span class="number">.4</span>.RELEASE.jar包里面也有META-INF/spring.factories</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-<p><strong>蠢事：</strong>忘记填写@RestController</p>
-<h3 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h3><h4 id="properties"><a href="#properties" class="headerlink" title="properties"></a>properties</h4><p>“YAML Ain’t Markup Language”</p>
-<h4 id="yaml"><a href="#yaml" class="headerlink" title="yaml"></a>yaml</h4><p>适合用来做以数据为中心的配置文件</p>
-<p><strong>自定义的类和配置文件绑定一般没有提示</strong></p>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line">       <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">excludes</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">exclude</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-configuration-processor<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;/<span class="name">exclude</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;/<span class="name">excludes</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="静态资源访问"><a href="#静态资源访问" class="headerlink" title="静态资源访问"></a>静态资源访问</h3><h4 id="静态资源"><a href="#静态资源" class="headerlink" title="静态资源"></a>静态资源</h4><p>静态资源放在类路径下：called <code>/static</code> (or <code>/public</code> or <code>/resources</code> or <code>/META-INF/resources</code></p>
-<p>访问：当前项目根路径&#x2F; + 静态资源名</p>
-<p><strong>原理：</strong>静态映射&#x2F;**</p>
-<p>请求进来，先去找Controller看能不能处理。不能处理的所有请求又都交给静态资源处理器。静态资源也找不到则响应404页面。</p>
-<p>改变默认的静态资源路径</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">mvc:</span></span><br><span class="line">    <span class="attr">static-path-pattern:</span> <span class="string">/res/**</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">static-locations:</span> [<span class="string">classpath:/haha/</span>]</span><br></pre></td></tr></table></figure>
-
-<h4 id="欢迎页"><a href="#欢迎页" class="headerlink" title="欢迎页"></a>欢迎页</h4><p>静态资源路径下配置 index.html</p>
-<ul>
-<li>可以配置静态资源路径</li>
-<li>需要注意的是，如果配置了静态资源的访问前缀，会导致 index.html 不能被默认访问</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="comment">#  mvc:</span></span><br><span class="line"><span class="comment">#    static-path-pattern: /res/**   导致welcome page功能失效</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">resources:</span></span><br><span class="line">    <span class="attr">static-locations:</span> [<span class="string">classpath:/haha/</span>]</span><br></pre></td></tr></table></figure>
-
-<h4 id="自定义-Favicon"><a href="#自定义-Favicon" class="headerlink" title="自定义 Favicon"></a>自定义 Favicon</h4><p>favicon.io 放在静态资源目录</p>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="comment">#  mvc:</span></span><br><span class="line"><span class="comment">#    static-path-pattern: /res/**   这个会导致 Favicon 功能失效</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="静态资源配置原理"><a href="#静态资源配置原理" class="headerlink" title="静态资源配置原理"></a>静态资源配置原理</h4><ul>
-<li>SpringBoot启动默认加载  xxxAutoConfiguration 类（自动配置类）</li>
-<li>SpringMVC功能的自动配置类 WebMvcAutoConfiguration，生效</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Java</category>
-      </categories>
-      <tags>
-        <tag>Java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>java基础复习</title>
     <url>/2022/05/24/java%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<p>今天在刷牛客的时候，发现自己对一些数据结构的基础知识并不是很清晰。所以在这里做个笔记整理一下。<span id="more"></span></p>
@@ -445,7 +445,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#x2e;&#99;&#111;&#109;">&#103;&#105;&#x74;&#64;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#x2e;&#99;&#111;&#109;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#x69;&#116;&#x40;&#103;&#105;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#109;">&#103;&#x69;&#116;&#x40;&#103;&#105;&#116;&#104;&#x75;&#x62;&#x2e;&#x63;&#x6f;&#109;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -459,7 +459,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#x67;&#105;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#x2e;&#x63;&#111;&#x6d;">&#x67;&#105;&#116;&#64;&#103;&#x69;&#x74;&#x68;&#117;&#98;&#x2e;&#x63;&#111;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#103;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#98;&#46;&#99;&#111;&#109;">&#103;&#x69;&#116;&#x40;&#103;&#x69;&#116;&#104;&#x75;&#98;&#46;&#99;&#111;&#109;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -552,6 +552,31 @@
       </categories>
       <tags>
         <tag>hexo搭建博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python中lambda表达式</title>
+    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
+<ul>
+<li>lambda表达式必须使用lambda关键字定义。</li>
+<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
+<li>lambda表达式必须是单行的。</li>
+<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
+<li>lambda表达式的计算结果就是函数的返回值。 </li>
+<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
+<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
+<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -965,31 +990,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python中lambda表达式</title>
-    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
-<ul>
-<li>lambda表达式必须使用lambda关键字定义。</li>
-<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
-<li>lambda表达式必须是单行的。</li>
-<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
-<li>lambda表达式的计算结果就是函数的返回值。 </li>
-<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
-<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
-<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python</title>
     <url>/2022/03/14/python/</url>
     <content><![CDATA[<h3 id="Python简介"><a href="#Python简介" class="headerlink" title="Python简介"></a>Python简介</h3><p>python 这一伟大语言诞生于1989年圣诞节期间，创始人是荷兰的Guido van Rossum。(python有两个主要的大版本: python2 和 python3。本文基于 python3 开发)<span id="more"></span></p>
@@ -1319,6 +1319,91 @@
       </tags>
   </entry>
   <entry>
+    <title>python爬虫</title>
+    <url>/2022/03/26/python%E7%88%AC%E8%99%AB/</url>
+    <content><![CDATA[<h3 id="python爬虫工作原理"><a href="#python爬虫工作原理" class="headerlink" title="python爬虫工作原理"></a>python爬虫工作原理</h3><p><strong>获取数据：</strong></p>
+<p>爬虫程序会根据我们提供的网址，向服务器发起请求，然后返回数据。</p>
+<p><strong>解析数据：</strong></p>
+<p>爬虫程序会把服务器返回的数据解析成我们能读懂的格式。</p>
+<p><strong>提取数据：</strong></p>
+<p>爬虫程序再从中提取出我们需要的数据。</p>
+<p><strong>储存数据:</strong><br>爬虫程序把这些有用的数据保存起来,便于你以后的使用和分析。</p>
+<span id="more"></span>
+
+<h4 id="requests库"><a href="#requests库" class="headerlink" title="requests库"></a>requests库</h4><p>requests库可以帮我们下载网页源代码、文本、图片，甚至是音频。</p>
+<p><strong>requests.get()</strong></p>
+<p>requests.get 是在调用 requests 库中的 get() 方法，它向服务器发送了一个请求，括号里的参数是你需要的数据所在的网址，然后得到了服务器的响应。服务器返回的结果是个 Response 对象。</p>
+<p>response对象常用的四个属性：</p>
+<p><img src="/../resources/image-20220410100554836.png" alt="image-20220410100554836"></p>
+<p><strong>response.status_code属性：</strong></p>
+<p><img src="/../resources/image-20220410100621487.png" alt="image-20220410100621487"></p>
+<p><strong>response.content属性：</strong></p>
+<p>该属性能把Response对象的内容以二进制数据的形式返回，适用于图片、音频、视频的下载。</p>
+<p><strong>response.text属性：</strong></p>
+<p>该属性可以把Response对象的内容以字符串的形式返回， 适用于文字、网页源代码的下载。</p>
+<p><strong>response.encoding属性：</strong></p>
+<p>该属性能帮我们定义Response对象的编码。 遇上输出的文本有乱码问题，才考虑用res.encoding。首先，目标数据本身是什么编码是未知的。用requests.get() 发 送请求后，会取得一个Response对象，其中，requests库会对数据的编码类型做出自己的判断。但是这个判断有可能准确，也可能不准确。 如果它判断准确的话，打印出来的response.text的内容就是正常的、没有乱码的，就无需用res.encoding；如果判断不准确，就会出现一堆乱码，那我们就可以去查看目标数据的编码，然后再用res.encoding把编码定义成和目标数据一 致的类型即可。</p>
+<h4 id="robots协议"><a href="#robots协议" class="headerlink" title="robots协议"></a>robots协议</h4><p>查看robots协议，在网站的域名后加上 &#x2F;robots.txt</p>
+<p><img src="/../resources/image-20220410101501845.png" alt="image-20220410101501845"></p>
+<h4 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h4><p>HTML文档包含了HTML标签（TAG）和元素，通过它们来描述网页。Web浏览器的作用是将HTML源文件转化成 网页形式，并显示出它们。浏览器本身并不会显示出HTML 标签，而是使用它们来解释页面的内容。</p>
+<p><img src="/../resources/image-20220410101613520.png" alt="image-20220410101613520"></p>
+<p>HTML常见标签：</p>
+<p><img src="/../resources/image-20220410101647072.png" alt="image-20220410101647072"></p>
+<h4 id="解析数据"><a href="#解析数据" class="headerlink" title="解析数据"></a>解析数据</h4><p>我们平时使用浏览器上网，浏览器会把服务器返 回来的HTML源代码翻译为我们能看懂的样子，之后我们才能在网页上做各种操作。 而在爬虫中，也要使用能读懂html的工具，才能提取到想要的数据。</p>
+<p><strong>【提取数据】</strong>是指把我们需要的数据从众多数据中挑选出来。</p>
+<p><img src="/../resources/image-20220410102609214.png" alt="image-20220410102609214"></p>
+<p>在括号中，要输入两个参数，第0个参数是要被解析的文本，注意了，它必须是字符串。 括号中的第1个参数用来标识解析器，我们要用的是一个 Python内置库：html.parser。（它不是唯一的解析器，但是比较简单的）</p>
+<p>以该网站为例（url： <a href="https://localprod.pandateacher.com/python%02manuscript/crawler-html/spider-men5.0.html%EF%BC%89%E5%81%87%E8%AE%BE%E6%88%91%E4%BB%AC%E6%83%B3%E7%88%AC%E5%8F%96%E7%BD%91%E9%A1%B5%E4%B8%AD%E7%9A%84%E4%B9%A6%E7%B1%8D%E7%B1%BB%E5%9E%8B%E3%80%81%E4%B9%A6%E5%90%8D%E3%80%81%E9%93%BE%E6%8E%A5%E3%80%81%E5%92%8C%E4%B9%A6%E7%B1%8D%E4%BB%8B%E7%BB%8D%E3%80%82%E6%A0%B9%E6%8D%AE%E4%B9%8B">https://localprod.pandateacher.com/pythonmanuscript/crawler-html/spider-men5.0.html）假设我们想爬取网页中的书籍类型、书名、链接、和书籍介绍。根据之</a> 前所学的 requests.get()，我们可以先获取到一个Response对象，并确认自己获取成功：</p>
+<p><img src="/../resources/image-20220410110621682.png" alt="image-20220410110621682"></p>
+<p>接着用BeautifulSoup解析数据，请特别留意第2行和第6 行新增的代码。第2行是引入BeautifulSoup库。第6行中的第 0个参数，必须是字符串类型；括号中的第1个参数是解析器。 这就是解析数据的用法。</p>
+<p><img src="/../resources/image-20220410110641745.png" alt="image-20220410110641745"></p>
+<p>接下来，我们来打印看看soup的数据类型，和soup本身 （第7行开始为新增代码）。</p>
+<p> import requests </p>
+<p>from bs4 import BeautifulSoup </p>
+<p>res &#x3D;  requests.get(‘<a href="https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;">https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;</a>)  </p>
+<p>soup &#x3D; BeautifulSoup( res.text,’html.parser’) </p>
+<p>print(type(soup)) #查看soup的类型 </p>
+<p>print(soup) # 打印soup</p>
+<p>代码运行结果：</p>
+<p><img src="/../resources/image-20220410110850553.png" alt="image-20220410110850553"></p>
+<ul>
+<li><p>soup的数据类型是， 说明soup是一个BeautifulSoup对象。打印的soup， 它是所请求网页的完整HTML源代码。我们所要提取的书名、链接、书籍内容这些数据都在这里面。</p>
+</li>
+<li><p>打印soup出来的源代码和我们之前使用 response.text 打印出来的源代码是完全一样的。</p>
+</li>
+<li><p>虽然 response.text 和 soup 打印出的内容一样，但它们属于不同的类： &lt;class ‘str’&gt;与&lt;class ‘bs4.BeautifulSoup’&gt;。前者是字符串，后者是已经被解析过的 BeautifulSoup 对象。之所以打印出来的是一样的文本，是因为 BeautifulSoup 对象在直 接打印它的时候会调用该对象内的 str 方法，所以直接打印 bs 对象显示字符串是str的返回结果。</p>
+</li>
+<li><p>之后还会用 BeautifulSoup 库来提取数据，如果这不是一 个 BeautifulSoup 对象，就没法调用相关的属性和方法的，所以，用 BeautifulSoup 解析数据是非常有用的，并不是重复劳动。</p>
+</li>
+<li><p><img src="/../resources/image-20220410111622337.png" alt="image-20220410111622337"></p>
+</li>
+</ul>
+<p>仍然使用BeautifulSoup来提取数据。</p>
+<p><img src="/../resources/image-20220410111721377.png" alt="image-20220410111721377"></p>
+<p>find() 与 find_all()</p>
+<p><img src="/../resources/image-20220410112341145.png" alt="image-20220410112341145"></p>
+<p>Tag类对象的常用属性和方法</p>
+<p><img src="/../resources/image-20220410112633026.png" alt="image-20220410112633026"></p>
+<h4 id="定制请求头"><a href="#定制请求头" class="headerlink" title="定制请求头"></a>定制请求头</h4><p>最好将自己的爬虫伪装成真实的浏览器——因为在这种情况下，服务器很可能拒绝爬虫访问。甚至有的网站，一开始就不允许爬虫访问。 如，知乎、猫眼电影等。</p>
+<p>每一个 request 请求，都会有一个Requests Headers，把它称作请求头。 它里面会有一些关于该请求的基本信息，比如：这个请求是从什么设备 什么浏览器上发出？这个请求是从哪个页面跳转而来？ user-agent会记录你电脑的信息和浏览器版本（如图，就是windows10的64位操作系统， 使用谷歌浏览器），它最大的应用是帮助我们应对“反爬虫”技术。</p>
+<p><img src="/../resources/image-20220410113019785.png" alt="image-20220410113019785"></p>
+<p>基于【豆瓣官网】【下厨房】等网站突然IP反爬的情况， 程序开始需要加上headers里的 user-agent，以后面的实操例 子下厨房为例，user-agent在这里。</p>
+<p><img src="/../resources/image-20220410113100826.png" alt="image-20220410113100826"></p>
+<p>给爬虫代码加上请求头后是这样的 <strong>headers&#x3D;{‘User-Agent’: ‘Mozilla&#x2F;5.0 (Windows NT 10.0;  Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko)  Chrome&#x2F;86.0.4240.193 Safari&#x2F;537.36’}</strong> 这个请求头是万能的，可以直接保存下来，后面加请求头都可以直接使用。 注意！！！提取数据那一行的第二个参数也要加上请求头！！！</p>
+<p><img src="/../resources/image-20220410113214914.png" alt="image-20220410113214914"></p>
+<p>从最开始用requests库获取数据，到用BeautifulSoup库来解析数据，再继续用BeautifulSoup库提取数据，不断经历的是操作对象的类型转换</p>
+<p><img src="/../resources/image-20220410113315426.png" alt="image-20220410113315426"></p>
+<p>例子：</p>
+<p><img src="/../resources/image-20220410160211171.png" alt="image-20220410160211171"></p>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>python序列结构</title>
     <url>/2022/03/25/python%E5%BA%8F%E5%88%97%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<h3 id="序列"><a href="#序列" class="headerlink" title="序列"></a>序列</h3><p>序列（sequence）是一种用来存放多个值的数据类型，序列中对象类型可以相同也可以不同。</p>
@@ -1495,91 +1580,6 @@
 <p> <img src="/../resources/image-20220327192032281.png" alt="image-20220327192032281"></p>
 <p><img src="/../resources/image-20220327192049746.png" alt="image-20220327192049746"></p>
 <p><img src="/../resources/image-20220327192102639.png" alt="image-20220327192102639"></p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>python爬虫</title>
-    <url>/2022/03/26/python%E7%88%AC%E8%99%AB/</url>
-    <content><![CDATA[<h3 id="python爬虫工作原理"><a href="#python爬虫工作原理" class="headerlink" title="python爬虫工作原理"></a>python爬虫工作原理</h3><p><strong>获取数据：</strong></p>
-<p>爬虫程序会根据我们提供的网址，向服务器发起请求，然后返回数据。</p>
-<p><strong>解析数据：</strong></p>
-<p>爬虫程序会把服务器返回的数据解析成我们能读懂的格式。</p>
-<p><strong>提取数据：</strong></p>
-<p>爬虫程序再从中提取出我们需要的数据。</p>
-<p><strong>储存数据:</strong><br>爬虫程序把这些有用的数据保存起来,便于你以后的使用和分析。</p>
-<span id="more"></span>
-
-<h4 id="requests库"><a href="#requests库" class="headerlink" title="requests库"></a>requests库</h4><p>requests库可以帮我们下载网页源代码、文本、图片，甚至是音频。</p>
-<p><strong>requests.get()</strong></p>
-<p>requests.get 是在调用 requests 库中的 get() 方法，它向服务器发送了一个请求，括号里的参数是你需要的数据所在的网址，然后得到了服务器的响应。服务器返回的结果是个 Response 对象。</p>
-<p>response对象常用的四个属性：</p>
-<p><img src="/../resources/image-20220410100554836.png" alt="image-20220410100554836"></p>
-<p><strong>response.status_code属性：</strong></p>
-<p><img src="/../resources/image-20220410100621487.png" alt="image-20220410100621487"></p>
-<p><strong>response.content属性：</strong></p>
-<p>该属性能把Response对象的内容以二进制数据的形式返回，适用于图片、音频、视频的下载。</p>
-<p><strong>response.text属性：</strong></p>
-<p>该属性可以把Response对象的内容以字符串的形式返回， 适用于文字、网页源代码的下载。</p>
-<p><strong>response.encoding属性：</strong></p>
-<p>该属性能帮我们定义Response对象的编码。 遇上输出的文本有乱码问题，才考虑用res.encoding。首先，目标数据本身是什么编码是未知的。用requests.get() 发 送请求后，会取得一个Response对象，其中，requests库会对数据的编码类型做出自己的判断。但是这个判断有可能准确，也可能不准确。 如果它判断准确的话，打印出来的response.text的内容就是正常的、没有乱码的，就无需用res.encoding；如果判断不准确，就会出现一堆乱码，那我们就可以去查看目标数据的编码，然后再用res.encoding把编码定义成和目标数据一 致的类型即可。</p>
-<h4 id="robots协议"><a href="#robots协议" class="headerlink" title="robots协议"></a>robots协议</h4><p>查看robots协议，在网站的域名后加上 &#x2F;robots.txt</p>
-<p><img src="/../resources/image-20220410101501845.png" alt="image-20220410101501845"></p>
-<h4 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h4><p>HTML文档包含了HTML标签（TAG）和元素，通过它们来描述网页。Web浏览器的作用是将HTML源文件转化成 网页形式，并显示出它们。浏览器本身并不会显示出HTML 标签，而是使用它们来解释页面的内容。</p>
-<p><img src="/../resources/image-20220410101613520.png" alt="image-20220410101613520"></p>
-<p>HTML常见标签：</p>
-<p><img src="/../resources/image-20220410101647072.png" alt="image-20220410101647072"></p>
-<h4 id="解析数据"><a href="#解析数据" class="headerlink" title="解析数据"></a>解析数据</h4><p>我们平时使用浏览器上网，浏览器会把服务器返 回来的HTML源代码翻译为我们能看懂的样子，之后我们才能在网页上做各种操作。 而在爬虫中，也要使用能读懂html的工具，才能提取到想要的数据。</p>
-<p><strong>【提取数据】</strong>是指把我们需要的数据从众多数据中挑选出来。</p>
-<p><img src="/../resources/image-20220410102609214.png" alt="image-20220410102609214"></p>
-<p>在括号中，要输入两个参数，第0个参数是要被解析的文本，注意了，它必须是字符串。 括号中的第1个参数用来标识解析器，我们要用的是一个 Python内置库：html.parser。（它不是唯一的解析器，但是比较简单的）</p>
-<p>以该网站为例（url： <a href="https://localprod.pandateacher.com/python%02manuscript/crawler-html/spider-men5.0.html%EF%BC%89%E5%81%87%E8%AE%BE%E6%88%91%E4%BB%AC%E6%83%B3%E7%88%AC%E5%8F%96%E7%BD%91%E9%A1%B5%E4%B8%AD%E7%9A%84%E4%B9%A6%E7%B1%8D%E7%B1%BB%E5%9E%8B%E3%80%81%E4%B9%A6%E5%90%8D%E3%80%81%E9%93%BE%E6%8E%A5%E3%80%81%E5%92%8C%E4%B9%A6%E7%B1%8D%E4%BB%8B%E7%BB%8D%E3%80%82%E6%A0%B9%E6%8D%AE%E4%B9%8B">https://localprod.pandateacher.com/pythonmanuscript/crawler-html/spider-men5.0.html）假设我们想爬取网页中的书籍类型、书名、链接、和书籍介绍。根据之</a> 前所学的 requests.get()，我们可以先获取到一个Response对象，并确认自己获取成功：</p>
-<p><img src="/../resources/image-20220410110621682.png" alt="image-20220410110621682"></p>
-<p>接着用BeautifulSoup解析数据，请特别留意第2行和第6 行新增的代码。第2行是引入BeautifulSoup库。第6行中的第 0个参数，必须是字符串类型；括号中的第1个参数是解析器。 这就是解析数据的用法。</p>
-<p><img src="/../resources/image-20220410110641745.png" alt="image-20220410110641745"></p>
-<p>接下来，我们来打印看看soup的数据类型，和soup本身 （第7行开始为新增代码）。</p>
-<p> import requests </p>
-<p>from bs4 import BeautifulSoup </p>
-<p>res &#x3D;  requests.get(‘<a href="https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;">https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;</a>)  </p>
-<p>soup &#x3D; BeautifulSoup( res.text,’html.parser’) </p>
-<p>print(type(soup)) #查看soup的类型 </p>
-<p>print(soup) # 打印soup</p>
-<p>代码运行结果：</p>
-<p><img src="/../resources/image-20220410110850553.png" alt="image-20220410110850553"></p>
-<ul>
-<li><p>soup的数据类型是， 说明soup是一个BeautifulSoup对象。打印的soup， 它是所请求网页的完整HTML源代码。我们所要提取的书名、链接、书籍内容这些数据都在这里面。</p>
-</li>
-<li><p>打印soup出来的源代码和我们之前使用 response.text 打印出来的源代码是完全一样的。</p>
-</li>
-<li><p>虽然 response.text 和 soup 打印出的内容一样，但它们属于不同的类： &lt;class ‘str’&gt;与&lt;class ‘bs4.BeautifulSoup’&gt;。前者是字符串，后者是已经被解析过的 BeautifulSoup 对象。之所以打印出来的是一样的文本，是因为 BeautifulSoup 对象在直 接打印它的时候会调用该对象内的 str 方法，所以直接打印 bs 对象显示字符串是str的返回结果。</p>
-</li>
-<li><p>之后还会用 BeautifulSoup 库来提取数据，如果这不是一 个 BeautifulSoup 对象，就没法调用相关的属性和方法的，所以，用 BeautifulSoup 解析数据是非常有用的，并不是重复劳动。</p>
-</li>
-<li><p><img src="/../resources/image-20220410111622337.png" alt="image-20220410111622337"></p>
-</li>
-</ul>
-<p>仍然使用BeautifulSoup来提取数据。</p>
-<p><img src="/../resources/image-20220410111721377.png" alt="image-20220410111721377"></p>
-<p>find() 与 find_all()</p>
-<p><img src="/../resources/image-20220410112341145.png" alt="image-20220410112341145"></p>
-<p>Tag类对象的常用属性和方法</p>
-<p><img src="/../resources/image-20220410112633026.png" alt="image-20220410112633026"></p>
-<h4 id="定制请求头"><a href="#定制请求头" class="headerlink" title="定制请求头"></a>定制请求头</h4><p>最好将自己的爬虫伪装成真实的浏览器——因为在这种情况下，服务器很可能拒绝爬虫访问。甚至有的网站，一开始就不允许爬虫访问。 如，知乎、猫眼电影等。</p>
-<p>每一个 request 请求，都会有一个Requests Headers，把它称作请求头。 它里面会有一些关于该请求的基本信息，比如：这个请求是从什么设备 什么浏览器上发出？这个请求是从哪个页面跳转而来？ user-agent会记录你电脑的信息和浏览器版本（如图，就是windows10的64位操作系统， 使用谷歌浏览器），它最大的应用是帮助我们应对“反爬虫”技术。</p>
-<p><img src="/../resources/image-20220410113019785.png" alt="image-20220410113019785"></p>
-<p>基于【豆瓣官网】【下厨房】等网站突然IP反爬的情况， 程序开始需要加上headers里的 user-agent，以后面的实操例 子下厨房为例，user-agent在这里。</p>
-<p><img src="/../resources/image-20220410113100826.png" alt="image-20220410113100826"></p>
-<p>给爬虫代码加上请求头后是这样的 <strong>headers&#x3D;{‘User-Agent’: ‘Mozilla&#x2F;5.0 (Windows NT 10.0;  Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko)  Chrome&#x2F;86.0.4240.193 Safari&#x2F;537.36’}</strong> 这个请求头是万能的，可以直接保存下来，后面加请求头都可以直接使用。 注意！！！提取数据那一行的第二个参数也要加上请求头！！！</p>
-<p><img src="/../resources/image-20220410113214914.png" alt="image-20220410113214914"></p>
-<p>从最开始用requests库获取数据，到用BeautifulSoup库来解析数据，再继续用BeautifulSoup库提取数据，不断经历的是操作对象的类型转换</p>
-<p><img src="/../resources/image-20220410113315426.png" alt="image-20220410113315426"></p>
-<p>例子：</p>
-<p><img src="/../resources/image-20220410160211171.png" alt="image-20220410160211171"></p>
 ]]></content>
       <categories>
         <category>python</category>
@@ -1836,6 +1836,18 @@
       </tags>
   </entry>
   <entry>
+    <title>字符串的一些问题</title>
+    <url>/2022/06/23/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<p>最近刷题发现字符串的一类题是自己的弱项，这里记录巩固复习</p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>异或运算</title>
     <url>/2022/06/15/%E5%BC%82%E6%88%96%E8%BF%90%E7%AE%97/</url>
     <content><![CDATA[<p>今天遇到这样一个题目，<a href="https://leetcode.cn/problems/single-number/">136. 只出现一次的数字 - 力扣（LeetCode）</a></p>
@@ -1861,6 +1873,49 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>知识图谱</title>
+    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</url>
+    <content><![CDATA[<h3 id="知识图谱"><a href="#知识图谱" class="headerlink" title="知识图谱"></a>知识图谱</h3><h4 id="知识图谱和人工智能"><a href="#知识图谱和人工智能" class="headerlink" title="知识图谱和人工智能"></a>知识图谱和人工智能</h4><p>​        谈到知识图谱大部人可能很陌生，但说到人工智能，大家早已耳熟能详。目前，很多行业应用人工智能，让机器代替人进行简单重复性的工作。我们可以把人工智能分为两个层次，一个是感知层次，也就是听觉、视觉、嗅觉、味觉等等，目前人工智能在听觉和视觉方面做的比较好，语音识别，图像识别等，研究的学者越来越多，技术逐渐落地。人工智能的第二个层次，也就是认知层次，能够认识这个客观世界。而认知世界是通过大量的知识积累实现的，我们见到狗和猫，见过几次就能分辨出狗和猫，但如何让机器来分辨？这种认知能力是知识的运用，当我们见到狗，就会在潜意识中总结狗的特征，长耳朵，瘦脸，汪汪叫。猫的特征，短耳朵，圆脸，喵喵叫。这些知识会存储在人类的大脑中，作为经验知识，再次碰到类似的动物，人们马上就从记忆中想起该动物的特征，对号入座，马上判断出动物的类型。机器要想具有认知能力，也需要建立一个知识库，然后运用知识库来做一些事，这个知识库就是我们要说的知识图谱。从这个角度说，知识图谱是人工职能的一个重要分支，也是机器具有认知能力的基石，在人工智能领域具有非常重要的地位。</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Users\Congyingxu\AppData\Roaming\Typora\typora-user-images\image-20220811121725316.png" alt="image-20220811121725316" style="zoom:67%;">
+
+<h4 id="知识图谱的由来"><a href="#知识图谱的由来" class="headerlink" title="知识图谱的由来"></a>知识图谱的由来</h4><p>​        知识图谱（Knowledge Graph）是 Google 在2012年对其搜索引擎中使用的知识库的称谓。</p>
+<p><img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Users\Congyingxu\AppData\Roaming\Typora\typora-user-images\image-20220811123027705.png" alt="image-20220811123027705" style="zoom:67%;">众所周知，Google是做搜索引擎的，知识图谱出现之前，我们使用google、百度进行搜索的时候，搜索的结果是一堆网页，我们会根据搜索结果的网页题目再点击链接，才能看到具体内容，2012年google提出Google Knowldge Graph之后，利用知识图谱技术改善了搜索引擎核心，表现出来的效果就是我们现在使用搜索引擎进行搜索的时候，搜索结果会以一定的组织结构呈现，比如我们搜索比尔盖茨，结果如图所示</p>
+<img src="https://img2018.cnblogs.com/blog/935893/201812/935893-20181229144559553-575365779.png" alt="img" style="zoom:67%;">
+
+<p>这样的搜索结果，与知识图谱出现之前的结果有什么区别呢，辛格尔博士对知识图谱的介绍很简短，things，not string，抓住了知识图谱的核心，也点出了知识图谱加入之后搜索发生的变化，以前的搜索，都是将要搜索的内容看作字符串，结果是和字符串进行匹配，将匹配程度高的排在前面，后面按照匹配度依次显示。利用知识图谱之后，将搜索的内容不再看作字符串，而是看作客观世界的事物，也就是一个个的个体。搜索比尔盖茨的时候，搜索引擎不是搜索“比尔盖茨”这个字符串，而是搜索比尔盖茨这个人，围绕比尔盖茨这个人，展示与他相关的人和事，左侧百科会把比尔盖茨的主要情况列举出来，右侧显示比尔盖茨的微软产品和与他类似的人，主要是一些IT行业的创始人。一个搜索结果页面就把和比尔盖茨的基本情况和他的主要关系都列出来了，搜索的人很容易找到自己感兴趣的结果。</p>
+<h4 id="知识图谱是什么"><a href="#知识图谱是什么" class="headerlink" title="知识图谱是什么"></a>知识图谱是什么</h4><p>​        知识图谱本质上是一种语义网络，用图的形式描述客观事物，这里的图指的是数据结构中的图，也就是由节点和边组成的，这也是知识图谱（Knowledge Graph）的真实含义。</p>
+<p><img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Blog\source\resources\image-20220811122912945.png" alt="image-20220811122912945"></p>
+<p>​        知识图谱中的节点表示概念和实体，概念是抽象出来的事物，实体是具体的事物；边表示事物的关系和属性，事物的内部特征用属性来表示，外部联系用关系来表示。</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Users\Congyingxu\AppData\Roaming\Typora\typora-user-images\image-20220811122645526.png" alt="image-20220811122645526" style="zoom:67%;">
+
+<h4 id="知识图谱如何组织数据"><a href="#知识图谱如何组织数据" class="headerlink" title="知识图谱如何组织数据"></a>知识图谱如何组织数据</h4><p>知识图谱是由实体和实体的关系组成，通过图的形式表现出来，那么实体和实体关系的这些数据在知识图谱中怎么组织呢，这就涉及到三元组的概念，在知识图谱中，节点-边-节点可以看作一条记录，第一个节点看作主语，边看作谓语，第二个节点看作宾语，主谓宾构成一条记录。知识图谱由这样的一条条三元组构成，围绕着一个主语，可以有很多的关系呈现，随着知识的不断积累，最终会形成一个庞大的知识图谱，知识图谱建设完成后，会包含海量的数据，内涵丰富的知识。</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Users\Congyingxu\AppData\Roaming\Typora\typora-user-images\image-20220811123405135.png" alt="image-20220811123405135" style="zoom:67%;">
+
+<h4 id="知识图谱的应用场景"><a href="#知识图谱的应用场景" class="headerlink" title="知识图谱的应用场景"></a>知识图谱的应用场景</h4><ol>
+<li><p>辅助搜索</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Users\Congyingxu\AppData\Roaming\Typora\typora-user-images\image-20220811123649860.png" alt="image-20220811123649860" style="zoom:67%;">
+</li>
+<li><p>辅助问答</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Users\Congyingxu\AppData\Roaming\Typora\typora-user-images\image-20220811123933101.png" alt="image-20220811123933101" style="zoom:67%;">
+
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Users\Congyingxu\AppData\Roaming\Typora\typora-user-images\image-20220811124015557.png" alt="image-20220811124015557" style="zoom:67%;">
+</li>
+<li><p>辅助数据集成</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Users\Congyingxu\AppData\Roaming\Typora\typora-user-images\image-20220811124037375.png" alt="image-20220811124037375" style="zoom:67%;">
+</li>
+<li><p>辅助决策</p>
+</li>
+</ol>
+<p>​        知识图谱是一个具有本体特征的语义网络，可以看成是按照本体模式组织数据的知识库，以知识图谱为基础进行搜索，可以根据查询的内容进行语义搜索，查找需要找的本体或者本体的信息，这种语义搜索功能在google、百度、阿里巴巴等数据量大的公司里得到应用。智能问答，和语义搜索类似，对于提问内容，计算机首先要分析提问问题的语义，然后再将语义转换为查询语句，到知识图谱中查找，将最贴近的答案提供给提问者。推荐系统首先要采集用户的需求，分析用户的以往数据，提取共同特征，然后根据一定的规则，对用户提供推荐的产品。比如淘宝中记录用户经常购买的商品，经常浏览的商品，提取这些商品的共同特征，然后给这个用户打上标签，然后就给用户推荐具有类似特征的商品。</p>
+]]></content>
+      <categories>
+        <category>知识图谱</category>
+      </categories>
+      <tags>
+        <tag>知识图谱</tag>
       </tags>
   </entry>
 </search>
