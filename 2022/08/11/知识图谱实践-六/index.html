@@ -27,14 +27,14 @@
 <meta property="og:site_name" content="程序人生">
 <meta property="og:description" content="从结构化数据进行知识抽取(D2RQ)概述D2RQ，含义是把关系型数据库当作虚拟的RDF图数据库进行访问。D2RQ平台是一个将关系型数据库当作虚拟的、只读的RDF图数据库进行访问的系统。提供了基于RDF访问关系数据库的内容，而无需复制这个数据库将其以RDF的形式进行保存。D2RQ有以下功能： 使用SPARQL查询非RDF数据库； 在Web上，将数据库内容当作链接数据进行访问； 以RDF形式创建一个自">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://congyx.com/resources%5C935893-20190808153811462-1357317205.png">
-<meta property="og:image" content="https://congyx.com/resources%5C935893-20190808153823045-818001472.png">
+<meta property="og:image" content="https://congyx.com/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%85%AD/935893-20190808153811462-1357317205.png">
+<meta property="og:image" content="https://congyx.com/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%85%AD/935893-20190808153823045-818001472.png">
 <meta property="article:published_time" content="2022-08-11T12:25:46.000Z">
-<meta property="article:modified_time" content="2022-08-11T12:30:55.259Z">
+<meta property="article:modified_time" content="2022-08-11T13:28:02.434Z">
 <meta property="article:author" content="Cong yx">
 <meta property="article:tag" content="D2RQ">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://congyx.com/resources%5C935893-20190808153811462-1357317205.png">
+<meta name="twitter:image" content="https://congyx.com/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%85%AD/935893-20190808153811462-1357317205.png">
 
 <link rel="canonical" href="https://congyx.com/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%85%AD/">
 
@@ -224,7 +224,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-08-11 20:25:46 / 修改时间：20:30:55" itemprop="dateCreated datePublished" datetime="2022-08-11T20:25:46+08:00">2022-08-11</time>
+              <time title="创建时间：2022-08-11 20:25:46 / 修改时间：21:28:02" itemprop="dateCreated datePublished" datetime="2022-08-11T20:25:46+08:00">2022-08-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -278,12 +278,14 @@
 <p>l D2RQ映射语言，一种声明的映射语言，用于描述本体和关系数据模型之间的关系。</p>
 <p>l D2RA引擎，一种服务于Jena语义网工具库插件，使用映射重写对数据库的SQL访问的Jena API调用，并且将查询结果传递给框架高层。</p>
 <p>l D2R服务器，一个提供调试用的链接数据视图和HTML视图的HTTP服务器，还提供了一个SPARQL协议endpoint数据接口。</p>
-<p><img src="/../resources%5C935893-20190808153811462-1357317205.png" alt="img"></p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%85%AD/935893-20190808153811462-1357317205.png" alt="img" style="zoom:80%;">
+
 <h2 id="D2RQ映射语言"><a href="#D2RQ映射语言" class="headerlink" title="D2RQ映射语言"></a>D2RQ映射语言</h2><p>D2RQ是一种声明式语言，描述了关系型数据库规则和RDFS词汇或OWL本体之间的关系。D2RQ本身是一个符合Trutle语法的RDF文档，映射是用在D2RQ命名空间下的术语表示的，D2RQ命名空间是</p>
 <p><a target="_blank" rel="noopener" href="http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#">http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#</a></p>
 <p>映射定义了一个虚拟RDF图，包括数据库的信息。和SQL视图概念类似，除了虚拟的数据结构是一个RDF图而不是虚拟的关系表。这个虚拟的RDF图能够以多种方式访问，取决于映射的实现形式。D2RQ平台提供了SPARQL访问，一个链接数据服务器，一个RDF数据集生成器，一个简单的HTML界面和Jena API访问D2RQ映射数据库。</p>
 <p>下图显示了一个D2RQ映射实例的结构</p>
-<p><img src="/../resources%5C935893-20190808153823045-818001472.png" alt="img"></p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%85%AD/935893-20190808153823045-818001472.png" alt="img" style="zoom:80%;">
+
 <p>数据库映射为RDF术语，显示在右侧的，使用d2rq:ClassMaps and d2rq:PropertyBridges。映射中最重要的问题是类的映射，一个类映射表示一个类或者一组相似的本体类。类映射描述了类的实例如何生成URI或者空节点。它还有一组属性映射规则，能够描述实例的属性如何创建。</p>
 <h2 id="D2R服务器"><a href="#D2R服务器" class="headerlink" title="D2R服务器"></a>D2R服务器</h2><p>D2R服务器是一个工具，基于语义网发布关系型数据库的内容，所有的信息都是由链接数据组成。语义网上的数据都是用RDF模型化和表示，D2R服务器使用了一个定制化D2RQ映射将数据库内容转换为RDF的形式，允许以RDF数据浏览和搜索，这是语义网中最主要的两种访问数据的方式。</p>
 <p>网络的请求通过映射重写为SQL查询语句，这种即时转换允许从大型实时数据库发布RDF，并且无需将数据复制到专用的RDF三元组存储中。</p>
