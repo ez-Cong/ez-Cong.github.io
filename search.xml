@@ -406,7 +406,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#98;&#46;&#99;&#111;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#x67;&#105;&#116;&#x68;&#117;&#98;&#46;&#99;&#111;&#x6d;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#x69;&#116;&#x40;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#x2e;&#99;&#111;&#109;">&#103;&#x69;&#116;&#x40;&#x67;&#x69;&#116;&#x68;&#117;&#98;&#x2e;&#99;&#111;&#109;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -420,7 +420,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#x67;&#105;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#x63;&#111;&#x6d;">&#x67;&#105;&#116;&#64;&#x67;&#x69;&#116;&#x68;&#x75;&#x62;&#46;&#x63;&#111;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#103;&#105;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#98;&#46;&#x63;&#111;&#x6d;">&#103;&#105;&#x74;&#x40;&#x67;&#105;&#x74;&#x68;&#x75;&#98;&#46;&#x63;&#111;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -965,31 +965,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python中lambda表达式</title>
-    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
-<ul>
-<li>lambda表达式必须使用lambda关键字定义。</li>
-<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
-<li>lambda表达式必须是单行的。</li>
-<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
-<li>lambda表达式的计算结果就是函数的返回值。 </li>
-<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
-<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
-<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python</title>
     <url>/2022/03/14/python/</url>
     <content><![CDATA[<h3 id="Python简介"><a href="#Python简介" class="headerlink" title="Python简介"></a>Python简介</h3><p>python 这一伟大语言诞生于1989年圣诞节期间，创始人是荷兰的Guido van Rossum。(python有两个主要的大版本: python2 和 python3。本文基于 python3 开发)<span id="more"></span></p>
@@ -1310,6 +1285,31 @@
 </ul>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python中lambda表达式</title>
+    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
+<ul>
+<li>lambda表达式必须使用lambda关键字定义。</li>
+<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
+<li>lambda表达式必须是单行的。</li>
+<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
+<li>lambda表达式的计算结果就是函数的返回值。 </li>
+<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
+<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
+<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
 ]]></content>
       <categories>
         <category>python</category>
@@ -1880,30 +1880,30 @@
     <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</url>
     <content><![CDATA[<h3 id="知识图谱"><a href="#知识图谱" class="headerlink" title="知识图谱"></a>知识图谱</h3><h4 id="知识图谱和人工智能"><a href="#知识图谱和人工智能" class="headerlink" title="知识图谱和人工智能"></a>知识图谱和人工智能</h4><p>​        谈到知识图谱大部人可能很陌生，但说到人工智能，大家早已耳熟能详。目前，很多行业应用人工智能，让机器代替人进行简单重复性的工作。我们可以把人工智能分为两个层次，一个是感知层次，也就是听觉、视觉、嗅觉、味觉等等，目前人工智能在听觉和视觉方面做的比较好，语音识别，图像识别等，研究的学者越来越多，技术逐渐落地。人工智能的第二个层次，也就是认知层次，能够认识这个客观世界。而认知世界是通过大量的知识积累实现的，我们见到狗和猫，见过几次就能分辨出狗和猫，但如何让机器来分辨？<span id="more"></span>这种认知能力是知识的运用，当我们见到狗，就会在潜意识中总结狗的特征，长耳朵，瘦脸，汪汪叫。猫的特征，短耳朵，圆脸，喵喵叫。这些知识会存储在人类的大脑中，作为经验知识，再次碰到类似的动物，人们马上就从记忆中想起该动物的特征，对号入座，马上判断出动物的类型。机器要想具有认知能力，也需要建立一个知识库，然后运用知识库来做一些事，这个知识库就是我们要说的知识图谱。从这个角度说，知识图谱是人工职能的一个重要分支，也是机器具有认知能力的基石，在人工智能领域具有非常重要的地位。</p>
 <h4 id="知识图谱的由来"><a href="#知识图谱的由来" class="headerlink" title="知识图谱的由来"></a>知识图谱的由来</h4><p>​        知识图谱（Knowledge Graph）是 Google 在2012年对其搜索引擎中使用的知识库的称谓。</p>
-<p><img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Blog\source\_posts\知识图谱\image-20220811123027705.png" alt="image-20220811123027705" style="zoom:67%;">众所周知，Google是做搜索引擎的，知识图谱出现之前，我们使用google、百度进行搜索的时候，搜索的结果是一堆网页，我们会根据搜索结果的网页题目再点击链接，才能看到具体内容，2012年google提出Google Knowldge Graph之后，利用知识图谱技术改善了搜索引擎核心，表现出来的效果就是我们现在使用搜索引擎进行搜索的时候，搜索结果会以一定的组织结构呈现，比如我们搜索比尔盖茨，结果如图所示</p>
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Blog\source\resources\935893-20181229144559553-575365779.png" alt="img" style="zoom:67%;">
+<p><img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/image-20220811123027705.png" alt="image-20220811123027705" style="zoom:67%;">众所周知，Google是做搜索引擎的，知识图谱出现之前，我们使用google、百度进行搜索的时候，搜索的结果是一堆网页，我们会根据搜索结果的网页题目再点击链接，才能看到具体内容，2012年google提出Google Knowldge Graph之后，利用知识图谱技术改善了搜索引擎核心，表现出来的效果就是我们现在使用搜索引擎进行搜索的时候，搜索结果会以一定的组织结构呈现，比如我们搜索比尔盖茨，结果如图所示</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/935893-20181229144559553-575365779.png" alt="img" style="zoom:67%;">
 
 <p>这样的搜索结果，与知识图谱出现之前的结果有什么区别呢，辛格尔博士对知识图谱的介绍很简短，things，not string，抓住了知识图谱的核心，也点出了知识图谱加入之后搜索发生的变化，以前的搜索，都是将要搜索的内容看作字符串，结果是和字符串进行匹配，将匹配程度高的排在前面，后面按照匹配度依次显示。利用知识图谱之后，将搜索的内容不再看作字符串，而是看作客观世界的事物，也就是一个个的个体。搜索比尔盖茨的时候，搜索引擎不是搜索“比尔盖茨”这个字符串，而是搜索比尔盖茨这个人，围绕比尔盖茨这个人，展示与他相关的人和事，左侧百科会把比尔盖茨的主要情况列举出来，右侧显示比尔盖茨的微软产品和与他类似的人，主要是一些IT行业的创始人。一个搜索结果页面就把和比尔盖茨的基本情况和他的主要关系都列出来了，搜索的人很容易找到自己感兴趣的结果。</p>
 <h4 id="知识图谱是什么"><a href="#知识图谱是什么" class="headerlink" title="知识图谱是什么"></a>知识图谱是什么</h4><p>​        知识图谱本质上是一种语义网络，用图的形式描述客观事物，这里的图指的是数据结构中的图，也就是由节点和边组成的，这也是知识图谱（Knowledge Graph）的真实含义。</p>
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Blog\source\resources\image-20220811122912945.png" alt="image-20220811122912945" style="zoom: 67%;">
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/image-20220811122912945.png" alt="image-20220811122912945" style="zoom: 67%;">
 
 <p>​        知识图谱中的节点表示概念和实体，概念是抽象出来的事物，实体是具体的事物；边表示事物的关系和属性，事物的内部特征用属性来表示，外部联系用关系来表示。</p>
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Blog\source\resources\image-20220811122645526.png" alt="image-20220811122645526" style="zoom:67%;">
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/image-20220811122645526.png" alt="image-20220811122645526" style="zoom:67%;">
 
 <h4 id="知识图谱如何组织数据"><a href="#知识图谱如何组织数据" class="headerlink" title="知识图谱如何组织数据"></a>知识图谱如何组织数据</h4><p>知识图谱是由实体和实体的关系组成，通过图的形式表现出来，那么实体和实体关系的这些数据在知识图谱中怎么组织呢，这就涉及到三元组的概念，在知识图谱中，节点-边-节点可以看作一条记录，第一个节点看作主语，边看作谓语，第二个节点看作宾语，主谓宾构成一条记录。知识图谱由这样的一条条三元组构成，围绕着一个主语，可以有很多的关系呈现，随着知识的不断积累，最终会形成一个庞大的知识图谱，知识图谱建设完成后，会包含海量的数据，内涵丰富的知识。</p>
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Blog\source\resources\image-20220811123405135.png" alt="image-20220811123405135" style="zoom:67%;">
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/image-20220811123405135.png" alt="image-20220811123405135" style="zoom:67%;">
 
 <h4 id="知识图谱的应用场景"><a href="#知识图谱的应用场景" class="headerlink" title="知识图谱的应用场景"></a>知识图谱的应用场景</h4><ol>
 <li><p>辅助搜索</p>
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Blog\source\resources\image-20220811123649860.png" alt="image-20220811123649860" style="zoom:67%;">
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/image-20220811123649860.png" alt="image-20220811123649860" style="zoom:67%;">
 </li>
 <li><p>辅助问答</p>
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Blog\source\resources\image-20220811123933101.png" alt="image-20220811123933101" style="zoom:67%;">
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/image-20220811123933101.png" alt="image-20220811123933101" style="zoom:67%;">
 
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Blog\source\resources\image-20220811124015557.png" alt="image-20220811124015557" style="zoom:67%;">
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/image-20220811124015557.png" alt="image-20220811124015557" style="zoom:67%;">
 </li>
 <li><p>辅助数据集成</p>
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/Blog\source\resources\image-20220811124037375.png" alt="image-20220811124037375" style="zoom:67%;">
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/image-20220811124037375.png" alt="image-20220811124037375" style="zoom:67%;">
 </li>
 <li><p>辅助决策</p>
 </li>
