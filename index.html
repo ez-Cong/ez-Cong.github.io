@@ -191,6 +191,209 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%B8%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Cong yx">
+      <meta itemprop="description" content="欲买桂花同载酒，终不似，少年游。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序人生">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%B8%89/" class="post-title-link" itemprop="url">知识图谱(三)</a>
+        </h2>
+
+        <div class="post-meta">
+
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-08-11 15:11:10 / 修改时间：15:22:19" itemprop="dateCreated datePublished" datetime="2022-08-11T15:11:10+08:00">2022-08-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" itemprop="url" rel="index"><span itemprop="name">知识图谱</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="知识图谱的构建过程"><a href="#知识图谱的构建过程" class="headerlink" title="知识图谱的构建过程"></a>知识图谱的构建过程</h1><h2 id="知识图谱的总体构建思路"><a href="#知识图谱的总体构建思路" class="headerlink" title="知识图谱的总体构建思路"></a>知识图谱的总体构建思路</h2><img src="/知识图谱-三\935893-20190109090654567-18322997.png" alt="img" style="zoom:80%;">
+
+<p>如图所示，从原始的数据到形成知识图谱，经历了知识抽取、知识融合（实体对齐）、数据模型构建、质量评估等步骤。</p>
+<p><img src="/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%B8%89%5Cimage-20220811151518235.png" alt="image-20220811151518235"></p>
+<p>原始的数据，按照数据的结构化程度来分，可以分为结构化数据、半结构化数据和非结构化数据，根据数据的不同的结构化形式，采用不同的方法，将数据转换为三元组的形式，然后对三元组的数据进行知识融合，主要是实体对齐，以及和数据模型进行结合，经过融合之后，会形成标准的数据表示，为了发现新知识，可以依据一定的推理规则，产生隐含的知识，所有形成的知识经过一定的质量评估，最终进入知识图谱，依据知识图谱这个数据平台，可以实现语义搜索，智能问答，推荐系统等一些应用。</p>
+<h2 id="知识抽取"><a href="#知识抽取" class="headerlink" title="知识抽取"></a>知识抽取</h2><img src="/知识图谱-三\image-20220811151246698.png" alt="image-20220811151246698" style="zoom:80%;">
+
+<p>我们将原始数据分为结构化数据、半结构化数据和非结构化数据，根据不同的数据类型，我们采用不同的方法进行处理。</p>
+<h3 id="结构化数据处理"><a href="#结构化数据处理" class="headerlink" title="结构化数据处理"></a>结构化数据处理</h3><p>针对结构化数据，通常是关系型数据库的数据，数据结构清晰，把关系型数据库中的数据转换为RDF数据（linked data），普遍采用的技术是D2R技术。D2R主要包括D2R Server，D2RQ Engine和D2RRQ Mapping语言。</p>
+<p>D2R Server 是一个 HTTP Server，它的主要功能提供对RDF数据的查询访问接口，以供上层的RDF浏览器、SPARQL查询客户端以及传统的 HTML 浏览器调用。 D2RQ Engine的主要功能是使用一个可定制的 D2RQ Mapping 文件将关系型数据库中的数据换成 RDF 格式。D2RQ engine 并没有将关系型数据库发布成真实的 RDF 数据，而是使用 D2RQ Mapping 文件将其映射成虚拟的 RDF 格式。该文件的作用是在访问关系型数据时将 RDF 数据的查询语言 SPARQL 转换为 RDB 数据的查询语言 SQL，并将 SQL 查询结果转换为 RDF 三元组或者 SPARQL 查询结果。D2RQ Engine 是建立在 Jena（Jena 是一个创建 Semantic Web 应用的 Java 平台，它提供了基于 RDF，SPARQL 等的编程环境）的接口之上。 D2RQ Mapping 语言的主要功能是定义将关系型数据转换成 RDF 格式的 Mapping 规则。</p>
+<h3 id="半结构化数据处理"><a href="#半结构化数据处理" class="headerlink" title="半结构化数据处理"></a>半结构化数据处理</h3><p>半结构化数据，主要是指那些具有一定的数据结构，但需要进一步提取整理的数据。比如百科的数据，网页中的数据等。对于这类数据，主要采用包装器的方式进行处理。</p>
+<p>包装器是一个能够将数据从HTML网页中抽取出来,并且将它们还原为结构化的数据的软件程序。网页数据输入到包装器中，通过包装器的处理，输出为我们需要的信息。</p>
+<p>对于一般的有规律的页面，我们可以使用正则表达式的方式写出XPath和CSS选择器表达式来提取网页中的元素。但这样的通用性很差，因此也可以通过包装器归纳这种基于有监督学习的方法,自动的从标注好的训练样例集合中学习数据抽取规则,用于从其他相同标记或相同网页模板抽取目标数据。</p>
+<h3 id="非结构化数据处理"><a href="#非结构化数据处理" class="headerlink" title="非结构化数据处理"></a>非结构化数据处理</h3><p>对于非结构化的文本数据，我们抽取的知识包括实体、关系、属性。对应的研究问题就有三个，一是<strong>实体抽取</strong>，也称为命名实体识别，此处的实体包括概念，人物，组织，地名，时间等等。二是<strong>关系抽取</strong>，也就是实体和实体之间的关系，也是文本中的重要知识，需要采用一定的技术手段将关系信息提取出来。三是<strong>属性抽取</strong>，也就是实体的属性信息，和关系比较类似，关系反映实体的外部联系，属性体现实体的内部特征。</p>
+<p>非结构化数据的抽取问题，研究的人比较多，对于具体的语料环境，采取的技术也不尽相同。举个例子，比如关系抽取，有的人采用深度学习的方法，将两个实体，他们的关系，以及出处的句子作为训练数据，训练出一个模型，然后对于测试数据进行关系抽取，测试数据需要提供两个实体和出处的句子，模型在训练得到的已知关系中查找，得出测试数据中两个实体之间的关系。这是一种关系抽取的方法。还有人用句法依存特征，来获取关系，这种方法认为，实体和实体之间的关系可以组成主谓宾结构，在一个句子中，找出主谓关系和动宾关系，其中的谓词和动词如果是一个词，那么这个词就是一个关系。比如说“小明吃了一个苹果”，主谓关系是“小明吃”，动宾关系是“吃苹果”，那么就认为“吃”是一个关系。</p>
+<p>当然，还有其它很多方法，可以在一定程度上实现实体抽取，关系抽取和属性抽取，效果可能会有差异，这需要在实践中测试和完善。</p>
+<h2 id="知识融合"><a href="#知识融合" class="headerlink" title="知识融合"></a>知识融合</h2><p>知识融合，简单理解，就是将多个知识库中的知识进行整合，形成一个知识库的过程，在这个过程中，主要需要解决的问题就是实体对齐。不同的知识库，收集知识的侧重点不同，对于同一个实体，有知识库的可能侧重于其本身某个方面的描述，有的知识库可能侧重于描述实体与其它实体的关系，知识融合的目的就是将不同知识库对实体的描述进行整合，从而获得实体的完整描述。</p>
+<p>比如，对于历史人物曹操的描述，在百度百科、互动百科、维基百科等不同的知识库中，描述有一些差别，曹操所属时代，百度百科为东汉，互动百科为东汉末年，维基百科为东汉末期；曹操的主要成就，百度百科为“实行屯田制，安抚流民消灭群雄，统一北方，奠定曹魏政权的基础，开创建安文学，提倡薄葬”，互动百科为“统一北方”，维基百科为“统一了东汉帝国核心地区”。</p>
+<p>由此可以看出，不同的知识库对于同一个实体的描述，还是有一些差异，所属时代的描述差别在于年代的具体程度，主要成就的差别在于成就的范围不同，等等，通过知识融合，可以将不同知识库中的知识进行互补融合，形成全面、准确、完整的实体描述。 知识融合过程中，主要涉及到的工作就是实体对齐，也包括关系对齐，属性对齐，可以通过相似度计算，聚合，聚类等技术来实现。</p>
+<h2 id="数据模型构建"><a href="#数据模型构建" class="headerlink" title="数据模型构建"></a>数据模型构建</h2><p>数据模型就是知识图谱的数据组织框架，不同的知识图谱，会采用不同的数据模型。对于行业知识图谱来说，行业术语、行业数据都相对比较清晰，可以采用自顶向下的方式来建设知识图谱，也就是先确定知识图谱的数据模型，然后，根据数据模型约定的框架，再补充数据，完成知识图谱的建设。 数据模型的构建，一般都会找一个基础的参考模型，这个参考模型，可以参照行业的相关数据标准，整合标准中对数据的要求，慢慢形成一个基础的数据模型，再根据实际收集的数据情况，来完善数据模型。也可以从公共知识图谱数据模型中抽取，将与行业有关的数据模型从公共知识图谱数据模型中提取出来，然后结合行业知识进行完善。</p>
+<h2 id="知识推理"><a href="#知识推理" class="headerlink" title="知识推理"></a>知识推理</h2><p>知识推理，就是根据已有的数据模型和数据，依据推理规则，获取新的知识或者结论，新的知识或结论应该是满足语义的。知识推理，依据描述逻辑系统实现。描述逻辑(Description Logic)是基于对象的知识表示的形式化，也叫概念表示语言或术语逻辑，是一阶谓词逻辑的一个可判定子集。</p>
+<p>一个描述逻辑系统由四个基本部分组成： 最基本的元素：概念、关系、个体；TBox术语集：概念术语的公理集合； Abox断言集：个体的断言集合；TBox 和 ABox上的推理机制。</p>
+<p>描述逻辑涉及到的内容也比较多，此处举几个例子，比如实体的分类包含关系，一个电脑椅是椅子，椅子是家具，可以说，一个电脑椅是家具。常识规则的推理，一个男人的孩子是A，一个女人的孩子是A，可以知道，这个男人和女人是配偶。</p>
+<p>通过推理发现新的知识，应用比较多，说明知识图谱的时候也经常不自觉的会应用推理，比如前两年比较受人关注的王宝强离婚案，为什么会聘用张起淮做律师，通过知识图谱可以很清楚知道，王宝强和冯小刚关系比较密切，冯小刚聘用张起淮作为律师顾问，所以王宝强很容易和张起淮建立关系，这也可以看作是知识推理的范畴。当然，更确切地说，应该是规则的范畴。推理更强调的是固有的逻辑，规则一般是和业务相关的自定义逻辑，但推理和规则都是通过逻辑准则，获取新的知识或发现，在这里先不做区分。</p>
+<h2 id="质量评估"><a href="#质量评估" class="headerlink" title="质量评估"></a>质量评估</h2><p>质量评估，就是对最后的结果数据进行评估，将合格的数据放入知识图谱中。质量评估的方法，根据所构建的知识图谱的不同，对数据要求的差异而有所差别。总的目的是要获得合乎要求的知识图谱数据，要求的标准根据具体情况确定。 比如对于公共领域的知识图谱，知识的获取采用了众包的方法，对于同一个知识点，可能会有很多人来完成，如果这个知识点只有一个答案，可以采用的一种策略是，将多人的标注结果进行比较，取投票多的结果作为最终的结果。当然，这是不严谨的，因为真理往往掌握在少数人的手里，特别是针对一些行业的知识图谱，表现尤为突出。行业内的一条知识，可能只有行业专家能够给出权威正确的答案，如果让大众投票来决定，可能会得到一条错误的知识。所以，针对行业知识图谱，可能会采用不同于公共知识图谱的策略，来进行知识的质量评估。</p>
+
+      
+    </div>
+
+    
+    
+    
+
+ 
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%BA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Cong yx">
+      <meta itemprop="description" content="欲买桂花同载酒，终不似，少年游。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序人生">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%BA%8C/" class="post-title-link" itemprop="url">知识图谱(二)</a>
+        </h2>
+
+        <div class="post-meta">
+
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-08-11 15:02:37 / 修改时间：15:10:48" itemprop="dateCreated datePublished" datetime="2022-08-11T15:02:37+08:00">2022-08-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" itemprop="url" rel="index"><span itemprop="name">知识图谱</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="知识图谱的构建"><a href="#知识图谱的构建" class="headerlink" title="知识图谱的构建"></a>知识图谱的构建</h1><p>知识图谱的数据是通过三元组（主语，谓词，宾语）的方式进行组织，每一个三元组代表一条知识，这些三元组并不是杂乱无章的堆砌在知识图谱中，而是按照一定的逻辑组织起来的。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%BA%8C/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+ 
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -931,210 +1134,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Cong yx">
-      <meta itemprop="description" content="欲买桂花同载酒，终不似，少年游。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="程序人生">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" class="post-title-link" itemprop="url">Matplotlib数据可视化</a>
-        </h2>
-
-        <div class="post-meta">
-
-
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-04-15 09:26:05" itemprop="dateCreated datePublished" datetime="2022-04-15T09:26:05+08:00">2022-04-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-05-03 16:33:54" itemprop="dateModified" datetime="2022-05-03T16:33:54+08:00">2022-05-03</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>8.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>7 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Matplotlib数据可视化"><a href="#Matplotlib数据可视化" class="headerlink" title="Matplotlib数据可视化"></a>Matplotlib数据可视化</h1><p>Python语言的matplotlib扩展包是一个提供了跨平台的2D 图形库，它可以将数据用多种形式展示出来。Matplotlib可画出折线图，柱状图，饼图，雷达图等。在matplotlib的官网上给出了500多个图表展示的例子程序 (<a target="_blank" rel="noopener" href="https://matplotlib.org/gallery/index.html)%E3%80%82">https://matplotlib.org/gallery/index.html)。</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
- 
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/03/26/python%E7%88%AC%E8%99%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Cong yx">
-      <meta itemprop="description" content="欲买桂花同载酒，终不似，少年游。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="程序人生">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/03/26/python%E7%88%AC%E8%99%AB/" class="post-title-link" itemprop="url">python爬虫</a>
-        </h2>
-
-        <div class="post-meta">
-
-
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-03-26 10:00:12" itemprop="dateCreated datePublished" datetime="2022-03-26T10:00:12+08:00">2022-03-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-10 16:02:30" itemprop="dateModified" datetime="2022-04-10T16:02:30+08:00">2022-04-10</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="python爬虫工作原理"><a href="#python爬虫工作原理" class="headerlink" title="python爬虫工作原理"></a>python爬虫工作原理</h3><p><strong>获取数据：</strong></p>
-<p>爬虫程序会根据我们提供的网址，向服务器发起请求，然后返回数据。</p>
-<p><strong>解析数据：</strong></p>
-<p>爬虫程序会把服务器返回的数据解析成我们能读懂的格式。</p>
-<p><strong>提取数据：</strong></p>
-<p>爬虫程序再从中提取出我们需要的数据。</p>
-<p><strong>储存数据:</strong><br>爬虫程序把这些有用的数据保存起来,便于你以后的使用和分析。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/03/26/python%E7%88%AC%E8%99%AB/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
- 
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1206,7 +1205,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">18</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

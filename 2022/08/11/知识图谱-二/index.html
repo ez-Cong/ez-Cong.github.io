@@ -20,39 +20,20 @@
     var CONFIG = {"hostname":"congyx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","positon":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="python爬虫工作原理获取数据： 爬虫程序会根据我们提供的网址，向服务器发起请求，然后返回数据。 解析数据： 爬虫程序会把服务器返回的数据解析成我们能读懂的格式。 提取数据： 爬虫程序再从中提取出我们需要的数据。 储存数据:爬虫程序把这些有用的数据保存起来,便于你以后的使用和分析。">
+  <meta name="description" content="知识图谱的构建知识图谱的数据是通过三元组（主语，谓词，宾语）的方式进行组织，每一个三元组代表一条知识，这些三元组并不是杂乱无章的堆砌在知识图谱中，而是按照一定的逻辑组织起来的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="python爬虫">
-<meta property="og:url" content="https://congyx.com/2022/03/26/python%E7%88%AC%E8%99%AB/index.html">
+<meta property="og:title" content="知识图谱(二)">
+<meta property="og:url" content="https://congyx.com/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%BA%8C/index.html">
 <meta property="og:site_name" content="程序人生">
-<meta property="og:description" content="python爬虫工作原理获取数据： 爬虫程序会根据我们提供的网址，向服务器发起请求，然后返回数据。 解析数据： 爬虫程序会把服务器返回的数据解析成我们能读懂的格式。 提取数据： 爬虫程序再从中提取出我们需要的数据。 储存数据:爬虫程序把这些有用的数据保存起来,便于你以后的使用和分析。">
+<meta property="og:description" content="知识图谱的构建知识图谱的数据是通过三元组（主语，谓词，宾语）的方式进行组织，每一个三元组代表一条知识，这些三元组并不是杂乱无章的堆砌在知识图谱中，而是按照一定的逻辑组织起来的。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410100554836.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410100621487.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410101501845.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410101613520.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410101647072.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410102609214.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410110621682.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410110641745.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410110850553.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410111622337.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410111721377.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410112341145.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410112633026.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410113019785.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410113100826.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410113214914.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410113315426.png">
-<meta property="og:image" content="https://congyx.com/resources/image-20220410160211171.png">
-<meta property="article:published_time" content="2022-03-26T02:00:12.000Z">
-<meta property="article:modified_time" content="2022-04-10T08:02:30.007Z">
+<meta property="article:published_time" content="2022-08-11T07:02:37.000Z">
+<meta property="article:modified_time" content="2022-08-11T07:10:48.849Z">
 <meta property="article:author" content="Cong yx">
-<meta property="article:tag" content="python">
+<meta property="article:tag" content="知识图谱">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://congyx.com/resources/image-20220410100554836.png">
 
-<link rel="canonical" href="https://congyx.com/2022/03/26/python%E7%88%AC%E8%99%AB/">
+<link rel="canonical" href="https://congyx.com/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%BA%8C/">
 
 
 <script id="page-configurations">
@@ -65,7 +46,7 @@
   };
 </script>
 
-  <title>python爬虫 | 程序人生</title>
+  <title>知识图谱(二) | 程序人生</title>
   
 
 
@@ -214,7 +195,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/03/26/python%E7%88%AC%E8%99%AB/">
+    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%BA%8C/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -227,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          python爬虫
+          知识图谱(二)
         </h1>
 
         <div class="post-meta">
@@ -238,23 +219,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2022-03-26 10:00:12" itemprop="dateCreated datePublished" datetime="2022-03-26T10:00:12+08:00">2022-03-26</time>
+              <time title="创建时间：2022-08-11 15:02:37 / 修改时间：15:10:48" itemprop="dateCreated datePublished" datetime="2022-08-11T15:02:37+08:00">2022-08-11</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-04-10 16:02:30" itemprop="dateModified" datetime="2022-04-10T16:02:30+08:00">2022-04-10</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a>
+                  <a href="/categories/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" itemprop="url" rel="index"><span itemprop="name">知识图谱</span></a>
                 </span>
             </span>
 
@@ -271,14 +246,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3k</span>
+              <span>1.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -290,80 +265,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="python爬虫工作原理"><a href="#python爬虫工作原理" class="headerlink" title="python爬虫工作原理"></a>python爬虫工作原理</h3><p><strong>获取数据：</strong></p>
-<p>爬虫程序会根据我们提供的网址，向服务器发起请求，然后返回数据。</p>
-<p><strong>解析数据：</strong></p>
-<p>爬虫程序会把服务器返回的数据解析成我们能读懂的格式。</p>
-<p><strong>提取数据：</strong></p>
-<p>爬虫程序再从中提取出我们需要的数据。</p>
-<p><strong>储存数据:</strong><br>爬虫程序把这些有用的数据保存起来,便于你以后的使用和分析。</p>
-<span id="more"></span>
-
-<h4 id="requests库"><a href="#requests库" class="headerlink" title="requests库"></a>requests库</h4><p>requests库可以帮我们下载网页源代码、文本、图片，甚至是音频。</p>
-<p><strong>requests.get()</strong></p>
-<p>requests.get 是在调用 requests 库中的 get() 方法，它向服务器发送了一个请求，括号里的参数是你需要的数据所在的网址，然后得到了服务器的响应。服务器返回的结果是个 Response 对象。</p>
-<p>response对象常用的四个属性：</p>
-<p><img src="/../resources/image-20220410100554836.png" alt="image-20220410100554836"></p>
-<p><strong>response.status_code属性：</strong></p>
-<p><img src="/../resources/image-20220410100621487.png" alt="image-20220410100621487"></p>
-<p><strong>response.content属性：</strong></p>
-<p>该属性能把Response对象的内容以二进制数据的形式返回，适用于图片、音频、视频的下载。</p>
-<p><strong>response.text属性：</strong></p>
-<p>该属性可以把Response对象的内容以字符串的形式返回， 适用于文字、网页源代码的下载。</p>
-<p><strong>response.encoding属性：</strong></p>
-<p>该属性能帮我们定义Response对象的编码。 遇上输出的文本有乱码问题，才考虑用res.encoding。首先，目标数据本身是什么编码是未知的。用requests.get() 发 送请求后，会取得一个Response对象，其中，requests库会对数据的编码类型做出自己的判断。但是这个判断有可能准确，也可能不准确。 如果它判断准确的话，打印出来的response.text的内容就是正常的、没有乱码的，就无需用res.encoding；如果判断不准确，就会出现一堆乱码，那我们就可以去查看目标数据的编码，然后再用res.encoding把编码定义成和目标数据一 致的类型即可。</p>
-<h4 id="robots协议"><a href="#robots协议" class="headerlink" title="robots协议"></a>robots协议</h4><p>查看robots协议，在网站的域名后加上 &#x2F;robots.txt</p>
-<p><img src="/../resources/image-20220410101501845.png" alt="image-20220410101501845"></p>
-<h4 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h4><p>HTML文档包含了HTML标签（TAG）和元素，通过它们来描述网页。Web浏览器的作用是将HTML源文件转化成 网页形式，并显示出它们。浏览器本身并不会显示出HTML 标签，而是使用它们来解释页面的内容。</p>
-<p><img src="/../resources/image-20220410101613520.png" alt="image-20220410101613520"></p>
-<p>HTML常见标签：</p>
-<p><img src="/../resources/image-20220410101647072.png" alt="image-20220410101647072"></p>
-<h4 id="解析数据"><a href="#解析数据" class="headerlink" title="解析数据"></a>解析数据</h4><p>我们平时使用浏览器上网，浏览器会把服务器返 回来的HTML源代码翻译为我们能看懂的样子，之后我们才能在网页上做各种操作。 而在爬虫中，也要使用能读懂html的工具，才能提取到想要的数据。</p>
-<p><strong>【提取数据】</strong>是指把我们需要的数据从众多数据中挑选出来。</p>
-<p><img src="/../resources/image-20220410102609214.png" alt="image-20220410102609214"></p>
-<p>在括号中，要输入两个参数，第0个参数是要被解析的文本，注意了，它必须是字符串。 括号中的第1个参数用来标识解析器，我们要用的是一个 Python内置库：html.parser。（它不是唯一的解析器，但是比较简单的）</p>
-<p>以该网站为例（url： <a target="_blank" rel="noopener" href="https://localprod.pandateacher.com/python%02manuscript/crawler-html/spider-men5.0.html%EF%BC%89%E5%81%87%E8%AE%BE%E6%88%91%E4%BB%AC%E6%83%B3%E7%88%AC%E5%8F%96%E7%BD%91%E9%A1%B5%E4%B8%AD%E7%9A%84%E4%B9%A6%E7%B1%8D%E7%B1%BB%E5%9E%8B%E3%80%81%E4%B9%A6%E5%90%8D%E3%80%81%E9%93%BE%E6%8E%A5%E3%80%81%E5%92%8C%E4%B9%A6%E7%B1%8D%E4%BB%8B%E7%BB%8D%E3%80%82%E6%A0%B9%E6%8D%AE%E4%B9%8B">https://localprod.pandateacher.com/pythonmanuscript/crawler-html/spider-men5.0.html）假设我们想爬取网页中的书籍类型、书名、链接、和书籍介绍。根据之</a> 前所学的 requests.get()，我们可以先获取到一个Response对象，并确认自己获取成功：</p>
-<p><img src="/../resources/image-20220410110621682.png" alt="image-20220410110621682"></p>
-<p>接着用BeautifulSoup解析数据，请特别留意第2行和第6 行新增的代码。第2行是引入BeautifulSoup库。第6行中的第 0个参数，必须是字符串类型；括号中的第1个参数是解析器。 这就是解析数据的用法。</p>
-<p><img src="/../resources/image-20220410110641745.png" alt="image-20220410110641745"></p>
-<p>接下来，我们来打印看看soup的数据类型，和soup本身 （第7行开始为新增代码）。</p>
-<p> import requests </p>
-<p>from bs4 import BeautifulSoup </p>
-<p>res &#x3D;  requests.get(‘<a target="_blank" rel="noopener" href="https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;">https://localprod.pandateacher.com/python-manuscript/crawler-html/spider-men5.0.html&#39;</a>)  </p>
-<p>soup &#x3D; BeautifulSoup( res.text,’html.parser’) </p>
-<p>print(type(soup)) #查看soup的类型 </p>
-<p>print(soup) # 打印soup</p>
-<p>代码运行结果：</p>
-<p><img src="/../resources/image-20220410110850553.png" alt="image-20220410110850553"></p>
-<ul>
-<li><p>soup的数据类型是， 说明soup是一个BeautifulSoup对象。打印的soup， 它是所请求网页的完整HTML源代码。我们所要提取的书名、链接、书籍内容这些数据都在这里面。</p>
-</li>
-<li><p>打印soup出来的源代码和我们之前使用 response.text 打印出来的源代码是完全一样的。</p>
-</li>
-<li><p>虽然 response.text 和 soup 打印出的内容一样，但它们属于不同的类： &lt;class ‘str’&gt;与&lt;class ‘bs4.BeautifulSoup’&gt;。前者是字符串，后者是已经被解析过的 BeautifulSoup 对象。之所以打印出来的是一样的文本，是因为 BeautifulSoup 对象在直 接打印它的时候会调用该对象内的 str 方法，所以直接打印 bs 对象显示字符串是str的返回结果。</p>
-</li>
-<li><p>之后还会用 BeautifulSoup 库来提取数据，如果这不是一 个 BeautifulSoup 对象，就没法调用相关的属性和方法的，所以，用 BeautifulSoup 解析数据是非常有用的，并不是重复劳动。</p>
-</li>
-<li><p><img src="/../resources/image-20220410111622337.png" alt="image-20220410111622337"></p>
-</li>
-</ul>
-<p>仍然使用BeautifulSoup来提取数据。</p>
-<p><img src="/../resources/image-20220410111721377.png" alt="image-20220410111721377"></p>
-<p>find() 与 find_all()</p>
-<p><img src="/../resources/image-20220410112341145.png" alt="image-20220410112341145"></p>
-<p>Tag类对象的常用属性和方法</p>
-<p><img src="/../resources/image-20220410112633026.png" alt="image-20220410112633026"></p>
-<h4 id="定制请求头"><a href="#定制请求头" class="headerlink" title="定制请求头"></a>定制请求头</h4><p>最好将自己的爬虫伪装成真实的浏览器——因为在这种情况下，服务器很可能拒绝爬虫访问。甚至有的网站，一开始就不允许爬虫访问。 如，知乎、猫眼电影等。</p>
-<p>每一个 request 请求，都会有一个Requests Headers，把它称作请求头。 它里面会有一些关于该请求的基本信息，比如：这个请求是从什么设备 什么浏览器上发出？这个请求是从哪个页面跳转而来？ user-agent会记录你电脑的信息和浏览器版本（如图，就是windows10的64位操作系统， 使用谷歌浏览器），它最大的应用是帮助我们应对“反爬虫”技术。</p>
-<p><img src="/../resources/image-20220410113019785.png" alt="image-20220410113019785"></p>
-<p>基于【豆瓣官网】【下厨房】等网站突然IP反爬的情况， 程序开始需要加上headers里的 user-agent，以后面的实操例 子下厨房为例，user-agent在这里。</p>
-<p><img src="/../resources/image-20220410113100826.png" alt="image-20220410113100826"></p>
-<p>给爬虫代码加上请求头后是这样的 <strong>headers&#x3D;{‘User-Agent’: ‘Mozilla&#x2F;5.0 (Windows NT 10.0;  Win64; x64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko)  Chrome&#x2F;86.0.4240.193 Safari&#x2F;537.36’}</strong> 这个请求头是万能的，可以直接保存下来，后面加请求头都可以直接使用。 注意！！！提取数据那一行的第二个参数也要加上请求头！！！</p>
-<p><img src="/../resources/image-20220410113214914.png" alt="image-20220410113214914"></p>
-<p>从最开始用requests库获取数据，到用BeautifulSoup库来解析数据，再继续用BeautifulSoup库提取数据，不断经历的是操作对象的类型转换</p>
-<p><img src="/../resources/image-20220410113315426.png" alt="image-20220410113315426"></p>
-<p>例子：</p>
-<p><img src="/../resources/image-20220410160211171.png" alt="image-20220410160211171"></p>
+        <h1 id="知识图谱的构建"><a href="#知识图谱的构建" class="headerlink" title="知识图谱的构建"></a>知识图谱的构建</h1><p>知识图谱的数据是通过三元组（主语，谓词，宾语）的方式进行组织，每一个三元组代表一条知识，这些三元组并不是杂乱无章的堆砌在知识图谱中，而是按照一定的逻辑组织起来的。<span id="more"></span></p>
+<h2 id="知识图谱的数据结构"><a href="#知识图谱的数据结构" class="headerlink" title="知识图谱的数据结构"></a>知识图谱的数据结构</h2><p>从知识图谱数据组织的架构来看，可以把知识图谱的数据分为两个层次，一个是<strong>数据模型层</strong>，数据模型是按照本体论的思想，勾画出来的数据组织模式，数据模型可以展示数据的组织方式，数据之间的相互关系，依据数据模型，数据才能得到有效的组织。数据模型除了确定对象之间的分类，关系，还要明确对象的属性，针对不同的知识图谱，需要收集的数据的内容也不相同，内容范围由对象的属性确定。数据模型的分类，关系反映了数据之间的关系特征，数据模型的属性反映了数据的内在特征。 另一个就是<strong>具体数据层</strong>，具体数据是一条条的知识，它是依据数据模型组织起来的。我们可以把数据模型看作是骨架，把具体数据看作是肌肉，两部分共同组成了一个健壮的整体，就是我们的知识图谱。不同类型的知识图谱，组织数据的方式也有所不同，涉及到具体数据，具体数据的内容也有差别。比如对于一个人物来说，如果是历史知识图谱，可能人物数据的内容主要侧重于人物的生平，主要事迹，人物关系等等，如果是文学知识图谱，人物数据的内容则会主要侧重人物的主要作品，师承关系，作品流派等等。 将知识图谱的数据分成了两个层次，在构建知识图谱的时候，是先确定数据模型再收集具体数据，还是先收集具体数据再确定数据模型，这就形成了两种构建知识图谱的方式。</p>
+<h2 id="自顶向下的构建方式"><a href="#自顶向下的构建方式" class="headerlink" title="自顶向下的构建方式"></a>自顶向下的构建方式</h2><p>自顶向下的构建方式，是指先确定知识图谱的数据模型，再根据模型去填充具体数据，最终形成知识图谱。数据模型的设计，是知识图谱的顶层设计，根据知识图谱的特点确定数据模型，就相当于确定了知识图谱收集数据的范围，以及数据的组织方式。这种构建方式，一般适用于行业知识图谱的构建，对于一个行业来说，数据内容，数据组织方式相对来说比较容易确定。</p>
+<p>总体来说，自顶向下的构建方式，适用于那些知识内容比较明确，关系比较清晰的领域构建知识图谱。</p>
+<h2 id="自下向上的构建方式"><a href="#自下向上的构建方式" class="headerlink" title="自下向上的构建方式"></a>自下向上的构建方式</h2><p>自下向上的构建方式，是指先按照三元组的方式收集具体数据，然后根据数据内容来提炼数据模型。 采用这种方式构建知识图谱，是因为在开始构建知识图谱的时候，还不清楚收集数据的范围，也不清楚数据怎么使用，就是先把所有的数据收集起来，形成一个庞大的数据集，然后再根据数据内容，总结数据的特点，将数据进行整理、分析、归纳、总结，形成一个框架，也就是数据模型。一般公共领域的知识图谱采用这种方式，因为公共领域的知识图谱，涉及到海量数据，并且包括方方面面的知识，做出来的效果是大而全，这在构建初期，很难想清楚数据的整体架构，只能是根据数据的内容总结提炼特征，形成数据框架模型。比如google，百度的知识图谱，属于典型的公共领域知识图谱，现实中，使用他们的搜索工具进行内容搜索时，用户可能输入的内容千差万别，各个领域的问题都可能问到，也就使得他们的后台知识图谱内容也要覆盖所有知识，在构建他们这种公共领域的知识图谱过程中，随着数据的不断积累，才会对数据知识进行分类，慢慢呈现出知识架构。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>两种构建方式也不是一成不变的，在构建初期两种方式区别很明显，在知识图谱构建后期，两种方式可能会结合使用。对于自顶向下的构建方式，随着数据量的不断积累，可能会发现原来的数据模型并不完善，有很多数据可能没有包含在数据模型的体系中，这时候就需要修订数据模型，根据数据的特点，完善数据模型。同样，在自下向上的构建方式中，慢慢形成的数据模型，对于后期的数据收集，也有一定的指导作用，按照形成的数据模型，可以快速准确地收集相关数据。总之，数据和数据模型之间，是一个相辅相成的关系，二者在构建知识图谱的过程中缺一不可。</p>
 
     </div>
 
@@ -389,7 +296,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://congyx.com/2022/03/26/python%E7%88%AC%E8%99%AB/" title="python爬虫">https://congyx.com/2022/03/26/python爬虫/</a>
+    <a href="https://congyx.com/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%BA%8C/" title="知识图谱(二)">https://congyx.com/2022/08/11/知识图谱-二/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -400,7 +307,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" rel="tag"># 知识图谱</a>
           </div>
 
         
@@ -409,12 +316,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="prev" title="python中lambda表达式">
-      <i class="fa fa-chevron-left"></i> python中lambda表达式
+    <a href="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/" rel="prev" title="知识图谱">
+      <i class="fa fa-chevron-left"></i> 知识图谱
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/04/15/Matplotlib%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="next" title="Matplotlib数据可视化">
-      Matplotlib数据可视化 <i class="fa fa-chevron-right"></i>
+    <a href="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%B8%89/" rel="next" title="知识图谱(三)">
+      知识图谱(三) <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -479,7 +386,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#python%E7%88%AC%E8%99%AB%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">python爬虫工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#requests%E5%BA%93"><span class="nav-number">1.1.</span> <span class="nav-text">requests库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#robots%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.2.</span> <span class="nav-text">robots协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML"><span class="nav-number">1.3.</span> <span class="nav-text">HTML</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E6%9E%90%E6%95%B0%E6%8D%AE"><span class="nav-number">1.4.</span> <span class="nav-text">解析数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9A%E5%88%B6%E8%AF%B7%E6%B1%82%E5%A4%B4"><span class="nav-number">1.5.</span> <span class="nav-text">定制请求头</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E6%9E%84%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">知识图谱的构建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">知识图谱的数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E9%A1%B6%E5%90%91%E4%B8%8B%E7%9A%84%E6%9E%84%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">自顶向下的构建方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E4%B8%8B%E5%90%91%E4%B8%8A%E7%9A%84%E6%9E%84%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="nav-number">1.3.</span> <span class="nav-text">自下向上的构建方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.4.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
