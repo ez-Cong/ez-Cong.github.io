@@ -244,39 +244,6 @@
       </tags>
   </entry>
   <entry>
-    <title>String、StringBuffer、StringBuilder之间的联系</title>
-    <url>/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/</url>
-    <content><![CDATA[<p>今天做题遇见 <strong>反转字符串中的单词</strong> 这道题，给定一个字符串需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。题目链接：<a href="https://leetcode.cn/problems/reverse-words-in-a-string-iii/">557. 反转字符串中的单词 III - 力扣（LeetCode）</a>。<span id="more"></span></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;Let&#x27;s take LeetCode contest&quot;</span><br><span class="line">输出：&quot;s&#x27;teL ekat edoCteeL tsetnoc&quot;</span><br><span class="line"></span><br><span class="line">输入： s = &quot;God Ding&quot;</span><br><span class="line">输出：&quot;doG gniD&quot;</span><br></pre></td></tr></table></figure>
-
-<p>做题过程中，发现自己忘记了字符串的一些知识，所谓温故而知新。在此记录复习。</p>
-<p>在 java 中字符串属于对象，Java 提供了 String 类来创建和操作字符串。String 类是不可变类，即一旦一个 String 对象被创建以后，包含在这个对象中的字符序列是不可改变的，直至这个对象被销毁。</p>
-<p>Java 提供了两个可变字符串类 <strong>StringBuffer</strong> 和 <strong>StringBuilder</strong>，中文翻译为“字符串缓冲区”。</p>
-<p>StringBuilder 类是 JDK 1.5 新增的类，它也代表可变字符串对象。实际上，StringBuilder 和 StringBuffer 功能基本相似，方法也差不多。不同的是，StringBuffer 是线程安全的，而 StringBuilder 则没有实现线程安全功能，所以性能略高。因此在通常情况下，如果需要创建一个内容可变的字符串对象，则应该优先考虑使用 StringBuilder 类。</p>
-<p>StringBuffer、StringBuilder、String 中都实现了 CharSequence 接口。CharSequence 是一个定义字符串操作的接口，它只包括 length()、charAt(int index)、subSequence(int start, int end) 这几个 API。</p>
-<p>StringBuffer、StringBuilder、String 对 CharSequence 接口的实现过程不一样，</p>
-<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122937245.png" alt="image-20220605122937245" style="zoom:80%;">
-
-<p><strong>String、StringBuffer、StringBuilder 之间的区别：</strong></p>
-<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122516694.png" alt="image-20220605122516694" style="zoom:80%;">
-
-<p><strong>String:</strong></p>
-<p>对于String来说，是把数据存放在了常量池中，因为所有的String，默认都是以常量形式保存，且由final修饰，因此在线程池中它是线程安全的。因为每一个String当被创建好了以后，他就不再发生任何变化，但是它的执行速度是最差的。</p>
-<p>我们要创建String的时候，他在常量池中对这些信息进行处理，如果在程序中出现了大量字符串拼接的工作，效率是非常底下的。<br>因此使用场景是在少量字符串操作的时候才建议直接使用String来操作。</p>
-<p><strong>StringBuffer:</strong></p>
-<p>StringBuffer相对于StringBuilder效率要相对低一点，但也远比String要高的多。效率低的原因：对于StringBuffer来说更多的考虑到了多线程的情况，在进行字符串操作的时候，它使用了synchronize关键字，对方法进行了同步处理。因此StringBuffer适用于多线程环境下的大量操作。</p>
-<p><strong>StringBuilder:</strong></p>
-<p>线程安全与线程不安全：<br>在进行多线程处理的时候，如果多个线程对于这一个对象同时产生操作，会产生预期之外的结果。对于StringBuilder来说，执行效率虽然高，但是因为线程不安全，所以不建议在多线程的环境下对同一个StringBuilder对象进行操作。因此StringBuilder适用于单线程环境下的大量字符串操作。</p>
-<p><strong>参考：</strong><a href="http://c.biancheng.net/view/5822.html">String、StringBuffer和StringBuilder类的区别 (biancheng.net)</a></p>
-]]></content>
-      <categories>
-        <category>java</category>
-      </categories>
-      <tags>
-        <tag>java</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>SpringBoot</title>
     <url>/2022/03/09/SpringBoot/</url>
     <content><![CDATA[<p>SpringBoot是整合Spring技术栈的一站式框架</p>
@@ -389,6 +356,39 @@
       </tags>
   </entry>
   <entry>
+    <title>String、StringBuffer、StringBuilder之间的联系</title>
+    <url>/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/</url>
+    <content><![CDATA[<p>今天做题遇见 <strong>反转字符串中的单词</strong> 这道题，给定一个字符串需要反转字符串中每个单词的字符顺序，同时仍保留空格和单词的初始顺序。题目链接：<a href="https://leetcode.cn/problems/reverse-words-in-a-string-iii/">557. 反转字符串中的单词 III - 力扣（LeetCode）</a>。<span id="more"></span></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入：s = &quot;Let&#x27;s take LeetCode contest&quot;</span><br><span class="line">输出：&quot;s&#x27;teL ekat edoCteeL tsetnoc&quot;</span><br><span class="line"></span><br><span class="line">输入： s = &quot;God Ding&quot;</span><br><span class="line">输出：&quot;doG gniD&quot;</span><br></pre></td></tr></table></figure>
+
+<p>做题过程中，发现自己忘记了字符串的一些知识，所谓温故而知新。在此记录复习。</p>
+<p>在 java 中字符串属于对象，Java 提供了 String 类来创建和操作字符串。String 类是不可变类，即一旦一个 String 对象被创建以后，包含在这个对象中的字符序列是不可改变的，直至这个对象被销毁。</p>
+<p>Java 提供了两个可变字符串类 <strong>StringBuffer</strong> 和 <strong>StringBuilder</strong>，中文翻译为“字符串缓冲区”。</p>
+<p>StringBuilder 类是 JDK 1.5 新增的类，它也代表可变字符串对象。实际上，StringBuilder 和 StringBuffer 功能基本相似，方法也差不多。不同的是，StringBuffer 是线程安全的，而 StringBuilder 则没有实现线程安全功能，所以性能略高。因此在通常情况下，如果需要创建一个内容可变的字符串对象，则应该优先考虑使用 StringBuilder 类。</p>
+<p>StringBuffer、StringBuilder、String 中都实现了 CharSequence 接口。CharSequence 是一个定义字符串操作的接口，它只包括 length()、charAt(int index)、subSequence(int start, int end) 这几个 API。</p>
+<p>StringBuffer、StringBuilder、String 对 CharSequence 接口的实现过程不一样，</p>
+<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122937245.png" alt="image-20220605122937245" style="zoom:80%;">
+
+<p><strong>String、StringBuffer、StringBuilder 之间的区别：</strong></p>
+<img src="/2022/06/05/String%E3%80%81StringBuffer%E3%80%81StringBuilder%E4%B9%8B%E9%97%B4%E7%9A%84%E8%81%94%E7%B3%BB/image-20220605122516694.png" alt="image-20220605122516694" style="zoom:80%;">
+
+<p><strong>String:</strong></p>
+<p>对于String来说，是把数据存放在了常量池中，因为所有的String，默认都是以常量形式保存，且由final修饰，因此在线程池中它是线程安全的。因为每一个String当被创建好了以后，他就不再发生任何变化，但是它的执行速度是最差的。</p>
+<p>我们要创建String的时候，他在常量池中对这些信息进行处理，如果在程序中出现了大量字符串拼接的工作，效率是非常底下的。<br>因此使用场景是在少量字符串操作的时候才建议直接使用String来操作。</p>
+<p><strong>StringBuffer:</strong></p>
+<p>StringBuffer相对于StringBuilder效率要相对低一点，但也远比String要高的多。效率低的原因：对于StringBuffer来说更多的考虑到了多线程的情况，在进行字符串操作的时候，它使用了synchronize关键字，对方法进行了同步处理。因此StringBuffer适用于多线程环境下的大量操作。</p>
+<p><strong>StringBuilder:</strong></p>
+<p>线程安全与线程不安全：<br>在进行多线程处理的时候，如果多个线程对于这一个对象同时产生操作，会产生预期之外的结果。对于StringBuilder来说，执行效率虽然高，但是因为线程不安全，所以不建议在多线程的环境下对同一个StringBuilder对象进行操作。因此StringBuilder适用于单线程环境下的大量字符串操作。</p>
+<p><strong>参考：</strong><a href="http://c.biancheng.net/view/5822.html">String、StringBuffer和StringBuilder类的区别 (biancheng.net)</a></p>
+]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>hexo + github 搭建个人博客</title>
     <url>/2022/02/20/hello-world/</url>
     <content><![CDATA[<p>搭建博客最重要的就是<strong>耐心</strong>和<strong>坚持</strong>。搭建时候遇见许多问题(权限、版本等等)，经过耐心的搜索解决方案逐一解决还是非常开心的！<span id="more"></span></p>
@@ -406,7 +406,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#105;&#116;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#46;&#99;&#x6f;&#109;">&#103;&#105;&#116;&#64;&#x67;&#105;&#116;&#x68;&#x75;&#98;&#46;&#99;&#x6f;&#109;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#103;&#105;&#116;&#x40;&#x67;&#105;&#x74;&#104;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;">&#103;&#105;&#116;&#x40;&#x67;&#105;&#x74;&#104;&#117;&#x62;&#x2e;&#x63;&#x6f;&#109;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -420,7 +420,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#x67;&#x69;&#x74;&#x40;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#x6f;&#x6d;">&#x67;&#x69;&#x74;&#x40;&#103;&#x69;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#x6f;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#x67;&#105;&#116;&#64;&#103;&#x69;&#116;&#104;&#117;&#x62;&#46;&#x63;&#111;&#x6d;">&#x67;&#105;&#116;&#64;&#103;&#x69;&#116;&#104;&#117;&#x62;&#46;&#x63;&#111;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -1915,23 +1915,6 @@
       </tags>
   </entry>
   <entry>
-    <title>知识图谱(二)</title>
-    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%BA%8C/</url>
-    <content><![CDATA[<h1 id="知识图谱的构建"><a href="#知识图谱的构建" class="headerlink" title="知识图谱的构建"></a>知识图谱的构建</h1><p>知识图谱的数据是通过三元组（主语，谓词，宾语）的方式进行组织，每一个三元组代表一条知识，这些三元组并不是杂乱无章的堆砌在知识图谱中，而是按照一定的逻辑组织起来的。<span id="more"></span></p>
-<h2 id="知识图谱的数据结构"><a href="#知识图谱的数据结构" class="headerlink" title="知识图谱的数据结构"></a>知识图谱的数据结构</h2><p>从知识图谱数据组织的架构来看，可以把知识图谱的数据分为两个层次，一个是<strong>数据模型层</strong>，数据模型是按照本体论的思想，勾画出来的数据组织模式，数据模型可以展示数据的组织方式，数据之间的相互关系，依据数据模型，数据才能得到有效的组织。数据模型除了确定对象之间的分类，关系，还要明确对象的属性，针对不同的知识图谱，需要收集的数据的内容也不相同，内容范围由对象的属性确定。数据模型的分类，关系反映了数据之间的关系特征，数据模型的属性反映了数据的内在特征。 另一个就是<strong>具体数据层</strong>，具体数据是一条条的知识，它是依据数据模型组织起来的。我们可以把数据模型看作是骨架，把具体数据看作是肌肉，两部分共同组成了一个健壮的整体，就是我们的知识图谱。不同类型的知识图谱，组织数据的方式也有所不同，涉及到具体数据，具体数据的内容也有差别。比如对于一个人物来说，如果是历史知识图谱，可能人物数据的内容主要侧重于人物的生平，主要事迹，人物关系等等，如果是文学知识图谱，人物数据的内容则会主要侧重人物的主要作品，师承关系，作品流派等等。 将知识图谱的数据分成了两个层次，在构建知识图谱的时候，是先确定数据模型再收集具体数据，还是先收集具体数据再确定数据模型，这就形成了两种构建知识图谱的方式。</p>
-<h2 id="自顶向下的构建方式"><a href="#自顶向下的构建方式" class="headerlink" title="自顶向下的构建方式"></a>自顶向下的构建方式</h2><p>自顶向下的构建方式，是指先确定知识图谱的数据模型，再根据模型去填充具体数据，最终形成知识图谱。数据模型的设计，是知识图谱的顶层设计，根据知识图谱的特点确定数据模型，就相当于确定了知识图谱收集数据的范围，以及数据的组织方式。这种构建方式，一般适用于行业知识图谱的构建，对于一个行业来说，数据内容，数据组织方式相对来说比较容易确定。</p>
-<p>总体来说，自顶向下的构建方式，适用于那些知识内容比较明确，关系比较清晰的领域构建知识图谱。</p>
-<h2 id="自下向上的构建方式"><a href="#自下向上的构建方式" class="headerlink" title="自下向上的构建方式"></a>自下向上的构建方式</h2><p>自下向上的构建方式，是指先按照三元组的方式收集具体数据，然后根据数据内容来提炼数据模型。 采用这种方式构建知识图谱，是因为在开始构建知识图谱的时候，还不清楚收集数据的范围，也不清楚数据怎么使用，就是先把所有的数据收集起来，形成一个庞大的数据集，然后再根据数据内容，总结数据的特点，将数据进行整理、分析、归纳、总结，形成一个框架，也就是数据模型。一般公共领域的知识图谱采用这种方式，因为公共领域的知识图谱，涉及到海量数据，并且包括方方面面的知识，做出来的效果是大而全，这在构建初期，很难想清楚数据的整体架构，只能是根据数据的内容总结提炼特征，形成数据框架模型。比如google，百度的知识图谱，属于典型的公共领域知识图谱，现实中，使用他们的搜索工具进行内容搜索时，用户可能输入的内容千差万别，各个领域的问题都可能问到，也就使得他们的后台知识图谱内容也要覆盖所有知识，在构建他们这种公共领域的知识图谱过程中，随着数据的不断积累，才会对数据知识进行分类，慢慢呈现出知识架构。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>两种构建方式也不是一成不变的，在构建初期两种方式区别很明显，在知识图谱构建后期，两种方式可能会结合使用。对于自顶向下的构建方式，随着数据量的不断积累，可能会发现原来的数据模型并不完善，有很多数据可能没有包含在数据模型的体系中，这时候就需要修订数据模型，根据数据的特点，完善数据模型。同样，在自下向上的构建方式中，慢慢形成的数据模型，对于后期的数据收集，也有一定的指导作用，按照形成的数据模型，可以快速准确地收集相关数据。总之，数据和数据模型之间，是一个相辅相成的关系，二者在构建知识图谱的过程中缺一不可。</p>
-]]></content>
-      <categories>
-        <category>知识图谱</category>
-      </categories>
-      <tags>
-        <tag>知识图谱</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>知识图谱</title>
     <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/</url>
     <content><![CDATA[<h3 id="知识图谱"><a href="#知识图谱" class="headerlink" title="知识图谱"></a>知识图谱</h3><h4 id="知识图谱和人工智能"><a href="#知识图谱和人工智能" class="headerlink" title="知识图谱和人工智能"></a>知识图谱和人工智能</h4><p>​        谈到知识图谱大部人可能很陌生，但说到人工智能，大家早已耳熟能详。目前，很多行业应用人工智能，让机器代替人进行简单重复性的工作。我们可以把人工智能分为两个层次，一个是感知层次，也就是听觉、视觉、嗅觉、味觉等等，目前人工智能在听觉和视觉方面做的比较好，语音识别，图像识别等，研究的学者越来越多，技术逐渐落地。人工智能的第二个层次，也就是认知层次，能够认识这个客观世界。而认知世界是通过大量的知识积累实现的，我们见到狗和猫，见过几次就能分辨出狗和猫，但如何让机器来分辨？<span id="more"></span>这种认知能力是知识的运用，当我们见到狗，就会在潜意识中总结狗的特征，长耳朵，瘦脸，汪汪叫。猫的特征，短耳朵，圆脸，喵喵叫。这些知识会存储在人类的大脑中，作为经验知识，再次碰到类似的动物，人们马上就从记忆中想起该动物的特征，对号入座，马上判断出动物的类型。机器要想具有认知能力，也需要建立一个知识库，然后运用知识库来做一些事，这个知识库就是我们要说的知识图谱。从这个角度说，知识图谱是人工职能的一个重要分支，也是机器具有认知能力的基石，在人工智能领域具有非常重要的地位。</p>
@@ -1965,6 +1948,23 @@
 </li>
 </ol>
 <p>​        知识图谱是一个具有本体特征的语义网络，可以看成是按照本体模式组织数据的知识库，以知识图谱为基础进行搜索，可以根据查询的内容进行语义搜索，查找需要找的本体或者本体的信息，这种语义搜索功能在google、百度、阿里巴巴等数据量大的公司里得到应用。智能问答，和语义搜索类似，对于提问内容，计算机首先要分析提问问题的语义，然后再将语义转换为查询语句，到知识图谱中查找，将最贴近的答案提供给提问者。推荐系统首先要采集用户的需求，分析用户的以往数据，提取共同特征，然后根据一定的规则，对用户提供推荐的产品。比如淘宝中记录用户经常购买的商品，经常浏览的商品，提取这些商品的共同特征，然后给这个用户打上标签，然后就给用户推荐具有类似特征的商品。</p>
+]]></content>
+      <categories>
+        <category>知识图谱</category>
+      </categories>
+      <tags>
+        <tag>知识图谱</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>知识图谱(二)</title>
+    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%BA%8C/</url>
+    <content><![CDATA[<h1 id="知识图谱的构建"><a href="#知识图谱的构建" class="headerlink" title="知识图谱的构建"></a>知识图谱的构建</h1><p>知识图谱的数据是通过三元组（主语，谓词，宾语）的方式进行组织，每一个三元组代表一条知识，这些三元组并不是杂乱无章的堆砌在知识图谱中，而是按照一定的逻辑组织起来的。<span id="more"></span></p>
+<h2 id="知识图谱的数据结构"><a href="#知识图谱的数据结构" class="headerlink" title="知识图谱的数据结构"></a>知识图谱的数据结构</h2><p>从知识图谱数据组织的架构来看，可以把知识图谱的数据分为两个层次，一个是<strong>数据模型层</strong>，数据模型是按照本体论的思想，勾画出来的数据组织模式，数据模型可以展示数据的组织方式，数据之间的相互关系，依据数据模型，数据才能得到有效的组织。数据模型除了确定对象之间的分类，关系，还要明确对象的属性，针对不同的知识图谱，需要收集的数据的内容也不相同，内容范围由对象的属性确定。数据模型的分类，关系反映了数据之间的关系特征，数据模型的属性反映了数据的内在特征。 另一个就是<strong>具体数据层</strong>，具体数据是一条条的知识，它是依据数据模型组织起来的。我们可以把数据模型看作是骨架，把具体数据看作是肌肉，两部分共同组成了一个健壮的整体，就是我们的知识图谱。不同类型的知识图谱，组织数据的方式也有所不同，涉及到具体数据，具体数据的内容也有差别。比如对于一个人物来说，如果是历史知识图谱，可能人物数据的内容主要侧重于人物的生平，主要事迹，人物关系等等，如果是文学知识图谱，人物数据的内容则会主要侧重人物的主要作品，师承关系，作品流派等等。 将知识图谱的数据分成了两个层次，在构建知识图谱的时候，是先确定数据模型再收集具体数据，还是先收集具体数据再确定数据模型，这就形成了两种构建知识图谱的方式。</p>
+<h2 id="自顶向下的构建方式"><a href="#自顶向下的构建方式" class="headerlink" title="自顶向下的构建方式"></a>自顶向下的构建方式</h2><p>自顶向下的构建方式，是指先确定知识图谱的数据模型，再根据模型去填充具体数据，最终形成知识图谱。数据模型的设计，是知识图谱的顶层设计，根据知识图谱的特点确定数据模型，就相当于确定了知识图谱收集数据的范围，以及数据的组织方式。这种构建方式，一般适用于行业知识图谱的构建，对于一个行业来说，数据内容，数据组织方式相对来说比较容易确定。</p>
+<p>总体来说，自顶向下的构建方式，适用于那些知识内容比较明确，关系比较清晰的领域构建知识图谱。</p>
+<h2 id="自下向上的构建方式"><a href="#自下向上的构建方式" class="headerlink" title="自下向上的构建方式"></a>自下向上的构建方式</h2><p>自下向上的构建方式，是指先按照三元组的方式收集具体数据，然后根据数据内容来提炼数据模型。 采用这种方式构建知识图谱，是因为在开始构建知识图谱的时候，还不清楚收集数据的范围，也不清楚数据怎么使用，就是先把所有的数据收集起来，形成一个庞大的数据集，然后再根据数据内容，总结数据的特点，将数据进行整理、分析、归纳、总结，形成一个框架，也就是数据模型。一般公共领域的知识图谱采用这种方式，因为公共领域的知识图谱，涉及到海量数据，并且包括方方面面的知识，做出来的效果是大而全，这在构建初期，很难想清楚数据的整体架构，只能是根据数据的内容总结提炼特征，形成数据框架模型。比如google，百度的知识图谱，属于典型的公共领域知识图谱，现实中，使用他们的搜索工具进行内容搜索时，用户可能输入的内容千差万别，各个领域的问题都可能问到，也就使得他们的后台知识图谱内容也要覆盖所有知识，在构建他们这种公共领域的知识图谱过程中，随着数据的不断积累，才会对数据知识进行分类，慢慢呈现出知识架构。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>两种构建方式也不是一成不变的，在构建初期两种方式区别很明显，在知识图谱构建后期，两种方式可能会结合使用。对于自顶向下的构建方式，随着数据量的不断积累，可能会发现原来的数据模型并不完善，有很多数据可能没有包含在数据模型的体系中，这时候就需要修订数据模型，根据数据的特点，完善数据模型。同样，在自下向上的构建方式中，慢慢形成的数据模型，对于后期的数据收集，也有一定的指导作用，按照形成的数据模型，可以快速准确地收集相关数据。总之，数据和数据模型之间，是一个相辅相成的关系，二者在构建知识图谱的过程中缺一不可。</p>
 ]]></content>
       <categories>
         <category>知识图谱</category>
@@ -2109,6 +2109,37 @@
       </tags>
   </entry>
   <entry>
+    <title>知识图谱实践(六)</title>
+    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%85%AD/</url>
+    <content><![CDATA[<h1 id="从结构化数据进行知识抽取-D2RQ"><a href="#从结构化数据进行知识抽取-D2RQ" class="headerlink" title="从结构化数据进行知识抽取(D2RQ)"></a>从结构化数据进行知识抽取(D2RQ)</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>D2RQ，含义是把关系型数据库当作虚拟的RDF图数据库进行访问。D2RQ平台是一个将关系型数据库当作虚拟的、只读的RDF图数据库进行访问的系统。提供了基于RDF访问关系数据库的内容，而无需复制这个数据库将其以RDF的形式进行保存。D2RQ有以下功能：</p>
+<p>使用SPARQL查询非RDF数据库；</p>
+<p>在Web上，将数据库内容当作链接数据进行访问；</p>
+<p>以RDF形式创建一个自定义的数据库，加载成RDF存储；</p>
+<p>使用Apache Jena API访问非RDF数据库的信息。</p>
+<p>D2RQ是一个开源软件，基于Apache协议发布，源代码在Github上。</p>
+<p>D2RQ平台的组成</p>
+<p>l D2RQ映射语言，一种声明的映射语言，用于描述本体和关系数据模型之间的关系。</p>
+<p>l D2RA引擎，一种服务于Jena语义网工具库插件，使用映射重写对数据库的SQL访问的Jena API调用，并且将查询结果传递给框架高层。</p>
+<p>l D2R服务器，一个提供调试用的链接数据视图和HTML视图的HTTP服务器，还提供了一个SPARQL协议endpoint数据接口。</p>
+<p><img src="/../resources%5C935893-20190808153811462-1357317205.png" alt="img"></p>
+<h2 id="D2RQ映射语言"><a href="#D2RQ映射语言" class="headerlink" title="D2RQ映射语言"></a>D2RQ映射语言</h2><p>D2RQ是一种声明式语言，描述了关系型数据库规则和RDFS词汇或OWL本体之间的关系。D2RQ本身是一个符合Trutle语法的RDF文档，映射是用在D2RQ命名空间下的术语表示的，D2RQ命名空间是</p>
+<p><a href="http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#">http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#</a></p>
+<p>映射定义了一个虚拟RDF图，包括数据库的信息。和SQL视图概念类似，除了虚拟的数据结构是一个RDF图而不是虚拟的关系表。这个虚拟的RDF图能够以多种方式访问，取决于映射的实现形式。D2RQ平台提供了SPARQL访问，一个链接数据服务器，一个RDF数据集生成器，一个简单的HTML界面和Jena API访问D2RQ映射数据库。</p>
+<p>下图显示了一个D2RQ映射实例的结构</p>
+<p><img src="/../resources%5C935893-20190808153823045-818001472.png" alt="img"></p>
+<p>数据库映射为RDF术语，显示在右侧的，使用d2rq:ClassMaps and d2rq:PropertyBridges。映射中最重要的问题是类的映射，一个类映射表示一个类或者一组相似的本体类。类映射描述了类的实例如何生成URI或者空节点。它还有一组属性映射规则，能够描述实例的属性如何创建。</p>
+<h2 id="D2R服务器"><a href="#D2R服务器" class="headerlink" title="D2R服务器"></a>D2R服务器</h2><p>D2R服务器是一个工具，基于语义网发布关系型数据库的内容，所有的信息都是由链接数据组成。语义网上的数据都是用RDF模型化和表示，D2R服务器使用了一个定制化D2RQ映射将数据库内容转换为RDF的形式，允许以RDF数据浏览和搜索，这是语义网中最主要的两种访问数据的方式。</p>
+<p>网络的请求通过映射重写为SQL查询语句，这种即时转换允许从大型实时数据库发布RDF，并且无需将数据复制到专用的RDF三元组存储中。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>非常简要的介绍了D2RQ的内容，实际的使用过程中，应该更深入的参考<a href="http://d2rq.org/%E7%9A%84%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9%E3%80%82">http://d2rq.org/的相关内容。</a></p>
+]]></content>
+      <categories>
+        <category>知识图谱</category>
+      </categories>
+      <tags>
+        <tag>D2RQ</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>知识图谱实践(五)</title>
     <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E4%BA%94/</url>
     <content><![CDATA[<h1 id="Protege简介"><a href="#Protege简介" class="headerlink" title="Protégé简介"></a>Protégé简介</h1><p>Protégé是一个本体建模工具软件，由斯坦福大学基于java语言开发的，属于开放源代码软件。软件主要用于语义网中本体的构建和基于本体的知识应用，是本体构建的核心开发工具，最新版本为5.5.0（截至2019年7月）。</p>
@@ -2160,37 +2191,6 @@
       </categories>
       <tags>
         <tag>protege</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>知识图谱实践(六)</title>
-    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%85%AD/</url>
-    <content><![CDATA[<h1 id="从结构化数据进行知识抽取-D2RQ"><a href="#从结构化数据进行知识抽取-D2RQ" class="headerlink" title="从结构化数据进行知识抽取(D2RQ)"></a>从结构化数据进行知识抽取(D2RQ)</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>D2RQ，含义是把关系型数据库当作虚拟的RDF图数据库进行访问。D2RQ平台是一个将关系型数据库当作虚拟的、只读的RDF图数据库进行访问的系统。提供了基于RDF访问关系数据库的内容，而无需复制这个数据库将其以RDF的形式进行保存。D2RQ有以下功能：</p>
-<p>使用SPARQL查询非RDF数据库；</p>
-<p>在Web上，将数据库内容当作链接数据进行访问；</p>
-<p>以RDF形式创建一个自定义的数据库，加载成RDF存储；</p>
-<p>使用Apache Jena API访问非RDF数据库的信息。</p>
-<p>D2RQ是一个开源软件，基于Apache协议发布，源代码在Github上。</p>
-<p>D2RQ平台的组成</p>
-<p>l D2RQ映射语言，一种声明的映射语言，用于描述本体和关系数据模型之间的关系。</p>
-<p>l D2RA引擎，一种服务于Jena语义网工具库插件，使用映射重写对数据库的SQL访问的Jena API调用，并且将查询结果传递给框架高层。</p>
-<p>l D2R服务器，一个提供调试用的链接数据视图和HTML视图的HTTP服务器，还提供了一个SPARQL协议endpoint数据接口。</p>
-<p><img src="/../resources%5C935893-20190808153811462-1357317205.png" alt="img"></p>
-<h2 id="D2RQ映射语言"><a href="#D2RQ映射语言" class="headerlink" title="D2RQ映射语言"></a>D2RQ映射语言</h2><p>D2RQ是一种声明式语言，描述了关系型数据库规则和RDFS词汇或OWL本体之间的关系。D2RQ本身是一个符合Trutle语法的RDF文档，映射是用在D2RQ命名空间下的术语表示的，D2RQ命名空间是</p>
-<p><a href="http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#">http://www.wiwiss.fu-berlin.de/suhl/bizer/D2RQ/0.1#</a></p>
-<p>映射定义了一个虚拟RDF图，包括数据库的信息。和SQL视图概念类似，除了虚拟的数据结构是一个RDF图而不是虚拟的关系表。这个虚拟的RDF图能够以多种方式访问，取决于映射的实现形式。D2RQ平台提供了SPARQL访问，一个链接数据服务器，一个RDF数据集生成器，一个简单的HTML界面和Jena API访问D2RQ映射数据库。</p>
-<p>下图显示了一个D2RQ映射实例的结构</p>
-<p><img src="/../resources%5C935893-20190808153823045-818001472.png" alt="img"></p>
-<p>数据库映射为RDF术语，显示在右侧的，使用d2rq:ClassMaps and d2rq:PropertyBridges。映射中最重要的问题是类的映射，一个类映射表示一个类或者一组相似的本体类。类映射描述了类的实例如何生成URI或者空节点。它还有一组属性映射规则，能够描述实例的属性如何创建。</p>
-<h2 id="D2R服务器"><a href="#D2R服务器" class="headerlink" title="D2R服务器"></a>D2R服务器</h2><p>D2R服务器是一个工具，基于语义网发布关系型数据库的内容，所有的信息都是由链接数据组成。语义网上的数据都是用RDF模型化和表示，D2R服务器使用了一个定制化D2RQ映射将数据库内容转换为RDF的形式，允许以RDF数据浏览和搜索，这是语义网中最主要的两种访问数据的方式。</p>
-<p>网络的请求通过映射重写为SQL查询语句，这种即时转换允许从大型实时数据库发布RDF，并且无需将数据复制到专用的RDF三元组存储中。</p>
-<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>非常简要的介绍了D2RQ的内容，实际的使用过程中，应该更深入的参考<a href="http://d2rq.org/%E7%9A%84%E7%9B%B8%E5%85%B3%E5%86%85%E5%AE%B9%E3%80%82">http://d2rq.org/的相关内容。</a></p>
-]]></content>
-      <categories>
-        <category>知识图谱</category>
-      </categories>
-      <tags>
-        <tag>D2RQ</tag>
       </tags>
   </entry>
   <entry>
