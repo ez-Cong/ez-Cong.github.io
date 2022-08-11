@@ -32,7 +32,7 @@
 <meta property="og:image" content="https://congyx.com/resources%5C935893-20190923153237874-1829310518.png">
 <meta property="og:image" content="https://congyx.com/resources%5Cimage-20220811203513854.png">
 <meta property="article:published_time" content="2022-08-11T12:26:03.000Z">
-<meta property="article:modified_time" content="2022-08-11T12:37:09.319Z">
+<meta property="article:modified_time" content="2022-08-11T12:52:08.101Z">
 <meta property="article:author" content="Cong yx">
 <meta property="article:tag" content="信息抽取">
 <meta name="twitter:card" content="summary">
@@ -226,7 +226,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2022-08-11 20:26:03 / 修改时间：20:37:09" itemprop="dateCreated datePublished" datetime="2022-08-11T20:26:03+08:00">2022-08-11</time>
+              <time title="创建时间：2022-08-11 20:26:03 / 修改时间：20:52:08" itemprop="dateCreated datePublished" datetime="2022-08-11T20:26:03+08:00">2022-08-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -272,9 +272,9 @@
       
         <h1 id="网页数据抽取"><a href="#网页数据抽取" class="headerlink" title="网页数据抽取"></a>网页数据抽取</h1><p>互联网中蕴含着大量的数据资源，这些数据存在于html的代码之中，如何从浩瀚的代码中提取有效的数据，针对不同的情况，可以采用多种方法来实现网页数据的提取。<span id="more"></span></p>
 <h2 id="手工方法"><a href="#手工方法" class="headerlink" title="手工方法"></a>手工方法</h2><p>网页呈现数据的方式，一般都是按照导航页、列表页、详情页进行设计，这就会使得数据展示存在一定的规律，我们找出这种规律，就可以制定相应的规则，来获取数据。比如。京东商城中笔记本的列表页面。</p>
-<p><img src="/../resources%5C935893-20190923153137663-1112940991.png" alt="img"></p>
+<p><img src="/../resources%5C935893-20190923153137663-1112940991.png" alt="image-20220811203513854"></p>
 <p> 我们想要在该页面提取笔记本的价格数据，则需要对页面的html代码进行分析，获取其html代码，如下所示：</p>
-<p><img src="/../resources%5C935893-20190923153204804-1915389282.png" alt="img"></p>
+<p><img src="/../resources%5C935893-20190923153204804-1915389282.png" alt="image-20220811203513854"></p>
 <h3 id="利用XPath语言"><a href="#利用XPath语言" class="headerlink" title="利用XPath语言"></a>利用XPath语言</h3><p>利用其html代码进行数据提取，可以采用XPath语言，XPath即为XML路径语言（XML Path Language），它是一种用来确定XML文档中某部分位置的语言。XPath基于XML的树状结构，提供在数据结构树中找寻节点的能力。XPath被开发者采用来当作小型查询语言。</p>
 <p>​    价格信息的Xpath代码为：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">//*[@id=”plist”]/ul/li[5]/div/div[3]/strong</span><br></pre></td></tr></table></figure>
@@ -307,7 +307,7 @@
 <p>​    综上两个标准比较，选择包装器A。</p>
 <h2 id="自动抽取"><a href="#自动抽取" class="headerlink" title="自动抽取"></a>自动抽取</h2><p> 首先来说，网站的数据自动抽取是可行的，因为网站中的数据通常是用很少的一些模板来编码的，通过挖掘多个数据记录中的重复模式来寻找这些模板是可能。其次，自动抽取也能够克服手工方法和包装器归纳的缺陷。手工方法，仅适用于那些较简单网站，工作量不大的情况。有监督的包装器则维护开销会很大，比如网站改变了以后的模板，之前生成的包装器就需要相应的进行修改，才能使用。</p>
 <p>​    网页数据自动抽取的流程如下所示：</p>
-<p><img src="/../resources%5C935893-20190923153237874-1829310518.png" alt="img"></p>
+<p><img src="/../resources%5C935893-20190923153237874-1829310518.png" alt="image-20220811203513854"></p>
 <p>对于需要抽取数据的网页，需要进行预处理，也就是网页清洗工作，规范网页代码结构和标签的使用，然后对网页进行聚类处理，通过一定的聚类算法，将特征相近的网页归为一组，然后，根据不同组的聚类网页，训练生成相应的包装器模板，使得每组相似的网页获得一个包装器模板，分别使用不同的包装器模板，对相应的网页进行信息抽取，获取网页中的目标数据，最后，将得到的数据保存到数据库中。</p>
 <p>​    网页信息自动抽取的一个代表就是RoadRunner，它是自动抽取网页数据的包装器，通过比较同类网页的两个样本页面，然后分析两个页面的相似性和不同性，归纳出一个正则文法，然后根据正则文法生成一个网页所包含的数据模式，最后抽取网页的数据。</p>
 <h2 id="三类网页数据抽取方法的比较"><a href="#三类网页数据抽取方法的比较" class="headerlink" title="三类网页数据抽取方法的比较"></a>三类网页数据抽取方法的比较</h2><p><img src="/../resources%5Cimage-20220811203513854.png" alt="image-20220811203513854"></p>
