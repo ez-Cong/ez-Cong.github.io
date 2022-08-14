@@ -406,7 +406,7 @@
 <p><img src="/../resources/image-20220227222722625.png" alt="image-20220227222722625"></p>
 <p>将复制的公钥 id_rsa.pub 的内容粘贴到 key 内，再点击  Add SSH key，如下图(Title可以为空)：</p>
 <p><img src="/../resources/image-20220227222758260.png" alt="image-20220227222758260"></p>
-<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#x69;&#x74;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#x62;&#46;&#x63;&#111;&#x6d;">&#x67;&#x69;&#x74;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#x62;&#46;&#x63;&#111;&#x6d;</a> 进行检验。</p>
+<p>验证是否成功，我们可以通过在 Git Bash 中输入 ssh -T <a href="mailto:&#x67;&#x69;&#116;&#x40;&#103;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#x69;&#116;&#x40;&#103;&#105;&#116;&#x68;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;</a> 进行检验。</p>
 <h3 id="提交文件"><a href="#提交文件" class="headerlink" title="提交文件"></a>提交文件</h3><p><strong>本地没有 git 仓库</strong></p>
 <ol>
 <li>直接将远程仓库 clone 到本地；</li>
@@ -420,7 +420,7 @@
 <p><img src="/../resources/image-20220227224802896.png" alt="image-20220227224802896"></p>
 <p>点击 <strong>Clone or download</strong>，再复制地址，然后进入我们准备存储 Git 仓库的目录，如下图：</p>
 <p><img src="/../resources/image-20220227224831420.png" alt="image-20220227224831420"></p>
-<p>接下来，输入 git clone <a href="mailto:&#x67;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;">&#x67;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#104;&#117;&#98;&#x2e;&#x63;&#x6f;&#109;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
+<p>接下来，输入 git clone <a href="mailto:&#103;&#105;&#116;&#x40;&#103;&#105;&#116;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;">&#103;&#105;&#116;&#x40;&#103;&#105;&#116;&#104;&#x75;&#x62;&#x2e;&#99;&#111;&#x6d;</a>:ez-Cong&#x2F;text.git，将远程仓库 clone 到本地。然后检查 clone 到本地的仓库内容与远程仓库的内容是否完全一致。</p>
 <p>然后创建一个 text.txt 测试文件，如下图。</p>
 <p><img src="/../resources/image-20220227225419620.png" alt="image-20220227225419620"></p>
 <p>从此目录进入 Git Bash， 输入 git status 查看仓库状态：</p>
@@ -965,31 +965,6 @@
       </tags>
   </entry>
   <entry>
-    <title>python中lambda表达式</title>
-    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
-    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
-<ul>
-<li>lambda表达式必须使用lambda关键字定义。</li>
-<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
-<li>lambda表达式必须是单行的。</li>
-<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
-<li>lambda表达式的计算结果就是函数的返回值。 </li>
-<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
-<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
-
-<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
-<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
-]]></content>
-      <categories>
-        <category>python</category>
-      </categories>
-      <tags>
-        <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>python</title>
     <url>/2022/03/14/python/</url>
     <content><![CDATA[<h3 id="Python简介"><a href="#Python简介" class="headerlink" title="Python简介"></a>Python简介</h3><p>python 这一伟大语言诞生于1989年圣诞节期间，创始人是荷兰的Guido van Rossum。(python有两个主要的大版本: python2 和 python3。本文基于 python3 开发)<span id="more"></span></p>
@@ -1310,6 +1285,31 @@
 </ul>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>python中lambda表达式</title>
+    <url>/2022/03/25/python%E4%B8%ADlambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h3 id="lambda表达式"><a href="#lambda表达式" class="headerlink" title="lambda表达式"></a>lambda表达式</h3><p>lambda表达式可以用来声明匿名函数，也就是没有函数名字的临时使用的函数。在使用函数作为参数的时候，如果传入的函数比较简单或者使用次数较少，直接定义这些函数就显得比较浪费，这是就可以使用lambda表达式。<span id="more"></span> lambda : 其中variables是函数的参数，expression是函数的返回值，它们之间用冒号:分隔。</p>
+<ul>
+<li>lambda表达式必须使用lambda关键字定义。</li>
+<li>在lambda关键字之后、冒号左边的是参数列表， 可以没有参数，也可以有多个参数，由逗号隔开，冒号右边是该 lambda 表达式的返回值。</li>
+<li>lambda表达式必须是单行的。</li>
+<li>lambda表达式可以直接在程序中使用，也可以将这一表达式赋值给一个变量。</li>
+<li>lambda表达式的计算结果就是函数的返回值。 </li>
+<li>lambda表达式只可以包含一个表达式，不允许包含选择、循环等语法结构，该表达式的计算结果可以看作是函数的返回值，不允许包含复合语句，但在表达式中可以调用其他函数。</li>
+<li>lambda函数拥有自己的命名空间，且不能访问自有参数列表之外或全局命名空间里的参数</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x,y,z:<span class="built_in">max</span>(x,y,z)</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>))</span><br><span class="line">g = <span class="keyword">lambda</span> x:x*<span class="number">2</span></span><br><span class="line"><span class="built_in">print</span>(g(<span class="number">3</span>))</span><br><span class="line">f = <span class="keyword">lambda</span> x,y,z:x+y+z</span><br><span class="line"><span class="built_in">print</span>(f(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="/../resources/image-20220328092818168.png" alt="image-20220328092818168"></p>
+<p><img src="/../resources/image-20220328092923895.png" alt="image-20220328092923895"></p>
 ]]></content>
       <categories>
         <category>python</category>
@@ -1768,6 +1768,11 @@
       </tags>
   </entry>
   <entry>
+    <title>基于知识图谱的电影推荐</title>
+    <url>/2022/08/13/%E5%9F%BA%E4%BA%8E%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E7%94%B5%E5%BD%B1%E6%8E%A8%E8%8D%90/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>合并k个已排序的链表</title>
     <url>/2022/05/22/%E5%90%88%E5%B9%B6k%E4%B8%AA%E5%B7%B2%E6%8E%92%E5%BA%8F%E7%9A%84%E9%93%BE%E8%A1%A8/</url>
     <content><![CDATA[<p>今天刷题遇到了<strong>合并K个已排序的链表</strong>这道题，记录，复习一下相关知识点。<span id="more"></span></p>
@@ -1955,6 +1960,128 @@
       </tags>
   </entry>
   <entry>
+    <title>正则表达式进阶</title>
+    <url>/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/</url>
+    <content><![CDATA[<h1 id="正则表达式进阶"><a href="#正则表达式进阶" class="headerlink" title="正则表达式进阶"></a>正则表达式进阶</h1><h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><p>在正则表达式中还提供了一种将表达式<strong>分组</strong>的机制，当使用分组时，除了获得整个匹配。还能够在匹配中选择每一个分组。<span id="more"></span></p>
+<p>要实现分组很简单，使用<code>()</code>即可。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814085711087.png" alt="image-20220814085711087" style="zoom:80%;">
+
+<p>这段正则表达式将文本<strong>分成了两组</strong>，第一组为：<code>0731</code>，第二组为<code>8825951</code>。</p>
+<p>分组有一个非常重要的功能——<code>捕获数据</code>。所以<code>()</code>被称为捕获分组，用来捕获数据，当我们想要从匹配好的数据中提取关键数据的时候可以使用分组。</p>
+<h2 id="提取p标签中的数据"><a href="#提取p标签中的数据" class="headerlink" title="提取p标签中的数据"></a>提取p标签中的数据</h2><img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814090425091.png" alt="image-20220814090425091" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814090622623.png" alt="image-20220814090622623" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814090908705.png" alt="image-20220814090908705" style="zoom:80%;">
+
+<h2 id="或者条件"><a href="#或者条件" class="headerlink" title="或者条件"></a>或者条件</h2><p>使用分组的同时还可以使用 <strong>或者</strong>（<code>or</code>）条件。</p>
+<p>例如要提取所有图片文件的后缀名，可以在各个后缀名之间加上一个 <code>|</code>符号：</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814091140840.png" alt="image-20220814091140840" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814091347899.png" alt="image-20220814091347899" style="zoom:80%;">
+
+<h2 id="非捕获分组"><a href="#非捕获分组" class="headerlink" title="非捕获分组"></a>非捕获分组</h2><p>有时候，我们并不需要捕获某个分组的内容，但是又想使用分组的特性。</p>
+<p>这个时候就可以使用非捕获组<code>(?:表达式)</code>，从而<strong>不捕获数据</strong>，还能使用分组的功能。</p>
+<p>例如想要匹配<strong>两个字母组成的单词</strong>或者<strong>四个字母组成的单词</strong>就可以使用<strong>非捕获分组</strong>：</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814091939853.png" alt="image-20220814091939853" style="zoom:80%;">
+
+<h2 id="分组使用技巧"><a href="#分组使用技巧" class="headerlink" title="分组使用技巧"></a>分组使用技巧</h2><p>日期可以有很多格式，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">20200102</span><br><span class="line">2020-01-02</span><br><span class="line">2020-1-2</span><br><span class="line">2020.01.02</span><br><span class="line">2020 01 02</span><br><span class="line">2020 1 2</span><br><span class="line">2020/01/02</span><br></pre></td></tr></table></figure>
+
+<p>现在我们想要使用正则表达式将其中的<code>年月日</code>全都提取出来。</p>
+<p>可以发现他们唯一的区别就在于分隔符和月份与日期，这个时候可以使用 <strong>[]</strong> 来匹配多种情况。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814092108110.png" alt="image-20220814092108110" style="zoom:80%;">
+
+<p>通过<code>(\d&#123;4&#125;)[-./\s]?(\d&#123;1,2&#125;)[-./\s]?(\d&#123;1,2&#125;)</code> 就可以从文本中将年月日分别提取出来了。</p>
+<p>虽然这段正则表达式看起来内容挺多，但是还是很容易理解的，<code>[-./\s]</code>表示匹配三个可能出现的分隔符<code>-./</code>和空白，<code>?</code>表示匹配它们<code>0</code>次或者<code>1</code>次，其他年月日的数据使用<code>\d&#123;N&#125;</code>与<strong>分组</strong>结合就可以提取到目标数据。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814092537004.png" alt="image-20220814092537004" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814093251525.png" alt="image-20220814093251525" style="zoom:80%;">
+
+<h2 id="分组的回溯引用"><a href="#分组的回溯引用" class="headerlink" title="分组的回溯引用"></a>分组的回溯引用</h2><p>正则表达式还提供了一种引用之前匹配分组的机制，有些时候，我们或许会寻找到一个子匹配，该匹配接下来会再次出现。</p>
+<p>例如，要匹配一段 HTML 代码，比如：<code>0123&lt;font&gt;提示&lt;/font&gt;abcd</code>，可能会编写出这样一段正则表达式：</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814093333017.png" alt="image-20220814093333017" style="zoom:80%;">
+
+<p>这确实可以匹配，不过可能还有另一种情况，如果数据改成这样：<code>&lt;font&gt;提示&lt;/bar&gt;</code></p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814093351196.png" alt="image-20220814093351196" style="zoom:80%;">
+
+<p>在这里<code>font</code> 和 <code>bar</code> 明显不是一对正确的标签，但是我们编写的正则表达式还是将它们给匹配了，所以这个结果是错误的。</p>
+<p>我们想让后面分组的正则也匹配<code>font</code>，但是现在所有形式的都会匹配。</p>
+<p>那如果想让后面分组的正则和第一个分组的正则匹配同样的数据该如何做呢？</p>
+<p>可以使用<strong>分组的回溯引用</strong>，使用<code>\N</code>可以引用编号为<code>N</code>的分组，因此上述例子的代码我们可以改为：</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814093408216.png" alt="image-20220814093408216" style="zoom:80%;">
+
+<p>通过这个例子，可以发现 <code>\1</code> 表示的就是第一个分组，在这里第一个分组匹配的是 <code>font</code> 所以<code>\1</code> 就代表<code>font</code>。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814094252729.png" alt="image-20220814094252729" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814094657671.png" alt="image-20220814094657671" style="zoom:80%;">
+
+<h2 id="正向先行断言"><a href="#正向先行断言" class="headerlink" title="正向先行断言"></a>正向先行断言</h2><p>很多人也称先行断言和后行断言为<strong>环视</strong>，也有人叫<strong>预搜索</strong>，其实叫什么无所谓，重要的是知道如何使用它们！</p>
+<p>先行断言和后行断言总共有四种：</p>
+<ol>
+<li>正向先行断言</li>
+<li>反向先行断言</li>
+<li>正向后行断言</li>
+<li>反向后行断言</li>
+</ol>
+<p><strong>正向先行断言：</strong><code>(?=表达式)</code>，指在某个位置向右看，表示所在位置右侧必须能匹配<code>表达式</code></p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">我喜欢你 我喜欢 我喜欢我 喜欢 喜欢你</span><br></pre></td></tr></table></figure>
+
+<p>如果要取出<strong>喜欢</strong>两个字，要求这个<strong>喜欢</strong>后面有你，这个时候就要这么写：<code>喜欢(?=你)</code>，这就是<strong>正向先行断言</strong>。</p>
+<p><strong>提取包含大小写的字符串：</strong></p>
+<p>先行断言可以用来判断字符串是否符合特定的规则，例如提取包含至少一个大小写字母的字符串：</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814094839343.png" alt="image-20220814094839343" style="zoom:80%;">
+
+<p><code>(?=.*?[a-z])(?=.*?[A-Z]).+</code> 这段正则表达式规定了匹配的字符串中必须包含<strong>至少一个大写和小写的字母</strong>。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814095307358.png" alt="image-20220814095307358" style="zoom:80%;">
+
+<h2 id="反向先行断言"><a href="#反向先行断言" class="headerlink" title="反向先行断言"></a>反向先行断言</h2><p><strong>反向先行断言</strong><code>(?!表达式)</code>的作用是保证右边不能出现某字符。</p>
+<p>例如： <code>我喜欢你 我喜欢 我喜欢我 喜欢 喜欢你</code></p>
+<p>如果要取出<strong>喜欢</strong>两个字，要求这个<strong>喜欢</strong>后面没有你，这个时候就要这么写：<code>喜欢(?!你)</code>，这就是<strong>反向先行断言</strong>。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814095514178.png" alt="image-20220814095514178" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100049091.png" alt="image-20220814100049091" style="zoom:80%;">
+
+<h2 id="正向后行断言"><a href="#正向后行断言" class="headerlink" title="正向后行断言"></a>正向后行断言</h2><p>本小节只需要记住一句话：先行断言和后行断言只有一个区别，即<strong>先行断言从左往右看，后行断言从右往左看。</strong></p>
+<p><strong>正向后行断言：</strong><code>(?&lt;=表达式)</code>，指在某个位置向左看，表示所在位置左侧必须能匹配<code>表达式</code></p>
+<p>例如：如果要取出喜欢两个字，要求喜欢的<strong>前面有我</strong>，<strong>后面有你</strong>，这个时候就要这么写：<code>(?&lt;=我)喜欢(?=你)</code>。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100341932.png" alt="image-20220814100341932" style="zoom:80%;">
+
+<h2 id="返向后行断言"><a href="#返向后行断言" class="headerlink" title="返向后行断言"></a>返向后行断言</h2><p><strong>反向后行断言：</strong><code>(?&lt;!表达式)</code>，指在某个位置向左看，表示所在位置左侧不能匹配<code>表达式</code></p>
+<p>例如：如果要取出喜欢两个字，要求喜欢的<strong>前面没有我</strong>，<strong>后面没有你</strong>，这个时候就要这么写：<code>(?&lt;!我)喜欢(?!你)</code>。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100420821.png" alt="image-20220814100420821" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100554182.png" alt="image-20220814100554182" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100626159.png" alt="image-20220814100626159" style="zoom:80%;">
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100730538.png" alt="image-20220814100730538" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100935411.png" alt="image-20220814100935411" style="zoom:80%;">
+]]></content>
+      <tags>
+        <tag>正则表达式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>知识图谱(二)</title>
+    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%BA%8C/</url>
+    <content><![CDATA[<h1 id="知识图谱的构建"><a href="#知识图谱的构建" class="headerlink" title="知识图谱的构建"></a>知识图谱的构建</h1><p>知识图谱的数据是通过三元组（主语，谓词，宾语）的方式进行组织，每一个三元组代表一条知识，这些三元组并不是杂乱无章的堆砌在知识图谱中，而是按照一定的逻辑组织起来的。<span id="more"></span></p>
+<h2 id="知识图谱的数据结构"><a href="#知识图谱的数据结构" class="headerlink" title="知识图谱的数据结构"></a>知识图谱的数据结构</h2><p>从知识图谱数据组织的架构来看，可以把知识图谱的数据分为两个层次，一个是<strong>数据模型层</strong>，数据模型是按照本体论的思想，勾画出来的数据组织模式，数据模型可以展示数据的组织方式，数据之间的相互关系，依据数据模型，数据才能得到有效的组织。数据模型除了确定对象之间的分类，关系，还要明确对象的属性，针对不同的知识图谱，需要收集的数据的内容也不相同，内容范围由对象的属性确定。数据模型的分类，关系反映了数据之间的关系特征，数据模型的属性反映了数据的内在特征。 另一个就是<strong>具体数据层</strong>，具体数据是一条条的知识，它是依据数据模型组织起来的。我们可以把数据模型看作是骨架，把具体数据看作是肌肉，两部分共同组成了一个健壮的整体，就是我们的知识图谱。不同类型的知识图谱，组织数据的方式也有所不同，涉及到具体数据，具体数据的内容也有差别。比如对于一个人物来说，如果是历史知识图谱，可能人物数据的内容主要侧重于人物的生平，主要事迹，人物关系等等，如果是文学知识图谱，人物数据的内容则会主要侧重人物的主要作品，师承关系，作品流派等等。 将知识图谱的数据分成了两个层次，在构建知识图谱的时候，是先确定数据模型再收集具体数据，还是先收集具体数据再确定数据模型，这就形成了两种构建知识图谱的方式。</p>
+<h2 id="自顶向下的构建方式"><a href="#自顶向下的构建方式" class="headerlink" title="自顶向下的构建方式"></a>自顶向下的构建方式</h2><p>自顶向下的构建方式，是指先确定知识图谱的数据模型，再根据模型去填充具体数据，最终形成知识图谱。数据模型的设计，是知识图谱的顶层设计，根据知识图谱的特点确定数据模型，就相当于确定了知识图谱收集数据的范围，以及数据的组织方式。这种构建方式，一般适用于行业知识图谱的构建，对于一个行业来说，数据内容，数据组织方式相对来说比较容易确定。</p>
+<p>总体来说，自顶向下的构建方式，适用于那些知识内容比较明确，关系比较清晰的领域构建知识图谱。</p>
+<h2 id="自下向上的构建方式"><a href="#自下向上的构建方式" class="headerlink" title="自下向上的构建方式"></a>自下向上的构建方式</h2><p>自下向上的构建方式，是指先按照三元组的方式收集具体数据，然后根据数据内容来提炼数据模型。 采用这种方式构建知识图谱，是因为在开始构建知识图谱的时候，还不清楚收集数据的范围，也不清楚数据怎么使用，就是先把所有的数据收集起来，形成一个庞大的数据集，然后再根据数据内容，总结数据的特点，将数据进行整理、分析、归纳、总结，形成一个框架，也就是数据模型。一般公共领域的知识图谱采用这种方式，因为公共领域的知识图谱，涉及到海量数据，并且包括方方面面的知识，做出来的效果是大而全，这在构建初期，很难想清楚数据的整体架构，只能是根据数据的内容总结提炼特征，形成数据框架模型。比如google，百度的知识图谱，属于典型的公共领域知识图谱，现实中，使用他们的搜索工具进行内容搜索时，用户可能输入的内容千差万别，各个领域的问题都可能问到，也就使得他们的后台知识图谱内容也要覆盖所有知识，在构建他们这种公共领域的知识图谱过程中，随着数据的不断积累，才会对数据知识进行分类，慢慢呈现出知识架构。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>两种构建方式也不是一成不变的，在构建初期两种方式区别很明显，在知识图谱构建后期，两种方式可能会结合使用。对于自顶向下的构建方式，随着数据量的不断积累，可能会发现原来的数据模型并不完善，有很多数据可能没有包含在数据模型的体系中，这时候就需要修订数据模型，根据数据的特点，完善数据模型。同样，在自下向上的构建方式中，慢慢形成的数据模型，对于后期的数据收集，也有一定的指导作用，按照形成的数据模型，可以快速准确地收集相关数据。总之，数据和数据模型之间，是一个相辅相成的关系，二者在构建知识图谱的过程中缺一不可。</p>
+]]></content>
+      <categories>
+        <category>知识图谱</category>
+      </categories>
+      <tags>
+        <tag>知识图谱</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>知识图谱(三)</title>
     <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%B8%89/</url>
     <content><![CDATA[<h1 id="知识图谱的构建过程"><a href="#知识图谱的构建过程" class="headerlink" title="知识图谱的构建过程"></a>知识图谱的构建过程</h1><h2 id="知识图谱的总体构建思路"><a href="#知识图谱的总体构建思路" class="headerlink" title="知识图谱的总体构建思路"></a>知识图谱的总体构建思路</h2><img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%B8%89/935893-20190109090654567-18322997.png" alt="img" style="zoom:80%;">
@@ -1985,23 +2112,6 @@
 <p>描述逻辑涉及到的内容也比较多，此处举几个例子，比如实体的分类包含关系，一个电脑椅是椅子，椅子是家具，可以说，一个电脑椅是家具。常识规则的推理，一个男人的孩子是A，一个女人的孩子是A，可以知道，这个男人和女人是配偶。</p>
 <p>通过推理发现新的知识，应用比较多，说明知识图谱的时候也经常不自觉的会应用推理，比如前两年比较受人关注的王宝强离婚案，为什么会聘用张起淮做律师，通过知识图谱可以很清楚知道，王宝强和冯小刚关系比较密切，冯小刚聘用张起淮作为律师顾问，所以王宝强很容易和张起淮建立关系，这也可以看作是知识推理的范畴。当然，更确切地说，应该是规则的范畴。推理更强调的是固有的逻辑，规则一般是和业务相关的自定义逻辑，但推理和规则都是通过逻辑准则，获取新的知识或发现，在这里先不做区分。</p>
 <h2 id="质量评估"><a href="#质量评估" class="headerlink" title="质量评估"></a>质量评估</h2><p>质量评估，就是对最后的结果数据进行评估，将合格的数据放入知识图谱中。质量评估的方法，根据所构建的知识图谱的不同，对数据要求的差异而有所差别。总的目的是要获得合乎要求的知识图谱数据，要求的标准根据具体情况确定。 比如对于公共领域的知识图谱，知识的获取采用了众包的方法，对于同一个知识点，可能会有很多人来完成，如果这个知识点只有一个答案，可以采用的一种策略是，将多人的标注结果进行比较，取投票多的结果作为最终的结果。当然，这是不严谨的，因为真理往往掌握在少数人的手里，特别是针对一些行业的知识图谱，表现尤为突出。行业内的一条知识，可能只有行业专家能够给出权威正确的答案，如果让大众投票来决定，可能会得到一条错误的知识。所以，针对行业知识图谱，可能会采用不同于公共知识图谱的策略，来进行知识的质量评估。</p>
-]]></content>
-      <categories>
-        <category>知识图谱</category>
-      </categories>
-      <tags>
-        <tag>知识图谱</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>知识图谱(二)</title>
-    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1-%E4%BA%8C/</url>
-    <content><![CDATA[<h1 id="知识图谱的构建"><a href="#知识图谱的构建" class="headerlink" title="知识图谱的构建"></a>知识图谱的构建</h1><p>知识图谱的数据是通过三元组（主语，谓词，宾语）的方式进行组织，每一个三元组代表一条知识，这些三元组并不是杂乱无章的堆砌在知识图谱中，而是按照一定的逻辑组织起来的。<span id="more"></span></p>
-<h2 id="知识图谱的数据结构"><a href="#知识图谱的数据结构" class="headerlink" title="知识图谱的数据结构"></a>知识图谱的数据结构</h2><p>从知识图谱数据组织的架构来看，可以把知识图谱的数据分为两个层次，一个是<strong>数据模型层</strong>，数据模型是按照本体论的思想，勾画出来的数据组织模式，数据模型可以展示数据的组织方式，数据之间的相互关系，依据数据模型，数据才能得到有效的组织。数据模型除了确定对象之间的分类，关系，还要明确对象的属性，针对不同的知识图谱，需要收集的数据的内容也不相同，内容范围由对象的属性确定。数据模型的分类，关系反映了数据之间的关系特征，数据模型的属性反映了数据的内在特征。 另一个就是<strong>具体数据层</strong>，具体数据是一条条的知识，它是依据数据模型组织起来的。我们可以把数据模型看作是骨架，把具体数据看作是肌肉，两部分共同组成了一个健壮的整体，就是我们的知识图谱。不同类型的知识图谱，组织数据的方式也有所不同，涉及到具体数据，具体数据的内容也有差别。比如对于一个人物来说，如果是历史知识图谱，可能人物数据的内容主要侧重于人物的生平，主要事迹，人物关系等等，如果是文学知识图谱，人物数据的内容则会主要侧重人物的主要作品，师承关系，作品流派等等。 将知识图谱的数据分成了两个层次，在构建知识图谱的时候，是先确定数据模型再收集具体数据，还是先收集具体数据再确定数据模型，这就形成了两种构建知识图谱的方式。</p>
-<h2 id="自顶向下的构建方式"><a href="#自顶向下的构建方式" class="headerlink" title="自顶向下的构建方式"></a>自顶向下的构建方式</h2><p>自顶向下的构建方式，是指先确定知识图谱的数据模型，再根据模型去填充具体数据，最终形成知识图谱。数据模型的设计，是知识图谱的顶层设计，根据知识图谱的特点确定数据模型，就相当于确定了知识图谱收集数据的范围，以及数据的组织方式。这种构建方式，一般适用于行业知识图谱的构建，对于一个行业来说，数据内容，数据组织方式相对来说比较容易确定。</p>
-<p>总体来说，自顶向下的构建方式，适用于那些知识内容比较明确，关系比较清晰的领域构建知识图谱。</p>
-<h2 id="自下向上的构建方式"><a href="#自下向上的构建方式" class="headerlink" title="自下向上的构建方式"></a>自下向上的构建方式</h2><p>自下向上的构建方式，是指先按照三元组的方式收集具体数据，然后根据数据内容来提炼数据模型。 采用这种方式构建知识图谱，是因为在开始构建知识图谱的时候，还不清楚收集数据的范围，也不清楚数据怎么使用，就是先把所有的数据收集起来，形成一个庞大的数据集，然后再根据数据内容，总结数据的特点，将数据进行整理、分析、归纳、总结，形成一个框架，也就是数据模型。一般公共领域的知识图谱采用这种方式，因为公共领域的知识图谱，涉及到海量数据，并且包括方方面面的知识，做出来的效果是大而全，这在构建初期，很难想清楚数据的整体架构，只能是根据数据的内容总结提炼特征，形成数据框架模型。比如google，百度的知识图谱，属于典型的公共领域知识图谱，现实中，使用他们的搜索工具进行内容搜索时，用户可能输入的内容千差万别，各个领域的问题都可能问到，也就使得他们的后台知识图谱内容也要覆盖所有知识，在构建他们这种公共领域的知识图谱过程中，随着数据的不断积累，才会对数据知识进行分类，慢慢呈现出知识架构。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>两种构建方式也不是一成不变的，在构建初期两种方式区别很明显，在知识图谱构建后期，两种方式可能会结合使用。对于自顶向下的构建方式，随着数据量的不断积累，可能会发现原来的数据模型并不完善，有很多数据可能没有包含在数据模型的体系中，这时候就需要修订数据模型，根据数据的特点，完善数据模型。同样，在自下向上的构建方式中，慢慢形成的数据模型，对于后期的数据收集，也有一定的指导作用，按照形成的数据模型，可以快速准确地收集相关数据。总之，数据和数据模型之间，是一个相辅相成的关系，二者在构建知识图谱的过程中缺一不可。</p>
 ]]></content>
       <categories>
         <category>知识图谱</category>
@@ -2260,42 +2370,6 @@
       </tags>
   </entry>
   <entry>
-    <title>知识图谱实践</title>
-    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/</url>
-    <content><![CDATA[<h1 id="知识图谱的演化过程"><a href="#知识图谱的演化过程" class="headerlink" title="知识图谱的演化过程"></a>知识图谱的演化过程</h1><p>知识图谱是一个包含很多技术内容的知识体系，总的来说，是处理关联的知识，核心是数据，但强调了数据之间的关联关系。简单来看，可以认为是数据库或知识库，和语义网有着千丝万缕的联系。<span id="more"></span>知识图谱是由谷歌首先提出来的，用于优化它的搜索能力，之后，获得了蓬勃的发展，研究的人也越来越多。</p>
-<p>知识图谱的出现，不是一蹴而就的，有一个缓慢演进的过程，包括现在，也还在发展中。知识图谱的发展，可以从多个方面进行阐述，比如开放链接数据的思想，知识表示，知识推理，知识存储等，伴随着信息技术特别是人工智能技术的发展，知识图谱不断融合新的技术，不断发展和完善。此处主要讲述知识图谱理论的形成过程。</p>
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/image-20220811162038819.png" alt="image-20220811162038819" style="zoom: 50%;">
-
-
-
-
-
-<p>Knowledge is a familiarity, awareness, or  understanding of someone or something,  such as facts, information, descriptions, or  skills, which is acquired through experience or education by perceiving, discovering, or  learning.    ——–维基百科</p>
-<h2 id="信息及其Memex"><a href="#信息及其Memex" class="headerlink" title="信息及其Memex"></a>信息及其Memex</h2><p>1945年，一个美国科学家Vannevar Bush在《大西洋月刊》上发表了一篇文章《As We May Think》，提出一种信息机器的构想，就像下图中的样子。</p>
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/image-20220811153233326.png" alt="image-20220811153233326" style="zoom:67%;">
-
-<p>在Bush博士的设想中，这种机器还可以与图书馆联网。通过某种机制，将图书馆收藏的胶卷，自动装载到本地机器上。因此，只通过这一个机器，就可以实现海量的信息检索。他将这种机器命名为Memex，也就是“memory extender”这两个单词词首的组合，意思是“记忆的延伸”。这个设想的影响非常大，后来许多早期的计算机论文中都提到了这个机器。然后，文中关于信息切换的描述，直接启发了“超文本协议”（hypertext）的发明。现在，我们在互联网上不同的链接之间跳转，其源头都可以追溯到这篇文章。</p>
-<h2 id="以超链接为主的WEB"><a href="#以超链接为主的WEB" class="headerlink" title="以超链接为主的WEB"></a>以超链接为主的WEB</h2><p>1989年3 月，蒂姆·伯纳·李爵士（Tim Berners-Lee）向CERN递交了一份立项建议书，建议采用超文本技术（Hypertext）把CERN内部的各个实验室连接起来，在系统建成后，将可能扩展到全世界。</p>
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/935893-20190707091638679-2026270082.png" alt="img" style="zoom:67%;">
-
-<p>文中说明了超文本利用圆圈和箭头可以自由的描述任何事物，比使用层级结构的表格要灵活的多，特别是描述复杂系统，作用更加突出，这就是超文本的作用。这个思想也是现在比较流行的思维导图的核心思想，利用发散思维，建立联系。</p>
-<h2 id="已链接数据为核心的语义网"><a href="#已链接数据为核心的语义网" class="headerlink" title="已链接数据为核心的语义网"></a>已链接数据为核心的语义网</h2><p>语义网的概念也是由万维网联盟的蒂姆在1998年提出，它的核心是通过给万维网上的文档 （如：HTML文档、XML文档）添加能够被计算机所理解的语义“元数据”（外语：Meta data），从而使整个互联网成为一个通用的信息交换媒介。</p>
-<p>语义网不同于现在WWW，现有的WWW是面向文档而语义网则面向文档所表示的数据，而语义网更重视于计算机“理解与处理”，并且具有一定的判断、推理能力。</p>
-<p>2006年蒂姆·伯纳斯-李在普林斯顿大学演讲和后期接受媒体采访时公开表示，他最初将这种智能网络命名为语义网或许不够贴切，也许更准确的名称应该是数据网（外语：Data Web）。</p>
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/935893-20190707091712841-1987031174.png" alt="img" style="zoom:67%;">
-
-<h2 id="谷歌知识图谱-things-not-strings"><a href="#谷歌知识图谱-things-not-strings" class="headerlink" title="谷歌知识图谱,things,not strings"></a>谷歌知识图谱,things,not strings</h2><p>链接数据不断积累，数据量以几何量级增长，如何更好的使用这些数据，搜索引擎公司Google提出了知识图谱的概念。辛格博士曾经说过，The world is not made of strings , but is made of things. </p>
-<p>知识图谱的提出，目的在于更好的利用开放链接数据，将搜索字符串变为搜索真实世界中的事物，将一个事物通过内部特征（属性）和外部联系（关系），立体的呈现在人们面前，将知识图谱看作一张以关联关系为主的巨大图谱，图谱中，点代表客观事物，边代表了事物的属性或关系。</p>
-<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/935893-20181229144559553-575365779.png" alt="img" style="zoom: 50%;">
-]]></content>
-      <categories>
-        <category>知识图谱</category>
-      </categories>
-      <tags>
-        <tag>知识图谱</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>知识图谱实践(六)</title>
     <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5-%E5%85%AD/</url>
     <content><![CDATA[<h1 id="从结构化数据进行知识抽取-D2RQ"><a href="#从结构化数据进行知识抽取-D2RQ" class="headerlink" title="从结构化数据进行知识抽取(D2RQ)"></a>从结构化数据进行知识抽取(D2RQ)</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>D2RQ，含义是把关系型数据库当作虚拟的RDF图数据库进行访问。D2RQ平台是一个将关系型数据库当作虚拟的、只读的RDF图数据库进行访问的系统。提供了基于RDF访问关系数据库的内容，而无需复制这个数据库将其以RDF的形式进行保存。D2RQ有以下功能：<span id="more"></span></p>
@@ -2377,6 +2451,42 @@
 <h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>这里只是简单介绍了SPARQL的语法和常用的查询语句，实际环境中，应用SPARQL进行查询可能会复杂的多，会有很多复合语句，更为复杂的可能会跨数据集进行查询，也可能用到RDF的一些特性，比如只查找字面量或者只查找IRI的数据等等。总之，SPARQL查询，在实际的使用中，会碰到各种不同的需求，还要根据具体情况写出各种查询语句。</p>
 <p>书写SPARQL查询语句的时候，还要细心，不能出错，不能写错一个字符，有的时候还要注意顺序，这些问题没有注意到，都可能导致查不到结果，或者是直接报错。在拼接SPARQL的时候，要多一些耐心，按照SPARQL规则来，循序渐进，慢慢就会初步掌握这种查询语言。</p>
 <p>另外SPARQL还有UPDATE功能，有insert和delete关键字，但是没有update关键字，也就是说，SPARQL如果实现update操作，需要先insert再delete，从而达到update的效果。SPARQL的UPDATE功能，不如查询功能用的广泛，可能是因为数据集一般数据量大，都是直接以文件的形式存到数据库中的缘故。</p>
+]]></content>
+      <categories>
+        <category>知识图谱</category>
+      </categories>
+      <tags>
+        <tag>知识图谱</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>知识图谱实践</title>
+    <url>/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/</url>
+    <content><![CDATA[<h1 id="知识图谱的演化过程"><a href="#知识图谱的演化过程" class="headerlink" title="知识图谱的演化过程"></a>知识图谱的演化过程</h1><p>知识图谱是一个包含很多技术内容的知识体系，总的来说，是处理关联的知识，核心是数据，但强调了数据之间的关联关系。简单来看，可以认为是数据库或知识库，和语义网有着千丝万缕的联系。<span id="more"></span>知识图谱是由谷歌首先提出来的，用于优化它的搜索能力，之后，获得了蓬勃的发展，研究的人也越来越多。</p>
+<p>知识图谱的出现，不是一蹴而就的，有一个缓慢演进的过程，包括现在，也还在发展中。知识图谱的发展，可以从多个方面进行阐述，比如开放链接数据的思想，知识表示，知识推理，知识存储等，伴随着信息技术特别是人工智能技术的发展，知识图谱不断融合新的技术，不断发展和完善。此处主要讲述知识图谱理论的形成过程。</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/image-20220811162038819.png" alt="image-20220811162038819" style="zoom: 50%;">
+
+
+
+
+
+<p>Knowledge is a familiarity, awareness, or  understanding of someone or something,  such as facts, information, descriptions, or  skills, which is acquired through experience or education by perceiving, discovering, or  learning.    ——–维基百科</p>
+<h2 id="信息及其Memex"><a href="#信息及其Memex" class="headerlink" title="信息及其Memex"></a>信息及其Memex</h2><p>1945年，一个美国科学家Vannevar Bush在《大西洋月刊》上发表了一篇文章《As We May Think》，提出一种信息机器的构想，就像下图中的样子。</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/image-20220811153233326.png" alt="image-20220811153233326" style="zoom:67%;">
+
+<p>在Bush博士的设想中，这种机器还可以与图书馆联网。通过某种机制，将图书馆收藏的胶卷，自动装载到本地机器上。因此，只通过这一个机器，就可以实现海量的信息检索。他将这种机器命名为Memex，也就是“memory extender”这两个单词词首的组合，意思是“记忆的延伸”。这个设想的影响非常大，后来许多早期的计算机论文中都提到了这个机器。然后，文中关于信息切换的描述，直接启发了“超文本协议”（hypertext）的发明。现在，我们在互联网上不同的链接之间跳转，其源头都可以追溯到这篇文章。</p>
+<h2 id="以超链接为主的WEB"><a href="#以超链接为主的WEB" class="headerlink" title="以超链接为主的WEB"></a>以超链接为主的WEB</h2><p>1989年3 月，蒂姆·伯纳·李爵士（Tim Berners-Lee）向CERN递交了一份立项建议书，建议采用超文本技术（Hypertext）把CERN内部的各个实验室连接起来，在系统建成后，将可能扩展到全世界。</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/935893-20190707091638679-2026270082.png" alt="img" style="zoom:67%;">
+
+<p>文中说明了超文本利用圆圈和箭头可以自由的描述任何事物，比使用层级结构的表格要灵活的多，特别是描述复杂系统，作用更加突出，这就是超文本的作用。这个思想也是现在比较流行的思维导图的核心思想，利用发散思维，建立联系。</p>
+<h2 id="已链接数据为核心的语义网"><a href="#已链接数据为核心的语义网" class="headerlink" title="已链接数据为核心的语义网"></a>已链接数据为核心的语义网</h2><p>语义网的概念也是由万维网联盟的蒂姆在1998年提出，它的核心是通过给万维网上的文档 （如：HTML文档、XML文档）添加能够被计算机所理解的语义“元数据”（外语：Meta data），从而使整个互联网成为一个通用的信息交换媒介。</p>
+<p>语义网不同于现在WWW，现有的WWW是面向文档而语义网则面向文档所表示的数据，而语义网更重视于计算机“理解与处理”，并且具有一定的判断、推理能力。</p>
+<p>2006年蒂姆·伯纳斯-李在普林斯顿大学演讲和后期接受媒体采访时公开表示，他最初将这种智能网络命名为语义网或许不够贴切，也许更准确的名称应该是数据网（外语：Data Web）。</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/935893-20190707091712841-1987031174.png" alt="img" style="zoom:67%;">
+
+<h2 id="谷歌知识图谱-things-not-strings"><a href="#谷歌知识图谱-things-not-strings" class="headerlink" title="谷歌知识图谱,things,not strings"></a>谷歌知识图谱,things,not strings</h2><p>链接数据不断积累，数据量以几何量级增长，如何更好的使用这些数据，搜索引擎公司Google提出了知识图谱的概念。辛格博士曾经说过，The world is not made of strings , but is made of things. </p>
+<p>知识图谱的提出，目的在于更好的利用开放链接数据，将搜索字符串变为搜索真实世界中的事物，将一个事物通过内部特征（属性）和外部联系（关系），立体的呈现在人们面前，将知识图谱看作一张以关联关系为主的巨大图谱，图谱中，点代表客观事物，边代表了事物的属性或关系。</p>
+<img src="/2022/08/11/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E5%AE%9E%E8%B7%B5/935893-20181229144559553-575365779.png" alt="img" style="zoom: 50%;">
 ]]></content>
       <categories>
         <category>知识图谱</category>

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"congyx.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","positon":"left","display":"post","padding":18,"offset":12,"onmobile":false,"b2t":true,"scrollpercent":true},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="正则表达式进阶分组在正则表达式中还提供了一种将表达式分组的机制，当使用分组时，除了获得整个匹配。还能够在匹配中选择每一个分组。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则表达式进阶">
+<meta property="og:url" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/index.html">
+<meta property="og:site_name" content="程序人生">
+<meta property="og:description" content="正则表达式进阶分组在正则表达式中还提供了一种将表达式分组的机制，当使用分组时，除了获得整个匹配。还能够在匹配中选择每一个分组。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814085711087.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814090425091.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814090622623.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814090908705.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814091140840.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814091347899.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814091939853.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814092108110.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814092537004.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814093251525.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814093333017.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814093351196.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814093408216.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814094252729.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814094657671.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814094839343.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814095307358.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814095514178.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100049091.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100341932.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100420821.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100554182.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100626159.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100730538.png">
+<meta property="og:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100935411.png">
+<meta property="article:published_time" content="2022-08-14T00:56:07.000Z">
+<meta property="article:modified_time" content="2022-08-14T02:10:10.452Z">
+<meta property="article:author" content="Cong yx">
+<meta property="article:tag" content="正则表达式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814085711087.png">
+
+<link rel="canonical" href="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>正则表达式进阶 | 程序人生</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/rss2.xml" title="程序人生" type="application/rss+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">程序人生</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Cong yx">
+      <meta itemprop="description" content="欲买桂花同载酒，终不似，少年游。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序人生">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          正则表达式进阶
+        </h1>
+
+        <div class="post-meta">
+
+
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-08-14 08:56:07 / 修改时间：10:10:10" itemprop="dateCreated datePublished" datetime="2022-08-14T08:56:07+08:00">2022-08-14</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="正则表达式进阶"><a href="#正则表达式进阶" class="headerlink" title="正则表达式进阶"></a>正则表达式进阶</h1><h2 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h2><p>在正则表达式中还提供了一种将表达式<strong>分组</strong>的机制，当使用分组时，除了获得整个匹配。还能够在匹配中选择每一个分组。<span id="more"></span></p>
+<p>要实现分组很简单，使用<code>()</code>即可。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814085711087.png" alt="image-20220814085711087" style="zoom:80%;">
+
+<p>这段正则表达式将文本<strong>分成了两组</strong>，第一组为：<code>0731</code>，第二组为<code>8825951</code>。</p>
+<p>分组有一个非常重要的功能——<code>捕获数据</code>。所以<code>()</code>被称为捕获分组，用来捕获数据，当我们想要从匹配好的数据中提取关键数据的时候可以使用分组。</p>
+<h2 id="提取p标签中的数据"><a href="#提取p标签中的数据" class="headerlink" title="提取p标签中的数据"></a>提取p标签中的数据</h2><img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814090425091.png" alt="image-20220814090425091" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814090622623.png" alt="image-20220814090622623" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814090908705.png" alt="image-20220814090908705" style="zoom:80%;">
+
+<h2 id="或者条件"><a href="#或者条件" class="headerlink" title="或者条件"></a>或者条件</h2><p>使用分组的同时还可以使用 <strong>或者</strong>（<code>or</code>）条件。</p>
+<p>例如要提取所有图片文件的后缀名，可以在各个后缀名之间加上一个 <code>|</code>符号：</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814091140840.png" alt="image-20220814091140840" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814091347899.png" alt="image-20220814091347899" style="zoom:80%;">
+
+<h2 id="非捕获分组"><a href="#非捕获分组" class="headerlink" title="非捕获分组"></a>非捕获分组</h2><p>有时候，我们并不需要捕获某个分组的内容，但是又想使用分组的特性。</p>
+<p>这个时候就可以使用非捕获组<code>(?:表达式)</code>，从而<strong>不捕获数据</strong>，还能使用分组的功能。</p>
+<p>例如想要匹配<strong>两个字母组成的单词</strong>或者<strong>四个字母组成的单词</strong>就可以使用<strong>非捕获分组</strong>：</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814091939853.png" alt="image-20220814091939853" style="zoom:80%;">
+
+<h2 id="分组使用技巧"><a href="#分组使用技巧" class="headerlink" title="分组使用技巧"></a>分组使用技巧</h2><p>日期可以有很多格式，例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">20200102</span><br><span class="line">2020-01-02</span><br><span class="line">2020-1-2</span><br><span class="line">2020.01.02</span><br><span class="line">2020 01 02</span><br><span class="line">2020 1 2</span><br><span class="line">2020/01/02</span><br></pre></td></tr></table></figure>
+
+<p>现在我们想要使用正则表达式将其中的<code>年月日</code>全都提取出来。</p>
+<p>可以发现他们唯一的区别就在于分隔符和月份与日期，这个时候可以使用 <strong>[]</strong> 来匹配多种情况。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814092108110.png" alt="image-20220814092108110" style="zoom:80%;">
+
+<p>通过<code>(\d&#123;4&#125;)[-./\s]?(\d&#123;1,2&#125;)[-./\s]?(\d&#123;1,2&#125;)</code> 就可以从文本中将年月日分别提取出来了。</p>
+<p>虽然这段正则表达式看起来内容挺多，但是还是很容易理解的，<code>[-./\s]</code>表示匹配三个可能出现的分隔符<code>-./</code>和空白，<code>?</code>表示匹配它们<code>0</code>次或者<code>1</code>次，其他年月日的数据使用<code>\d&#123;N&#125;</code>与<strong>分组</strong>结合就可以提取到目标数据。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814092537004.png" alt="image-20220814092537004" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814093251525.png" alt="image-20220814093251525" style="zoom:80%;">
+
+<h2 id="分组的回溯引用"><a href="#分组的回溯引用" class="headerlink" title="分组的回溯引用"></a>分组的回溯引用</h2><p>正则表达式还提供了一种引用之前匹配分组的机制，有些时候，我们或许会寻找到一个子匹配，该匹配接下来会再次出现。</p>
+<p>例如，要匹配一段 HTML 代码，比如：<code>0123&lt;font&gt;提示&lt;/font&gt;abcd</code>，可能会编写出这样一段正则表达式：</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814093333017.png" alt="image-20220814093333017" style="zoom:80%;">
+
+<p>这确实可以匹配，不过可能还有另一种情况，如果数据改成这样：<code>&lt;font&gt;提示&lt;/bar&gt;</code></p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814093351196.png" alt="image-20220814093351196" style="zoom:80%;">
+
+<p>在这里<code>font</code> 和 <code>bar</code> 明显不是一对正确的标签，但是我们编写的正则表达式还是将它们给匹配了，所以这个结果是错误的。</p>
+<p>我们想让后面分组的正则也匹配<code>font</code>，但是现在所有形式的都会匹配。</p>
+<p>那如果想让后面分组的正则和第一个分组的正则匹配同样的数据该如何做呢？</p>
+<p>可以使用<strong>分组的回溯引用</strong>，使用<code>\N</code>可以引用编号为<code>N</code>的分组，因此上述例子的代码我们可以改为：</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814093408216.png" alt="image-20220814093408216" style="zoom:80%;">
+
+<p>通过这个例子，可以发现 <code>\1</code> 表示的就是第一个分组，在这里第一个分组匹配的是 <code>font</code> 所以<code>\1</code> 就代表<code>font</code>。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814094252729.png" alt="image-20220814094252729" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814094657671.png" alt="image-20220814094657671" style="zoom:80%;">
+
+<h2 id="正向先行断言"><a href="#正向先行断言" class="headerlink" title="正向先行断言"></a>正向先行断言</h2><p>很多人也称先行断言和后行断言为<strong>环视</strong>，也有人叫<strong>预搜索</strong>，其实叫什么无所谓，重要的是知道如何使用它们！</p>
+<p>先行断言和后行断言总共有四种：</p>
+<ol>
+<li>正向先行断言</li>
+<li>反向先行断言</li>
+<li>正向后行断言</li>
+<li>反向后行断言</li>
+</ol>
+<p><strong>正向先行断言：</strong><code>(?=表达式)</code>，指在某个位置向右看，表示所在位置右侧必须能匹配<code>表达式</code></p>
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我喜欢你 我喜欢 我喜欢我 喜欢 喜欢你</span><br></pre></td></tr></table></figure>
+
+<p>如果要取出<strong>喜欢</strong>两个字，要求这个<strong>喜欢</strong>后面有你，这个时候就要这么写：<code>喜欢(?=你)</code>，这就是<strong>正向先行断言</strong>。</p>
+<p><strong>提取包含大小写的字符串：</strong></p>
+<p>先行断言可以用来判断字符串是否符合特定的规则，例如提取包含至少一个大小写字母的字符串：</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814094839343.png" alt="image-20220814094839343" style="zoom:80%;">
+
+<p><code>(?=.*?[a-z])(?=.*?[A-Z]).+</code> 这段正则表达式规定了匹配的字符串中必须包含<strong>至少一个大写和小写的字母</strong>。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814095307358.png" alt="image-20220814095307358" style="zoom:80%;">
+
+<h2 id="反向先行断言"><a href="#反向先行断言" class="headerlink" title="反向先行断言"></a>反向先行断言</h2><p><strong>反向先行断言</strong><code>(?!表达式)</code>的作用是保证右边不能出现某字符。</p>
+<p>例如： <code>我喜欢你 我喜欢 我喜欢我 喜欢 喜欢你</code></p>
+<p>如果要取出<strong>喜欢</strong>两个字，要求这个<strong>喜欢</strong>后面没有你，这个时候就要这么写：<code>喜欢(?!你)</code>，这就是<strong>反向先行断言</strong>。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814095514178.png" alt="image-20220814095514178" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100049091.png" alt="image-20220814100049091" style="zoom:80%;">
+
+<h2 id="正向后行断言"><a href="#正向后行断言" class="headerlink" title="正向后行断言"></a>正向后行断言</h2><p>本小节只需要记住一句话：先行断言和后行断言只有一个区别，即<strong>先行断言从左往右看，后行断言从右往左看。</strong></p>
+<p><strong>正向后行断言：</strong><code>(?&lt;=表达式)</code>，指在某个位置向左看，表示所在位置左侧必须能匹配<code>表达式</code></p>
+<p>例如：如果要取出喜欢两个字，要求喜欢的<strong>前面有我</strong>，<strong>后面有你</strong>，这个时候就要这么写：<code>(?&lt;=我)喜欢(?=你)</code>。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100341932.png" alt="image-20220814100341932" style="zoom:80%;">
+
+<h2 id="返向后行断言"><a href="#返向后行断言" class="headerlink" title="返向后行断言"></a>返向后行断言</h2><p><strong>反向后行断言：</strong><code>(?&lt;!表达式)</code>，指在某个位置向左看，表示所在位置左侧不能匹配<code>表达式</code></p>
+<p>例如：如果要取出喜欢两个字，要求喜欢的<strong>前面没有我</strong>，<strong>后面没有你</strong>，这个时候就要这么写：<code>(?&lt;!我)喜欢(?!你)</code>。</p>
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100420821.png" alt="image-20220814100420821" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100554182.png" alt="image-20220814100554182" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100626159.png" alt="image-20220814100626159" style="zoom:80%;">
+
+<h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100730538.png" alt="image-20220814100730538" style="zoom:80%;">
+
+<img src="/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/image-20220814100935411.png" alt="image-20220814100935411" style="zoom:80%;">
+
+    </div>
+
+    
+    
+    
+
+ 
+   <div>
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+   </div>
+ 
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Cong yx
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://congyx.com/2022/08/14/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6/" title="正则表达式进阶">https://congyx.com/2022/08/14/正则表达式进阶/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="tag"># 正则表达式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/08/13/%E5%9F%BA%E4%BA%8E%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%9A%84%E7%94%B5%E5%BD%B1%E6%8E%A8%E8%8D%90/" rel="prev" title="基于知识图谱的电影推荐">
+      <i class="fa fa-chevron-left"></i> 基于知识图谱的电影推荐
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="lv-container" data-id="city" data-uid="MTAyMC81NTU0Ny8zMjAxNA=="></div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%BF%9B%E9%98%B6"><span class="nav-number">1.</span> <span class="nav-text">正则表达式进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84"><span class="nav-number">1.1.</span> <span class="nav-text">分组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8F%96p%E6%A0%87%E7%AD%BE%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">1.2.</span> <span class="nav-text">提取p标签中的数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%96%E8%80%85%E6%9D%A1%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">或者条件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9D%9E%E6%8D%95%E8%8E%B7%E5%88%86%E7%BB%84"><span class="nav-number">1.4.</span> <span class="nav-text">非捕获分组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E4%BD%BF%E7%94%A8%E6%8A%80%E5%B7%A7"><span class="nav-number">1.5.</span> <span class="nav-text">分组使用技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E7%BB%84%E7%9A%84%E5%9B%9E%E6%BA%AF%E5%BC%95%E7%94%A8"><span class="nav-number">1.6.</span> <span class="nav-text">分组的回溯引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E5%85%88%E8%A1%8C%E6%96%AD%E8%A8%80"><span class="nav-number">1.7.</span> <span class="nav-text">正向先行断言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E5%85%88%E8%A1%8C%E6%96%AD%E8%A8%80"><span class="nav-number">1.8.</span> <span class="nav-text">反向先行断言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E5%90%8E%E8%A1%8C%E6%96%AD%E8%A8%80"><span class="nav-number">1.9.</span> <span class="nav-text">正向后行断言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%94%E5%90%91%E5%90%8E%E8%A1%8C%E6%96%AD%E8%A8%80"><span class="nav-number">1.10.</span> <span class="nav-text">返向后行断言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0"><span class="nav-number">1.11.</span> <span class="nav-text">练习</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Cong yx"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Cong yx</p>
+  <div class="site-description" itemprop="description">欲买桂花同载酒，终不似，少年游。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ez-Cong" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ez-Cong" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:Congyx0304@163.com" title="E-Mail → mailto:Congyx0304@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://cn.bing.com/?mkt=zh-cn" title="https:&#x2F;&#x2F;cn.bing.com&#x2F;?mkt&#x3D;zh-cn" rel="noopener" target="_blank">Bing</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.zhihu.com/signin?next=/" title="https:&#x2F;&#x2F;www.zhihu.com&#x2F;signin?next&#x3D;%2F" rel="noopener" target="_blank">知乎</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="https://www.csdn.net/" title="https:&#x2F;&#x2F;www.csdn.net&#x2F;" rel="noopener" target="_blank">CSDN</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cong yx</span>
+</div>
+
+
+    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+    <span id="busuanzi_container_site_pv">总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+    <span class="post-meta-divider">|</span>
+    <span id="busuanzi_container_site_uv">总访客数<span id="busuanzi_value_site_uv"></span>人</span>
+    <span class="post-meta-divider">|</span>
+<!-- 不蒜子计数初始值纠正 -->
+<script>
+$(document).ready(function() {
+
+    var int = setInterval(fixCount, 50);  // 50ms周期检测函数
+    var countOffset = 20000;  // 初始化首次数据
+
+    function fixCount() {            
+       if (document.getElementById("busuanzi_container_site_pv").style.display != "none")
+        {
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + countOffset); 
+            clearInterval(int);
+        }                  
+        if ($("#busuanzi_container_site_pv").css("display") != "none")
+        {
+            $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + countOffset); // 加上初始数据 
+            clearInterval(int); // 停止检测
+        }  
+    }
+       	
+});
+</script> 
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+<script>
+NexT.utils.loadComments(document.querySelector('#lv-container'), () => {
+  window.livereOptions = {
+    refer: location.pathname.replace(CONFIG.root, '').replace('index.html', '')
+  };
+  (function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+  })(document, 'script');
+});
+</script>
+
+</body>
+</html>
